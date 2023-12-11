@@ -3,16 +3,18 @@ package Bulletin.UI;
 
 import java.sql.*;
 import javax.swing.*;
-import net.proteanit.sql.DbUtils;
+//import net.proteanit.sql.DbUtils;
 
-public class LoginDetails extends javax.swing.JFrame {
+// Classe en relation avec Barre Menu (Admin)
+
+public class InfoConnexion extends javax.swing.JFrame {
 Connection con=null;
 ResultSet rs=null;
 PreparedStatement pst=null;
     /**
      * Creates new form LoginDetails
      */
-    public LoginDetails() {
+    public InfoConnexion() {
         initComponents();
         con= Connect.ConnectDB();
         Get_Data();
@@ -24,7 +26,7 @@ PreparedStatement pst=null;
           try{
          pst=con.prepareStatement(sql);
           rs= pst.executeQuery();
-         Users_table.setModel(DbUtils.resultSetToTableModel(rs));
+         ListeConnecte.setModel(DbUtils.resultSetToTableModel(rs));
          }catch(Exception e){
             JOptionPane.showMessageDialog(null, e);
           
@@ -40,7 +42,7 @@ PreparedStatement pst=null;
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        Users_table = new javax.swing.JTable();
+        ListeConnecte = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
@@ -50,8 +52,8 @@ PreparedStatement pst=null;
             }
         });
 
-        Users_table.setFont(new java.awt.Font("Palatino Linotype", 1, 12)); // NOI18N
-        Users_table.setModel(new javax.swing.table.DefaultTableModel(
+        ListeConnecte.setFont(new java.awt.Font("Palatino Linotype", 1, 12)); // NOI18N
+        ListeConnecte.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null},
                 {null, null},
@@ -70,8 +72,8 @@ PreparedStatement pst=null;
                 return canEdit [columnIndex];
             }
         });
-        Users_table.getTableHeader().setReorderingAllowed(false);
-        jScrollPane1.setViewportView(Users_table);
+        ListeConnecte.getTableHeader().setReorderingAllowed(false);
+        jScrollPane1.setViewportView(ListeConnecte);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -110,20 +112,21 @@ PreparedStatement pst=null;
                 }
             }
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(LoginDetails.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(InfoConnexion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                new LoginDetails().setVisible(true);
+                new InfoConnexion().setVisible(true);
             }
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTable Users_table;
+    private javax.swing.JTable ListeConnecte;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }

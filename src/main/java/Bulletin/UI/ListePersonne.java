@@ -8,14 +8,14 @@ import javax.swing.JOptionPane;
 import net.proteanit.sql.DbUtils;
 
 
-public class PatientRegistrationRecord extends javax.swing.JFrame {
+public class ListePersonne extends javax.swing.JFrame {
 Connection con=null;
 ResultSet rs=null;
 PreparedStatement pst=null;
     /**
      * Creates new form PatientRegistrationRecord
      */
-    public PatientRegistrationRecord() {
+    public ListePersonne() {
         initComponents();
          con= Connect.ConnectDB();
         Get_Data();
@@ -55,13 +55,13 @@ PreparedStatement pst=null;
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Acte de Naissance", "Nom", "Prénom", "Père", "Mère", "Date de Naissance", "Lieu de Naissance", "Sexe", "Status", "Domicile", "Nationalité"
             }
         ));
         jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -95,32 +95,32 @@ PreparedStatement pst=null;
             rs=  pst.executeQuery();
             if(rs.next()){
                 this.hide();
-                PatientRegistration frm = new PatientRegistration();
+                AjoutPersonne frm = new AjoutPersonne();
                 frm.setVisible(true);
                 String add1=rs.getString("PatientID");
-                frm.txtPatientID.setText(add1);
+                frm.IDPersonne.setText(add1);
                 String add2=rs.getString("Patientname");
-                frm.txtPatientName.setText(add2);
+                frm.NomPers.setText(add2);
                 String add3=rs.getString("Fathername");
-                frm.txtFathername.setText(add3);
+                frm.PrenomPers.setText(add3);
                 String add5=rs.getString("Email");
-                frm.txtEmailID.setText(add5);
+                frm.datenais.setText(add5);
                 int add6 = rs.getInt("Age");
                 String add= Integer.toString(add6);
-                frm.txtAge.setText(add);
+                frm.lieunais.setText(add);
                 String add7=rs.getString("Remarks");
                 frm.txtRemarks.setText(add7);
                 String add9=rs.getString("BG");
                 frm.cmbBloodGroup.setSelectedItem(add9);
                 String add11=rs.getString("Gen");
-                frm.cmbGender.setSelectedItem(add11);
+                frm.cmbStatus.setSelectedItem(add11);
                 String add15=rs.getString("Address");
                 frm.txtAddress.setText(add15);
                 String add16=rs.getString("ContactNo");
                 frm.txtContactNo.setText(add16);
-                frm.btnUpdate.setEnabled(true);
-                frm.btnDelete.setEnabled(true);
-                frm.btnSave.setEnabled(false);
+                frm.btnMaj.setEnabled(true);
+                frm.btnEffacer.setEnabled(true);
+                frm.btnEnregistrer.setEnabled(false);
              
             }
         }catch(Exception ex){
@@ -130,7 +130,7 @@ PreparedStatement pst=null;
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
     this.hide();
-    PatientRegistration frm = new PatientRegistration();
+    AjoutPersonne frm = new AjoutPersonne();
     frm.setVisible(true);
     }//GEN-LAST:event_formWindowClosing
 
@@ -151,20 +151,21 @@ PreparedStatement pst=null;
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(PatientRegistrationRecord.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ListePersonne.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(PatientRegistrationRecord.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ListePersonne.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(PatientRegistrationRecord.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ListePersonne.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(PatientRegistrationRecord.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ListePersonne.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new PatientRegistrationRecord().setVisible(true);
+                new ListePersonne().setVisible(true);
             }
         });
     }

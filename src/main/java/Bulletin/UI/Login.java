@@ -178,7 +178,7 @@ PreparedStatement pst=null;
           rs= pst.executeQuery();
           if (rs.next()){
              this.hide();
-             MainMenu frm=new MainMenu();
+             BarreMenu frm=new BarreMenu();
              frm.setVisible(true);
           }
           else{
@@ -214,7 +214,7 @@ PreparedStatement pst=null;
           rs= pst.executeQuery();
           if (rs.next()){
              this.hide();
-             MainMenu frm=new MainMenu();
+             BarreMenu frm=new BarreMenu();
              frm.setVisible(true);
           }
           else{
