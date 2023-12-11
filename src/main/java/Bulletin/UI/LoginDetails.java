@@ -18,8 +18,9 @@ PreparedStatement pst=null;
         Get_Data();
         setLocationRelativeTo(null);
     }
+    // Pour avoir les données de l'utilisateur et l'afficher dans le tableau
     private void Get_Data(){
-        String sql="select UserName as 'User Name',User_Password as 'Password' from users order by username";
+        String sql="select UserName as 'User Name',User_Password as 'Password' from users order by username"; // A modifier
           try{
          pst=con.prepareStatement(sql);
           rs= pst.executeQuery();
@@ -76,13 +77,13 @@ PreparedStatement pst=null;
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 559, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 1, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 371, Short.MAX_VALUE)
         );
 
         pack();

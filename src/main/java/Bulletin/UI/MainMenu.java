@@ -102,7 +102,7 @@ public class MainMenu extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu1);
 
-        jMenu2.setText("Users");
+        jMenu2.setText("Admin");
 
         jMenuItem4.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_R, java.awt.event.InputEvent.ALT_DOWN_MASK));
         jMenuItem4.setText("Registration");
@@ -146,7 +146,7 @@ public class MainMenu extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu7);
 
-        jMenu3.setText("Patient");
+        jMenu3.setText("User");
 
         jMenuItem10.setText("Registration");
         jMenuItem10.addActionListener(new java.awt.event.ActionListener() {
