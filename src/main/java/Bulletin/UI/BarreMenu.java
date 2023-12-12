@@ -26,8 +26,17 @@ public class BarreMenu extends javax.swing.JFrame {
         jCheckBoxMenuItem1 = new javax.swing.JCheckBoxMenuItem();
         jMenu12 = new javax.swing.JMenu();
         jMenuItem16 = new javax.swing.JMenuItem();
-        jLabel2 = new javax.swing.JLabel();
-        jMenuBar1 = new javax.swing.JMenuBar();
+        txtBienvenue = new javax.swing.JLabel();
+        txtPresentation = new javax.swing.JLabel();
+        typeLog = new javax.swing.JLabel();
+        pnlGuide = new javax.swing.JPanel();
+        titleGuide = new javax.swing.JLabel();
+        txtNav = new javax.swing.JLabel();
+        txtNavPers = new javax.swing.JLabel();
+        txtNavOpt = new javax.swing.JLabel();
+        txtNavAdmin = new javax.swing.JLabel();
+        txtNavAbt = new javax.swing.JLabel();
+        MenuBar = new javax.swing.JMenuBar();
         MPersonne = new javax.swing.JMenu();
         MIdentification = new javax.swing.JMenuItem();
         ListePersonne = new javax.swing.JMenuItem();
@@ -58,6 +67,71 @@ public class BarreMenu extends javax.swing.JFrame {
         setTitle("Main Menu");
         setResizable(false);
 
+        txtBienvenue.setFont(new java.awt.Font("Cantarell", 1, 24)); // NOI18N
+        txtBienvenue.setText("Bienvenue");
+
+        txtPresentation.setFont(new java.awt.Font("sansserif", 1, 18)); // NOI18N
+        txtPresentation.setText("Casier Judiciaire N°3");
+
+        typeLog.setFont(new java.awt.Font("sansserif", 1, 13)); // NOI18N
+        typeLog.setText("Logiciel OpenSource");
+
+        titleGuide.setFont(new java.awt.Font("sansserif", 1, 15)); // NOI18N
+        titleGuide.setText("Guide");
+
+        txtNav.setFont(new java.awt.Font("sansserif", 1, 13)); // NOI18N
+        txtNav.setText("-> Pour la navigation vers les autres pages, vous devez utiliser la barre de menu en dessus.");
+
+        txtNavPers.setFont(new java.awt.Font("sansserif", 1, 13)); // NOI18N
+        txtNavPers.setText("-> Menu Personne: Pour la manipulation des données des personnes présents ou à ajouter dans la liste");
+
+        txtNavOpt.setFont(new java.awt.Font("sansserif", 1, 13)); // NOI18N
+        txtNavOpt.setText("-> Menu Options: Pour les paramètres ou pour vous déconnecter de cette session");
+
+        txtNavAdmin.setFont(new java.awt.Font("sansserif", 1, 13)); // NOI18N
+        txtNavAdmin.setText("-> Menu Admin: Pour changer ou ajouter de nouveau utilisateur, supprimer votre compte ou mettre à jour des données");
+
+        txtNavAbt.setFont(new java.awt.Font("sansserif", 1, 13)); // NOI18N
+        txtNavAbt.setText("-> Menu  Aide: Pour les informations des développeurs ou les contacter.");
+
+        javax.swing.GroupLayout pnlGuideLayout = new javax.swing.GroupLayout(pnlGuide);
+        pnlGuide.setLayout(pnlGuideLayout);
+        pnlGuideLayout.setHorizontalGroup(
+            pnlGuideLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlGuideLayout.createSequentialGroup()
+                .addGap(34, 34, 34)
+                .addGroup(pnlGuideLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlGuideLayout.createSequentialGroup()
+                        .addGroup(pnlGuideLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(titleGuide)
+                            .addComponent(txtNav))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(pnlGuideLayout.createSequentialGroup()
+                        .addGroup(pnlGuideLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtNavPers)
+                            .addComponent(txtNavOpt)
+                            .addComponent(txtNavAdmin)
+                            .addComponent(txtNavAbt))
+                        .addGap(0, 0, Short.MAX_VALUE))))
+        );
+        pnlGuideLayout.setVerticalGroup(
+            pnlGuideLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlGuideLayout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addComponent(titleGuide)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(txtNav)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(txtNavPers)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(txtNavOpt)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(txtNavAdmin)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(txtNavAbt)
+                .addContainerGap(39, Short.MAX_VALUE))
+        );
+
         MPersonne.setText("Personne");
 
         MIdentification.setText("Identification");
@@ -76,7 +150,7 @@ public class BarreMenu extends javax.swing.JFrame {
         });
         MPersonne.add(ListePersonne);
 
-        jMenuBar1.add(MPersonne);
+        MenuBar.add(MPersonne);
 
         MOptions.setText("Options");
 
@@ -89,7 +163,7 @@ public class BarreMenu extends javax.swing.JFrame {
         });
         MOptions.add(jMenuItem13);
 
-        jMenuBar1.add(MOptions);
+        MenuBar.add(MOptions);
 
         MAdmin.setText("Admin");
 
@@ -120,7 +194,7 @@ public class BarreMenu extends javax.swing.JFrame {
         });
         MAdmin.add(Info_Connex);
 
-        jMenuBar1.add(MAdmin);
+        MenuBar.add(MAdmin);
 
         MAide.setText("Aide");
         MAide.addActionListener(new java.awt.event.ActionListener() {
@@ -145,19 +219,43 @@ public class BarreMenu extends javax.swing.JFrame {
         });
         MAide.add(MContact);
 
-        jMenuBar1.add(MAide);
+        MenuBar.add(MAide);
 
-        setJMenuBar(jMenuBar1);
+        setJMenuBar(MenuBar);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 258, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(txtBienvenue)
+                        .addGap(492, 492, 492))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(txtPresentation)
+                        .addGap(460, 460, 460))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(typeLog)
+                        .addGap(28, 28, 28))))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(110, 110, 110)
+                .addComponent(pnlGuide, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 242, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel2)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(222, 222, 222)
+                .addComponent(txtBienvenue, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(txtPresentation)
+                .addGap(40, 40, 40)
+                .addComponent(pnlGuide, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 194, Short.MAX_VALUE)
+                .addComponent(typeLog)
+                .addGap(19, 19, 19))
         );
 
         pack();
@@ -257,14 +355,23 @@ public class BarreMenu extends javax.swing.JFrame {
     private javax.swing.JMenu MOptions;
     private javax.swing.JMenu MPersonne;
     private javax.swing.JMenuItem MdpChange;
+    private javax.swing.JMenuBar MenuBar;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JMenu jMenu12;
     private javax.swing.JMenu jMenu6;
-    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem13;
     private javax.swing.JMenuItem jMenuItem16;
     private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JPanel pnlGuide;
+    private javax.swing.JLabel titleGuide;
+    private javax.swing.JLabel txtBienvenue;
+    private javax.swing.JLabel txtNav;
+    private javax.swing.JLabel txtNavAbt;
+    private javax.swing.JLabel txtNavAdmin;
+    private javax.swing.JLabel txtNavOpt;
+    private javax.swing.JLabel txtNavPers;
+    private javax.swing.JLabel txtPresentation;
+    private javax.swing.JLabel typeLog;
     // End of variables declaration//GEN-END:variables
 }
