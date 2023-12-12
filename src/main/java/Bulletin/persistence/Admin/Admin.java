@@ -1,16 +1,14 @@
 package Bulletin.persistence.Admin;
 
 import java.io.Serializable;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+
+import jakarta.persistence.*;
 
 /**
  *
  * @author dazai
  */
-@Entity
+@Entity @Table(name = "Admin")
 public class Admin implements Serializable {
 
     private static final long serialVersionUID = 1L;
