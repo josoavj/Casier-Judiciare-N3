@@ -29,14 +29,14 @@ PreparedStatement pst=null;
         jMenuItem1 = new javax.swing.JMenuItem();
         filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
         jSplitPane1 = new javax.swing.JSplitPane();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        Username = new javax.swing.JLabel();
+        Password = new javax.swing.JLabel();
         txtUserName = new javax.swing.JTextField();
         txtPassword = new javax.swing.JPasswordField();
         btnOK = new javax.swing.JButton();
         btnCancel = new javax.swing.JButton();
         filler2 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
-        jLabel3 = new javax.swing.JLabel();
+        Titre = new javax.swing.JLabel();
 
         jMenuItem1.setText("jMenuItem1");
 
@@ -49,11 +49,11 @@ PreparedStatement pst=null;
             }
         });
 
-        jLabel1.setFont(new java.awt.Font("Cantarell", 1, 14)); // NOI18N
-        jLabel1.setText("Utilisateur");
+        Username.setFont(new java.awt.Font("Cantarell", 1, 14)); // NOI18N
+        Username.setText("Utilisateur");
 
-        jLabel2.setFont(new java.awt.Font("Cantarell", 1, 14)); // NOI18N
-        jLabel2.setText("Mot de passe");
+        Password.setFont(new java.awt.Font("Cantarell", 1, 14)); // NOI18N
+        Password.setText("Mot de passe");
 
         txtUserName.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -93,9 +93,9 @@ PreparedStatement pst=null;
             }
         });
 
-        jLabel3.setFont(new java.awt.Font("Cantarell", 1, 18)); // NOI18N
-        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("Connexion");
+        Titre.setFont(new java.awt.Font("Cantarell", 1, 18)); // NOI18N
+        Titre.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        Titre.setText("Connexion");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -111,8 +111,8 @@ PreparedStatement pst=null;
                     .addGroup(layout.createSequentialGroup()
                         .addGap(189, 189, 189)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel1))
+                            .addComponent(Password)
+                            .addComponent(Username))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -125,21 +125,21 @@ PreparedStatement pst=null;
                         .addComponent(filler2, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(298, 298, 298)
-                        .addComponent(jLabel3)))
+                        .addComponent(Titre)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(84, 84, 84)
-                .addComponent(jLabel3)
+                .addComponent(Titre)
                 .addGap(45, 45, 45)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
+                    .addComponent(Username)
                     .addComponent(txtUserName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Password, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(50, 50, 50)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -265,13 +265,13 @@ PreparedStatement pst=null;
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel Password;
+    private javax.swing.JLabel Titre;
+    private javax.swing.JLabel Username;
     private javax.swing.JButton btnCancel;
     private javax.swing.JButton btnOK;
     private javax.swing.Box.Filler filler1;
     private javax.swing.Box.Filler filler2;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JSplitPane jSplitPane1;
     public javax.swing.JPasswordField txtPassword;
