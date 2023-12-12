@@ -32,15 +32,16 @@ PreparedStatement pst=null;
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        txtUsername = new javax.swing.JTextField();
-        btnChangePassword = new javax.swing.JButton();
-        txtOldPassword = new javax.swing.JPasswordField();
-        txtNewPassword = new javax.swing.JPasswordField();
-        txtConfirmPassword = new javax.swing.JPasswordField();
+        NomUser = new javax.swing.JLabel();
+        OldMdp = new javax.swing.JLabel();
+        NewMdp = new javax.swing.JLabel();
+        MdpConf = new javax.swing.JLabel();
+        UserName = new javax.swing.JTextField();
+        btnChanger = new javax.swing.JButton();
+        MdpOld = new javax.swing.JPasswordField();
+        MdpNew = new javax.swing.JPasswordField();
+        ConfMdp = new javax.swing.JPasswordField();
+        jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Change Password");
@@ -51,134 +52,147 @@ PreparedStatement pst=null;
             }
         });
 
-        jLabel1.setFont(new java.awt.Font("Palatino Linotype", 1, 12)); // NOI18N
-        jLabel1.setText("User Name");
+        NomUser.setFont(new java.awt.Font("Palatino Linotype", 1, 12)); // NOI18N
+        NomUser.setText("Utilisateur");
 
-        jLabel2.setFont(new java.awt.Font("Palatino Linotype", 1, 12)); // NOI18N
-        jLabel2.setText("Old Password");
+        OldMdp.setFont(new java.awt.Font("Palatino Linotype", 1, 12)); // NOI18N
+        OldMdp.setText("Ancien mot de passe");
 
-        jLabel3.setFont(new java.awt.Font("Palatino Linotype", 1, 12)); // NOI18N
-        jLabel3.setText("New Password");
+        NewMdp.setFont(new java.awt.Font("Palatino Linotype", 1, 12)); // NOI18N
+        NewMdp.setText("Nouveau mot de passe");
 
-        jLabel4.setFont(new java.awt.Font("Palatino Linotype", 1, 12)); // NOI18N
-        jLabel4.setText("Confirm Password");
+        MdpConf.setFont(new java.awt.Font("Palatino Linotype", 1, 12)); // NOI18N
+        MdpConf.setText("Confirmer le mot de passe");
 
-        btnChangePassword.setFont(new java.awt.Font("Palatino Linotype", 1, 12)); // NOI18N
-        btnChangePassword.setText("Change Password");
-        btnChangePassword.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnChanger.setFont(new java.awt.Font("Palatino Linotype", 1, 12)); // NOI18N
+        btnChanger.setText("Changer le mot de passe");
+        btnChanger.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnChangePasswordMouseClicked(evt);
+                btnChangerMouseClicked(evt);
             }
         });
-        btnChangePassword.addActionListener(new java.awt.event.ActionListener() {
+        btnChanger.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnChangePasswordActionPerformed(evt);
+                btnChangerActionPerformed(evt);
             }
         });
 
-        txtConfirmPassword.addKeyListener(new java.awt.event.KeyAdapter() {
+        ConfMdp.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtConfirmPasswordKeyPressed(evt);
+                ConfMdpKeyPressed(evt);
             }
         });
+
+        jLabel5.setFont(new java.awt.Font("Cantarell", 1, 18)); // NOI18N
+        jLabel5.setText("Changement de mot de passe");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(51, 51, 51)
+                .addGap(120, 120, 120)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 89, Short.MAX_VALUE)
-                        .addGap(22, 22, 22))
-                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(27, 27, 27)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtOldPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtNewPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtConfirmPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(46, 46, 46))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(NewMdp, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(MdpNew, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
+                                    .addComponent(MdpOld)))
+                            .addComponent(jLabel5)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(NomUser)
+                                    .addComponent(OldMdp))
+                                .addGap(65, 65, 65)
+                                .addComponent(UserName, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(158, 158, 158))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(MdpConf, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(23, 23, 23)
+                        .addComponent(ConfMdp, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())))
             .addGroup(layout.createSequentialGroup()
-                .addGap(113, 113, 113)
-                .addComponent(btnChangePassword)
+                .addGap(203, 203, 203)
+                .addComponent(btnChanger)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(41, 41, 41)
+                .addGap(72, 72, 72)
+                .addComponent(jLabel5)
+                .addGap(65, 65, 65)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(NomUser, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(UserName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtOldPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(21, 21, 21)
+                    .addComponent(OldMdp, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(MdpOld, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(16, 16, 16)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(txtNewPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(21, 21, 21)
+                    .addComponent(NewMdp)
+                    .addComponent(MdpNew, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtConfirmPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(MdpConf, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(ConfMdp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(44, 44, 44)
-                .addComponent(btnChangePassword, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28))
+                .addComponent(btnChanger, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(119, 119, 119))
         );
 
-        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {txtConfirmPassword, txtNewPassword, txtOldPassword, txtUsername});
+        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {ConfMdp, MdpNew, MdpOld, UserName});
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnChangePasswordMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnChangePasswordMouseClicked
+    private void btnChangerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnChangerMouseClicked
        
-    }//GEN-LAST:event_btnChangePasswordMouseClicked
+    }//GEN-LAST:event_btnChangerMouseClicked
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
       
     }//GEN-LAST:event_formWindowOpened
 
-    private void btnChangePasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChangePasswordActionPerformed
+    private void btnChangerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChangerActionPerformed
         try{
-         String Newpass=String.valueOf(txtNewPassword.getPassword());
-         String ConfPass=String.valueOf(txtConfirmPassword.getPassword());
-        String OldPass=String.valueOf(txtOldPassword.getPassword());
-        String uName=txtUsername.getText();
+         String Newpass=String.valueOf(MdpNew.getPassword());
+         String ConfPass=String.valueOf(ConfMdp.getPassword());
+        String OldPass=String.valueOf(MdpOld.getPassword());
+        String uName=UserName.getText();
         if (uName.equals("")) {
               
-                JOptionPane.showMessageDialog( this, "Please enter a username",
+                JOptionPane.showMessageDialog( this, "Entrer votre nom d'utilisateur",
                                           "Error", JOptionPane.ERROR_MESSAGE);
                 return;
                
             } else if (OldPass.equals("")) {
             
-                JOptionPane.showMessageDialog( this, "Please enter a old password",
-                                          "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog( this, "Veuillez entrer votre ancien mot de passe",
+                                          "Erreur", JOptionPane.ERROR_MESSAGE);
                 return;
                
             } else if (Newpass.equals("")) {
               
-                JOptionPane.showMessageDialog( this, "Please enter a new password",
-                                          "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog( this, "Veuillez entrer votre nouveau mot de passe",
+                                          "Erreur", JOptionPane.ERROR_MESSAGE);
                 return;
                 
             } else if (ConfPass.equals("")) {
                
-                JOptionPane.showMessageDialog( this, "Please enter a confirmed password",
-                                          "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog( this, "Veuillez confirmer votre mot de passe",
+                                          "Erreur", JOptionPane.ERROR_MESSAGE);
                 return;
             } 
                else if (Newpass.length()< 5) {
                
                 JOptionPane.showMessageDialog(this,
-                                         "The New Password Should be of Atleast 5 Characters",
-                                         "Error", JOptionPane.ERROR_MESSAGE);
+                                         "Le mot de passe doit contenir au moins 5 caractères",
+                                         "Erreur", JOptionPane.ERROR_MESSAGE);
                 return;
                }
             
@@ -187,19 +201,19 @@ PreparedStatement pst=null;
             else if ((Newpass).equals(OldPass)) {
                 
                JOptionPane.showMessageDialog(this,
-                                         "Password is same..Re-enter new password","Error", JOptionPane.ERROR_MESSAGE);
+                                         "Mot de passe identique..Veuillez reecrire votre mot de passe","Erreur", JOptionPane.ERROR_MESSAGE);
                return;
             }
     else if (!(Newpass).equals(ConfPass)) {
                
                 JOptionPane.showMessageDialog(this,
-                                         "New Password doesn't match with Confirmed Password",
+                                         "Le nouveau mot de passe ne se corresponde pas, réessayez",
                                          "Error", JOptionPane.ERROR_MESSAGE);
                 return;
             }
        
       con=Connect.ConnectDB();
-      String sql= "select Username,User_Password from users where Username='" + txtUsername.getText() + "' and User_Password= '" + txtOldPassword.getText() + "'";
+      String sql= "select Username,User_Password from users where Username='" + UserName.getText() + "' and User_Password= '" + MdpOld.getText() + "'";
       pst=con.prepareStatement(sql);
       rs= pst.executeQuery();
       while(rs.next())
@@ -213,53 +227,53 @@ PreparedStatement pst=null;
                  Statement stmt = con.createStatement();
                  stmt.execute(sql1.toString());
                  stmt.close();
-                 JOptionPane.showMessageDialog(this,"Password Successfully Changed");
+                 JOptionPane.showMessageDialog(this,"Mot de passe changée");
                  this.dispose();
                  return;
               }
             else
             {
-             JOptionPane.showMessageDialog(this,"invalid user name or password","Error", JOptionPane.ERROR_MESSAGE);   
-             txtUsername.setText("");
-             txtOldPassword.setText("");
-             txtNewPassword.setText("");
-             txtConfirmPassword.setText("");
+             JOptionPane.showMessageDialog(this,"Utilisateur ou mot de passe erroné","Erreur", JOptionPane.ERROR_MESSAGE);   
+             UserName.setText("");
+             MdpOld.setText("");
+             MdpNew.setText("");
+             ConfMdp.setText("");
              return;
             }
         }    
         }catch(SQLException | HeadlessException ex){
            JOptionPane.showMessageDialog(this,ex); 
         }
-    }//GEN-LAST:event_btnChangePasswordActionPerformed
+    }//GEN-LAST:event_btnChangerActionPerformed
 
-    private void txtConfirmPasswordKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtConfirmPasswordKeyPressed
+    private void ConfMdpKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_ConfMdpKeyPressed
         if (evt.getKeyCode()==KeyEvent.VK_ENTER){
               try{
-         String Newpass=String.valueOf(txtNewPassword.getPassword());
-         String ConfPass=String.valueOf(txtConfirmPassword.getPassword());
-        String OldPass=String.valueOf(txtOldPassword.getPassword());
-        String uName=txtUsername.getText();
+         String Newpass=String.valueOf(MdpNew.getPassword());
+         String ConfPass=String.valueOf(ConfMdp.getPassword());
+        String OldPass=String.valueOf(MdpOld.getPassword());
+        String uName=UserName.getText();
         if (uName.equals("")) {
               
-                JOptionPane.showMessageDialog( this, "Please enter a username",
+                JOptionPane.showMessageDialog( this, "Veuillez entrer votre nom d'utilisateur",
                                           "Error", JOptionPane.ERROR_MESSAGE);
                 return;
                
             } else if (OldPass.equals("")) {
             
-                JOptionPane.showMessageDialog( this, "Please enter a old password",
+                JOptionPane.showMessageDialog( this, "Veuillez entrer votre ancien mot de passe",
                                           "Error", JOptionPane.ERROR_MESSAGE);
                 return;
                
             } else if (Newpass.equals("")) {
               
-                JOptionPane.showMessageDialog( this, "Please enter a new password",
+                JOptionPane.showMessageDialog( this, "Veuillez entrer votre nouveau mot de passe",
                                           "Error", JOptionPane.ERROR_MESSAGE);
                 return;
                 
             } else if (ConfPass.equals("")) {
                
-                JOptionPane.showMessageDialog( this, "Please enter a confirmed password",
+                JOptionPane.showMessageDialog( this, "Veuillez confirmer votre mot de passe",
                                           "Error", JOptionPane.ERROR_MESSAGE);
                 return;
             } 
@@ -288,7 +302,7 @@ PreparedStatement pst=null;
             }
        
       con=Connect.ConnectDB();
-      String sql= "select Username,User_Password from users where Username='" + txtUsername.getText() + "' and User_Password= '" + txtOldPassword.getText() + "'";
+      String sql= "select Username,User_Password from users where Username='" + UserName.getText() + "' and User_Password= '" + MdpOld.getText() + "'";
       pst=con.prepareStatement(sql);
       rs= pst.executeQuery();
       while(rs.next())
@@ -309,10 +323,10 @@ PreparedStatement pst=null;
             else
             {
              JOptionPane.showMessageDialog(this,"invalid user name or password","Error", JOptionPane.ERROR_MESSAGE);   
-             txtUsername.setText("");
-             txtOldPassword.setText("");
-             txtNewPassword.setText("");
-             txtConfirmPassword.setText("");
+             UserName.setText("");
+             MdpOld.setText("");
+             MdpNew.setText("");
+             ConfMdp.setText("");
              return;
             }
         }    
@@ -321,7 +335,7 @@ PreparedStatement pst=null;
         }
             
         }
-    }//GEN-LAST:event_txtConfirmPasswordKeyPressed
+    }//GEN-LAST:event_ConfMdpKeyPressed
 
     /**
      * @param args the command line arguments
@@ -353,14 +367,15 @@ PreparedStatement pst=null;
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnChangePassword;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JPasswordField txtConfirmPassword;
-    private javax.swing.JPasswordField txtNewPassword;
-    private javax.swing.JPasswordField txtOldPassword;
-    private javax.swing.JTextField txtUsername;
+    private javax.swing.JPasswordField ConfMdp;
+    private javax.swing.JLabel MdpConf;
+    private javax.swing.JPasswordField MdpNew;
+    private javax.swing.JPasswordField MdpOld;
+    private javax.swing.JLabel NewMdp;
+    private javax.swing.JLabel NomUser;
+    private javax.swing.JLabel OldMdp;
+    private javax.swing.JTextField UserName;
+    private javax.swing.JButton btnChanger;
+    private javax.swing.JLabel jLabel5;
     // End of variables declaration//GEN-END:variables
 }

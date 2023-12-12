@@ -5,14 +5,14 @@ import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.sql.*;
 import javax.swing.*;
-public class Login extends javax.swing.JFrame {
+public class Connexion extends javax.swing.JFrame {
 Connection con=null;
 ResultSet rs=null;
 PreparedStatement pst=null;
     /**
      * Creates new form Login
      */
-    public Login() {
+    public Connexion() {
         initComponents();
         setLocationRelativeTo(null);
                  }
@@ -252,15 +252,16 @@ PreparedStatement pst=null;
                 }
             }
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Connexion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                new Login().setVisible(true);
+                new Connexion().setVisible(true);
             }
         });
     }
