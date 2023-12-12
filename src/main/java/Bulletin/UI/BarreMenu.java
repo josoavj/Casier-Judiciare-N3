@@ -30,7 +30,6 @@ public class BarreMenu extends javax.swing.JFrame {
         txtPresentation = new javax.swing.JLabel();
         typeLog = new javax.swing.JLabel();
         pnlGuide = new javax.swing.JPanel();
-        titleGuide = new javax.swing.JLabel();
         txtNav = new javax.swing.JLabel();
         txtNavPers = new javax.swing.JLabel();
         txtNavOpt = new javax.swing.JLabel();
@@ -76,8 +75,7 @@ public class BarreMenu extends javax.swing.JFrame {
         typeLog.setFont(new java.awt.Font("sansserif", 1, 13)); // NOI18N
         typeLog.setText("Logiciel OpenSource");
 
-        titleGuide.setFont(new java.awt.Font("sansserif", 1, 15)); // NOI18N
-        titleGuide.setText("Guide");
+        pnlGuide.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Guide d'utilisation", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("sansserif", 1, 16))); // NOI18N
 
         txtNav.setFont(new java.awt.Font("sansserif", 1, 13)); // NOI18N
         txtNav.setText("-> Pour la navigation vers les autres pages, vous devez utiliser la barre de menu en dessus.");
@@ -102,9 +100,7 @@ public class BarreMenu extends javax.swing.JFrame {
                 .addGap(34, 34, 34)
                 .addGroup(pnlGuideLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlGuideLayout.createSequentialGroup()
-                        .addGroup(pnlGuideLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(titleGuide)
-                            .addComponent(txtNav))
+                        .addComponent(txtNav)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(pnlGuideLayout.createSequentialGroup()
                         .addGroup(pnlGuideLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -112,14 +108,12 @@ public class BarreMenu extends javax.swing.JFrame {
                             .addComponent(txtNavOpt)
                             .addComponent(txtNavAdmin)
                             .addComponent(txtNavAbt))
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                        .addGap(0, 62, Short.MAX_VALUE))))
         );
         pnlGuideLayout.setVerticalGroup(
             pnlGuideLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlGuideLayout.createSequentialGroup()
-                .addGap(22, 22, 22)
-                .addComponent(titleGuide)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(36, 36, 36)
                 .addComponent(txtNav)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(txtNavPers)
@@ -228,7 +222,7 @@ public class BarreMenu extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(525, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(txtBienvenue)
@@ -242,7 +236,7 @@ public class BarreMenu extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(110, 110, 110)
                 .addComponent(pnlGuide, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 242, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -253,7 +247,7 @@ public class BarreMenu extends javax.swing.JFrame {
                 .addComponent(txtPresentation)
                 .addGap(40, 40, 40)
                 .addComponent(pnlGuide, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 194, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 229, Short.MAX_VALUE)
                 .addComponent(typeLog)
                 .addGap(19, 19, 19))
         );
@@ -364,7 +358,6 @@ public class BarreMenu extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem16;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JPanel pnlGuide;
-    private javax.swing.JLabel titleGuide;
     private javax.swing.JLabel txtBienvenue;
     private javax.swing.JLabel txtNav;
     private javax.swing.JLabel txtNavAbt;
