@@ -6,20 +6,23 @@ import Bulletin.persistence.Admin.AdminService;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import javax.swing.*;
-<<<<<<< HEAD:src/main/java/Bulletin/UI/Connexion.java
+
 public class Connexion extends javax.swing.JFrame {
 Connection con=null;
 ResultSet rs=null;
 PreparedStatement pst=null;
-=======
+
 public class Login extends javax.swing.JFrame {
 AdminService adminService = AdminService.getInstance();
->>>>>>> 8b802d3 (tsaiko pr tsony):src/main/java/Bulletin/UI/Login.java
+
     /**
      * Creates new form Login
      */
-    public Connexion() {
+    public Login() {
         initComponents();
         setLocationRelativeTo(null);
                  }
@@ -33,9 +36,6 @@ AdminService adminService = AdminService.getInstance();
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jMenuItem1 = new javax.swing.JMenuItem();
-        filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
-        jSplitPane1 = new javax.swing.JSplitPane();
         Username = new javax.swing.JLabel();
         Password = new javax.swing.JLabel();
         txtUserName = new javax.swing.JTextField();
@@ -45,8 +45,6 @@ AdminService adminService = AdminService.getInstance();
         filler2 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
         Titre = new javax.swing.JLabel();
         name = new javax.swing.JLabel();
-
-        jMenuItem1.setText("jMenuItem1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Login Form");
@@ -171,21 +169,18 @@ AdminService adminService = AdminService.getInstance();
      
     }//GEN-LAST:event_txtUserNameMouseClicked
 
-<<<<<<< HEAD
     private void btnOKMouseClicked(java.awt.event.MouseEvent evt) {
         String username = txtUserName.getText().strip();
         String password= String.valueOf(txtPassword.getPassword()).strip();
     if (username.isEmpty()) {
            JOptionPane.showMessageDialog( this, "Veuillez remplir votre identifiant","Erreur", JOptionPane.ERROR_MESSAGE);
-=======
     private void btnOKMouseClicked(java.awt.event.MouseEvent evt) {                                   
     if (txtUserName.getText().equals("")) {
            JOptionPane.showMessageDialog( this, "Veuillez entrer votre nom d'utilisateur","Error", JOptionPane.ERROR_MESSAGE);
->>>>>>> 28794f6 (Homepage init)
            return;
             
             }
-        if (password.isEmpty()) {
+        if (Password.isEmpty()) {
            JOptionPane.showMessageDialog( this, "Veuillez entrer votre mot de passe","Erreur", JOptionPane.ERROR_MESSAGE);
            return;
           
@@ -289,10 +284,7 @@ AdminService adminService = AdminService.getInstance();
     private javax.swing.JLabel Username;
     private javax.swing.JButton btnCancel;
     private javax.swing.JButton btnOK;
-    private javax.swing.Box.Filler filler1;
     private javax.swing.Box.Filler filler2;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JSplitPane jSplitPane1;
     private javax.swing.JLabel name;
     public javax.swing.JPasswordField txtPassword;
     public javax.swing.JTextField txtUserName;
