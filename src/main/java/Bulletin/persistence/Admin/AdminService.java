@@ -11,14 +11,14 @@ public class AdminService {
     private EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("Bulletin");
     private EntityManager entityManager = entityManagerFactory.createEntityManager();
 
-    private AdminService instance = null;
+    private static AdminService instance = null;
 
     /**
      *
      * @return AdminService || null
      * @description Cette méthode retourne une seulle instance de l'objet AdminService
      */
-    public AdminService getInstance() {
+    public static AdminService getInstance() {
         return instance == null ? instance = new AdminService() : null;
     }
 

@@ -1,14 +1,21 @@
 package Bulletin.UI;
 
 
+import Bulletin.persistence.Admin.Admin;
+import Bulletin.persistence.Admin.AdminService;
+
 import java.awt.*;
 import java.awt.event.KeyEvent;
-import java.sql.*;
 import javax.swing.*;
+<<<<<<< HEAD:src/main/java/Bulletin/UI/Connexion.java
 public class Connexion extends javax.swing.JFrame {
 Connection con=null;
 ResultSet rs=null;
 PreparedStatement pst=null;
+=======
+public class Login extends javax.swing.JFrame {
+AdminService adminService = AdminService.getInstance();
+>>>>>>> 8b802d3 (tsaiko pr tsony):src/main/java/Bulletin/UI/Login.java
     /**
      * Creates new form Login
      */
@@ -158,34 +165,33 @@ PreparedStatement pst=null;
      
     }//GEN-LAST:event_txtUserNameMouseClicked
 
-    private void btnOKMouseClicked(java.awt.event.MouseEvent evt) {                                   
-    if (txtUserName.getText().equals("")) {
-           JOptionPane.showMessageDialog( this, "Please enter user name","Error", JOptionPane.ERROR_MESSAGE);
+    private void btnOKMouseClicked(java.awt.event.MouseEvent evt) {
+        String username = txtUserName.getText().strip();
+        String password= String.valueOf(txtPassword.getPassword()).strip();
+    if (username.isEmpty()) {
+           JOptionPane.showMessageDialog( this, "Veuillez remplir votre identifiant","Erreur", JOptionPane.ERROR_MESSAGE);
            return;
             
             }
-    String Password= String.valueOf(txtPassword.getPassword());
-        if (Password.equals("")) {
-           JOptionPane.showMessageDialog( this, "Please enter password","Error", JOptionPane.ERROR_MESSAGE);
+        if (password.isEmpty()) {
+           JOptionPane.showMessageDialog( this, "Veuillez entrer votre mot de passe","Erreur", JOptionPane.ERROR_MESSAGE);
            return;
           
             }
-      con=Connect.ConnectDB();
-      String sql= "select * from users where UserName= '" + txtUserName.getText() + "' and user_Password ='" + txtPassword.getText() + "'";
       try
       {
-          pst=con.prepareStatement(sql);
-          rs= pst.executeQuery();
-          if (rs.next()){
+          Admin admin = adminService.getAdmin(username,password);
+          if (admin != null){
              this.hide();
-             BarreMenu frm=new BarreMenu();
-             frm.setVisible(true);
+             System.out.println("connectedd");
+             // BarreMenu frm=new BarreMenu();
+             //frm.setVisible(true);
           }
           else{
               
-            JOptionPane.showMessageDialog(null, "Login Failed..Try again !","Access denied",JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Erreur de connection !","Access refusée",JOptionPane.ERROR_MESSAGE);
           }
-      }catch(SQLException | HeadlessException e){
+      }catch(HeadlessException e){
          JOptionPane.showMessageDialog(null, e); 
           
     }                                     
@@ -206,28 +212,28 @@ PreparedStatement pst=null;
 
     private void txtPasswordKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPasswordKeyPressed
      if (evt.getKeyCode()==KeyEvent.VK_ENTER){
-           con=Connect.ConnectDB();
-      String sql= "select * from users where UserName= '" + txtUserName.getText() + "' and user_Password ='" + txtPassword.getText() + "'";
+      //     con=Connect.ConnectDB();
+      //String sql= "select * from users where UserName= '" + txtUserName.getText() + "' and user_Password ='" + txtPassword.getText() + "'";
       try
       {
-          pst=con.prepareStatement(sql);
-          rs= pst.executeQuery();
-          if (rs.next()){
+          Admin admin = adminService.getAdmin(txtUserName.getText(),txtPassword.getText());
+          if (admin != null){
              this.hide();
-             BarreMenu frm=new BarreMenu();
-             frm.setVisible(true);
+            // BarreMenu frm=new BarreMenu();
+              System.out.println("connected");
+             //frm.setVisible(true);
           }
           else{
-              
+
             JOptionPane.showMessageDialog(null, "Login Failed..Try again !","Access denied",JOptionPane.ERROR_MESSAGE);
             txtUserName.setText("");
             txtPassword.setText("");
             txtUserName.requestDefaultFocus();
          }
-      }catch(SQLException | HeadlessException e){
-         JOptionPane.showMessageDialog(null, e); 
-          
-    }            
+      }catch(HeadlessException e){
+         JOptionPane.showMessageDialog(null, e);
+
+    }
      }
     }//GEN-LAST:event_txtPasswordKeyPressed
 

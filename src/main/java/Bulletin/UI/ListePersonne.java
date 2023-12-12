@@ -5,7 +5,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import javax.swing.JOptionPane;
+<<<<<<< HEAD
 // import net.proteanit.sql.DbUtils;
+=======
+>>>>>>> 8b802d3 (tsaiko pr tsony)
 
 
 public class ListePersonne extends javax.swing.JFrame {
@@ -110,6 +113,11 @@ PreparedStatement pst=null;
                 frm.lieunais.setText(add);
                 String add7=rs.getString("Remarks");
                 frm.txtRemarks.setText(add7);
+<<<<<<< HEAD
+=======
+                String add9=rs.getString("BG");
+                //frm.cmbBloodGroup.setSelectedItem(add9);
+>>>>>>> 8b802d3 (tsaiko pr tsony)
                 String add11=rs.getString("Gen");
                 frm.cmbStatus.setSelectedItem(add11);
                 String add15=rs.getString("Address");

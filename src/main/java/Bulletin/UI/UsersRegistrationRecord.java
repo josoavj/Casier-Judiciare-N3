@@ -3,7 +3,10 @@ package Bulletin.UI;
 
 import java.sql.*;
 import javax.swing.*;
+<<<<<<< HEAD
 //import net.proteanit.sql.DbUtils;
+=======
+>>>>>>> 8b802d3 (tsaiko pr tsony)
 public class UsersRegistrationRecord extends javax.swing.JFrame {
 Connection con=null;
 ResultSet rs=null;
