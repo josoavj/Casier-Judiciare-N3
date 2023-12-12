@@ -3,7 +3,7 @@ package Bulletin.UI;
 
 import java.sql.*;
 import javax.swing.*;
-import net.proteanit.sql.DbUtils;
+//import net.proteanit.sql.DbUtils;
 public class UsersRegistrationRecord extends javax.swing.JFrame {
 Connection con=null;
 ResultSet rs=null;
@@ -22,7 +22,7 @@ PreparedStatement pst=null;
         try{
          pst=con.prepareStatement(sql);
           rs= pst.executeQuery();
-         jTable1.setModel(DbUtils.resultSetToTableModel(rs));
+         //jTable1.setModel(DbUtils.resultSetToTableModel(rs));
          }catch(Exception e){
             JOptionPane.showMessageDialog(null, e);
           
@@ -71,7 +71,7 @@ PreparedStatement pst=null;
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 876, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 924, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

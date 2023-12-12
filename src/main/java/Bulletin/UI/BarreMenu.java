@@ -31,7 +31,7 @@ public class BarreMenu extends javax.swing.JFrame {
         MPersonne = new javax.swing.JMenu();
         MIdentification = new javax.swing.JMenuItem();
         ListePersonne = new javax.swing.JMenuItem();
-        jMenu7 = new javax.swing.JMenu();
+        MOptions = new javax.swing.JMenu();
         jMenuItem13 = new javax.swing.JMenuItem();
         MAdmin = new javax.swing.JMenu();
         AdmIden = new javax.swing.JMenuItem();
@@ -78,7 +78,7 @@ public class BarreMenu extends javax.swing.JFrame {
 
         jMenuBar1.add(MPersonne);
 
-        jMenu7.setText("Options");
+        MOptions.setText("Options");
 
         jMenuItem13.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_P, java.awt.event.InputEvent.ALT_DOWN_MASK));
         jMenuItem13.setText("Profile Entry");
@@ -87,9 +87,9 @@ public class BarreMenu extends javax.swing.JFrame {
                 jMenuItem13ActionPerformed(evt);
             }
         });
-        jMenu7.add(jMenuItem13);
+        MOptions.add(jMenuItem13);
 
-        jMenuBar1.add(jMenu7);
+        jMenuBar1.add(MOptions);
 
         MAdmin.setText("Admin");
 
@@ -254,13 +254,13 @@ public class BarreMenu extends javax.swing.JFrame {
     private javax.swing.JMenu MAide;
     private javax.swing.JMenuItem MContact;
     private javax.swing.JMenuItem MIdentification;
+    private javax.swing.JMenu MOptions;
     private javax.swing.JMenu MPersonne;
     private javax.swing.JMenuItem MdpChange;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JMenu jMenu12;
     private javax.swing.JMenu jMenu6;
-    private javax.swing.JMenu jMenu7;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem13;

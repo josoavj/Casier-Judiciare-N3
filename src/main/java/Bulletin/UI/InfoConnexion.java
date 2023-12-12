@@ -26,7 +26,7 @@ PreparedStatement pst=null;
           try{
          pst=con.prepareStatement(sql);
           rs= pst.executeQuery();
-         ListeConnecte.setModel(DbUtils.resultSetToTableModel(rs));
+         //ListeConnecte.setModel(DbUtils.resultSetToTableModel(rs));
          }catch(Exception e){
             JOptionPane.showMessageDialog(null, e);
           

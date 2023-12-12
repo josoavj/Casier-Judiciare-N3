@@ -5,7 +5,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import javax.swing.JOptionPane;
-import net.proteanit.sql.DbUtils;
+// import net.proteanit.sql.DbUtils;
 
 
 public class ListePersonne extends javax.swing.JFrame {
@@ -26,7 +26,7 @@ PreparedStatement pst=null;
            try{
          pst=con.prepareStatement(sql);
           rs= pst.executeQuery();
-         jTable1.setModel(DbUtils.resultSetToTableModel(rs));
+         //jTable1.setModel(DbUtils.resultSetToTableModel(rs));
          }catch(Exception e){
             JOptionPane.showMessageDialog(null, e);
           
@@ -110,8 +110,6 @@ PreparedStatement pst=null;
                 frm.lieunais.setText(add);
                 String add7=rs.getString("Remarks");
                 frm.txtRemarks.setText(add7);
-                String add9=rs.getString("BG");
-                frm.cmbBloodGroup.setSelectedItem(add9);
                 String add11=rs.getString("Gen");
                 frm.cmbStatus.setSelectedItem(add11);
                 String add15=rs.getString("Address");

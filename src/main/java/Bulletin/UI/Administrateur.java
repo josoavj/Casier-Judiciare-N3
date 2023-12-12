@@ -2,15 +2,11 @@ package Bulletin.UI;
 
 
 import java.awt.HeadlessException;
-import java.awt.event.KeyEvent;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import javax.swing.JOptionPane;
 
 
@@ -303,7 +299,7 @@ private void Reset()
         ID.requestDefaultFocus();
        return;
       }
-            String sql= "insert into Doctor(DoctorID,Doctorname,FatherName,Email,ContactNo,Qualifications,Specialization,Gender,BloodGroup,DateOfJoining,Address)values('"+ ID.getText() + "','"+ NomAd.getText() + "','"+ PrenomAd.getText() + "','"+ txtEmailID.getText() + "','"+ txtContactNo.getText() + "','"+ txtQualifications.getText() + "','"+ AdPoste.getText() + "','" + cmbGender.getSelectedItem() + "','" + AdUsername.getText() + "')";
+            String sql= "insert into Doctor(DoctorID,Doctorname,FatherName,Email,ContactNo,Qualifications,Specialization,Gender,BloodGroup,DateOfJoining,Address)values('"+ ID.getText() + "','"+ NomAd.getText() + "','"+ PrenomAd.getText() + "','"+  "','"+ AdPoste.getText() + "','" + cmbGender.getSelectedItem() + "','" + AdUsername.getText() + "')";
 
             pst=con.prepareStatement(sql);
             pst.execute();
@@ -336,7 +332,7 @@ private void Reset()
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
         try{
             con=Connect.ConnectDB();
-            String sql= "update Doctor set Doctorname='"+ NomAd.getText() + "',FatherName='"+ PrenomAd.getText() + "',Email='"+ txtEmailID.getText() + "',ContactNo='"+ txtContactNo.getText() + "',Qualifications='"+ txtQualifications.getText() + "',Specialization='"+ AdPoste.getText() + "',Gender='" + cmbGender.getSelectedItem() + "',BloodGroup='"+ cmbBloodGroup.getSelectedItem() + "',DateOfJoining='" + txtDateOfJoining.getText() + "',Address='" + AdUsername.getText() + "' where DoctorID='" + ID.getText() + "'";
+            String sql= "update Doctor set Doctorname='"+ NomAd.getText() + "',FatherName='"+ PrenomAd.getText() + "',Email='"+  "',Specialization='"+ AdPoste.getText() + "',Gender='" + cmbGender.getSelectedItem() + "',BloodGroup='"+  "',Address='" + AdUsername.getText() + "' where DoctorID='" + ID.getText() + "'";
 
            pst=con.prepareStatement(sql);
             pst.execute();
@@ -350,8 +346,8 @@ private void Reset()
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
      this.hide();
-     DoctorRecord frm=new DoctorRecord();
-     frm.setVisible(true);
+     //DoctorRecord frm=new DoctorRecord();
+     //frm.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
