@@ -57,5 +57,16 @@ INSERT INTO condamnation (dateCondamnation,
                             idConserned)
                             values (null, '', '', '', '',1);
 
+-- --------------------------------table Admin--------------------------------------------
+
+CREATE TABLE Admin (
+                     id int(4) UNSIGNED ZEROFILL AUTO_INCREMENT PRIMARY KEY NOT NULL,
+                     username VARCHAR(256) NOT NULL, 
+                     password VARCHAR(256) NOT NULL );
+
+-- --------------------------------Administrateur par defaut------------------------------
+
+INSERT INTO Admin (username, password) VALUES ("Admin", "Admin");
+
 
 
