@@ -47,6 +47,8 @@ PreparedStatement pst=null;
         btnAdd = new javax.swing.JButton();
         btnDel = new javax.swing.JButton();
         btnMod = new javax.swing.JButton();
+        btnImprimer = new javax.swing.JButton();
+        getInformation = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Patient Registration Record");
@@ -93,6 +95,20 @@ PreparedStatement pst=null;
 
         btnMod.setText("Modifier");
 
+        btnImprimer.setText("Imprimer");
+        btnImprimer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnImprimerActionPerformed(evt);
+            }
+        });
+
+        getInformation.setText("Informations");
+        getInformation.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                getInformationActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout modifPanelLayout = new javax.swing.GroupLayout(modifPanel);
         modifPanel.setLayout(modifPanelLayout);
         modifPanelLayout.setHorizontalGroup(
@@ -101,8 +117,10 @@ PreparedStatement pst=null;
                 .addContainerGap(29, Short.MAX_VALUE)
                 .addGroup(modifPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnAdd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnDel, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
-                    .addComponent(btnMod, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnDel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnMod, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnImprimer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(getInformation, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(19, 19, 19))
         );
         modifPanelLayout.setVerticalGroup(
@@ -114,7 +132,11 @@ PreparedStatement pst=null;
                 .addComponent(btnDel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnMod)
-                .addContainerGap(23, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnImprimer)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(getInformation)
+                .addContainerGap(17, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -139,7 +161,7 @@ PreparedStatement pst=null;
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1034, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1023, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -177,8 +199,6 @@ PreparedStatement pst=null;
                 frm.lieunais.setText(add);
                 String add7=rs.getString("Remarks");
                 frm.txtRemarks.setText(add7);
-                String add9=rs.getString("BG");
-                //frm.cmbBloodGroup.setSelectedItem(add9);
                 String add11=rs.getString("Gen");
                 frm.cmbStatus.setSelectedItem(add11);
                 String add15=rs.getString("Address");
@@ -208,6 +228,14 @@ PreparedStatement pst=null;
     private void btnDelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDelActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnDelActionPerformed
+
+    private void getInformationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_getInformationActionPerformed
+        // TODO add your handling code here: Voir les informations complètes sur la personne
+    }//GEN-LAST:event_getInformationActionPerformed
+
+    private void btnImprimerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImprimerActionPerformed
+        // TODO add your handling code here: Imprimer la personne selectionné
+    }//GEN-LAST:event_btnImprimerActionPerformed
 
     /**
      * @param args the command line arguments
@@ -247,12 +275,10 @@ PreparedStatement pst=null;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnDel;
+    private javax.swing.JButton btnImprimer;
     private javax.swing.JButton btnMod;
-    private javax.swing.JButton btnNouveau;
-    private javax.swing.JButton btnNouveau1;
+    private javax.swing.JButton getInformation;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel modifPanel;
     private javax.swing.JTable tablePerson;

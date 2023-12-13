@@ -29,7 +29,7 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <Component id="jScrollPane1" pref="1034" max="32767" attributes="0"/>
+              <Component id="jScrollPane1" pref="1023" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
           </Group>
@@ -157,8 +157,10 @@
                       <EmptySpace pref="29" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Component id="btnAdd" max="32767" attributes="0"/>
-                          <Component id="btnDel" alignment="0" pref="100" max="32767" attributes="0"/>
+                          <Component id="btnDel" alignment="0" max="32767" attributes="0"/>
                           <Component id="btnMod" alignment="0" max="32767" attributes="0"/>
+                          <Component id="btnImprimer" alignment="0" max="32767" attributes="0"/>
+                          <Component id="getInformation" alignment="0" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
                   </Group>
@@ -173,7 +175,11 @@
                       <Component id="btnDel" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="btnMod" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="23" max="32767" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="btnImprimer" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="getInformation" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace pref="17" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -199,6 +205,22 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Modifier"/>
               </Properties>
+            </Component>
+            <Component class="javax.swing.JButton" name="btnImprimer">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Imprimer"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnImprimerActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JButton" name="getInformation">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Informations"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="getInformationActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>

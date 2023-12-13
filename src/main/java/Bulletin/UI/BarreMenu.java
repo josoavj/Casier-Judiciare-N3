@@ -40,7 +40,7 @@ public class BarreMenu extends javax.swing.JFrame {
         MIdentification = new javax.swing.JMenuItem();
         ListePersonne = new javax.swing.JMenuItem();
         MOptions = new javax.swing.JMenu();
-        jMenuItem13 = new javax.swing.JMenuItem();
+        Settings = new javax.swing.JMenuItem();
         MAdmin = new javax.swing.JMenu();
         AdmIden = new javax.swing.JMenuItem();
         MdpChange = new javax.swing.JMenuItem();
@@ -148,14 +148,14 @@ public class BarreMenu extends javax.swing.JFrame {
 
         MOptions.setText("Options");
 
-        jMenuItem13.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_P, java.awt.event.InputEvent.ALT_DOWN_MASK));
-        jMenuItem13.setText("Profile Entry");
-        jMenuItem13.addActionListener(new java.awt.event.ActionListener() {
+        Settings.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_P, java.awt.event.InputEvent.ALT_DOWN_MASK));
+        Settings.setText("Settings");
+        Settings.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem13ActionPerformed(evt);
+                SettingsActionPerformed(evt);
             }
         });
-        MOptions.add(jMenuItem13);
+        MOptions.add(Settings);
 
         MenuBar.add(MOptions);
 
@@ -270,10 +270,10 @@ public class BarreMenu extends javax.swing.JFrame {
     frm.setVisible(true); 
     }//GEN-LAST:event_Info_ConnexActionPerformed
 
-    private void jMenuItem13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem13ActionPerformed
-     Administrateur frm= new Administrateur();
+    private void SettingsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SettingsActionPerformed
+     Settings frm= new Settings();
      frm.setVisible(true);
-    }//GEN-LAST:event_jMenuItem13ActionPerformed
+    }//GEN-LAST:event_SettingsActionPerformed
 
     private void MAideActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MAideActionPerformed
    
@@ -286,13 +286,15 @@ public class BarreMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_MAboutActionPerformed
 
     private void MIdentificationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MIdentificationActionPerformed
+    // Ajout d'un nouveau personne dans la liste
     AjoutPersonne frm= new AjoutPersonne();
     frm.setVisible(true);
     }//GEN-LAST:event_MIdentificationActionPerformed
 
     private void ListePersonneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ListePersonneActionPerformed
-    //Services frm= new Services();
-    //frm.setVisible(true);
+    // Voir la liste des personnes dans la liste
+    ListePersonne frm= new ListePersonne();
+    frm.setVisible(true);
     }//GEN-LAST:event_ListePersonneActionPerformed
 
     
@@ -350,11 +352,11 @@ public class BarreMenu extends javax.swing.JFrame {
     private javax.swing.JMenu MPersonne;
     private javax.swing.JMenuItem MdpChange;
     private javax.swing.JMenuBar MenuBar;
+    private javax.swing.JMenuItem Settings;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem1;
     private javax.swing.JMenu jMenu12;
     private javax.swing.JMenu jMenu6;
     private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem13;
     private javax.swing.JMenuItem jMenuItem16;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JPanel pnlGuide;
