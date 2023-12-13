@@ -56,7 +56,7 @@ PreparedStatement pst=null;
         setTitle("Doctor");
         setResizable(false);
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Doctor Details"));
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Administrateur"));
 
         IDAdmin.setText("ID");
 

@@ -61,7 +61,7 @@ PreparedStatement pst=null;
                 {null, null}
             },
             new String [] {
-                "User Name", "Password"
+                "Nom d'utilisateur", "Password"
             }
         ) {
             boolean[] canEdit = new boolean [] {
