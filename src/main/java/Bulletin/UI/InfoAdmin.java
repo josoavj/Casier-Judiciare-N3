@@ -5,14 +5,14 @@ import java.sql.*;
 import javax.swing.*;
 //import net.proteanit.sql.DbUtils;
 
-public class UsersRegistrationRecord extends javax.swing.JFrame {
+public class InfoAdmin extends javax.swing.JFrame {
 Connection con=null;
 ResultSet rs=null;
 PreparedStatement pst=null;
     /**
      * Creates new form UsersRegistrationRecord
      */
-    public UsersRegistrationRecord() {
+    public InfoAdmin() {
         initComponents();
         con= Connect.ConnectDB();
         Get_Data();
@@ -52,13 +52,13 @@ PreparedStatement pst=null;
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "ID", "Nom", "Prénom", "Username", "Poste", "Sexe"
             }
         ));
         jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -102,10 +102,6 @@ PreparedStatement pst=null;
                 frm.txtPassword.setText(add2);
                 String add3=rs.getString("NameOfUser");
                 frm.txtName.setText(add3);
-                String add4=rs.getString("ContactNo");
-                frm.txtContactNo.setText(add4);
-                String add5=rs.getString("Email");
-                frm.txtEmailID.setText(add5);
                 frm.Save.setEnabled(false);
                 frm.Delete.setEnabled(true);
                 frm.Update.setEnabled(true);
@@ -139,20 +135,21 @@ PreparedStatement pst=null;
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(UsersRegistrationRecord.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(InfoAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(UsersRegistrationRecord.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(InfoAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(UsersRegistrationRecord.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(InfoAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(UsersRegistrationRecord.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(InfoAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new UsersRegistrationRecord().setVisible(true);
+                new InfoAdmin().setVisible(true);
             }
         });
     }

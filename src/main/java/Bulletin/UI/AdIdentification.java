@@ -27,8 +27,6 @@ PreparedStatement pst=null;
     txtName.setText("");
     txtUserName.setText("");
     txtPassword.setText("");
-    txtEmailID.setText("");
-    txtContactNo.setText("");
     Save.setEnabled(true);
     Delete.setEnabled(false);
     Update.setEnabled(false);
@@ -58,10 +56,6 @@ PreparedStatement pst=null;
         txtUserName = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         txtPassword = new javax.swing.JPasswordField();
-        jLabel4 = new javax.swing.JLabel();
-        txtEmailID = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
-        txtContactNo = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("User Registration");
@@ -69,21 +63,21 @@ PreparedStatement pst=null;
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
-        New.setText("New");
+        New.setText("Nouveau");
         New.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 NewActionPerformed(evt);
             }
         });
 
-        Save.setText("Save");
+        Save.setText("Enregistrer");
         Save.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 SaveActionPerformed(evt);
             }
         });
 
-        Delete.setText("Delete");
+        Delete.setText("Effacer");
         Delete.setEnabled(false);
         Delete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -91,7 +85,7 @@ PreparedStatement pst=null;
             }
         });
 
-        Update.setText("Update");
+        Update.setText("Mettre à jour");
         Update.setEnabled(false);
         Update.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -99,7 +93,7 @@ PreparedStatement pst=null;
             }
         });
 
-        GetData.setText("Get Data");
+        GetData.setText("Obtenir les informations");
         GetData.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 GetDataActionPerformed(evt);
@@ -117,7 +111,7 @@ PreparedStatement pst=null;
                     .addComponent(Save, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(Delete, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(Update, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(GetData, javax.swing.GroupLayout.DEFAULT_SIZE, 85, Short.MAX_VALUE))
+                    .addComponent(GetData, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -138,21 +132,11 @@ PreparedStatement pst=null;
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("User Details"));
 
-        jLabel1.setText("Name");
+        jLabel1.setText("Nom");
 
-        jLabel2.setText("User Name");
+        jLabel2.setText("Nom d'utilisateur");
 
-        jLabel3.setText("Password");
-
-        jLabel4.setText("Email ID");
-
-        jLabel5.setText("Contact No.");
-
-        txtContactNo.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtContactNoKeyTyped(evt);
-            }
-        });
+        jLabel3.setText("Mot de passe");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -163,20 +147,14 @@ PreparedStatement pst=null;
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
                     .addComponent(jLabel2)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel5))
+                    .addComponent(jLabel3))
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(18, 18, 18)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtEmailID)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(txtPassword, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 212, Short.MAX_VALUE)
-                                    .addComponent(txtName, javax.swing.GroupLayout.Alignment.LEADING))
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(txtContactNo)))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(txtPassword, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 212, Short.MAX_VALUE)
+                            .addComponent(txtName, javax.swing.GroupLayout.Alignment.LEADING))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(txtUserName, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -197,15 +175,7 @@ PreparedStatement pst=null;
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel4)
-                    .addComponent(txtEmailID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(9, 9, 9)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(txtContactNo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(77, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -217,7 +187,7 @@ PreparedStatement pst=null;
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(23, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -255,10 +225,6 @@ PreparedStatement pst=null;
            JOptionPane.showMessageDialog( this, "Please enter password","Error", JOptionPane.ERROR_MESSAGE);
            return;
             }
-          if (txtContactNo.getText().equals("")) {
-           JOptionPane.showMessageDialog( this, "Please enter contact no.","Error", JOptionPane.ERROR_MESSAGE);
-           return;
-            }
           
        Statement stmt;
        stmt= con.createStatement();
@@ -271,7 +237,7 @@ PreparedStatement pst=null;
        return;
    }
        String Password1= String.valueOf(txtPassword.getPassword());
-       String sql= "insert into Registration(username,password,nameofuser,Email,ContactNo)values('"+ txtUserName.getText() + "','" + Password1 + "','" + txtName.getText() + "','" + txtEmailID.getText() + "','" + txtContactNo.getText() + "')";
+       String sql= "insert into Registration(username,password,nameofuser,Email,ContactNo)values('"+ txtUserName.getText() + "','" + Password1 + "','" + txtName.getText() + "','" + "')";
       
       pst=con.prepareStatement(sql);
       pst.execute();
@@ -313,7 +279,7 @@ PreparedStatement pst=null;
     try{
       con=Connect.ConnectDB();
      String Password1= String.valueOf(txtPassword.getPassword());
-       String sql= "update Registration set password='" + Password1 + "',nameofuser='" + txtName.getText() + "',Email='" + txtEmailID.getText() + "',ContactNo='" + txtContactNo.getText() + "' where Username='" + txtUserName.getText() + "'";
+       String sql= "update Registration set password='" + Password1 + "',nameofuser='" + txtName.getText() + "',Email='"  +  "' where Username='" + txtUserName.getText() + "'";
       
       pst=con.prepareStatement(sql);
       pst.execute();
@@ -330,17 +296,9 @@ PreparedStatement pst=null;
 
     private void GetDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GetDataActionPerformed
       this.hide();
-      UsersRegistrationRecord frm = new UsersRegistrationRecord();
+      InfoAdmin frm = new InfoAdmin();
       frm.setVisible(true); 
     }//GEN-LAST:event_GetDataActionPerformed
-
-    private void txtContactNoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtContactNoKeyTyped
-   char c=evt.getKeyChar();
-      if (!(Character.isDigit(c)|| (c== KeyEvent.VK_BACK_SPACE)||(c==KeyEvent.VK_DELETE))){
-          getToolkit().beep();
-          evt.consume();
-    }          
-    }//GEN-LAST:event_txtContactNoKeyTyped
 
     /**
      * @param args the command line arguments
@@ -387,12 +345,8 @@ PreparedStatement pst=null;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    public javax.swing.JTextField txtContactNo;
-    public javax.swing.JTextField txtEmailID;
     public javax.swing.JTextField txtName;
     public javax.swing.JPasswordField txtPassword;
     public javax.swing.JTextField txtUserName;
