@@ -57,7 +57,7 @@
       <Properties>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-            <TitledBorder title="Patient Details"/>
+            <TitledBorder title="Ajout d&apos;une nouvelle personne"/>
           </Border>
         </Property>
       </Properties>

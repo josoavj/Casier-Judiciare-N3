@@ -93,7 +93,7 @@ private void Reset()
         setTitle("Patient Registration");
         setResizable(false);
 
-        AjoutForm.setBorder(javax.swing.BorderFactory.createTitledBorder("Patient Details"));
+        AjoutForm.setBorder(javax.swing.BorderFactory.createTitledBorder("Ajout d'une nouvelle personne"));
 
         jLabel1.setText("Acte De naissance");
 
