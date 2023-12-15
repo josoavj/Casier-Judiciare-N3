@@ -1,31 +1,58 @@
 package Bulletin.UI;
 
 
+import Bulletin.persistence.infoCondamnation.InfoConserned;
+import Bulletin.persistence.infoCondamnation.InfoConsernedService;
+import jakarta.persistence.Query;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 // import net.proteanit.sql.DbUtils;
 
 public class ListePersonne extends javax.swing.JFrame {
 Connection con=null;
 ResultSet rs=null;
 PreparedStatement pst=null;
+InfoConsernedService infoConsernedService = InfoConsernedService.getInstance();
+List<InfoConserned> infoConsernedList = infoConsernedService.getConsernedList();
     /**
      * Creates new form PatientRegistrationRecord
      */
     public ListePersonne() {
         initComponents();
-         con= Connect.ConnectDB();
         Get_Data();
         setLocationRelativeTo(null);
     }
  private void Get_Data(){
-           String sql="select PatientID as 'Patient ID', PatientName as 'Patient Name',FatherName as 'Father Name',Address,ContactNo as 'Contact No',Email as 'Email ID',Age,Gen as 'Gender',BG as 'Blood Group',Remarks from Patientregistration";
+           Object[][] data = new Object[infoConsernedList.size()][8];
+           int i=0;
+           for (InfoConserned infoConserned : infoConsernedList){
+               data[i][0] = infoConserned.getActeNaissance();
+               data[i][1] = infoConserned.getNom();
+               data[i][2] = infoConserned.getPrenoms();
+               data[i][3] = infoConserned.getPere();
+               data[i][4] = infoConserned.getMere();
+               data[i][5] = infoConserned.getDateNaissance();
+               data[i][6] = infoConserned.getSexe();
+               data[i][7] = infoConserned.getNationalite();
+               i++;
+           }
+           String[] columnNames = new String[8];
+           columnNames[0] = "Acte de Naissance";
+           columnNames[1] = "Nom";
+           columnNames[2] = "Prénom";
+           columnNames[3] = "Père";
+           columnNames[4] = "Mère";
+           columnNames[5] = "Date de Naissance";
+           columnNames[6] = "Sexe";
+           columnNames[7] = "Nationalité";
+     DefaultTableModel tableModel = new DefaultTableModel(data,columnNames);
            try{
-         pst=con.prepareStatement(sql);
-          rs= pst.executeQuery();
-         //jTable1.setModel(DbUtils.resultSetToTableModel(rs));
+         tablePerson.setModel(tableModel);
          }catch(Exception e){
             JOptionPane.showMessageDialog(null, e);
           
@@ -176,40 +203,13 @@ PreparedStatement pst=null;
 
     private void tablePersonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablePersonMouseClicked
       try{
-            con=Connect.ConnectDB();
             int row= tablePerson.getSelectedRow();
             String table_click= tablePerson.getModel().getValueAt(row, 0).toString();
-            String sql= "select * from PatientRegistration where PatientID = '" + table_click + "'";
-            pst=con.prepareStatement(sql);
-            rs=  pst.executeQuery();
-            if(rs.next()){
-                this.hide();
-                AjoutPersonne frm = new AjoutPersonne();
-                frm.setVisible(true);
-                String add1=rs.getString("PatientID");
-                frm.IDPersonne.setText(add1);
-                String add2=rs.getString("Patientname");
-                frm.NomPers.setText(add2);
-                String add3=rs.getString("Fathername");
-                frm.PrenomPers.setText(add3);
-                String add5=rs.getString("Email");
-                frm.datenais.setText(add5);
-                int add6 = rs.getInt("Age");
-                String add= Integer.toString(add6);
-                frm.lieunais.setText(add);
-                String add7=rs.getString("Remarks");
-                frm.txtRemarks.setText(add7);
-                String add11=rs.getString("Gen");
-                frm.cmbStatus.setSelectedItem(add11);
-                String add15=rs.getString("Address");
-                frm.txtAddress.setText(add15);
-                String add16=rs.getString("ContactNo");
-                frm.txtContactNo.setText(add16);
-                frm.btnMaj.setEnabled(true);
-                frm.btnEffacer.setEnabled(true);
-                frm.btnEnregistrer.setEnabled(false);
-             
-            }
+            int acteNaissanceNum = Integer.parseInt(table_click);
+            InfoConserned ic = infoConsernedService.getInfoConsernedByAN(acteNaissanceNum);
+            this.hide();
+            AjoutPersonne frm = new AjoutPersonne(ic);
+            frm.setVisible(true);
         }catch(Exception ex){
             JOptionPane.showMessageDialog(this,ex);
         }

@@ -13,13 +13,16 @@ public class InfoConserned {
     private Long idConserned;
 
     @OneToMany(mappedBy = "infoConserned", orphanRemoval = true)
-    private Set<Condamnation> condamnations = new LinkedHashSet<>();
+    private List<Condamnation> condamnations = new ArrayList<>();
 
     public InfoConserned() {
-        this("uknown", "uknown", "uknown", "uknown", null, "uknown", "uknown", "uknown", "uknown", "uknown");
+        this(0, "uknown", "uknown", "uknown", "uknown",
+                null, "uknown", "uknown", "uknown",
+                "uknown", "uknown", "uknown");
     }
 
-    public InfoConserned(String nom, String prenoms, String pere, String mere, Date dateNaissance, String lieuNaissance, String situationFamiliale, String profession, String domicile, String nationalite) {
+    public InfoConserned(int acteNaissance, String nom, String prenoms, String pere, String mere, Date dateNaissance, String lieuNaissance, String situationFamiliale, String profession, String domicile, String sexe, String nationalite) {
+        this.acteNaissance = acteNaissance;
         this.nom = nom;
         this.prenoms = prenoms;
         this.pere = pere;
@@ -29,9 +32,11 @@ public class InfoConserned {
         this.situationFamiliale = situationFamiliale;
         this.profession = profession;
         this.domicile = domicile;
+        this.sexe = sexe;
         this.nationalite = nationalite;
     }
-    public InfoConserned(String nom, String prenoms, String pere, String mere, Date dateNaissance, String lieuNaissance, String situationFamiliale, String profession, String domicile) {
+    public InfoConserned(int acteNaissance, String nom, String prenoms, String pere, String mere, Date dateNaissance, String lieuNaissance, String situationFamiliale, String profession, String domicile, String sexe) {
+        this.acteNaissance = acteNaissance;
         this.nom = nom;
         this.prenoms = prenoms;
         this.pere = pere;
@@ -41,12 +46,14 @@ public class InfoConserned {
         this.situationFamiliale = situationFamiliale;
         this.profession = profession;
         this.domicile = domicile;
+        this.sexe = sexe;
         this.nationalite = "MALAGASY";
     }
 
     public Long getIdConserned() {
         return idConserned;
     }
+    private int acteNaissance;
     private String nom;
     private String prenoms;
     private String pere;
@@ -56,15 +63,16 @@ public class InfoConserned {
     private String situationFamiliale;
     private String profession;
     private String domicile;
+    private String sexe;
     private String nationalite;
     @OneToMany(targetEntity = Condamnation.class,mappedBy = "infoConserned")
     private List<Condamnation> condamnationList = new ArrayList<Condamnation>();
 
-    public Set<Condamnation> getCondamnations() {
+    public List<Condamnation> getCondamnations() {
         return condamnations;
     }
 
-    public void setCondamnations(Set<Condamnation> condamnations) {
+    public void setCondamnations(List<Condamnation> condamnations) {
         this.condamnations = condamnations;
     }
 
@@ -171,5 +179,21 @@ public class InfoConserned {
                 ", nationalite='" + nationalite + '\'' +
                 ", condamnationList=" + condamnationList +
                 '}';
+    }
+
+    public int getActeNaissance() {
+        return acteNaissance;
+    }
+
+    public void setActeNaissance(int acteNaissance) {
+        this.acteNaissance = acteNaissance;
+    }
+
+    public String getSexe() {
+        return sexe;
+    }
+
+    public void setSexe(String sexe) {
+        this.sexe = sexe;
     }
 }

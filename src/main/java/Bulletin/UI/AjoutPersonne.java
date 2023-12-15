@@ -1,6 +1,9 @@
 package Bulletin.UI;
 
 
+import Bulletin.persistence.condamnation.Condamnation;
+import Bulletin.persistence.infoCondamnation.InfoConserned;
+
 import java.awt.HeadlessException;
 import java.awt.event.KeyEvent;
 import java.sql.Connection;
@@ -8,7 +11,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 
 public class AjoutPersonne extends javax.swing.JFrame {
@@ -17,26 +22,94 @@ ResultSet rs=null;
 PreparedStatement pst=null;
     /**
      * Creates new form PatientRegistration
+     *
      */
+    public static List<Condamnation> listeDeCondamnations;
+    public static void extendCondamantionList(Condamnation condamnation){
+        listeDeCondamnations.add(condamnation);
+    }
+    private InfoConserned infoConserned;
+
+    public InfoConserned getInfoConserned() {
+        return infoConserned;
+    }
+
+    public void setInfoConserned(InfoConserned infoConserned) {
+
+        this.infoConserned = infoConserned;
+    }
+
     public AjoutPersonne() {
         initComponents();
         setLocationRelativeTo(null);
     }
+    public AjoutPersonne(InfoConserned infoConserned){
+        initComponents();
+        setLocationRelativeTo(null);
+        this.setInfoConserned(infoConserned);
+        acteNaissace.setText(String.valueOf(infoConserned.getActeNaissance()));
+        NomPers.setText(infoConserned.getNom());
+        PrenomPers.setText(infoConserned.getPrenoms());
+        mere.setText(infoConserned.getMere());
+        pere.setText(infoConserned.getPere());
+        lieunais.setText(infoConserned.getLieuNaissance());
+        datenais.setText(String.valueOf(infoConserned.getDateNaissance()));
+        Profession.setText(infoConserned.getProfession());
+        Domicile.setText(infoConserned.getDomicile());
+        Nationalite.setText(infoConserned.getNationalite());
+        int genderIndex = infoConserned.getSexe().equals("Masculin") ? 0 : 1;
+        cmbGender.setSelectedIndex(genderIndex);
+        switch (infoConserned.getSituationFamiliale()){
+            case "Célibataire" : cmbStatus.setSelectedIndex(0);
+            break;
+            case "Marié" : case "Mariée" :cmbStatus.setSelectedIndex(1);
+            break;
+            case "Veuf" : case "Veuve" : cmbStatus.setSelectedIndex(3);
+            break;
+        }
+        lister_Condamnation();
+        AjoutForm.setBorder(javax.swing.BorderFactory.createTitledBorder("Informations Consernant " + infoConserned.getNom()));
+    }
+
+    /**
+     * @description cette methode liste les condamnation lié au concerné
+     */
+    private void lister_Condamnation(){
+        Object[][] datas = new Object[infoConserned.getCondamnations().size()][4];
+        int i=0;
+        for (Condamnation condamnation : infoConserned.getCondamnations()){
+            datas[i][0] = condamnation.getDateCondamnation();
+            datas[i][1] = condamnation.getCoursOutrubinaux();
+            datas[i][2] = condamnation.getNatureCrime();
+            datas[i][3] = condamnation.getNaturePeine();
+            i++;
+        }
+        String[] colomnNames = new String[4];
+        colomnNames[0] = "Date de Condamnation";
+        colomnNames[1] = "Cours ou Trubinaux";
+        colomnNames[2] = "Nature des crimes ou délits";
+        colomnNames[3] = "Nature et durée de peine";
+        DefaultTableModel defaultTableModel = new DefaultTableModel(datas,colomnNames);
+        tableCondamnation.setModel(defaultTableModel);
+    }
 private void Reset()
 {
-    IDPersonne.setText("");
+    acteNaissace.setText("");
     NomPers.setText("");
     PrenomPers.setText("");
-    txtContactNo.setText("");
-    txtAddress.setText("");
+    mere.setText("");
+    pere.setText("");
     lieunais.setText("");
     datenais.setText("");
-    txtRemarks.setText("");
-    cmbStatus.setSelectedIndex(-1);
+    Profession.setText("");
+    Domicile.setText("");
+    Nationalite.setText("");
+    cmbStatus.setSelectedIndex(0);
+    cmbGender.setSelectedIndex(0);
     btnEnregistrer.setEnabled(true);
     btnMaj.setEnabled(false);
     btnEffacer.setEnabled(false);
-    IDPersonne.requestDefaultFocus();
+    acteNaissace.requestDefaultFocus();
 }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -54,33 +127,28 @@ private void Reset()
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        IDPersonne = new javax.swing.JTextField();
+        acteNaissace = new javax.swing.JTextField();
         NomPers = new javax.swing.JTextField();
         PrenomPers = new javax.swing.JTextField();
-        txtAddress = new javax.swing.JTextField();
+        pere = new javax.swing.JTextField();
         lieunais = new javax.swing.JTextField();
         datenais = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
         cmbStatus = new javax.swing.JComboBox();
         jLabel12 = new javax.swing.JLabel();
-        txtContactNo = new javax.swing.JTextField();
-        jLabel13 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        txtRemarks = new javax.swing.JTextArea();
+        mere = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         Profession = new javax.swing.JTextField();
         Sexe = new javax.swing.JLabel();
         cmbGender = new javax.swing.JComboBox();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        DateCondamnation = new javax.swing.JTextField();
-        Cours = new javax.swing.JTextField();
+        Domicile = new javax.swing.JTextField();
+        Nationalite = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
-        NatureCrime = new javax.swing.JTextField();
-        jLabel14 = new javax.swing.JLabel();
-        NaturePeine = new javax.swing.JTextField();
-        jLabel15 = new javax.swing.JLabel();
-        DureePeine = new javax.swing.JTextField();
+        btnAjoutCondamnation = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tableCondamnation = new javax.swing.JTable();
         jPanel2 = new javax.swing.JPanel();
         btnNouveau = new javax.swing.JButton();
         btnEnregistrer = new javax.swing.JButton();
@@ -124,17 +192,11 @@ private void Reset()
 
         jLabel12.setText("Lieu de naissance");
 
-        txtContactNo.addKeyListener(new java.awt.event.KeyAdapter() {
+        mere.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtContactNoKeyTyped(evt);
+                mereKeyTyped(evt);
             }
         });
-
-        jLabel13.setText("Observation(s)");
-
-        txtRemarks.setColumns(20);
-        txtRemarks.setRows(5);
-        jScrollPane1.setViewportView(txtRemarks);
 
         jLabel7.setText("Prénom");
 
@@ -147,58 +209,74 @@ private void Reset()
             }
         });
 
-        jLabel8.setText("Date de Condamnation");
+        jLabel8.setText("Domicile");
 
-        jLabel9.setText("Cours ou Tribunaux");
+        jLabel9.setText("Nationalité");
 
-        jLabel10.setText("Délits ou nature des crimes");
+        jLabel10.setText("Condamnation(s) : ");
 
-        jLabel14.setText("Nature de peine");
+        btnAjoutCondamnation.setText("Ajouter une condamnation");
 
-        jLabel15.setText("Durée de peine");
+        tableCondamnation.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Date de Condamnation", "Cours ou Trubinaux", "Nature des crimes ou délits", "Nature et durée de peine"
+            }
+        ));
+        jScrollPane1.setViewportView(tableCondamnation);
 
         javax.swing.GroupLayout AjoutFormLayout = new javax.swing.GroupLayout(AjoutForm);
         AjoutForm.setLayout(AjoutFormLayout);
         AjoutFormLayout.setHorizontalGroup(
             AjoutFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(AjoutFormLayout.createSequentialGroup()
-                .addGap(33, 33, 33)
                 .addGroup(AjoutFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel6)
-                    .addComponent(jLabel11)
-                    .addComponent(jLabel12)
-                    .addComponent(jLabel13)
-                    .addComponent(jLabel7)
-                    .addComponent(Sexe)
-                    .addComponent(jLabel8)
-                    .addComponent(jLabel9)
-                    .addComponent(jLabel10)
-                    .addComponent(jLabel14)
-                    .addComponent(jLabel15))
-                .addGap(50, 50, 50)
-                .addGroup(AjoutFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(cmbGender, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(IDPersonne, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(NomPers)
-                    .addComponent(PrenomPers)
-                    .addComponent(txtAddress)
-                    .addComponent(txtContactNo)
-                    .addComponent(lieunais)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 344, Short.MAX_VALUE)
-                    .addComponent(cmbStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Profession)
-                    .addComponent(NatureCrime)
-                    .addComponent(Cours)
-                    .addComponent(DateCondamnation, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(datenais, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(NaturePeine)
-                    .addComponent(DureePeine, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(25, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AjoutFormLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane1))
+                    .addGroup(AjoutFormLayout.createSequentialGroup()
+                        .addGroup(AjoutFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(AjoutFormLayout.createSequentialGroup()
+                                .addGap(54, 54, 54)
+                                .addGroup(AjoutFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel10)
+                                    .addComponent(btnAjoutCondamnation, javax.swing.GroupLayout.PREFERRED_SIZE, 443, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(AjoutFormLayout.createSequentialGroup()
+                                .addGap(33, 33, 33)
+                                .addGroup(AjoutFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel1)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jLabel4)
+                                    .addComponent(jLabel5)
+                                    .addComponent(jLabel6)
+                                    .addComponent(jLabel11)
+                                    .addComponent(jLabel12)
+                                    .addComponent(jLabel7)
+                                    .addComponent(Sexe)
+                                    .addComponent(jLabel8)
+                                    .addComponent(jLabel9))
+                                .addGap(54, 54, 54)
+                                .addGroup(AjoutFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(cmbGender, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(acteNaissace, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(NomPers, javax.swing.GroupLayout.DEFAULT_SIZE, 344, Short.MAX_VALUE)
+                                    .addComponent(PrenomPers)
+                                    .addComponent(pere)
+                                    .addComponent(mere)
+                                    .addComponent(lieunais)
+                                    .addComponent(cmbStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(Profession)
+                                    .addComponent(datenais, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(Domicile)
+                                    .addComponent(Nationalite, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(0, 19, Short.MAX_VALUE)))
+                .addGap(25, 25, 25))
         );
         AjoutFormLayout.setVerticalGroup(
             AjoutFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -206,7 +284,7 @@ private void Reset()
                 .addGap(19, 19, 19)
                 .addGroup(AjoutFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(IDPersonne, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(acteNaissace, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(AjoutFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
@@ -218,10 +296,10 @@ private void Reset()
                 .addGap(18, 18, 18)
                 .addGroup(AjoutFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(txtAddress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(pere, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(AjoutFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtContactNo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(mere, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5))
                 .addGroup(AjoutFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(AjoutFormLayout.createSequentialGroup()
@@ -248,29 +326,19 @@ private void Reset()
                     .addComponent(Profession, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(AjoutFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(DateCondamnation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Domicile, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel8))
                 .addGap(18, 18, 18)
                 .addGroup(AjoutFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Cours, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Nationalite, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel9))
+                .addGap(48, 48, 48)
+                .addComponent(jLabel10)
                 .addGap(18, 18, 18)
-                .addGroup(AjoutFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(NatureCrime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel10))
+                .addComponent(btnAjoutCondamnation)
                 .addGap(18, 18, 18)
-                .addGroup(AjoutFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(NaturePeine, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel14))
-                .addGap(18, 18, 18)
-                .addGroup(AjoutFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(DureePeine, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel15))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 88, Short.MAX_VALUE)
-                .addGroup(AjoutFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel13))
-                .addGap(62, 62, 62))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(39, Short.MAX_VALUE))
         );
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
@@ -361,7 +429,7 @@ private void Reset()
                 .addComponent(AjoutForm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(27, 27, 27)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(12, Short.MAX_VALUE))
+                .addContainerGap(246, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -391,7 +459,7 @@ private void Reset()
     private void btnEnregistrerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnregistrerActionPerformed
      try{
             con=Connect.ConnectDB();
-            if (IDPersonne.getText().equals("")) {
+            if (acteNaissace.getText().equals("")) {
                 JOptionPane.showMessageDialog( this, "Please enter patient id","Error", JOptionPane.ERROR_MESSAGE);
                 return;
 
@@ -405,11 +473,11 @@ private void Reset()
                 JOptionPane.showMessageDialog( this, "Please enter Father's name","Error", JOptionPane.ERROR_MESSAGE);
                 return;
             }
-            if (txtAddress.getText().equals("")) {
+            if (pere.getText().equals("")) {
                 JOptionPane.showMessageDialog( this, "Please enter address","Error", JOptionPane.ERROR_MESSAGE);
                 return;
             }
-           if (txtContactNo.getText().equals("")) {
+           if (mere.getText().equals("")) {
                 JOptionPane.showMessageDialog( this, "Please enter contact no.","Error", JOptionPane.ERROR_MESSAGE);
                 return;
             }
@@ -427,15 +495,15 @@ private void Reset()
           
    Statement stmt;
        stmt= con.createStatement();
-       String sql1="Select PatientID from PatientRegistration where PatientID= '" + IDPersonne.getText() + "'";
+       String sql1="Select PatientID from PatientRegistration where PatientID= '" + acteNaissace.getText() + "'";
       rs=stmt.executeQuery(sql1);
       if(rs.next()){
         JOptionPane.showMessageDialog( this, "Patient ID already exists","Error", JOptionPane.ERROR_MESSAGE);
-        IDPersonne.setText("");
-        IDPersonne.requestDefaultFocus();
+        acteNaissace.setText("");
+        acteNaissace.requestDefaultFocus();
        return;
       }
-            String sql= "insert into PatientRegistration(PatientID,Patientname,FatherName,Email,ContactNo,Age,Remarks,Gen,BG,Address)values('"+ IDPersonne.getText() + "','"+ NomPers.getText() + "','"+ PrenomPers.getText() + "','"+ datenais.getText() + "','"+ txtContactNo.getText() + "'," + lieunais.getText() + ",'"+ txtRemarks.getText() + "','" + cmbStatus.getSelectedItem() + "','" + txtAddress.getText() + "')";
+            String sql= "insert into PatientRegistration(PatientID,Patientname,FatherName,Email,ContactNo,Age,Remarks,Gen,BG,Address)values('"+ acteNaissace.getText() + "','"+ NomPers.getText() + "','"+ PrenomPers.getText() + "','"+ datenais.getText() + "','"+ mere.getText() + "'," + lieunais.getText() + "','" + cmbStatus.getSelectedItem() + "','" + pere.getText() + "')";
 
             pst=con.prepareStatement(sql);
             pst.execute();
@@ -453,7 +521,7 @@ private void Reset()
             if (P==0)
             {
                 con=Connect.ConnectDB();
-                String sql= "delete from PatientRegistration where PatientID = '" + IDPersonne.getText() + "'";
+                String sql= "delete from PatientRegistration where PatientID = '" + acteNaissace.getText() + "'";
                 pst=con.prepareStatement(sql);
                 pst.execute();
                 JOptionPane.showMessageDialog(this,"Successfully deleted","Record",JOptionPane.INFORMATION_MESSAGE);
@@ -475,7 +543,7 @@ frm.setVisible(true);
  try{
             con=Connect.ConnectDB();
           
-            String sql= "update PatientRegistration set Patientname='"+ NomPers.getText() + "',Fathername='"+ PrenomPers.getText() + "',Email='"+ datenais.getText() + "',ContactNo='"+ txtContactNo.getText() + "',Age=" + lieunais.getText() + ",Remarks='"+ txtRemarks.getText() + "',Gen='" + cmbStatus.getSelectedItem() + "',BG='"+ "',Address='" + txtAddress.getText() + "' where PatientID='" + IDPersonne.getText() + "'";
+            String sql= "update PatientRegistration set Patientname='"+ NomPers.getText() + "',Fathername='"+ PrenomPers.getText() + "',Email='"+ datenais.getText() + "',ContactNo='"+ mere.getText() + "',Age=" + lieunais.getText() + "',Gen='" + cmbStatus.getSelectedItem() + "',BG='"+ "',Address='" + pere.getText() + "' where PatientID='" + acteNaissace.getText() + "'";
 
             pst=con.prepareStatement(sql);
             pst.execute();
@@ -487,13 +555,13 @@ frm.setVisible(true);
         }  
     }//GEN-LAST:event_btnMajActionPerformed
 
-    private void txtContactNoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtContactNoKeyTyped
+    private void mereKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_mereKeyTyped
      char c=evt.getKeyChar();
       if (!(Character.isDigit(c)|| (c== KeyEvent.VK_BACK_SPACE)||(c==KeyEvent.VK_DELETE))){
           getToolkit().beep();
           evt.consume();
     }          
-    }//GEN-LAST:event_txtContactNoKeyTyped
+    }//GEN-LAST:event_mereKeyTyped
 
     private void lieunaisKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_lieunaisKeyTyped
      char c=evt.getKeyChar();
@@ -552,16 +620,14 @@ frm.setVisible(true);
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel AjoutForm;
-    public javax.swing.JTextField Cours;
-    public javax.swing.JTextField DateCondamnation;
-    public javax.swing.JTextField DureePeine;
-    public javax.swing.JTextField IDPersonne;
-    public javax.swing.JTextField NatureCrime;
-    public javax.swing.JTextField NaturePeine;
+    public javax.swing.JTextField Domicile;
+    public javax.swing.JTextField Nationalite;
     public javax.swing.JTextField NomPers;
     public javax.swing.JTextField PrenomPers;
     public javax.swing.JTextField Profession;
     private javax.swing.JLabel Sexe;
+    public javax.swing.JTextField acteNaissace;
+    private javax.swing.JButton btnAjoutCondamnation;
     public javax.swing.JButton btnEffacer;
     public javax.swing.JButton btnEnregistrer;
     private javax.swing.JButton btnGetInfo;
@@ -575,9 +641,6 @@ frm.setVisible(true);
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -589,8 +652,8 @@ frm.setVisible(true);
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     public javax.swing.JTextField lieunais;
-    public javax.swing.JTextField txtAddress;
-    public javax.swing.JTextField txtContactNo;
-    public javax.swing.JTextArea txtRemarks;
+    public javax.swing.JTextField mere;
+    public javax.swing.JTextField pere;
+    private javax.swing.JTable tableCondamnation;
     // End of variables declaration//GEN-END:variables
 }

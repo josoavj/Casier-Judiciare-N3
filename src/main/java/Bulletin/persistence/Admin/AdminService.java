@@ -5,6 +5,8 @@ import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 import jakarta.persistence.Query;
 
+import jakarta.persistence.NoResultException;
+
 public class AdminService {
     private EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("Bulletin");
     private EntityManager entityManager = entityManagerFactory.createEntityManager();
@@ -27,10 +29,15 @@ public class AdminService {
     }
 
     public Admin getAdmin(String username, String password){
+        try {
         Query query = entityManager.createQuery("SELECT a FROM Admin a where a.username = :username and a.password = :password", Admin.class);
         query.setParameter("username", username);
         query.setParameter("password",password);
-        return (Admin) query.getSingleResult();
+            return (Admin) query.getSingleResult();
+        }catch (NoResultException e){
+            return null;
+        }
+
     }
 
     public void removeAdmin(Admin admin){

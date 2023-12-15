@@ -16,16 +16,15 @@ Connection con=null;
 ResultSet rs=null;
 PreparedStatement pst=null;
 
-public class Login extends javax.swing.JFrame {
 AdminService adminService = AdminService.getInstance();
 
     /**
      * Creates new form Login
      */
-    public Login() {
+    public Connexion() {
         initComponents();
         setLocationRelativeTo(null);
-                 }
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -183,17 +182,14 @@ AdminService adminService = AdminService.getInstance();
     }//GEN-LAST:event_txtUserNameMouseClicked
 
     private void btnOKMouseClicked(java.awt.event.MouseEvent evt) {
-        String username = txtUserName.getText().strip();
-        String password= String.valueOf(txtPassword.getPassword()).strip();
-    if (username.isEmpty()) {
-           JOptionPane.showMessageDialog( this, "Veuillez remplir votre identifiant","Erreur", JOptionPane.ERROR_MESSAGE);
-    // private void btnOKMouseClicked(java.awt.event.MouseEvent evt) {                                   
+        String username = txtUserName.getText();
+        String password= String.valueOf(txtPassword.getPassword());
+
     if (txtUserName.getText().equals("")) {
            JOptionPane.showMessageDialog( this, "Veuillez entrer votre nom d'utilisateur","Error", JOptionPane.ERROR_MESSAGE);
            return;
-            
             }
-    else if (Password.isEmpty()) {
+    else if (Password.equals("")) {
            JOptionPane.showMessageDialog( this, "Veuillez entrer votre mot de passe","Erreur", JOptionPane.ERROR_MESSAGE);
            return;
           
@@ -203,19 +199,17 @@ AdminService adminService = AdminService.getInstance();
           Admin admin = adminService.getAdmin(username,password);
           if (admin != null){
              this.hide();
-             System.out.println("connectedd");
-             // BarreMenu frm=new BarreMenu();
-             //frm.setVisible(true);
+             BarreMenu frm=new BarreMenu();
+             frm.setVisible(true);
           }
           else{
-              
             JOptionPane.showMessageDialog(null, "Erreur de connection !","Access refusée",JOptionPane.ERROR_MESSAGE);
           }
       }catch(HeadlessException e){
          JOptionPane.showMessageDialog(null, e); 
       }    
     }                                     
-    }                                  
+
 
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
         // TODO add your handling code here:
@@ -239,13 +233,13 @@ AdminService adminService = AdminService.getInstance();
           Admin admin = adminService.getAdmin(txtUserName.getText(),txtPassword.getText());
           if (admin != null){
              this.hide();
-            // BarreMenu frm=new BarreMenu();
-              System.out.println("connected");
-             //frm.setVisible(true);
+            BarreMenu frm=new BarreMenu();
+            System.out.println("connected");
+            frm.setVisible(true);
           }
           else{
 
-            JOptionPane.showMessageDialog(null, "Login Failed..Try again !","Access denied",JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Erreur de Connection","Access denied",JOptionPane.ERROR_MESSAGE);
             txtUserName.setText("");
             txtPassword.setText("");
             txtUserName.requestDefaultFocus();
@@ -303,4 +297,4 @@ AdminService adminService = AdminService.getInstance();
     public javax.swing.JPasswordField txtPassword;
     public javax.swing.JTextField txtUserName;
     // End of variables declaration//GEN-END:variables
-}}
+}

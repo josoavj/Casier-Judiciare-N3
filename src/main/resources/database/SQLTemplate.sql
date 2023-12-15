@@ -22,6 +22,7 @@ USE Bulletin;
 -- ---------------------------------infoConserned---------------------------------------
 CREATE TABLE infoConserned (
 idConserned int(8) UNSIGNED ZEROFILL PRIMARY KEY NOT NULL AUTO_INCREMENT,
+acteNaissance int(6) UNSIGNED ZEROFILL NOT NULL,
 nom varchar(255) NOT NULL,
 prenoms varchar(255),
 pere varchar(255) NOT NULL,
@@ -31,10 +32,11 @@ lieuNaissance varchar(255) NOT NULL,
 situationFamiliale varchar(255) NOT NULL,
 profession varchar(255) NOT NULL,
 domicile varchar(255) NOT NULL,
+sexe varchar(30) NOT NULL,
 nationalite varchar(255)  DEFAULT "MALAGASY");
 
-INSERT INTO infoConserned (nom,prenoms,pere,mere,dateNaissance,lieuNaissance,situationFamiliale,profession,domicile) values
-("dazai","osamu","nanika","nakahara", CURRENT_DATE ,"shinjuku","celibataire", "portomafia","shinjuku");
+INSERT INTO infoConserned (acteNaissance,nom,prenoms,pere,mere,dateNaissance,lieuNaissance,situationFamiliale,profession,sexe,domicile) values
+(1112,"dazai","osamu","nanika","nakahara", CURRENT_DATE ,"shinjuku","celibataire", "portomafia","Masculin","shinjuku");
 
 -- ---------------------------------condamnation---------------------------------------
 
@@ -55,7 +57,7 @@ INSERT INTO condamnation (dateCondamnation,
                             naturePeine,
                             Observation,
                             idConserned)
-                            values (null, '', '', '', '',1);
+                            values (CURRENT_DATE, 'kille', 'die', 'dmfq', 'fqm',1);
 
 -- --------------------------------table Admin--------------------------------------------
 

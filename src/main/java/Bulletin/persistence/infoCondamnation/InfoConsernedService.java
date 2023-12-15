@@ -5,6 +5,7 @@ import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 import jakarta.persistence.Query;
 
+import javax.persistence.NoResultException;
 import java.util.HashSet;
 import java.util.List;
 
@@ -97,6 +98,18 @@ public class InfoConsernedService {
         entityManager.getTransaction().begin();
         entityManager.remove(infoConserned);
         entityManager.getTransaction().commit();
+    }
+
+    public InfoConserned getInfoConsernedByAN(int acteNaissace){
+        try {
+            Query query = entityManager.createQuery("SELECT ic FROM InfoConserned ic WHERE ic.acteNaissance = :acteNaissance",
+                    InfoConserned.class);
+            query.setParameter("acteNaissance",acteNaissace);
+            return (InfoConserned) query.getSingleResult();
+        }catch (NoResultException e){
+            return null;
+        }
+
     }
 
 }
