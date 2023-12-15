@@ -67,6 +67,7 @@ PreparedStatement pst=null;
             case "Veuf" : case "Veuve" : cmbStatus.setSelectedIndex(3);
             break;
         }
+        listeDeCondamnations = infoConserned.getCondamnations();
         lister_Condamnation();
         AjoutForm.setBorder(javax.swing.BorderFactory.createTitledBorder("Informations Consernant " + infoConserned.getNom()));
     }
@@ -75,9 +76,9 @@ PreparedStatement pst=null;
      * @description cette methode liste les condamnation lié au concerné
      */
     private void lister_Condamnation(){
-        Object[][] datas = new Object[infoConserned.getCondamnations().size()][4];
+        Object[][] datas = new Object[listeDeCondamnations.size()][4];
         int i=0;
-        for (Condamnation condamnation : infoConserned.getCondamnations()){
+        for (Condamnation condamnation : listeDeCondamnations){
             datas[i][0] = condamnation.getDateCondamnation();
             datas[i][1] = condamnation.getCoursOutrubinaux();
             datas[i][2] = condamnation.getNatureCrime();
@@ -106,10 +107,12 @@ private void Reset()
     Nationalite.setText("");
     cmbStatus.setSelectedIndex(0);
     cmbGender.setSelectedIndex(0);
+    listeDeCondamnations.clear();
     btnEnregistrer.setEnabled(true);
     btnMaj.setEnabled(false);
     btnEffacer.setEnabled(false);
     acteNaissace.requestDefaultFocus();
+    lister_Condamnation();
 }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -237,15 +240,10 @@ private void Reset()
             .addGroup(AjoutFormLayout.createSequentialGroup()
                 .addGroup(AjoutFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AjoutFormLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane1))
-                    .addGroup(AjoutFormLayout.createSequentialGroup()
                         .addGroup(AjoutFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(AjoutFormLayout.createSequentialGroup()
                                 .addGap(54, 54, 54)
-                                .addGroup(AjoutFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel10)
-                                    .addComponent(btnAjoutCondamnation, javax.swing.GroupLayout.PREFERRED_SIZE, 443, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(jLabel10))
                             .addGroup(AjoutFormLayout.createSequentialGroup()
                                 .addGap(33, 33, 33)
                                 .addGroup(AjoutFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -275,8 +273,10 @@ private void Reset()
                                     .addComponent(datenais, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(Domicile)
                                     .addComponent(Nationalite, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(0, 19, Short.MAX_VALUE)))
-                .addGap(25, 25, 25))
+                        .addGap(0, 38, Short.MAX_VALUE))
+                    .addComponent(btnAjoutCondamnation, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 568, Short.MAX_VALUE))
+                .addContainerGap())
         );
         AjoutFormLayout.setVerticalGroup(
             AjoutFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
