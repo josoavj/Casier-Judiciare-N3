@@ -3,7 +3,7 @@ package Bulletin.persistence.condamnation;
 import Bulletin.persistence.infoCondamnation.InfoConserned;
 import jakarta.persistence.*;
 
-import java.util.Date;
+import java.sql.Date;
 
 @Entity @Table(name = "condamnation")
 public class Condamnation {
@@ -19,6 +19,14 @@ public class Condamnation {
     @ManyToOne
     @JoinColumn(name = "idConserned")
     private InfoConserned infoConserned;
+
+    public Condamnation(Date dateCondamnation, String coursOutrubinaux, String natureCrime, String naturePeine,String observation) {
+    this.dateCondamnation = dateCondamnation;
+    this.coursOutrubinaux = coursOutrubinaux;
+    this.natureCrime = natureCrime;
+    this.naturePeine = naturePeine;
+    this.observation = observation;
+    }
 
     public InfoConserned getInfoConserned() {
         return infoConserned;

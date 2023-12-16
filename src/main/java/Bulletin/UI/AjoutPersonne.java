@@ -11,6 +11,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -24,10 +25,8 @@ PreparedStatement pst=null;
      * Creates new form PatientRegistration
      *
      */
-    public static List<Condamnation> listeDeCondamnations;
-    public static void extendCondamantionList(Condamnation condamnation){
-        listeDeCondamnations.add(condamnation);
-    }
+    public static List<Condamnation> listeDeCondamnations = new ArrayList<>();
+    public static List<Condamnation> CondamnationWillBeRemoved = new ArrayList<>();
     private InfoConserned infoConserned;
 
     public InfoConserned getInfoConserned() {
@@ -42,6 +41,8 @@ PreparedStatement pst=null;
     public AjoutPersonne() {
         initComponents();
         setLocationRelativeTo(null);
+        listeDeCondamnations.clear();
+        lister_Condamnation();
     }
     public AjoutPersonne(InfoConserned infoConserned){
         initComponents();
@@ -75,7 +76,7 @@ PreparedStatement pst=null;
     /**
      * @description cette methode liste les condamnation lié au concerné
      */
-    private void lister_Condamnation(){
+    public static void lister_Condamnation(){
         Object[][] datas = new Object[listeDeCondamnations.size()][4];
         int i=0;
         for (Condamnation condamnation : listeDeCondamnations){
@@ -219,6 +220,11 @@ private void Reset()
         jLabel10.setText("Condamnation(s) : ");
 
         btnAjoutCondamnation.setText("Ajouter une condamnation");
+        btnAjoutCondamnation.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAjoutCondamnationActionPerformed(evt);
+            }
+        });
 
         tableCondamnation.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -583,6 +589,12 @@ frm.setVisible(true);
         // TODO add your handling code here:
     }//GEN-LAST:event_cmbGenderActionPerformed
 
+    private void btnAjoutCondamnationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAjoutCondamnationActionPerformed
+        AjoutCondamnation frm = new AjoutCondamnation();
+        frm.setVisible(true);
+        frm.setLocationRelativeTo(null);
+    }//GEN-LAST:event_btnAjoutCondamnationActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -654,6 +666,6 @@ frm.setVisible(true);
     public javax.swing.JTextField lieunais;
     public javax.swing.JTextField mere;
     public javax.swing.JTextField pere;
-    private javax.swing.JTable tableCondamnation;
+    private static javax.swing.JTable tableCondamnation;
     // End of variables declaration//GEN-END:variables
 }

@@ -55,7 +55,6 @@ List<InfoConserned> infoConsernedList = infoConsernedService.getConsernedList();
          tablePerson.setModel(tableModel);
          }catch(Exception e){
             JOptionPane.showMessageDialog(null, e);
-          
 }
     }
     /**

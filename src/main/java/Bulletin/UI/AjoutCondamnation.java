@@ -4,17 +4,36 @@
  */
 package Bulletin.UI;
 
+import Bulletin.persistence.condamnation.Condamnation;
+
+import javax.swing.*;
+import java.sql.Date;
+import java.time.LocalDate;
+import java.util.regex.Pattern;
+
 /**
  *
  * @author dazai
  */
-public class ajoutCondamnation extends javax.swing.JFrame {
+public class AjoutCondamnation extends javax.swing.JFrame {
 
     /**
      * Creates new form ajoutCondamnation
      */
-    public ajoutCondamnation() {
+    public AjoutCondamnation() {
         initComponents();
+        dateJour.requestFocus();
+        btnUpdate.disable();
+        btnSupprimer.disable();
+    }
+    public AjoutCondamnation(Condamnation condamnation){
+        initComponents();
+        dateJour.setText(String.valueOf(condamnation.getDateCondamnation()));
+        txtCoursOuTrubinaux.setText(condamnation.getCoursOutrubinaux());
+        txtNatureCrimes.setText(condamnation.getNatureCrime());
+        txtNaturePeine.setText(condamnation.getNaturePeine());
+        txtObservation.setText(condamnation.getObservation());
+        btnAjouter.disable();
     }
 
     /**
@@ -32,18 +51,23 @@ public class ajoutCondamnation extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        txtDateCondamnation = new javax.swing.JTextField();
+        dateJour = new javax.swing.JTextField();
         txtCoursOuTrubinaux = new javax.swing.JTextField();
         txtNatureCrimes = new javax.swing.JTextField();
         txtNaturePeine = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtObservation = new javax.swing.JTextArea();
+        dateAnnee = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        dateMois = new javax.swing.JComboBox<>();
         jPanel2 = new javax.swing.JPanel();
         btnAjouter = new javax.swing.JButton();
         btnUpdate = new javax.swing.JButton();
         btnSupprimer = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Ajout d'une condamnation"));
@@ -68,6 +92,14 @@ public class ajoutCondamnation extends javax.swing.JFrame {
         txtObservation.setRows(5);
         jScrollPane1.setViewportView(txtObservation);
 
+        jLabel6.setText("Jj");
+
+        jLabel7.setText("Mm");
+
+        jLabel8.setText("Aa");
+
+        dateMois.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Janvier", "Fevrier", "Mars", "Avril", "Mai", "Juin", "Juillet", "Aout", "Septembre", "Octobre", "Novembre", "Decembre" }));
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -82,20 +114,42 @@ public class ajoutCondamnation extends javax.swing.JFrame {
                     .addComponent(jLabel5))
                 .addGap(39, 39, 39)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(txtDateCondamnation, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(txtCoursOuTrubinaux, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(txtNatureCrimes, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(txtNaturePeine, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 272, Short.MAX_VALUE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(txtCoursOuTrubinaux, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtNatureCrimes, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtNaturePeine, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 272, Short.MAX_VALUE))
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel6)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(dateJour, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(27, 27, 27)
+                                .addComponent(jLabel7)
+                                .addGap(18, 18, 18)
+                                .addComponent(dateMois, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(jLabel8)
+                        .addGap(103, 103, 103))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(dateAnnee, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(12, 12, 12))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtDateCondamnation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
+                    .addComponent(dateJour, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1)
+                    .addComponent(dateAnnee, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel7)
+                    .addComponent(jLabel8)
+                    .addComponent(dateMois, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(19, 19, 19)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
@@ -128,8 +182,20 @@ public class ajoutCondamnation extends javax.swing.JFrame {
         });
 
         btnUpdate.setText("Mettre à jour");
+        btnUpdate.setEnabled(false);
+        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdateActionPerformed(evt);
+            }
+        });
 
         btnSupprimer.setText("Supprimer");
+        btnSupprimer.setEnabled(false);
+        btnSupprimer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSupprimerActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -162,7 +228,7 @@ public class ajoutCondamnation extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(16, 16, 16))
         );
@@ -183,12 +249,35 @@ public class ajoutCondamnation extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAjouterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAjouterActionPerformed
-        // TODO add your handling code here:
+        try {
+            int jour = Integer.parseInt(dateJour.getText().strip());
+            int annee = Integer.parseInt(dateAnnee.getText().strip());
+        }catch (NumberFormatException e){
+            JOptionPane.showMessageDialog(null, e);
+            return;
+        }
+
+        LocalDate localDate = LocalDate.of(Integer.parseInt(dateAnnee.getText()),dateMois.getItemCount(),Integer.parseInt(dateJour.getText()));
+        Date date = Date.valueOf(localDate);
+
+        Condamnation condamnation = new Condamnation(date,txtCoursOuTrubinaux.getText()
+                ,txtNatureCrimes.getText(),txtObservation.getText(),txtObservation.getText());
+        AjoutPersonne.listeDeCondamnations.add(condamnation);
+        System.out.println(AjoutPersonne.listeDeCondamnations);
+        AjoutPersonne.lister_Condamnation();
     }//GEN-LAST:event_btnAjouterActionPerformed
 
     private void txtCoursOuTrubinauxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCoursOuTrubinauxActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtCoursOuTrubinauxActionPerformed
+
+    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnUpdateActionPerformed
+
+    private void btnSupprimerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSupprimerActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnSupprimerActionPerformed
 
     /**
      * @param args the command line arguments
@@ -207,20 +296,21 @@ public class ajoutCondamnation extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ajoutCondamnation.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AjoutCondamnation.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ajoutCondamnation.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AjoutCondamnation.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ajoutCondamnation.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AjoutCondamnation.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ajoutCondamnation.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AjoutCondamnation.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ajoutCondamnation().setVisible(true);
+                new AjoutCondamnation().setVisible(true);
             }
         });
     }
@@ -229,16 +319,21 @@ public class ajoutCondamnation extends javax.swing.JFrame {
     private javax.swing.JButton btnAjouter;
     private javax.swing.JButton btnSupprimer;
     private javax.swing.JButton btnUpdate;
+    private javax.swing.JTextField dateAnnee;
+    private javax.swing.JTextField dateJour;
+    private javax.swing.JComboBox<String> dateMois;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField txtCoursOuTrubinaux;
-    private javax.swing.JTextField txtDateCondamnation;
     private javax.swing.JTextField txtNatureCrimes;
     private javax.swing.JTextField txtNaturePeine;
     private javax.swing.JTextArea txtObservation;
