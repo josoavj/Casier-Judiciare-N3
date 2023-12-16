@@ -20,6 +20,7 @@ public class AjoutCondamnation extends javax.swing.JFrame {
     /**
      * Creates new form ajoutCondamnation
      */
+    private Condamnation condamnationSelected;
     public AjoutCondamnation() {
         initComponents();
         dateJour.requestFocus();
@@ -28,12 +29,19 @@ public class AjoutCondamnation extends javax.swing.JFrame {
     }
     public AjoutCondamnation(Condamnation condamnation){
         initComponents();
-        dateJour.setText(String.valueOf(condamnation.getDateCondamnation()));
+        Pattern pattern = Pattern.compile("[ /-]");
+        this.condamnationSelected = condamnation;
+        String[] date = pattern.split(String.valueOf(condamnation.getDateCondamnation()));
+        dateJour.setText(date[2]);
+        dateAnnee.setText(date[0]);
+        dateMois.setSelectedIndex(Integer.parseInt(date[1])-1);
         txtCoursOuTrubinaux.setText(condamnation.getCoursOutrubinaux());
         txtNatureCrimes.setText(condamnation.getNatureCrime());
         txtNaturePeine.setText(condamnation.getNaturePeine());
         txtObservation.setText(condamnation.getObservation());
-        btnAjouter.disable();
+        btnAjouter.setEnabled(false);
+        btnSupprimer.setEnabled(true);
+        btnUpdate.setEnabled(true);
     }
 
     /**
@@ -250,21 +258,22 @@ public class AjoutCondamnation extends javax.swing.JFrame {
 
     private void btnAjouterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAjouterActionPerformed
         try {
-            int jour = Integer.parseInt(dateJour.getText().strip());
-            int annee = Integer.parseInt(dateAnnee.getText().strip());
+            Integer.parseInt(dateJour.getText().strip());
+            Integer.parseInt(dateAnnee.getText().strip());
         }catch (NumberFormatException e){
             JOptionPane.showMessageDialog(null, e);
             return;
         }
 
-        LocalDate localDate = LocalDate.of(Integer.parseInt(dateAnnee.getText()),dateMois.getItemCount(),Integer.parseInt(dateJour.getText()));
+        LocalDate localDate = LocalDate.of(Integer.parseInt(dateAnnee.getText()),dateMois.getSelectedIndex()+1,Integer.parseInt(dateJour.getText()));
         Date date = Date.valueOf(localDate);
 
         Condamnation condamnation = new Condamnation(date,txtCoursOuTrubinaux.getText()
-                ,txtNatureCrimes.getText(),txtObservation.getText(),txtObservation.getText());
+                ,txtNatureCrimes.getText(),txtNaturePeine.getText(),txtObservation.getText());
         AjoutPersonne.listeDeCondamnations.add(condamnation);
-        System.out.println(AjoutPersonne.listeDeCondamnations);
+        AjoutPersonne.listCondamnationAdded.add(condamnation);
         AjoutPersonne.lister_Condamnation();
+        this.dispose();
     }//GEN-LAST:event_btnAjouterActionPerformed
 
     private void txtCoursOuTrubinauxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCoursOuTrubinauxActionPerformed
@@ -272,11 +281,35 @@ public class AjoutCondamnation extends javax.swing.JFrame {
     }//GEN-LAST:event_txtCoursOuTrubinauxActionPerformed
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
-        // TODO add your handling code here:
+        for(Condamnation condamnation : AjoutPersonne.listeDeCondamnations){
+            try {
+                Integer.parseInt(dateJour.getText().strip());
+                Integer.parseInt(dateAnnee.getText().strip());
+            }catch (NumberFormatException e){
+                JOptionPane.showMessageDialog(null, e);
+                return;
+            }
+
+            LocalDate localDate = LocalDate.of(Integer.parseInt(dateAnnee.getText()),dateMois.getSelectedIndex()+1,Integer.parseInt(dateJour.getText()));
+            Date date = Date.valueOf(localDate);
+            if (condamnation == this.condamnationSelected){
+                condamnation.setDateCondamnation(date);
+                condamnation.setCoursOutrubinaux(txtCoursOuTrubinaux.getText());
+                condamnation.setNatureCrime(txtNatureCrimes.getText());
+                condamnation.setNaturePeine(txtNaturePeine.getText());
+                condamnation.setObservation(txtObservation.getText());
+            }
+            AjoutPersonne.lister_Condamnation();
+            this.dispose();
+        }
     }//GEN-LAST:event_btnUpdateActionPerformed
 
     private void btnSupprimerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSupprimerActionPerformed
-        // TODO add your handling code here:
+
+        AjoutPersonne.listCondamnationWillRemoved.add(condamnationSelected);
+        AjoutPersonne.listeDeCondamnations.remove(condamnationSelected);
+        AjoutPersonne.lister_Condamnation();
+        this.dispose();
     }//GEN-LAST:event_btnSupprimerActionPerformed
 
     /**
