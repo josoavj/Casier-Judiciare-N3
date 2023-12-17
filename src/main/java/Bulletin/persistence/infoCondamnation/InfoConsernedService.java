@@ -19,7 +19,7 @@ public class InfoConsernedService {
      * @description Cette fonction retourne l'instence de la class InfoConsernedService
      */
     public static  InfoConsernedService getInstance() {
-        return instance == null ? instance = new InfoConsernedService() : null;
+        return instance == null ? instance = new InfoConsernedService() : instance;
     }
 
     /**

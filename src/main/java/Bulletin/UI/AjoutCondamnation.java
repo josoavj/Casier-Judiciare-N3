@@ -7,6 +7,7 @@ package Bulletin.UI;
 import Bulletin.persistence.condamnation.Condamnation;
 
 import javax.swing.*;
+import java.awt.event.KeyEvent;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.util.regex.Pattern;
@@ -24,8 +25,6 @@ public class AjoutCondamnation extends javax.swing.JFrame {
     public AjoutCondamnation() {
         initComponents();
         dateJour.requestFocus();
-        btnUpdate.disable();
-        btnSupprimer.disable();
     }
     public AjoutCondamnation(Condamnation condamnation){
         initComponents();
@@ -90,6 +89,12 @@ public class AjoutCondamnation extends javax.swing.JFrame {
 
         jLabel5.setText("Observation");
 
+        dateJour.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                dateJourKeyTyped(evt);
+            }
+        });
+
         txtCoursOuTrubinaux.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtCoursOuTrubinauxActionPerformed(evt);
@@ -99,6 +104,12 @@ public class AjoutCondamnation extends javax.swing.JFrame {
         txtObservation.setColumns(20);
         txtObservation.setRows(5);
         jScrollPane1.setViewportView(txtObservation);
+
+        dateAnnee.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                dateAnneeKeyTyped(evt);
+            }
+        });
 
         jLabel6.setText("Jj");
 
@@ -311,6 +322,22 @@ public class AjoutCondamnation extends javax.swing.JFrame {
         AjoutPersonne.lister_Condamnation();
         this.dispose();
     }//GEN-LAST:event_btnSupprimerActionPerformed
+
+    private void dateJourKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_dateJourKeyTyped
+         char c=evt.getKeyChar();
+      if (!(Character.isDigit(c)|| (c== KeyEvent.VK_BACK_SPACE)||(c==KeyEvent.VK_DELETE))){
+          getToolkit().beep();
+          evt.consume();
+    } 
+    }//GEN-LAST:event_dateJourKeyTyped
+
+    private void dateAnneeKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_dateAnneeKeyTyped
+        char c=evt.getKeyChar();
+        if (!(Character.isDigit(c)|| (c== KeyEvent.VK_BACK_SPACE)||(c==KeyEvent.VK_DELETE))){
+            getToolkit().beep();
+            evt.consume();
+        }
+    }//GEN-LAST:event_dateAnneeKeyTyped
 
     /**
      * @param args the command line arguments

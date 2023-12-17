@@ -5,6 +5,7 @@ import Bulletin.persistence.condamnation.Condamnation;
 import Bulletin.persistence.condamnation.CondamnationService;
 import Bulletin.persistence.infoCondamnation.InfoConserned;
 import Bulletin.persistence.infoCondamnation.InfoConsernedService;
+import org.hibernate.service.spi.InjectService;
 
 import java.awt.HeadlessException;
 import java.awt.event.KeyEvent;
@@ -21,8 +22,10 @@ public class AjoutPersonne extends javax.swing.JFrame {
 Connection con=null;
 ResultSet rs=null;
 PreparedStatement pst=null;
-InfoConsernedService infoConsernedService = InfoConsernedService.getInstance();
-CondamnationService condamnationService = CondamnationService.getInstance();
+
+
+InfoConsernedService infoConsernedService = null;
+CondamnationService condamnationService = null;
     /**
      * Creates new form PatientRegistration
      *
@@ -79,6 +82,9 @@ CondamnationService condamnationService = CondamnationService.getInstance();
         listeDeCondamnations = infoConserned.getCondamnations();
         lister_Condamnation();
         AjoutForm.setBorder(javax.swing.BorderFactory.createTitledBorder("Informations Consernant " + infoConserned.getNom()));
+        btnEffacer.setEnabled(true);
+        btnMaj.setEnabled(true);
+        btnEnregistrer.setEnabled(false);
     }
 
     /**
@@ -197,12 +203,6 @@ private void Reset()
         acteNaissace.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 acteNaissaceKeyTyped(evt);
-            }
-        });
-
-        lieunais.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                lieunaisKeyTyped(evt);
             }
         });
 
@@ -560,6 +560,8 @@ private void Reset()
             } else if (cmbStatus.getSelectedIndex() == 2) {
                 status = cmbGender.getSelectedIndex() == 0 ? "Veuf" : "Veuve";
             }
+            this.infoConsernedService = InfoConsernedService.getInstance();
+            this.condamnationService = CondamnationService.getInstance();
             LocalDate localDate = LocalDate.of(Integer.parseInt(annenaiss.getText()), moisnaiss.getSelectedIndex() + 1, Integer.parseInt(datenaiss.getText()));
             Date date = Date.valueOf(localDate);
             InfoConserned infoConserned1 = new InfoConserned();
@@ -581,24 +583,19 @@ private void Reset()
             condamnationService.createCondamnation(c);
         }
 
-        System.out.println("bien enregistré");
+        JOptionPane.showMessageDialog(null,"enregistrement réuissite");
     }//GEN-LAST:event_btnEnregistrerActionPerformed
 
     private void btnEffacerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEffacerActionPerformed
-    try{
-            int P = JOptionPane.showConfirmDialog(null," Are you sure want to delete ?","Confirmation",JOptionPane.YES_NO_OPTION);
-            if (P==0)
-            {
-                con=Connect.ConnectDB();
-                String sql= "delete from PatientRegistration where PatientID = '" + acteNaissace.getText() + "'";
-                pst=con.prepareStatement(sql);
-                pst.execute();
-                JOptionPane.showMessageDialog(this,"Successfully deleted","Record",JOptionPane.INFORMATION_MESSAGE);
 
-                Reset();
-            }
-        }catch(HeadlessException | SQLException ex){
-            JOptionPane.showMessageDialog(this,ex);
+        int jOptionPane = JOptionPane.showConfirmDialog(null,"voulez vous supprimer "+infoConserned.getNom()
+        +" de la base de donnés?");
+        if(jOptionPane == 0){
+            infoConsernedService = InfoConsernedService.getInstance();
+            infoConsernedService.removeInfoConserned(infoConserned);
+            JOptionPane.showMessageDialog(null,"Supression réuissite");
+            infoConserned = null;
+            this.dispose();
         }
     }//GEN-LAST:event_btnEffacerActionPerformed
 
@@ -624,14 +621,6 @@ frm.setVisible(true);
         }  
     }//GEN-LAST:event_btnMajActionPerformed
 
-
-    private void lieunaisKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_lieunaisKeyTyped
-     char c=evt.getKeyChar();
-      if (!(Character.isDigit(c)|| (c== KeyEvent.VK_BACK_SPACE)||(c==KeyEvent.VK_DELETE))){
-          getToolkit().beep();
-          evt.consume();
-    }          
-    }//GEN-LAST:event_lieunaisKeyTyped
 
     private void btnImprimerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImprimerActionPerformed
         // TODO add your handling code here:
@@ -680,7 +669,7 @@ frm.setVisible(true);
       if (!(Character.isDigit(c)|| (c== KeyEvent.VK_BACK_SPACE)||(c==KeyEvent.VK_DELETE))){
           getToolkit().beep();
           evt.consume();
-    } 
+    }
     }//GEN-LAST:event_datenaissKeyTyped
 
     private void annenaissKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_annenaissKeyTyped

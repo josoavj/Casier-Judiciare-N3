@@ -8,6 +8,7 @@ import jakarta.persistence.Query;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -17,8 +18,8 @@ public class ListePersonne extends javax.swing.JFrame {
 Connection con=null;
 ResultSet rs=null;
 PreparedStatement pst=null;
-InfoConsernedService infoConsernedService = InfoConsernedService.getInstance();
-List<InfoConserned> infoConsernedList = infoConsernedService.getConsernedList();
+InfoConsernedService infoConsernedService = null;
+List<InfoConserned> infoConsernedList = new ArrayList<>();
     /**
      * Creates new form PatientRegistrationRecord
      */
@@ -28,6 +29,8 @@ List<InfoConserned> infoConsernedList = infoConsernedService.getConsernedList();
         setLocationRelativeTo(null);
     }
  private void Get_Data(){
+            infoConsernedService = InfoConsernedService.getInstance();
+            infoConsernedList = infoConsernedService.getConsernedList();
            Object[][] data = new Object[infoConsernedList.size()][8];
            int i=0;
            for (InfoConserned infoConserned : infoConsernedList){
@@ -55,7 +58,7 @@ List<InfoConserned> infoConsernedList = infoConsernedService.getConsernedList();
          tablePerson.setModel(tableModel);
          }catch(Exception e){
             JOptionPane.showMessageDialog(null, e);
-}
+        }
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -202,6 +205,7 @@ List<InfoConserned> infoConsernedList = infoConsernedService.getConsernedList();
 
     private void tablePersonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablePersonMouseClicked
       try{
+            infoConsernedService = InfoConsernedService.getInstance();
             int row= tablePerson.getSelectedRow();
             String table_click= tablePerson.getModel().getValueAt(row, 0).toString();
             int acteNaissanceNum = Integer.parseInt(table_click);
