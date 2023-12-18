@@ -181,6 +181,7 @@ private void Reset()
         btnMaj = new javax.swing.JButton();
         btnGetInfo = new javax.swing.JButton();
         btnImprimer = new javax.swing.JButton();
+        jLabel13 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Patient Registration");
@@ -389,8 +390,8 @@ private void Reset()
                 .addGap(18, 18, 18)
                 .addComponent(btnAjoutCondamnation)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(39, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 106, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
@@ -472,6 +473,9 @@ private void Reset()
                 .addContainerGap(13, Short.MAX_VALUE))
         );
 
+        jLabel13.setFont(new java.awt.Font("DialogInput", 1, 13)); // NOI18N
+        jLabel13.setText("Ajout ou modification des informations d'une personne - Casier Judiciaire N°3");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -481,7 +485,11 @@ private void Reset()
                 .addComponent(AjoutForm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(27, 27, 27)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(246, Short.MAX_VALUE))
+                .addContainerGap(455, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel13)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -493,7 +501,9 @@ private void Reset()
                     .addGroup(layout.createSequentialGroup()
                         .addGap(34, 34, 34)
                         .addComponent(AjoutForm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
+                .addComponent(jLabel13)
+                .addContainerGap())
         );
 
         AjoutForm.getAccessibleContext().setAccessibleName("Information sur le concerné");
@@ -852,6 +862,7 @@ frm.setVisible(true);
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -866,6 +877,6 @@ frm.setVisible(true);
     public javax.swing.JTextField mere;
     private javax.swing.JComboBox<String> moisnaiss;
     public javax.swing.JTextField pere;
-    private static javax.swing.JTable tableCondamnation;
+    private javax.swing.JTable tableCondamnation;
     // End of variables declaration//GEN-END:variables
 }
