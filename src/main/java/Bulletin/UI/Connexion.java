@@ -108,7 +108,7 @@ AdminService adminService = AdminService.getInstance();
         name.setText("SCASIER");
 
         jLabel1.setFont(new java.awt.Font("sansserif", 1, 13)); // NOI18N
-        jLabel1.setText("Opensource Project");
+        jLabel1.setText("Casier N°3 - Opensource Project");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
