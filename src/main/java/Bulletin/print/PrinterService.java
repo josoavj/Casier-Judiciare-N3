@@ -26,7 +26,7 @@ public class PrinterService {
 
         canvas.beginText();
         canvas.setTextMatrix(343,333);
-        canvas.showText("VONJINIAIANA Josoa Pory");
+        canvas.showText("");
 
         canvas.setTextMatrix(285,723);
         canvas.showText("VONJINIAIANA ");
