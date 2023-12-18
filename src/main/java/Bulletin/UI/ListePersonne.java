@@ -98,7 +98,15 @@ List<InfoConserned> infoConsernedList = new ArrayList<>();
             new String [] {
                 "Acte de Naissance", "Nom", "Prénom", "Père", "Mère", "Date de Naissance", "Sexe", "Nationalité"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         tablePerson.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tablePersonMouseClicked(evt);
@@ -227,7 +235,9 @@ List<InfoConserned> infoConsernedList = new ArrayList<>();
     }//GEN-LAST:event_formWindowClosing
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
-        // TODO add your handling code here:
+    AjoutPersonne frm = new AjoutPersonne();
+    frm.setVisible(true);
+    this.dispose();// TODO add your handling code here:
     }//GEN-LAST:event_btnAddActionPerformed
 
     private void btnDelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDelActionPerformed
