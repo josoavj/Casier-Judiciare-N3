@@ -267,6 +267,11 @@ public class AjoutCondamnation extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * @description ajouter une condamnation
+     * @param evt
+     */
+
     private void btnAjouterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAjouterActionPerformed
         try {
             Integer.parseInt(dateJour.getText().strip());
@@ -291,6 +296,10 @@ public class AjoutCondamnation extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtCoursOuTrubinauxActionPerformed
 
+    /**
+     * @description mettre à jour une condamnation
+     * @param evt
+     */
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
         for(Condamnation condamnation : AjoutPersonne.listeDeCondamnations){
             try {
@@ -315,6 +324,10 @@ public class AjoutCondamnation extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnUpdateActionPerformed
 
+    /**
+     * @description supprimer un condamnation
+     * @param evt
+     */
     private void btnSupprimerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSupprimerActionPerformed
 
         AjoutPersonne.listCondamnationWillRemoved.add(condamnationSelected);

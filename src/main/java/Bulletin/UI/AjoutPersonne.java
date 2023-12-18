@@ -507,6 +507,11 @@ private void Reset()
     Reset();
     }//GEN-LAST:event_btnNouveauActionPerformed
 
+    /**
+     * ajout d'un nouvelle Personne
+     * @param evt
+     */
+
     // Enregistrer les données
     private void btnEnregistrerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnregistrerActionPerformed
             if (acteNaissace.getText().equals("")) {
@@ -584,6 +589,14 @@ private void Reset()
         }
 
         JOptionPane.showMessageDialog(null,"enregistrement réuissite");
+        listCondamnationWillRemoved.clear();
+        listeDeCondamnations.clear();
+        listCondamnationAdded.clear();
+        infoConserned = null;
+        this.setVisible(false);
+        ListePersonne frm= new ListePersonne();
+        frm.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btnEnregistrerActionPerformed
 
     private void btnEffacerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEffacerActionPerformed
@@ -594,7 +607,13 @@ private void Reset()
             infoConsernedService = InfoConsernedService.getInstance();
             infoConsernedService.removeInfoConserned(infoConserned);
             JOptionPane.showMessageDialog(null,"Supression réuissite");
+            listCondamnationWillRemoved.clear();
+            listeDeCondamnations.clear();
+            listCondamnationAdded.clear();
             infoConserned = null;
+            this.setVisible(false);
+            ListePersonne frm= new ListePersonne();
+            frm.setVisible(true);
             this.dispose();
         }
     }//GEN-LAST:event_btnEffacerActionPerformed
@@ -605,20 +624,114 @@ ListePersonne frm=new ListePersonne();
 frm.setVisible(true);
     }//GEN-LAST:event_btnGetInfoActionPerformed
 
+    /**
+     * @description mise à jour des informations sur la conserné
+     * @param evt
+     */
+
     private void btnMajActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMajActionPerformed
- try{
-            con=Connect.ConnectDB();
-          
-            String sql= "update PatientRegistration set Patientname='"+ NomPers.getText() + "',Fathername='"+ PrenomPers.getText() + "',Email='"+ datenaiss.getText() + "',ContactNo='"+ mere.getText() + "',Age=" + lieunais.getText() + "',Gen='" + cmbStatus.getSelectedItem() + "',BG='"+ "',Address='" + pere.getText() + "' where PatientID='" + acteNaissace.getText() + "'";
+        if (acteNaissace.getText().equals("")) {
+            JOptionPane.showMessageDialog(this, "Please enter patient id", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
 
-            pst=con.prepareStatement(sql);
-            pst.execute();
-            JOptionPane.showMessageDialog(this,"Successfully updated","Record",JOptionPane.INFORMATION_MESSAGE);
-            btnMaj.setEnabled(false);
+        }
+        if (NomPers.getText().equals("")) {
+            JOptionPane.showMessageDialog(this, "Veuillez remplir le nom", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
 
-        }catch(HeadlessException | SQLException ex){
-            JOptionPane.showMessageDialog(this,ex);
-        }  
+        }
+        if (pere.getText().equals("")) {
+            JOptionPane.showMessageDialog(this, "Veuillez remplir le nom du père", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        if (mere.getText().equals("")) {
+            JOptionPane.showMessageDialog(this, "Veuillez remplir le nom de la mère", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // Lieu de Naissance
+        if (lieunais.getText().equals("")) {
+            JOptionPane.showMessageDialog(this, "Veuillez ajouter un date de naissance", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        if (cmbStatus.getSelectedItem().equals("")) {
+            JOptionPane.showMessageDialog(this, "Veuillez selectionner la situation familiale", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        if (Domicile.getText().equals("")) {
+            JOptionPane.showMessageDialog(this, "Veuillez ajouter la domicile", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        if (Profession.getText().equals("")) {
+            JOptionPane.showMessageDialog(this, "Veuillez ajouter une profession", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        try {
+            Integer.parseInt(datenaiss.getText().strip());
+            Integer.parseInt(annenaiss.getText().strip());
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, e);
+            return;
+        }
+        String status = "Célibataire";
+        if (cmbStatus.getSelectedIndex() == 0) {
+            status = "Célibataire";
+        } else if (cmbStatus.getSelectedIndex() == 1) {
+            status = cmbGender.getSelectedIndex() == 0 ? "Marié" : "Mariée";
+        } else if (cmbStatus.getSelectedIndex() == 2) {
+            status = cmbGender.getSelectedIndex() == 0 ? "Veuf" : "Veuve";
+        }
+        this.infoConsernedService = InfoConsernedService.getInstance();
+        this.condamnationService = CondamnationService.getInstance();
+        LocalDate localDate = LocalDate.of(Integer.parseInt(annenaiss.getText()), moisnaiss.getSelectedIndex() + 1, Integer.parseInt(datenaiss.getText()));
+        Date date = Date.valueOf(localDate);
+        InfoConserned infoConserned1 = new InfoConserned();
+        infoConserned1.setActeNaissance(Integer.parseInt(acteNaissace.getText().strip()));
+        infoConserned1.setNom(NomPers.getText().strip());
+        infoConserned1.setPrenoms(PrenomPers.getText().strip());
+        infoConserned1.setPere(pere.getText().strip());
+        infoConserned1.setMere(mere.getText().strip());
+        infoConserned1.setDateNaissance(date);
+        infoConserned1.setLieuNaissance(lieunais.getText().strip());
+        infoConserned1.setProfession(Profession.getText().strip());
+        infoConserned1.setDomicile(Domicile.getText().strip());
+        infoConserned1.setNationalite(Nationalite.getText().strip().toUpperCase());
+        infoConserned1.setSexe(cmbGender.getSelectedItem().toString());
+        infoConserned1.setSituationFamiliale(status);
+        int majConfirmation = JOptionPane.showConfirmDialog(null,"voullez vous mettre à jour les informations sur "+infoConserned.getNom()
+        + " ?");
+        if(majConfirmation == 0){
+        infoConsernedService.updateInfoConserned(infoConserned.getIdConserned(),infoConserned1);
+        //mise à jour des condamnations
+        for (Condamnation c : listeDeCondamnations){
+            if(c.getIdCondamnation()!=0){
+            Condamnation originalC = condamnationService.getCondamnationById(c.getIdCondamnation());
+            if(originalC != c){
+                condamnationService.updateCondamnation(originalC.getIdCondamnation(), c);
+            }
+            }
+        }
+        //ajout des nouveaux condamnations
+        for (Condamnation c:listCondamnationAdded) {
+            c.setInfoConserned(infoConsernedService.getInfoConsernedByAN(infoConserned1.getActeNaissance()));
+            condamnationService.createCondamnation(c);
+        }
+        //suppression des condamnations
+        for (Condamnation c:listCondamnationWillRemoved) {
+            condamnationService.removeCondamnation(condamnationService.getCondamnationById(c.getIdCondamnation()));
+        }
+            listCondamnationWillRemoved.clear();
+            listeDeCondamnations.clear();
+            listCondamnationAdded.clear();
+            infoConserned = null;
+            this.setVisible(false);
+            ListePersonne frm= new ListePersonne();
+            frm.setVisible(true);
+            this.dispose();
+        }else{
+            JOptionPane.showMessageDialog(null,"La mise à jour n'as pas été enregisté");
+        }
+
     }//GEN-LAST:event_btnMajActionPerformed
 
 

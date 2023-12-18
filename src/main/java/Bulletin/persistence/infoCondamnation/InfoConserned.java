@@ -10,7 +10,7 @@ public class InfoConserned {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idConserned", nullable = false)
-    private Long idConserned;
+    private int idConserned;
 
     @OneToMany(mappedBy = "infoConserned", orphanRemoval = true)
     private List<Condamnation> condamnations = new ArrayList<>();
@@ -50,7 +50,7 @@ public class InfoConserned {
         this.nationalite = "MALAGASY";
     }
 
-    public Long getIdConserned() {
+    public int getIdConserned() {
         return idConserned;
     }
     private int acteNaissance;

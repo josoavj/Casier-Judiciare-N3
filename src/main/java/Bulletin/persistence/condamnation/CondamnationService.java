@@ -15,7 +15,7 @@ public class CondamnationService {
      * @description Cette méthode retourne l'instance de l'objet CondamantionService
      */
     public static  CondamnationService getInstance() {
-        return instance == null ? instance = new CondamnationService() : null;
+        return instance == null ? instance = new CondamnationService() : instance;
     }
 
     /**
@@ -26,6 +26,17 @@ public class CondamnationService {
     public List<Condamnation> getCondamnationList(){
         Query query = entityManager.createQuery("SELECT c FROM Condamnation c", Condamnation.class);
         return query.getResultList();
+    }
+
+    public void updateCondamnation(int id, Condamnation condamnationUpdated){
+        Condamnation condamnation = entityManager.find(Condamnation.class,id);
+        entityManager.getTransaction().begin();
+        condamnation.setDateCondamnation(condamnationUpdated.getDateCondamnation());
+        condamnation.setCoursOutrubinaux(condamnationUpdated.getCoursOutrubinaux());
+        condamnation.setNatureCrime(condamnationUpdated.getNatureCrime());
+        condamnation.setNaturePeine(condamnationUpdated.getNaturePeine());
+        condamnation.setObservation(condamnationUpdated.getObservation());
+        entityManager.getTransaction().commit();
     }
 
     /**

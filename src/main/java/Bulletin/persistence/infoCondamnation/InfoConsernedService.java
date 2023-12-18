@@ -44,6 +44,24 @@ public class InfoConsernedService {
         entityManager.getTransaction().commit();
     }
 
+    public void updateInfoConserned(int id, InfoConserned infoConsernedUpdated){
+        InfoConserned infoConserned = entityManager.find(InfoConserned.class,id);
+        entityManager.getTransaction().begin();
+        infoConserned.setNom(infoConsernedUpdated.getNom());
+        infoConserned.setPrenoms(infoConsernedUpdated.getPrenoms());
+        infoConserned.setActeNaissance(infoConsernedUpdated.getActeNaissance());
+        infoConserned.setSexe(infoConsernedUpdated.getSexe());
+        infoConserned.setPere(infoConsernedUpdated.getPere());
+        infoConserned.setMere(infoConsernedUpdated.getMere());
+        infoConserned.setSituationFamiliale(infoConsernedUpdated.getSituationFamiliale());
+        infoConserned.setProfession(infoConsernedUpdated.getProfession());
+        infoConserned.setNationalite(infoConsernedUpdated.getNationalite());
+        infoConserned.setDomicile(infoConsernedUpdated.getDomicile());
+        infoConserned.setDateNaissance(infoConsernedUpdated.getDateNaissance());
+        infoConserned.setLieuNaissance(infoConsernedUpdated.getLieuNaissance());
+        entityManager.getTransaction().commit();
+    }
+
     /**
      *
      * @param id

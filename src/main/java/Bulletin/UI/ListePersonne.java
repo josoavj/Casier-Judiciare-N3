@@ -210,18 +210,20 @@ List<InfoConserned> infoConsernedList = new ArrayList<>();
             String table_click= tablePerson.getModel().getValueAt(row, 0).toString();
             int acteNaissanceNum = Integer.parseInt(table_click);
             InfoConserned ic = infoConsernedService.getInfoConsernedByAN(acteNaissanceNum);
-            this.hide();
+            this.setVisible(false);
             AjoutPersonne frm = new AjoutPersonne(ic);
             frm.setVisible(true);
+            this.dispose();
         }catch(Exception ex){
             JOptionPane.showMessageDialog(this,ex);
         }
     }//GEN-LAST:event_tablePersonMouseClicked
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-    this.hide();
+    this.setVisible(false);
     AjoutPersonne frm = new AjoutPersonne();
     frm.setVisible(true);
+    this.dispose();
     }//GEN-LAST:event_formWindowClosing
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
