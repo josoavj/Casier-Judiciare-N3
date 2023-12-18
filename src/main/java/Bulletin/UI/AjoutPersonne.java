@@ -515,39 +515,39 @@ private void Reset()
     // Enregistrer les données
     private void btnEnregistrerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnregistrerActionPerformed
             if (acteNaissace.getText().equals("")) {
-                JOptionPane.showMessageDialog(this, "Please enter patient id", "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Acte de naissance non initialisé", "Erreur", JOptionPane.ERROR_MESSAGE);
                 return;
 
             }
             if (NomPers.getText().equals("")) {
-                JOptionPane.showMessageDialog(this, "Veuillez remplir le nom", "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Veuillez remplir le nom", "Erreur", JOptionPane.ERROR_MESSAGE);
                 return;
 
             }
             if (pere.getText().equals("")) {
-                JOptionPane.showMessageDialog(this, "Veuillez remplir le nom du père", "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Veuillez remplir le nom du père", "Erreur", JOptionPane.ERROR_MESSAGE);
                 return;
             }
             if (mere.getText().equals("")) {
-                JOptionPane.showMessageDialog(this, "Veuillez remplir le nom de la mère", "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Veuillez remplir le nom de la mère", "Erreur", JOptionPane.ERROR_MESSAGE);
                 return;
             }
 
             // Lieu de Naissance
             if (lieunais.getText().equals("")) {
-                JOptionPane.showMessageDialog(this, "Veuillez ajouter un date de naissance", "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Veuillez ajouter un date de naissance", "Erreur", JOptionPane.ERROR_MESSAGE);
                 return;
             }
             if (cmbStatus.getSelectedItem().equals("")) {
-                JOptionPane.showMessageDialog(this, "Veuillez selectionner la situation familiale", "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Veuillez selectionner la situation familiale", "Erreur", JOptionPane.ERROR_MESSAGE);
                 return;
             }
             if (Domicile.getText().equals("")) {
-                JOptionPane.showMessageDialog(this, "Veuillez ajouter la domicile", "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Veuillez ajouter la domicile", "Erreur", JOptionPane.ERROR_MESSAGE);
                 return;
             }
             if (Profession.getText().equals("")) {
-                JOptionPane.showMessageDialog(this, "Veuillez ajouter une profession", "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Veuillez ajouter une profession", "Erreur", JOptionPane.ERROR_MESSAGE);
                 return;
             }
             try {
@@ -631,35 +631,35 @@ frm.setVisible(true);
 
     private void btnMajActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMajActionPerformed
         if (acteNaissace.getText().equals("")) {
-            JOptionPane.showMessageDialog(this, "Please enter patient id", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Acte de naissance invalide", "Erreur", JOptionPane.ERROR_MESSAGE);
             return;
 
         }
         if (NomPers.getText().equals("")) {
-            JOptionPane.showMessageDialog(this, "Veuillez remplir le nom", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Veuillez remplir le nom", "Erreur", JOptionPane.ERROR_MESSAGE);
             return;
 
         }
         if (pere.getText().equals("")) {
-            JOptionPane.showMessageDialog(this, "Veuillez remplir le nom du père", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Veuillez remplir le nom du père", "Erreur", JOptionPane.ERROR_MESSAGE);
             return;
         }
         if (mere.getText().equals("")) {
-            JOptionPane.showMessageDialog(this, "Veuillez remplir le nom de la mère", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Veuillez remplir le nom de la mère", "Erreur", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
         // Lieu de Naissance
         if (lieunais.getText().equals("")) {
-            JOptionPane.showMessageDialog(this, "Veuillez ajouter un date de naissance", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Veuillez ajouter un date de naissance", "Erreur", JOptionPane.ERROR_MESSAGE);
             return;
         }
         if (cmbStatus.getSelectedItem().equals("")) {
-            JOptionPane.showMessageDialog(this, "Veuillez selectionner la situation familiale", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Veuillez selectionner la situation familiale", "Erreur", JOptionPane.ERROR_MESSAGE);
             return;
         }
         if (Domicile.getText().equals("")) {
-            JOptionPane.showMessageDialog(this, "Veuillez ajouter la domicile", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Veuillez ajouter la domicile", "Erreur", JOptionPane.ERROR_MESSAGE);
             return;
         }
         if (Profession.getText().equals("")) {
@@ -698,7 +698,7 @@ frm.setVisible(true);
         infoConserned1.setNationalite(Nationalite.getText().strip().toUpperCase());
         infoConserned1.setSexe(cmbGender.getSelectedItem().toString());
         infoConserned1.setSituationFamiliale(status);
-        int majConfirmation = JOptionPane.showConfirmDialog(null,"voullez vous mettre à jour les informations sur "+infoConserned.getNom()
+        int majConfirmation = JOptionPane.showConfirmDialog(null,"Voulez vous mettre à jour les informations sur "+infoConserned.getNom()
         + " ?");
         if(majConfirmation == 0){
         infoConsernedService.updateInfoConserned(infoConserned.getIdConserned(),infoConserned1);
