@@ -26,16 +26,16 @@ public class Settings extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        panelDeconnect = new javax.swing.JPanel();
+        productName = new javax.swing.JLabel();
+        disconnectPanel = new javax.swing.JPanel();
         btnDisconnect = new javax.swing.JButton();
-        panelMode = new javax.swing.JPanel();
-        SwitchMode = new javax.swing.JComboBox<>();
+        themePanel = new javax.swing.JPanel();
+        themeSwitch = new javax.swing.JComboBox<>();
 
-        jLabel1.setFont(new java.awt.Font("sansserif", 1, 24)); // NOI18N
-        jLabel1.setText("S-CASIER");
+        productName.setFont(new java.awt.Font("sansserif", 1, 24)); // NOI18N
+        productName.setText("S-CASIER");
 
-        panelDeconnect.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Se déconnecter de cette session", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("sansserif", 1, 10))); // NOI18N
+        disconnectPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Se déconnecter de cette session", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("sansserif", 1, 10))); // NOI18N
 
         btnDisconnect.setText("Déconnecter");
         btnDisconnect.addActionListener(new java.awt.event.ActionListener() {
@@ -44,41 +44,41 @@ public class Settings extends javax.swing.JPanel {
             }
         });
 
-        javax.swing.GroupLayout panelDeconnectLayout = new javax.swing.GroupLayout(panelDeconnect);
-        panelDeconnect.setLayout(panelDeconnectLayout);
-        panelDeconnectLayout.setHorizontalGroup(
-            panelDeconnectLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelDeconnectLayout.createSequentialGroup()
+        javax.swing.GroupLayout disconnectPanelLayout = new javax.swing.GroupLayout(disconnectPanel);
+        disconnectPanel.setLayout(disconnectPanelLayout);
+        disconnectPanelLayout.setHorizontalGroup(
+            disconnectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, disconnectPanelLayout.createSequentialGroup()
                 .addContainerGap(198, Short.MAX_VALUE)
                 .addComponent(btnDisconnect)
                 .addGap(16, 16, 16))
         );
-        panelDeconnectLayout.setVerticalGroup(
-            panelDeconnectLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelDeconnectLayout.createSequentialGroup()
+        disconnectPanelLayout.setVerticalGroup(
+            disconnectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(disconnectPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(btnDisconnect)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        panelMode.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Changer de thème", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("sansserif", 1, 10))); // NOI18N
+        themePanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Changer de thème", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("sansserif", 1, 10))); // NOI18N
 
-        SwitchMode.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Mode Sombre (Dark)", "Mode Lumière (Light)" }));
+        themeSwitch.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Mode Sombre (Dark)", "Mode Lumière (Light)" }));
 
-        javax.swing.GroupLayout panelModeLayout = new javax.swing.GroupLayout(panelMode);
-        panelMode.setLayout(panelModeLayout);
-        panelModeLayout.setHorizontalGroup(
-            panelModeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelModeLayout.createSequentialGroup()
+        javax.swing.GroupLayout themePanelLayout = new javax.swing.GroupLayout(themePanel);
+        themePanel.setLayout(themePanelLayout);
+        themePanelLayout.setHorizontalGroup(
+            themePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, themePanelLayout.createSequentialGroup()
                 .addContainerGap(169, Short.MAX_VALUE)
-                .addComponent(SwitchMode, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(themeSwitch, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(15, 15, 15))
         );
-        panelModeLayout.setVerticalGroup(
-            panelModeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelModeLayout.createSequentialGroup()
+        themePanelLayout.setVerticalGroup(
+            themePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(themePanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(SwitchMode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(themeSwitch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -89,23 +89,23 @@ public class Settings extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(240, 240, 240)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(panelMode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(panelDeconnect, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(themePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(disconnectPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(249, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1)
+                .addComponent(productName)
                 .addGap(353, 353, 353))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(126, 126, 126)
-                .addComponent(jLabel1)
+                .addComponent(productName)
                 .addGap(31, 31, 31)
-                .addComponent(panelMode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(themePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(44, 44, 44)
-                .addComponent(panelDeconnect, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(disconnectPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(273, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -116,10 +116,10 @@ public class Settings extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> SwitchMode;
     private javax.swing.JButton btnDisconnect;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JPanel panelDeconnect;
-    private javax.swing.JPanel panelMode;
+    private javax.swing.JPanel disconnectPanel;
+    private javax.swing.JLabel productName;
+    private javax.swing.JPanel themePanel;
+    private javax.swing.JComboBox<String> themeSwitch;
     // End of variables declaration//GEN-END:variables
 }
