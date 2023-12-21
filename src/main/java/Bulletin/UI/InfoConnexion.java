@@ -42,7 +42,7 @@ PreparedStatement pst=null;
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        ListeConnecte = new javax.swing.JTable();
+        connectedUserList = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
@@ -52,8 +52,8 @@ PreparedStatement pst=null;
             }
         });
 
-        ListeConnecte.setFont(new java.awt.Font("Palatino Linotype", 1, 12)); // NOI18N
-        ListeConnecte.setModel(new javax.swing.table.DefaultTableModel(
+        connectedUserList.setFont(new java.awt.Font("Palatino Linotype", 1, 12)); // NOI18N
+        connectedUserList.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null},
                 {null, null},
@@ -72,8 +72,8 @@ PreparedStatement pst=null;
                 return canEdit [columnIndex];
             }
         });
-        ListeConnecte.getTableHeader().setReorderingAllowed(false);
-        jScrollPane1.setViewportView(ListeConnecte);
+        connectedUserList.getTableHeader().setReorderingAllowed(false);
+        jScrollPane1.setViewportView(connectedUserList);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -126,7 +126,7 @@ PreparedStatement pst=null;
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTable ListeConnecte;
+    private javax.swing.JTable connectedUserList;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }
