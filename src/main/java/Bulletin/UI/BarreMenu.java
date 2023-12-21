@@ -279,9 +279,9 @@ public class BarreMenu extends javax.swing.JFrame {
    
     }//GEN-LAST:event_MAideActionPerformed
 
-    // Pour ouvrir About
+    // Pour ouvrir AboutUs
     private void MAboutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MAboutActionPerformed
-     About frm= new About();
+     AboutUs frm= new AboutUs();
      frm.setVisible(true);
     }//GEN-LAST:event_MAboutActionPerformed
 
