@@ -43,7 +43,7 @@
     </Component>
     <Menu class="javax.swing.JMenuBar" name="MenuBar">
       <SubComponents>
-        <Menu class="javax.swing.JMenu" name="MPersonne">
+        <Menu class="javax.swing.JMenu" name="menuPersonne">
           <Properties>
             <Property name="text" type="java.lang.String" value="Personne"/>
           </Properties>
@@ -66,7 +66,7 @@
             </MenuItem>
           </SubComponents>
         </Menu>
-        <Menu class="javax.swing.JMenu" name="MOptions">
+        <Menu class="javax.swing.JMenu" name="menuOptions">
           <Properties>
             <Property name="text" type="java.lang.String" value="Options"/>
           </Properties>
@@ -84,7 +84,7 @@
             </MenuItem>
           </SubComponents>
         </Menu>
-        <Menu class="javax.swing.JMenu" name="MAdmin">
+        <Menu class="javax.swing.JMenu" name="menuAdmin">
           <Properties>
             <Property name="text" type="java.lang.String" value="Admin"/>
           </Properties>
@@ -124,12 +124,12 @@
             </MenuItem>
           </SubComponents>
         </Menu>
-        <Menu class="javax.swing.JMenu" name="MAide">
+        <Menu class="javax.swing.JMenu" name="menuAide">
           <Properties>
             <Property name="text" type="java.lang.String" value="Aide"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MAideActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menuAideActionPerformed"/>
           </Events>
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="MAbout">
@@ -197,7 +197,7 @@
           </Group>
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="110" max="-2" attributes="0"/>
-              <Component id="pnlGuide" min="-2" max="-2" attributes="0"/>
+              <Component id="guidePanel" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
           </Group>
       </Group>
@@ -210,7 +210,7 @@
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="txtPresentation" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
-              <Component id="pnlGuide" min="-2" max="-2" attributes="0"/>
+              <Component id="guidePanel" min="-2" max="-2" attributes="0"/>
               <EmptySpace pref="229" max="32767" attributes="0"/>
               <Component id="typeLog" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
@@ -243,7 +243,7 @@
         <Property name="text" type="java.lang.String" value="Logiciel OpenSource"/>
       </Properties>
     </Component>
-    <Container class="javax.swing.JPanel" name="pnlGuide">
+    <Container class="javax.swing.JPanel" name="guidePanel">
       <Properties>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">

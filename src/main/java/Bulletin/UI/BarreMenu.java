@@ -29,23 +29,23 @@ public class BarreMenu extends javax.swing.JFrame {
         txtBienvenue = new javax.swing.JLabel();
         txtPresentation = new javax.swing.JLabel();
         typeLog = new javax.swing.JLabel();
-        pnlGuide = new javax.swing.JPanel();
+        guidePanel = new javax.swing.JPanel();
         txtNav = new javax.swing.JLabel();
         txtNavPers = new javax.swing.JLabel();
         txtNavOpt = new javax.swing.JLabel();
         txtNavAdmin = new javax.swing.JLabel();
         txtNavAbt = new javax.swing.JLabel();
         MenuBar = new javax.swing.JMenuBar();
-        MPersonne = new javax.swing.JMenu();
+        menuPersonne = new javax.swing.JMenu();
         MIdentification = new javax.swing.JMenuItem();
         ListePersonne = new javax.swing.JMenuItem();
-        MOptions = new javax.swing.JMenu();
+        menuOptions = new javax.swing.JMenu();
         Settings = new javax.swing.JMenuItem();
-        MAdmin = new javax.swing.JMenu();
+        menuAdmin = new javax.swing.JMenu();
         AdmIden = new javax.swing.JMenuItem();
         MdpChange = new javax.swing.JMenuItem();
         Info_Connex = new javax.swing.JMenuItem();
-        MAide = new javax.swing.JMenu();
+        menuAide = new javax.swing.JMenu();
         MAbout = new javax.swing.JMenuItem();
         MContact = new javax.swing.JMenuItem();
 
@@ -75,7 +75,7 @@ public class BarreMenu extends javax.swing.JFrame {
         typeLog.setFont(new java.awt.Font("sansserif", 1, 13)); // NOI18N
         typeLog.setText("Logiciel OpenSource");
 
-        pnlGuide.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Guide d'utilisation", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("sansserif", 1, 16))); // NOI18N
+        guidePanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Guide d'utilisation", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("sansserif", 1, 16))); // NOI18N
 
         txtNav.setFont(new java.awt.Font("sansserif", 1, 13)); // NOI18N
         txtNav.setText("-> Pour la navigation vers les autres pages, vous devez utiliser la barre de menu en dessus.");
@@ -92,27 +92,27 @@ public class BarreMenu extends javax.swing.JFrame {
         txtNavAbt.setFont(new java.awt.Font("sansserif", 1, 13)); // NOI18N
         txtNavAbt.setText("-> Menu  Aide: Pour les informations des développeurs ou les contacter.");
 
-        javax.swing.GroupLayout pnlGuideLayout = new javax.swing.GroupLayout(pnlGuide);
-        pnlGuide.setLayout(pnlGuideLayout);
-        pnlGuideLayout.setHorizontalGroup(
-            pnlGuideLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlGuideLayout.createSequentialGroup()
+        javax.swing.GroupLayout guidePanelLayout = new javax.swing.GroupLayout(guidePanel);
+        guidePanel.setLayout(guidePanelLayout);
+        guidePanelLayout.setHorizontalGroup(
+            guidePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(guidePanelLayout.createSequentialGroup()
                 .addGap(34, 34, 34)
-                .addGroup(pnlGuideLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnlGuideLayout.createSequentialGroup()
+                .addGroup(guidePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(guidePanelLayout.createSequentialGroup()
                         .addComponent(txtNav)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(pnlGuideLayout.createSequentialGroup()
-                        .addGroup(pnlGuideLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(guidePanelLayout.createSequentialGroup()
+                        .addGroup(guidePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtNavPers)
                             .addComponent(txtNavOpt)
                             .addComponent(txtNavAdmin)
                             .addComponent(txtNavAbt))
                         .addGap(0, 62, Short.MAX_VALUE))))
         );
-        pnlGuideLayout.setVerticalGroup(
-            pnlGuideLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlGuideLayout.createSequentialGroup()
+        guidePanelLayout.setVerticalGroup(
+            guidePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(guidePanelLayout.createSequentialGroup()
                 .addGap(36, 36, 36)
                 .addComponent(txtNav)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -126,7 +126,7 @@ public class BarreMenu extends javax.swing.JFrame {
                 .addContainerGap(39, Short.MAX_VALUE))
         );
 
-        MPersonne.setText("Personne");
+        menuPersonne.setText("Personne");
 
         MIdentification.setText("Identification");
         MIdentification.addActionListener(new java.awt.event.ActionListener() {
@@ -134,7 +134,7 @@ public class BarreMenu extends javax.swing.JFrame {
                 MIdentificationActionPerformed(evt);
             }
         });
-        MPersonne.add(MIdentification);
+        menuPersonne.add(MIdentification);
 
         ListePersonne.setText("Liste");
         ListePersonne.addActionListener(new java.awt.event.ActionListener() {
@@ -142,11 +142,11 @@ public class BarreMenu extends javax.swing.JFrame {
                 ListePersonneActionPerformed(evt);
             }
         });
-        MPersonne.add(ListePersonne);
+        menuPersonne.add(ListePersonne);
 
-        MenuBar.add(MPersonne);
+        MenuBar.add(menuPersonne);
 
-        MOptions.setText("Options");
+        menuOptions.setText("Options");
 
         Settings.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_P, java.awt.event.InputEvent.ALT_DOWN_MASK));
         Settings.setText("Settings");
@@ -155,11 +155,11 @@ public class BarreMenu extends javax.swing.JFrame {
                 SettingsActionPerformed(evt);
             }
         });
-        MOptions.add(Settings);
+        menuOptions.add(Settings);
 
-        MenuBar.add(MOptions);
+        MenuBar.add(menuOptions);
 
-        MAdmin.setText("Admin");
+        menuAdmin.setText("Admin");
 
         AdmIden.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_R, java.awt.event.InputEvent.ALT_DOWN_MASK));
         AdmIden.setText("Identification");
@@ -168,7 +168,7 @@ public class BarreMenu extends javax.swing.JFrame {
                 AdmIdenActionPerformed(evt);
             }
         });
-        MAdmin.add(AdmIden);
+        menuAdmin.add(AdmIden);
 
         MdpChange.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.ALT_DOWN_MASK));
         MdpChange.setText("Changer de mot de passe");
@@ -177,7 +177,7 @@ public class BarreMenu extends javax.swing.JFrame {
                 MdpChangeActionPerformed(evt);
             }
         });
-        MAdmin.add(MdpChange);
+        menuAdmin.add(MdpChange);
 
         Info_Connex.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_L, java.awt.event.InputEvent.ALT_DOWN_MASK));
         Info_Connex.setText("Détails de connexion");
@@ -186,14 +186,14 @@ public class BarreMenu extends javax.swing.JFrame {
                 Info_ConnexActionPerformed(evt);
             }
         });
-        MAdmin.add(Info_Connex);
+        menuAdmin.add(Info_Connex);
 
-        MenuBar.add(MAdmin);
+        MenuBar.add(menuAdmin);
 
-        MAide.setText("Aide");
-        MAide.addActionListener(new java.awt.event.ActionListener() {
+        menuAide.setText("Aide");
+        menuAide.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                MAideActionPerformed(evt);
+                menuAideActionPerformed(evt);
             }
         });
 
@@ -203,7 +203,7 @@ public class BarreMenu extends javax.swing.JFrame {
                 MAboutActionPerformed(evt);
             }
         });
-        MAide.add(MAbout);
+        menuAide.add(MAbout);
 
         MContact.setText("Contact");
         MContact.addActionListener(new java.awt.event.ActionListener() {
@@ -211,9 +211,9 @@ public class BarreMenu extends javax.swing.JFrame {
                 MContactActionPerformed(evt);
             }
         });
-        MAide.add(MContact);
+        menuAide.add(MContact);
 
-        MenuBar.add(MAide);
+        MenuBar.add(menuAide);
 
         setJMenuBar(MenuBar);
 
@@ -235,7 +235,7 @@ public class BarreMenu extends javax.swing.JFrame {
                         .addGap(28, 28, 28))))
             .addGroup(layout.createSequentialGroup()
                 .addGap(110, 110, 110)
-                .addComponent(pnlGuide, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(guidePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -246,7 +246,7 @@ public class BarreMenu extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(txtPresentation)
                 .addGap(40, 40, 40)
-                .addComponent(pnlGuide, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(guidePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 229, Short.MAX_VALUE)
                 .addComponent(typeLog)
                 .addGap(19, 19, 19))
@@ -275,9 +275,9 @@ public class BarreMenu extends javax.swing.JFrame {
      frm.setVisible(true);
     }//GEN-LAST:event_SettingsActionPerformed
 
-    private void MAideActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MAideActionPerformed
+    private void menuAideActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuAideActionPerformed
    
-    }//GEN-LAST:event_MAideActionPerformed
+    }//GEN-LAST:event_menuAideActionPerformed
 
     // Pour ouvrir AboutUs
     private void MAboutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MAboutActionPerformed
@@ -344,22 +344,22 @@ public class BarreMenu extends javax.swing.JFrame {
     private javax.swing.JMenuItem Info_Connex;
     private javax.swing.JMenuItem ListePersonne;
     private javax.swing.JMenuItem MAbout;
-    private javax.swing.JMenu MAdmin;
-    private javax.swing.JMenu MAide;
     private javax.swing.JMenuItem MContact;
     private javax.swing.JMenuItem MIdentification;
-    private javax.swing.JMenu MOptions;
-    private javax.swing.JMenu MPersonne;
     private javax.swing.JMenuItem MdpChange;
     private javax.swing.JMenuBar MenuBar;
     private javax.swing.JMenuItem Settings;
+    private javax.swing.JPanel guidePanel;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem1;
     private javax.swing.JMenu jMenu12;
     private javax.swing.JMenu jMenu6;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem16;
     private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JPanel pnlGuide;
+    private javax.swing.JMenu menuAdmin;
+    private javax.swing.JMenu menuAide;
+    private javax.swing.JMenu menuOptions;
+    private javax.swing.JMenu menuPersonne;
     private javax.swing.JLabel txtBienvenue;
     private javax.swing.JLabel txtNav;
     private javax.swing.JLabel txtNavAbt;
