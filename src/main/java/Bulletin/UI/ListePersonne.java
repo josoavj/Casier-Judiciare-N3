@@ -55,7 +55,7 @@ List<InfoConserned> infoConsernedList = new ArrayList<>();
            columnNames[7] = "Nationalité";
      DefaultTableModel tableModel = new DefaultTableModel(data,columnNames);
            try{
-         tablePerson.setModel(tableModel);
+         tableListPerson.setModel(tableModel);
          }catch(Exception e){
             JOptionPane.showMessageDialog(null, e);
         }
@@ -70,14 +70,14 @@ List<InfoConserned> infoConsernedList = new ArrayList<>();
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        tablePerson = new javax.swing.JTable();
+        tableListPerson = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
         modifPanel = new javax.swing.JPanel();
-        btnAdd = new javax.swing.JButton();
-        btnDel = new javax.swing.JButton();
-        btnMod = new javax.swing.JButton();
-        btnImprimer = new javax.swing.JButton();
-        getInformation = new javax.swing.JButton();
+        addPerson = new javax.swing.JButton();
+        deletePerson = new javax.swing.JButton();
+        modifPerson = new javax.swing.JButton();
+        printPerson = new javax.swing.JButton();
+        getPersonInfo = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Patient Registration Record");
@@ -88,7 +88,7 @@ List<InfoConserned> infoConsernedList = new ArrayList<>();
             }
         });
 
-        tablePerson.setModel(new javax.swing.table.DefaultTableModel(
+        tableListPerson.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null},
@@ -107,42 +107,42 @@ List<InfoConserned> infoConsernedList = new ArrayList<>();
                 return canEdit [columnIndex];
             }
         });
-        tablePerson.addMouseListener(new java.awt.event.MouseAdapter() {
+        tableListPerson.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tablePersonMouseClicked(evt);
+                tableListPersonMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(tablePerson);
+        jScrollPane1.setViewportView(tableListPerson);
 
         modifPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Modifier"));
 
-        btnAdd.setText("Ajouter");
-        btnAdd.addActionListener(new java.awt.event.ActionListener() {
+        addPerson.setText("Ajouter");
+        addPerson.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAddActionPerformed(evt);
+                addPersonActionPerformed(evt);
             }
         });
 
-        btnDel.setText("Supprimer");
-        btnDel.addActionListener(new java.awt.event.ActionListener() {
+        deletePerson.setText("Supprimer");
+        deletePerson.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDelActionPerformed(evt);
+                deletePersonActionPerformed(evt);
             }
         });
 
-        btnMod.setText("Modifier");
+        modifPerson.setText("Modifier");
 
-        btnImprimer.setText("Imprimer");
-        btnImprimer.addActionListener(new java.awt.event.ActionListener() {
+        printPerson.setText("Imprimer");
+        printPerson.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnImprimerActionPerformed(evt);
+                printPersonActionPerformed(evt);
             }
         });
 
-        getInformation.setText("Informations");
-        getInformation.addActionListener(new java.awt.event.ActionListener() {
+        getPersonInfo.setText("Informations");
+        getPersonInfo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                getInformationActionPerformed(evt);
+                getPersonInfoActionPerformed(evt);
             }
         });
 
@@ -153,26 +153,26 @@ List<InfoConserned> infoConsernedList = new ArrayList<>();
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, modifPanelLayout.createSequentialGroup()
                 .addContainerGap(29, Short.MAX_VALUE)
                 .addGroup(modifPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnAdd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnDel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnMod, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnImprimer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(getInformation, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(addPerson, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(deletePerson, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(modifPerson, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(printPerson, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(getPersonInfo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(19, 19, 19))
         );
         modifPanelLayout.setVerticalGroup(
             modifPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(modifPanelLayout.createSequentialGroup()
                 .addGap(24, 24, 24)
-                .addComponent(btnAdd)
+                .addComponent(addPerson)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnDel)
+                .addComponent(deletePerson)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnMod)
+                .addComponent(modifPerson)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnImprimer)
+                .addComponent(printPerson)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(getInformation)
+                .addComponent(getPersonInfo)
                 .addContainerGap(17, Short.MAX_VALUE))
         );
 
@@ -211,11 +211,11 @@ List<InfoConserned> infoConsernedList = new ArrayList<>();
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void tablePersonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablePersonMouseClicked
+    private void tableListPersonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableListPersonMouseClicked
       try{
             infoConsernedService = InfoConsernedService.getInstance();
-            int row= tablePerson.getSelectedRow();
-            String table_click= tablePerson.getModel().getValueAt(row, 0).toString();
+            int row= tableListPerson.getSelectedRow();
+            String table_click= tableListPerson.getModel().getValueAt(row, 0).toString();
             int acteNaissanceNum = Integer.parseInt(table_click);
             InfoConserned ic = infoConsernedService.getInfoConsernedByAN(acteNaissanceNum);
             this.setVisible(false);
@@ -225,7 +225,7 @@ List<InfoConserned> infoConsernedList = new ArrayList<>();
         }catch(Exception ex){
             JOptionPane.showMessageDialog(this,ex);
         }
-    }//GEN-LAST:event_tablePersonMouseClicked
+    }//GEN-LAST:event_tableListPersonMouseClicked
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
     this.setVisible(false);
@@ -234,23 +234,23 @@ List<InfoConserned> infoConsernedList = new ArrayList<>();
     this.dispose();
     }//GEN-LAST:event_formWindowClosing
 
-    private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
+    private void addPersonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addPersonActionPerformed
     AjoutPersonne frm = new AjoutPersonne();
     frm.setVisible(true);
     this.dispose();// TODO add your handling code here:
-    }//GEN-LAST:event_btnAddActionPerformed
+    }//GEN-LAST:event_addPersonActionPerformed
 
-    private void btnDelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDelActionPerformed
+    private void deletePersonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deletePersonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnDelActionPerformed
+    }//GEN-LAST:event_deletePersonActionPerformed
 
-    private void getInformationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_getInformationActionPerformed
+    private void getPersonInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_getPersonInfoActionPerformed
         // TODO add your handling code here: Voir les informations complètes sur la personne
-    }//GEN-LAST:event_getInformationActionPerformed
+    }//GEN-LAST:event_getPersonInfoActionPerformed
 
-    private void btnImprimerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImprimerActionPerformed
+    private void printPersonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_printPersonActionPerformed
         // TODO add your handling code here: Imprimer la personne selectionné
-    }//GEN-LAST:event_btnImprimerActionPerformed
+    }//GEN-LAST:event_printPersonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -288,14 +288,14 @@ List<InfoConserned> infoConsernedList = new ArrayList<>();
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAdd;
-    private javax.swing.JButton btnDel;
-    private javax.swing.JButton btnImprimer;
-    private javax.swing.JButton btnMod;
-    private javax.swing.JButton getInformation;
+    private javax.swing.JButton addPerson;
+    private javax.swing.JButton deletePerson;
+    private javax.swing.JButton getPersonInfo;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel modifPanel;
-    private javax.swing.JTable tablePerson;
+    private javax.swing.JButton modifPerson;
+    private javax.swing.JButton printPerson;
+    private javax.swing.JTable tableListPerson;
     // End of variables declaration//GEN-END:variables
 }

@@ -68,11 +68,11 @@
               <Group type="102" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="New" alignment="0" max="32767" attributes="0"/>
-                      <Component id="Save" alignment="0" max="32767" attributes="0"/>
-                      <Component id="Delete" alignment="0" max="32767" attributes="0"/>
-                      <Component id="Update" alignment="0" max="32767" attributes="0"/>
-                      <Component id="GetData" alignment="0" max="32767" attributes="0"/>
+                      <Component id="newUser" alignment="0" max="32767" attributes="0"/>
+                      <Component id="saveUser" alignment="0" max="32767" attributes="0"/>
+                      <Component id="deleteUser" alignment="0" max="32767" attributes="0"/>
+                      <Component id="updateUser" alignment="0" max="32767" attributes="0"/>
+                      <Component id="getUserData" alignment="0" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -82,70 +82,70 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" max="-2" attributes="0"/>
-                  <Component id="New" max="32767" attributes="0"/>
+                  <Component id="newUser" max="32767" attributes="0"/>
                   <EmptySpace min="-2" max="-2" attributes="0"/>
-                  <Component id="Save" max="32767" attributes="0"/>
+                  <Component id="saveUser" max="32767" attributes="0"/>
                   <EmptySpace min="-2" max="-2" attributes="0"/>
-                  <Component id="Delete" max="32767" attributes="0"/>
+                  <Component id="deleteUser" max="32767" attributes="0"/>
                   <EmptySpace min="-2" max="-2" attributes="0"/>
-                  <Component id="Update" max="32767" attributes="0"/>
+                  <Component id="updateUser" max="32767" attributes="0"/>
                   <EmptySpace min="-2" max="-2" attributes="0"/>
-                  <Component id="GetData" max="32767" attributes="0"/>
+                  <Component id="getUserData" max="32767" attributes="0"/>
                   <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JButton" name="New">
+        <Component class="javax.swing.JButton" name="newUser">
           <Properties>
             <Property name="text" type="java.lang.String" value="Nouveau"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="NewActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="newUserActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="Save">
+        <Component class="javax.swing.JButton" name="saveUser">
           <Properties>
             <Property name="text" type="java.lang.String" value="Enregistrer"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="SaveActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="saveUserActionPerformed"/>
           </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
           </AuxValues>
         </Component>
-        <Component class="javax.swing.JButton" name="Delete">
+        <Component class="javax.swing.JButton" name="deleteUser">
           <Properties>
             <Property name="text" type="java.lang.String" value="Effacer"/>
             <Property name="enabled" type="boolean" value="false"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="DeleteActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="deleteUserActionPerformed"/>
           </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
           </AuxValues>
         </Component>
-        <Component class="javax.swing.JButton" name="Update">
+        <Component class="javax.swing.JButton" name="updateUser">
           <Properties>
             <Property name="text" type="java.lang.String" value="Mettre &#xe0; jour"/>
             <Property name="enabled" type="boolean" value="false"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="UpdateActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="updateUserActionPerformed"/>
           </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
           </AuxValues>
         </Component>
-        <Component class="javax.swing.JButton" name="GetData">
+        <Component class="javax.swing.JButton" name="getUserData">
           <Properties>
             <Property name="text" type="java.lang.String" value="Obtenir les informations"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="GetDataActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="getUserDataActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>

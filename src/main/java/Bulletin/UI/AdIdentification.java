@@ -27,9 +27,9 @@ PreparedStatement pst=null;
     txtName.setText("");
     txtUserName.setText("");
     txtPassword.setText("");
-    Save.setEnabled(true);
-    Delete.setEnabled(false);
-    Update.setEnabled(false);
+    saveUser.setEnabled(true);
+    deleteUser.setEnabled(false);
+    updateUser.setEnabled(false);
     txtUserName.requestDefaultFocus();
    
 }
@@ -44,11 +44,11 @@ PreparedStatement pst=null;
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        New = new javax.swing.JButton();
-        Save = new javax.swing.JButton();
-        Delete = new javax.swing.JButton();
-        Update = new javax.swing.JButton();
-        GetData = new javax.swing.JButton();
+        newUser = new javax.swing.JButton();
+        saveUser = new javax.swing.JButton();
+        deleteUser = new javax.swing.JButton();
+        updateUser = new javax.swing.JButton();
+        getUserData = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         txtName = new javax.swing.JTextField();
@@ -63,40 +63,40 @@ PreparedStatement pst=null;
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
-        New.setText("Nouveau");
-        New.addActionListener(new java.awt.event.ActionListener() {
+        newUser.setText("Nouveau");
+        newUser.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                NewActionPerformed(evt);
+                newUserActionPerformed(evt);
             }
         });
 
-        Save.setText("Enregistrer");
-        Save.addActionListener(new java.awt.event.ActionListener() {
+        saveUser.setText("Enregistrer");
+        saveUser.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                SaveActionPerformed(evt);
+                saveUserActionPerformed(evt);
             }
         });
 
-        Delete.setText("Effacer");
-        Delete.setEnabled(false);
-        Delete.addActionListener(new java.awt.event.ActionListener() {
+        deleteUser.setText("Effacer");
+        deleteUser.setEnabled(false);
+        deleteUser.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                DeleteActionPerformed(evt);
+                deleteUserActionPerformed(evt);
             }
         });
 
-        Update.setText("Mettre à jour");
-        Update.setEnabled(false);
-        Update.addActionListener(new java.awt.event.ActionListener() {
+        updateUser.setText("Mettre à jour");
+        updateUser.setEnabled(false);
+        updateUser.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                UpdateActionPerformed(evt);
+                updateUserActionPerformed(evt);
             }
         });
 
-        GetData.setText("Obtenir les informations");
-        GetData.addActionListener(new java.awt.event.ActionListener() {
+        getUserData.setText("Obtenir les informations");
+        getUserData.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                GetDataActionPerformed(evt);
+                getUserDataActionPerformed(evt);
             }
         });
 
@@ -107,26 +107,26 @@ PreparedStatement pst=null;
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(New, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(Save, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(Delete, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(Update, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(GetData, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(newUser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(saveUser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(deleteUser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(updateUser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(getUserData, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(New, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(newUser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(Save, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(saveUser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(Delete, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(deleteUser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(Update, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(updateUser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(GetData, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(getUserData, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(17, 17, 17))
         );
 
@@ -205,11 +205,11 @@ PreparedStatement pst=null;
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void NewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NewActionPerformed
+    private void newUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newUserActionPerformed
     Reset();
-    }//GEN-LAST:event_NewActionPerformed
+    }//GEN-LAST:event_newUserActionPerformed
 
-    private void SaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveActionPerformed
+    private void saveUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveUserActionPerformed
          try{
       con=Connect.ConnectDB();
        if (txtName.getText().equals("")) {
@@ -246,13 +246,13 @@ PreparedStatement pst=null;
       pst=con.prepareStatement(sql2);
       pst.execute();
       JOptionPane.showMessageDialog(this,"Successfully Registered","User",JOptionPane.INFORMATION_MESSAGE); 
-      Save.setEnabled(false);
+      saveUser.setEnabled(false);
         }catch(HeadlessException | SQLException ex){
            JOptionPane.showMessageDialog(this,ex); 
                 }
-    }//GEN-LAST:event_SaveActionPerformed
+    }//GEN-LAST:event_saveUserActionPerformed
 
-    private void DeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteActionPerformed
+    private void deleteUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteUserActionPerformed
           try
           {
         int P = JOptionPane.showConfirmDialog(null," Are you sure want to delete ?","Confirmation",JOptionPane.YES_NO_OPTION);
@@ -273,9 +273,9 @@ PreparedStatement pst=null;
            JOptionPane.showMessageDialog(this,ex); 
                 }
          
-    }//GEN-LAST:event_DeleteActionPerformed
+    }//GEN-LAST:event_deleteUserActionPerformed
 
-    private void UpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateActionPerformed
+    private void updateUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateUserActionPerformed
     try{
       con=Connect.ConnectDB();
      String Password1= String.valueOf(txtPassword.getPassword());
@@ -288,17 +288,17 @@ PreparedStatement pst=null;
       pst=con.prepareStatement(sql2);
       pst.execute();
       JOptionPane.showMessageDialog(this,"Successfully updated","User info",JOptionPane.INFORMATION_MESSAGE); 
-      Update.setEnabled(false);
+      updateUser.setEnabled(false);
         }catch(HeadlessException | SQLException ex){
            JOptionPane.showMessageDialog(this,ex); 
                 }
-    }//GEN-LAST:event_UpdateActionPerformed
+    }//GEN-LAST:event_updateUserActionPerformed
 
-    private void GetDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GetDataActionPerformed
+    private void getUserDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_getUserDataActionPerformed
       this.hide();
       InfoAdmin frm = new InfoAdmin();
       frm.setVisible(true); 
-    }//GEN-LAST:event_GetDataActionPerformed
+    }//GEN-LAST:event_getUserDataActionPerformed
 
     /**
      * @param args the command line arguments
@@ -337,18 +337,18 @@ PreparedStatement pst=null;
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public javax.swing.JButton Delete;
-    private javax.swing.JButton GetData;
-    private javax.swing.JButton New;
-    public javax.swing.JButton Save;
-    public javax.swing.JButton Update;
+    public javax.swing.JButton deleteUser;
+    private javax.swing.JButton getUserData;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JButton newUser;
+    public javax.swing.JButton saveUser;
     public javax.swing.JTextField txtName;
     public javax.swing.JPasswordField txtPassword;
     public javax.swing.JTextField txtUserName;
+    public javax.swing.JButton updateUser;
     // End of variables declaration//GEN-END:variables
 }

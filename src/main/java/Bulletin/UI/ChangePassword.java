@@ -37,11 +37,11 @@ PreparedStatement pst=null;
         NewMdp = new javax.swing.JLabel();
         MdpConf = new javax.swing.JLabel();
         UserName = new javax.swing.JTextField();
-        btnChanger = new javax.swing.JButton();
+        btnSaveChange = new javax.swing.JButton();
         MdpOld = new javax.swing.JPasswordField();
         MdpNew = new javax.swing.JPasswordField();
         ConfMdp = new javax.swing.JPasswordField();
-        jLabel5 = new javax.swing.JLabel();
+        txtTitleSection = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Change Password");
@@ -64,16 +64,16 @@ PreparedStatement pst=null;
         MdpConf.setFont(new java.awt.Font("Palatino Linotype", 1, 12)); // NOI18N
         MdpConf.setText("Confirmer le mot de passe");
 
-        btnChanger.setFont(new java.awt.Font("Palatino Linotype", 1, 12)); // NOI18N
-        btnChanger.setText("Changer le mot de passe");
-        btnChanger.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnSaveChange.setFont(new java.awt.Font("Palatino Linotype", 1, 12)); // NOI18N
+        btnSaveChange.setText("Changer le mot de passe");
+        btnSaveChange.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnChangerMouseClicked(evt);
+                btnSaveChangeMouseClicked(evt);
             }
         });
-        btnChanger.addActionListener(new java.awt.event.ActionListener() {
+        btnSaveChange.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnChangerActionPerformed(evt);
+                btnSaveChangeActionPerformed(evt);
             }
         });
 
@@ -83,8 +83,8 @@ PreparedStatement pst=null;
             }
         });
 
-        jLabel5.setFont(new java.awt.Font("Cantarell", 1, 18)); // NOI18N
-        jLabel5.setText("Changement de mot de passe");
+        txtTitleSection.setFont(new java.awt.Font("Cantarell", 1, 18)); // NOI18N
+        txtTitleSection.setText("Changement de mot de passe");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -101,13 +101,17 @@ PreparedStatement pst=null;
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                     .addComponent(MdpNew, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
                                     .addComponent(MdpOld)))
-                            .addComponent(jLabel5)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(NomUser)
                                     .addComponent(OldMdp))
                                 .addGap(65, 65, 65)
-                                .addComponent(UserName, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(UserName, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(txtTitleSection)
+                                .addGap(29, 29, 29)))
                         .addGap(158, 158, 158))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(MdpConf, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -116,15 +120,15 @@ PreparedStatement pst=null;
                         .addContainerGap())))
             .addGroup(layout.createSequentialGroup()
                 .addGap(203, 203, 203)
-                .addComponent(btnChanger)
+                .addComponent(btnSaveChange)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(72, 72, 72)
-                .addComponent(jLabel5)
-                .addGap(65, 65, 65)
+                .addGap(73, 73, 73)
+                .addComponent(txtTitleSection)
+                .addGap(64, 64, 64)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(NomUser, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(UserName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -141,7 +145,7 @@ PreparedStatement pst=null;
                     .addComponent(MdpConf, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(ConfMdp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(44, 44, 44)
-                .addComponent(btnChanger, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnSaveChange, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(119, 119, 119))
         );
 
@@ -150,15 +154,15 @@ PreparedStatement pst=null;
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnChangerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnChangerMouseClicked
+    private void btnSaveChangeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSaveChangeMouseClicked
        
-    }//GEN-LAST:event_btnChangerMouseClicked
+    }//GEN-LAST:event_btnSaveChangeMouseClicked
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
       
     }//GEN-LAST:event_formWindowOpened
 
-    private void btnChangerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChangerActionPerformed
+    private void btnSaveChangeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveChangeActionPerformed
         try{
          String Newpass=String.valueOf(MdpNew.getPassword());
          String ConfPass=String.valueOf(ConfMdp.getPassword());
@@ -244,7 +248,7 @@ PreparedStatement pst=null;
         }catch(SQLException | HeadlessException ex){
            JOptionPane.showMessageDialog(this,ex); 
         }
-    }//GEN-LAST:event_btnChangerActionPerformed
+    }//GEN-LAST:event_btnSaveChangeActionPerformed
 
     private void ConfMdpKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_ConfMdpKeyPressed
         if (evt.getKeyCode()==KeyEvent.VK_ENTER){
@@ -375,7 +379,7 @@ PreparedStatement pst=null;
     private javax.swing.JLabel NomUser;
     private javax.swing.JLabel OldMdp;
     private javax.swing.JTextField UserName;
-    private javax.swing.JButton btnChanger;
-    private javax.swing.JLabel jLabel5;
+    private javax.swing.JButton btnSaveChange;
+    private javax.swing.JLabel txtTitleSection;
     // End of variables declaration//GEN-END:variables
 }

@@ -217,9 +217,9 @@ PreparedStatement pst=null;
                 frm.txtPassword.setText(add2);
                 String add3=rs.getString("NameOfUser");
                 frm.txtName.setText(add3);
-                frm.Save.setEnabled(false);
-                frm.Delete.setEnabled(true);
-                frm.Update.setEnabled(true);
+                frm.saveUser.setEnabled(false);
+                frm.deleteUser.setEnabled(true);
+                frm.updateUser.setEnabled(true);
             }
           
         }catch(Exception ex){
