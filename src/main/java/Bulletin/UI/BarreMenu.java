@@ -194,6 +194,11 @@ public class BarreMenu extends javax.swing.JFrame {
         menuAdmin.add(Info_Connex);
 
         MenuBar.add(menuAdmin);
+        Info_Connex.addActionListener( new java.awt.event.ActionListener(){
+            public void actionPerformed(java.awt.event.ActionEvent evt){
+                
+            }
+        });
 
         menuAide.setText("Aide");
         menuAide.addActionListener(new java.awt.event.ActionListener() {
