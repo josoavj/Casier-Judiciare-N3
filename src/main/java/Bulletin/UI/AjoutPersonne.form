@@ -24,13 +24,13 @@
 
   <Layout>
     <DimensionLayout dim="0">
-      <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
+      <Group type="103" groupAlignment="1" attributes="0">
+          <Group type="102" attributes="0">
               <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
               <Component id="AjoutForm" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="455" max="32767" attributes="0"/>
+              <EmptySpace pref="33" max="32767" attributes="0"/>
           </Group>
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace max="32767" attributes="0"/>
@@ -52,7 +52,7 @@
                       <Component id="AjoutForm" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace pref="49" max="32767" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
               <Component id="jLabel13" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -100,18 +100,12 @@
                                       <Component id="jLabel9" alignment="0" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace min="-2" pref="54" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                      <Component id="cmbGender" min="-2" pref="108" max="-2" attributes="0"/>
-                                      <Component id="acteNaissace" alignment="0" min="-2" pref="118" max="-2" attributes="0"/>
-                                      <Component id="NomPers" pref="344" max="32767" attributes="0"/>
-                                      <Component id="PrenomPers" alignment="0" max="32767" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
                                       <Component id="pere" alignment="0" max="32767" attributes="0"/>
                                       <Component id="mere" alignment="0" max="32767" attributes="0"/>
                                       <Component id="lieunais" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="cmbStatus" alignment="0" min="-2" pref="133" max="-2" attributes="0"/>
                                       <Component id="Profession" max="32767" attributes="0"/>
                                       <Component id="Domicile" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="Nationalite" alignment="0" min="-2" pref="141" max="-2" attributes="0"/>
                                       <Group type="102" alignment="0" attributes="0">
                                           <Component id="datenaiss" min="-2" pref="85" max="-2" attributes="0"/>
                                           <EmptySpace max="32767" attributes="0"/>
@@ -119,13 +113,34 @@
                                           <EmptySpace min="-2" pref="62" max="-2" attributes="0"/>
                                           <Component id="annenaiss" min="-2" pref="85" max="-2" attributes="0"/>
                                       </Group>
+                                      <Component id="NomPers" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="PrenomPers" alignment="0" max="32767" attributes="0"/>
+                                      <Group type="102" attributes="0">
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="cmbGender" min="-2" pref="108" max="-2" attributes="0"/>
+                                              <Component id="cmbStatus" alignment="0" min="-2" pref="133" max="-2" attributes="0"/>
+                                              <Component id="Nationalite" alignment="0" min="-2" pref="141" max="-2" attributes="0"/>
+                                              <Group type="102" alignment="0" attributes="0">
+                                                  <Component id="acteNaissace" min="-2" pref="64" max="-2" attributes="0"/>
+                                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                                  <Component id="jLabel14" min="-2" max="-2" attributes="0"/>
+                                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                                  <Component id="jourAct" min="-2" pref="52" max="-2" attributes="0"/>
+                                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                                  <Component id="moisAct" min="-2" pref="72" max="-2" attributes="0"/>
+                                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                                  <Component id="anneAct" min="-2" pref="64" max="-2" attributes="0"/>
+                                              </Group>
+                                          </Group>
+                                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                      </Group>
                                   </Group>
                               </Group>
                           </Group>
-                          <EmptySpace min="0" pref="38" max="32767" attributes="0"/>
+                          <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
                       </Group>
                       <Component id="btnAjoutCondamnation" alignment="0" max="32767" attributes="0"/>
-                      <Component id="jScrollPane1" alignment="1" pref="568" max="32767" attributes="0"/>
+                      <Component id="jScrollPane1" alignment="1" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -138,6 +153,10 @@
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="acteNaissace" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabel14" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jourAct" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="moisAct" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="anneAct" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
@@ -216,7 +235,7 @@
       <SubComponents>
         <Component class="javax.swing.JLabel" name="jLabel1">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Acte De naissance"/>
+            <Property name="text" type="java.lang.String" value="Acte De naissance N&#xb0;"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel2">
@@ -427,6 +446,45 @@
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="annenaissActionPerformed"/>
             <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="annenaissKeyTyped"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabel14">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="delivr&#xe9; le"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="jourAct">
+          <Events>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jourActKeyTyped"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JComboBox" name="moisAct">
+          <Properties>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+              <StringArray count="12">
+                <StringItem index="0" value="Janv"/>
+                <StringItem index="1" value="Fev"/>
+                <StringItem index="2" value="Mars"/>
+                <StringItem index="3" value="Avril"/>
+                <StringItem index="4" value="Mai"/>
+                <StringItem index="5" value="Juin"/>
+                <StringItem index="6" value="Juillet"/>
+                <StringItem index="7" value="Aout"/>
+                <StringItem index="8" value="Sept"/>
+                <StringItem index="9" value="Oct"/>
+                <StringItem index="10" value="Nov"/>
+                <StringItem index="11" value="Dec"/>
+              </StringArray>
+            </Property>
+          </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+          </AuxValues>
+        </Component>
+        <Component class="javax.swing.JTextField" name="anneAct">
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="anneActActionPerformed"/>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="anneActKeyTyped"/>
           </Events>
         </Component>
       </SubComponents>

@@ -1,6 +1,9 @@
 package Bulletin.UI;
 
 
+import Bulletin.persistence.Admin.Admin;
+import Bulletin.persistence.Admin.AdminService;
+
 import java.awt.HeadlessException;
 import java.awt.event.KeyEvent;
 import java.sql.Connection;
@@ -22,6 +25,7 @@ PreparedStatement pst=null;
         initComponents();
         setLocationRelativeTo(null);
     }
+    private AdminService adminService = AdminService.getInstance();
     private void Reset()
 {
     txtName.setText("");
@@ -251,6 +255,31 @@ PreparedStatement pst=null;
            JOptionPane.showMessageDialog(this,ex); 
                 }
     }//GEN-LAST:event_saveUserActionPerformed
+
+    
+    private void SaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveActionPerformed
+
+             if (txtName.getText().equals("")) {
+                 JOptionPane.showMessageDialog(this, "Veuillez entrer le nom", "Error", JOptionPane.ERROR_MESSAGE);
+                 return;
+             }
+             if (txtUserName.getText().equals("")) {
+                 JOptionPane.showMessageDialog(this, "Veuillez entrer le nom de l'utilisateur", "Error", JOptionPane.ERROR_MESSAGE);
+                 return;
+             }
+             String Password = String.valueOf(txtPassword.getPassword());
+             if (Password.equals("")) {
+                 JOptionPane.showMessageDialog(this, "Veillez ajouter un mot de passe", "Error", JOptionPane.ERROR_MESSAGE);
+                 return;
+             }
+             Admin admin = new Admin();
+             admin.setName(txtName.getText().strip());
+             admin.setUsername(txtUserName.getText().strip());
+             admin.setPassword(String.valueOf(txtPassword.getPassword()).strip());
+             adminService.createAdmin(admin);
+            JOptionPane.showMessageDialog(this,"Enregistrement reussite","Success", JOptionPane.INFORMATION_MESSAGE);
+    }//GEN-LAST:event_SaveActionPerformed
+
 
     private void deleteUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteUserActionPerformed
           try

@@ -1,6 +1,9 @@
 package Bulletin.UI;
 
 
+import Bulletin.persistence.Admin.Admin;
+import Bulletin.persistence.Admin.AdminService;
+
 import java.awt.HeadlessException;
 import java.awt.event.KeyEvent;
 import java.sql.Connection;
@@ -12,9 +15,8 @@ import javax.swing.JOptionPane;
 
 // Pour changer le mot de passe Administrateur
 public class ChangePassword extends javax.swing.JFrame {
-Connection con=null;
-ResultSet rs=null;
-PreparedStatement pst=null;
+
+private AdminService adminService = AdminService.getInstance();
     /**
      * Creates new form ChangePassword
      */
@@ -215,22 +217,10 @@ PreparedStatement pst=null;
                                          "Error", JOptionPane.ERROR_MESSAGE);
                 return;
             }
-       
-      con=Connect.ConnectDB();
-      String sql= "select Username,User_Password from users where Username='" + UserName.getText() + "' and User_Password= '" + MdpOld.getText() + "'";
-      pst=con.prepareStatement(sql);
-      rs= pst.executeQuery();
-      while(rs.next())
-        {
-            String usrname = rs.getString("username").trim();
-            String passwd = rs.getString("user_password").trim();
-            if(uName.equals(usrname) && OldPass.equals(passwd))
+            Admin admin = adminService.getAdmin(uName,OldPass);
+            if(admin!=null)
             {
-                con=Connect.ConnectDB();
-                 String sql1= "update users set User_password= '" + Newpass + "' where Username= '" + uName + "' and User_password = '" + OldPass + "'";
-                 Statement stmt = con.createStatement();
-                 stmt.execute(sql1.toString());
-                 stmt.close();
+                adminService.changeMdp(admin.getId(),Newpass);
                  JOptionPane.showMessageDialog(this,"Mot de passe changée");
                  this.dispose();
                  return;
@@ -244,100 +234,77 @@ PreparedStatement pst=null;
              ConfMdp.setText("");
              return;
             }
-        }    
-        }catch(SQLException | HeadlessException ex){
+        }catch(HeadlessException ex){
            JOptionPane.showMessageDialog(this,ex); 
         }
     }//GEN-LAST:event_btnSaveChangeActionPerformed
 
     private void ConfMdpKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_ConfMdpKeyPressed
-        if (evt.getKeyCode()==KeyEvent.VK_ENTER){
-              try{
-         String Newpass=String.valueOf(MdpNew.getPassword());
-         String ConfPass=String.valueOf(ConfMdp.getPassword());
-        String OldPass=String.valueOf(MdpOld.getPassword());
-        String uName=UserName.getText();
-        if (uName.equals("")) {
-              
-                JOptionPane.showMessageDialog( this, "Veuillez entrer votre nom d'utilisateur",
-                                          "Error", JOptionPane.ERROR_MESSAGE);
-                return;
-               
-            } else if (OldPass.equals("")) {
-            
-                JOptionPane.showMessageDialog( this, "Veuillez entrer votre ancien mot de passe",
-                                          "Error", JOptionPane.ERROR_MESSAGE);
-                return;
-               
-            } else if (Newpass.equals("")) {
-              
-                JOptionPane.showMessageDialog( this, "Veuillez entrer votre nouveau mot de passe",
-                                          "Error", JOptionPane.ERROR_MESSAGE);
-                return;
-                
-            } else if (ConfPass.equals("")) {
-               
-                JOptionPane.showMessageDialog( this, "Veuillez confirmer votre mot de passe",
-                                          "Error", JOptionPane.ERROR_MESSAGE);
-                return;
-            } 
-               else if (Newpass.length()< 5) {
-               
-                JOptionPane.showMessageDialog(this,
-                                         "The New Password Should be of Atleast 5 Characters",
-                                         "Error", JOptionPane.ERROR_MESSAGE);
-                return;
-               }
-            
-           
-            
-            else if ((Newpass).equals(OldPass)) {
-                
-               JOptionPane.showMessageDialog(this,
-                                         "Password is same..Re-enter new password","Error", JOptionPane.ERROR_MESSAGE);
-               return;
+        if (evt.getKeyCode()==KeyEvent.VK_ENTER) {
+            try {
+                String Newpass = String.valueOf(MdpNew.getPassword());
+                String ConfPass = String.valueOf(ConfMdp.getPassword());
+                String OldPass = String.valueOf(MdpOld.getPassword());
+                String uName = UserName.getText();
+                if (uName.equals("")) {
+
+                    JOptionPane.showMessageDialog(this, "Veuillez entrer votre nom d'utilisateur",
+                            "Error", JOptionPane.ERROR_MESSAGE);
+                    return;
+
+                } else if (OldPass.equals("")) {
+
+                    JOptionPane.showMessageDialog(this, "Veuillez entrer votre ancien mot de passe",
+                            "Error", JOptionPane.ERROR_MESSAGE);
+                    return;
+
+                } else if (Newpass.equals("")) {
+
+                    JOptionPane.showMessageDialog(this, "Veuillez entrer votre nouveau mot de passe",
+                            "Error", JOptionPane.ERROR_MESSAGE);
+                    return;
+
+                } else if (ConfPass.equals("")) {
+
+                    JOptionPane.showMessageDialog(this, "Veuillez confirmer votre mot de passe",
+                            "Error", JOptionPane.ERROR_MESSAGE);
+                    return;
+                } else if (Newpass.length() < 5) {
+
+                    JOptionPane.showMessageDialog(this,
+                            "The New Password Should be of Atleast 5 Characters",
+                            "Error", JOptionPane.ERROR_MESSAGE);
+                    return;
+                } else if ((Newpass).equals(OldPass)) {
+
+                    JOptionPane.showMessageDialog(this,
+                            "Password is same..Re-enter new password", "Error", JOptionPane.ERROR_MESSAGE);
+                    return;
+                } else if (!(Newpass).equals(ConfPass)) {
+
+                    JOptionPane.showMessageDialog(this,
+                            "New Password doesn't match with Confirmed Password",
+                            "Error", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+
+                Admin admin = adminService.getAdmin(uName, OldPass);
+                if (admin != null) {
+                    adminService.changeMdp(admin.getId(), Newpass);
+                    JOptionPane.showMessageDialog(this, "Mot de passe changée");
+                    this.dispose();
+                    return;
+                } else {
+                    JOptionPane.showMessageDialog(this, "Utilisateur ou mot de passe erroné", "Erreur", JOptionPane.ERROR_MESSAGE);
+                    UserName.setText("");
+                    MdpOld.setText("");
+                    MdpNew.setText("");
+                    ConfMdp.setText("");
+                    return;
+                }
+            } catch (HeadlessException ex) {
+                JOptionPane.showMessageDialog(this, ex);
             }
-    else if (!(Newpass).equals(ConfPass)) {
-               
-                JOptionPane.showMessageDialog(this,
-                                         "New Password doesn't match with Confirmed Password",
-                                         "Error", JOptionPane.ERROR_MESSAGE);
-                return;
-            }
-       
-      con=Connect.ConnectDB();
-      String sql= "select Username,User_Password from users where Username='" + UserName.getText() + "' and User_Password= '" + MdpOld.getText() + "'";
-      pst=con.prepareStatement(sql);
-      rs= pst.executeQuery();
-      while(rs.next())
-        {
-            String usrname = rs.getString("username").trim();
-            String passwd = rs.getString("user_password").trim();
-            if(uName.equals(usrname) && OldPass.equals(passwd))
-            {
-                con=Connect.ConnectDB();
-                 String sql1= "update users set User_password= '" + Newpass + "' where Username= '" + uName + "' and User_password = '" + OldPass + "'";
-                 Statement stmt = con.createStatement();
-                 stmt.execute(sql1.toString());
-                 stmt.close();
-                 JOptionPane.showMessageDialog(this,"Password Successfully Changed");
-                 this.dispose();
-                 return;
-              }
-            else
-            {
-             JOptionPane.showMessageDialog(this,"invalid user name or password","Error", JOptionPane.ERROR_MESSAGE);   
-             UserName.setText("");
-             MdpOld.setText("");
-             MdpNew.setText("");
-             ConfMdp.setText("");
-             return;
-            }
-        }    
-        }catch(SQLException | HeadlessException ex){
-           JOptionPane.showMessageDialog(this,ex); 
-        }
-            
         }
     }//GEN-LAST:event_ConfMdpKeyPressed
 

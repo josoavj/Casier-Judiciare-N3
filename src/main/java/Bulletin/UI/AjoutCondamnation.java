@@ -10,6 +10,7 @@ import javax.swing.*;
 import java.awt.event.KeyEvent;
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.Objects;
 import java.util.regex.Pattern;
 
 /**
@@ -24,10 +25,12 @@ public class AjoutCondamnation extends javax.swing.JFrame {
     private Condamnation condamnationSelected;
     public AjoutCondamnation() {
         initComponents();
+        setLocationRelativeTo(null);
         dateJour.requestFocus();
     }
     public AjoutCondamnation(Condamnation condamnation){
         initComponents();
+        setLocationRelativeTo(null);
         Pattern pattern = Pattern.compile("[ /-]");
         this.condamnationSelected = condamnation;
         String[] date = pattern.split(String.valueOf(condamnation.getDateCondamnation()));
@@ -273,6 +276,14 @@ public class AjoutCondamnation extends javax.swing.JFrame {
      */
 
     private void btnAjouterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAjouterActionPerformed
+        if(txtNaturePeine.getText().strip().equals("")){
+            JOptionPane.showMessageDialog(null, "Veuillez specifier la nature de ou durée de la peine");
+            return;
+        }
+        if(txtNatureCrimes.getText().strip().equals("")){
+            JOptionPane.showMessageDialog(null, "Veuillez specifier la nature de la condamnation");
+            return;
+        }
         try {
             Integer.parseInt(dateJour.getText().strip());
             Integer.parseInt(dateAnnee.getText().strip());
@@ -284,7 +295,7 @@ public class AjoutCondamnation extends javax.swing.JFrame {
         LocalDate localDate = LocalDate.of(Integer.parseInt(dateAnnee.getText()),dateMois.getSelectedIndex()+1,Integer.parseInt(dateJour.getText()));
         Date date = Date.valueOf(localDate);
 
-        Condamnation condamnation = new Condamnation(date,txtCoursOuTrubinaux.getText()
+        Condamnation condamnation = new Condamnation(date, Objects.equals(txtCoursOuTrubinaux.getText().strip(), "") ?"TPI MIARINARIVO" :txtCoursOuTrubinaux.getText().strip()
                 ,txtNatureCrimes.getText(),txtNaturePeine.getText(),txtObservation.getText());
         AjoutPersonne.listeDeCondamnations.add(condamnation);
         AjoutPersonne.listCondamnationAdded.add(condamnation);
@@ -301,6 +312,14 @@ public class AjoutCondamnation extends javax.swing.JFrame {
      * @param evt
      */
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
+        if(txtNaturePeine.getText().strip().equals("")){
+            JOptionPane.showMessageDialog(null, "Veuillez specifier la nature de ou durée de la peine");
+            return;
+        }
+        if(txtNatureCrimes.getText().strip().equals("")){
+            JOptionPane.showMessageDialog(null, "Veuillez specifier la nature de la condamnation");
+            return;
+        }
         for(Condamnation condamnation : AjoutPersonne.listeDeCondamnations){
             try {
                 Integer.parseInt(dateJour.getText().strip());
@@ -314,7 +333,7 @@ public class AjoutCondamnation extends javax.swing.JFrame {
             Date date = Date.valueOf(localDate);
             if (condamnation == this.condamnationSelected){
                 condamnation.setDateCondamnation(date);
-                condamnation.setCoursOutrubinaux(txtCoursOuTrubinaux.getText());
+                condamnation.setCoursOutrubinaux(txtCoursOuTrubinaux.getText().strip().equals("")?"TPI MIARINARIVO" :txtCoursOuTrubinaux.getText().strip());
                 condamnation.setNatureCrime(txtNatureCrimes.getText());
                 condamnation.setNaturePeine(txtNaturePeine.getText());
                 condamnation.setObservation(txtObservation.getText());

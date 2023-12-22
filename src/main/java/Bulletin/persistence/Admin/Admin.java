@@ -13,23 +13,25 @@ public class Admin implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     public Admin(){
-        this("none","none");
+        this("none","none", "name");
     }
-    public Admin(String username, String password) {
+    public Admin(String username, String password, String name) {
         this.username = username;
         this.password = password;
+        this.name = name;
     }
 
-    public Long getId() {
-        return id;
+    public int getId() {
+        return Math.toIntExact(id);
     }
     
     private String username;
     private String password;
+    private String name;
 
 
     public String getUsername() {
@@ -46,5 +48,13 @@ public class Admin implements Serializable {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

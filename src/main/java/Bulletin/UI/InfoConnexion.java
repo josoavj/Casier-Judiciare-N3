@@ -1,31 +1,48 @@
 package Bulletin.UI;
 
 
+import Bulletin.persistence.Admin.Admin;
+import Bulletin.persistence.Admin.AdminService;
+import Bulletin.persistence.infoCondamnation.InfoConserned;
+
 import java.sql.*;
+import java.util.List;
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 //import net.proteanit.sql.DbUtils;
 
 // Classe en relation avec Barre Menu (Admin)
 
 public class InfoConnexion extends javax.swing.JFrame {
-Connection con=null;
-ResultSet rs=null;
-PreparedStatement pst=null;
     /**
      * Creates new form LoginDetails
      */
+    private final AdminService adminService = AdminService.getInstance();
     public InfoConnexion() {
         initComponents();
-        con= Connect.ConnectDB();
         Get_Data();
         setLocationRelativeTo(null);
     }
     // Pour avoir les données de l'utilisateur et l'afficher dans le tableau
     private void Get_Data(){
-        String sql="select UserName as 'User Name',User_Password as 'Password' from users order by username"; // A modifier
           try{
-         pst=con.prepareStatement(sql);
-          rs= pst.executeQuery();
+              List<Admin> admins = adminService.getAllAdmin();
+              Object[][] data = new Object[admins.size()][2];
+              int i = 0;
+              for (Admin admin : admins){
+                  data[i][0] = admin.getUsername();
+                  data[i][1] = admin.getPassword();
+                  i++;
+              }
+              String[] columnNames = new String[2];
+              columnNames[0] = "Nom d'utilisateur";
+              columnNames[1] = "Mot de passe";
+              DefaultTableModel tableModel = new DefaultTableModel(data,columnNames);
+              try{
+                  ListeConnecte.setModel(tableModel);
+              }catch(Exception e){
+                  JOptionPane.showMessageDialog(null, e);
+              };
          //ListeConnecte.setModel(DbUtils.resultSetToTableModel(rs));
          }catch(Exception e){
             JOptionPane.showMessageDialog(null, e);

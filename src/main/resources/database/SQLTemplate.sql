@@ -23,6 +23,7 @@ USE Bulletin;
 CREATE TABLE infoConserned (
 idConserned int(8) UNSIGNED ZEROFILL PRIMARY KEY NOT NULL AUTO_INCREMENT,
 acteNaissance int(6) UNSIGNED ZEROFILL NOT NULL,
+dateActenaissance date NOT  NULL,
 nom varchar(255) NOT NULL,
 prenoms varchar(255),
 pere varchar(255) NOT NULL,
@@ -35,8 +36,8 @@ domicile varchar(255) NOT NULL,
 sexe varchar(30) NOT NULL,
 nationalite varchar(255)  DEFAULT "MALAGASY");
 
-INSERT INTO infoConserned (acteNaissance,nom,prenoms,pere,mere,dateNaissance,lieuNaissance,situationFamiliale,profession,sexe,domicile) values
-(1112,"dazai","osamu","nanika","nakahara", CURRENT_DATE ,"shinjuku","celibataire", "portomafia","Masculin","shinjuku");
+INSERT INTO infoConserned (acteNaissance,dateActenaissance,nom,prenoms,pere,mere,dateNaissance,lieuNaissance,situationFamiliale,profession,sexe,domicile) values
+(1112,CURRENT_DATE,"dazai","osamu","nanika","nakahara", CURRENT_DATE ,"shinjuku","celibataire", "portomafia","Masculin","shinjuku");
 
 -- ---------------------------------condamnation---------------------------------------
 
@@ -63,12 +64,21 @@ INSERT INTO condamnation (dateCondamnation,
 
 CREATE TABLE Admin (
                      id int(4) UNSIGNED ZEROFILL AUTO_INCREMENT PRIMARY KEY NOT NULL,
-                     username VARCHAR(256) NOT NULL, 
+                     username VARCHAR(256) NOT NULL,
+                     name varchar(256) NOT NULL,
                      password VARCHAR(256) NOT NULL );
 
 -- --------------------------------Administrateur par defaut------------------------------
 
-INSERT INTO Admin (username, password) VALUES ("Admin", "Admin");
+INSERT INTO Admin (username,name, password) VALUES ("Admin", "Admin","Admin");
+
+-- --------------------------------------Printer-------------------------------------------
+CREATE TABLE PRINTER (id int(4) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT PRIMARY KEY,
+                            nameConerned VARCHAR(256) NOT NULL,
+                            date date default CURRENT_DATE);
+-- --------------------------------------Default printer-----------------------------------
+INSERT INTO PRINTER (nameConerned) values ("null");
+
 
 
 

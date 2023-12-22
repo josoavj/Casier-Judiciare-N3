@@ -7,6 +7,8 @@ import jakarta.persistence.Query;
 
 import jakarta.persistence.NoResultException;
 
+import java.util.List;
+
 public class AdminService {
     private EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("Bulletin");
     private EntityManager entityManager = entityManagerFactory.createEntityManager();
@@ -19,7 +21,7 @@ public class AdminService {
      * @description Cette méthode retourne une seulle instance de l'objet AdminService
      */
     public static AdminService getInstance() {
-        return instance == null ? instance = new AdminService() : null;
+        return instance == null ? instance = new AdminService() : instance;
     }
 
     public void createAdmin(Admin admin){
@@ -30,7 +32,7 @@ public class AdminService {
 
     public Admin getAdmin(String username, String password){
         try {
-        Query query = entityManager.createQuery("SELECT a FROM Admin a where a.username = :username and a.password = :password", Admin.class);
+        Query query = entityManager.createQuery("SELECT a FROM Admin a where ( a.username = :username or a.name = :username ) and a.password = :password", Admin.class);
         query.setParameter("username", username);
         query.setParameter("password",password);
             return (Admin) query.getSingleResult();
@@ -39,7 +41,26 @@ public class AdminService {
         }
 
     }
+    public void changeMdp(int id,String mdp){
+        Admin admin = entityManager.find(Admin.class,id);
+        entityManager.getTransaction().begin();
+        admin.setPassword(mdp);
+        entityManager.getTransaction().commit();
+    }
 
+    public void updateAdmin(int id,Admin admin){
+        Admin admin1 = entityManager.find(Admin.class,id);
+        entityManager.getTransaction().begin();
+        admin1.setUsername(admin.getUsername());
+        admin1.setName(admin.getName());
+        admin1.setPassword(admin.getPassword());
+        entityManager.getTransaction().commit();
+    }
+
+    public List<Admin> getAllAdmin(){
+        Query query = entityManager.createQuery("SELECT ad FROM Admin ad", Admin.class);
+        return query.getResultList();
+    }
     public void removeAdmin(Admin admin){
         entityManager.getTransaction().begin();
         entityManager.remove(admin);
