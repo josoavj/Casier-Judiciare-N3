@@ -290,7 +290,7 @@ public class BarreMenu extends javax.swing.JFrame {
 
     private void ListePersonneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ListePersonneActionPerformed
     // Voir la liste des personnes dans la liste
-    ListePersonne frm = Bulletin.UI.ListePersonne.getInstance();
+    ListePersonne frm = new ListePersonne();
     frm.setVisible(true);
     }//GEN-LAST:event_ListePersonneActionPerformed
 
@@ -308,7 +308,6 @@ public class BarreMenu extends javax.swing.JFrame {
         if(evt.getClickCount()==2){
             System.out.println("Double click");
         }
-            // TODO add your handling code here:
     }//GEN-LAST:event_formMouseClicked
 
     /**
