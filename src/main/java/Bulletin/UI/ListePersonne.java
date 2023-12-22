@@ -27,9 +27,6 @@ PreparedStatement pst=null;
         return instance == null ? new ListePersonne() : instance;
     }
 
-    /**
-     * Creates new form PatientRegistrationRecord
-     */
     public ListePersonne() {
         initComponents();
         Get_Data();
@@ -69,10 +66,10 @@ PreparedStatement pst=null;
          }catch(Exception e){
             JOptionPane.showMessageDialog(null, e);
         }
-           btnImprimer.setEnabled(false);
-           btnDel.setEnabled(false);
-           btnMod.setEnabled(false);
-           getInformation.setEnabled(false);
+           printPerson.setEnabled(false);
+           deletePerson.setEnabled(false);
+           modifPerson.setEnabled(false);
+           getPersonInfo.setEnabled(false);
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -121,13 +118,9 @@ PreparedStatement pst=null;
                 return canEdit [columnIndex];
             }
         });
-<<<<<<< HEAD
+        tableListPerson.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        tableListPerson.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         tableListPerson.addMouseListener(new java.awt.event.MouseAdapter() {
-=======
-        tablePerson.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        tablePerson.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        tablePerson.addMouseListener(new java.awt.event.MouseAdapter() {
->>>>>>> 2f1a7f688776b1b68e14dc43f53932fd917cb664
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tableListPersonMouseClicked(evt);
             }
@@ -150,29 +143,17 @@ PreparedStatement pst=null;
             }
         });
 
-<<<<<<< HEAD
         modifPerson.setText("Modifier");
-=======
-        btnMod.setText("Modifier");
-        btnMod.addActionListener(new java.awt.event.ActionListener() {
+        modifPerson.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnModActionPerformed(evt);
             }
         });
->>>>>>> 2f1a7f688776b1b68e14dc43f53932fd917cb664
 
         printPerson.setText("Imprimer");
         printPerson.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-<<<<<<< HEAD
                 printPersonActionPerformed(evt);
-=======
-                try {
-                    btnImprimerActionPerformed(evt);
-                } catch (Exception e) {
-                    throw new RuntimeException(e);
-                }
->>>>>>> 2f1a7f688776b1b68e14dc43f53932fd917cb664
             }
         });
 
@@ -250,10 +231,10 @@ PreparedStatement pst=null;
 
     private void tableListPersonMouseClicked(java.awt.event.MouseEvent evt) {                                             
     private void tablePersonMouseClicked(java.awt.event.MouseEvent evt) {                                         
-            btnImprimer.setEnabled(true);
-            btnDel.setEnabled(true);
-            btnMod.setEnabled(true);
-            getInformation.setEnabled(true);
+            printPerson.setEnabled(true);
+            deletePerson.setEnabled(true);
+            modifyPerson.setEnabled(true);
+            getPersonInfo.setEnabled(true);
 
         if(evt.getClickCount()==2){
       try{
@@ -278,7 +259,7 @@ PreparedStatement pst=null;
     private void addPersonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addPersonActionPerformed
     AjoutPersonne frm = new AjoutPersonne();
     frm.setVisible(true);
-    this.dispose();// TODO add your handling code here:
+    this.dispose();
     }//GEN-LAST:event_addPersonActionPerformed
 
     private void deletePersonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deletePersonActionPerformed
@@ -294,7 +275,7 @@ PreparedStatement pst=null;
         String table_click= tablePerson.getModel().getValueAt(row, 0).toString();
         int acteNaissanceNum = Integer.parseInt(table_click);
         InfoConserned ic = infoConsernedService.getInfoConsernedByAN(acteNaissanceNum);
-        String message = "voulez vous supprimer "+ic.getNom();
+        String message = "Voulez vous supprimer "+ic.getNom();
         if(JOptionPane.showConfirmDialog(null,message)==0) {
             InfoConsernedService.getInstance().removeInfoConserned(ic);
             Get_Data();
@@ -330,8 +311,8 @@ PreparedStatement pst=null;
     private void btnModActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModActionPerformed
         try{
             infoConsernedService = InfoConsernedService.getInstance();
-            int row= tablePerson.getSelectedRow();
-            String table_click= tablePerson.getModel().getValueAt(row, 0).toString();
+            int row= tableListPerson.getSelectedRow();
+            String table_click= tableListPerson.getModel().getValueAt(row, 0).toString();
             int acteNaissanceNum = Integer.parseInt(table_click);
             InfoConserned ic = infoConsernedService.getInfoConsernedByAN(acteNaissanceNum);
             this.setVisible(false);
@@ -378,6 +359,8 @@ PreparedStatement pst=null;
             }
         });
     }
+
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addPerson;
     private javax.swing.JButton deletePerson;

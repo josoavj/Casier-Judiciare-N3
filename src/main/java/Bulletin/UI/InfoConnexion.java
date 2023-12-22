@@ -39,11 +39,10 @@ public class InfoConnexion extends javax.swing.JFrame {
               columnNames[1] = "Mot de passe";
               DefaultTableModel tableModel = new DefaultTableModel(data,columnNames);
               try{
-                  ListeConnecte.setModel(tableModel);
+                  connectedUserList.setModel(tableModel);
               }catch(Exception e){
                   JOptionPane.showMessageDialog(null, e);
               };
-         //ListeConnecte.setModel(DbUtils.resultSetToTableModel(rs));
          }catch(Exception e){
             JOptionPane.showMessageDialog(null, e);
           
