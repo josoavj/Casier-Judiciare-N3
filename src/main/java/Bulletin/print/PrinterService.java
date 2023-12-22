@@ -81,6 +81,7 @@ public class PrinterService {
         PdfReader pdfReader = new PdfReader(MASTERPATH+"/Casier-B3.pdf");
         // Créer un objet JFileChooser
         JFileChooser chooser = new JFileChooser("/run/media/dazai/NANIKA/teste");
+        //JFileChooser chooser = new JFileChooser("/home/josoa/Documents/GitHub/Casier-Judiciare-N3");
         chooser.setSelectedFile(new File(chooser.getCurrentDirectory().toString()+"/Casier-B3-"+infoConserned.getNom()+".pdf"));
         // Choisir le dossier d'exportation
         int returnVal = chooser.showSaveDialog(null);
