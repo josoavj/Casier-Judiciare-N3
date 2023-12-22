@@ -250,8 +250,7 @@ PreparedStatement pst=null;
             JOptionPane.showMessageDialog(this,ex);
         }
     }                              
-        }
-    }    
+        }  
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
     this.setVisible(false);
     }//GEN-LAST:event_formWindowClosing
@@ -319,6 +318,7 @@ PreparedStatement pst=null;
         }catch(Exception ex){
             JOptionPane.showMessageDialog(this,ex);
         }
+
     }//GEN-LAST:event_btnModActionPerformed
 
     /**
