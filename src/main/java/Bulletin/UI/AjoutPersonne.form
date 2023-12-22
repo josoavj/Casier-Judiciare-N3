@@ -27,10 +27,10 @@
       <Group type="103" groupAlignment="1" attributes="0">
           <Group type="102" attributes="0">
               <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
-              <Component id="AjoutForm" min="-2" max="-2" attributes="0"/>
+              <Component id="AjoutForm" max="32767" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="45" max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
           </Group>
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace max="32767" attributes="0"/>
@@ -120,19 +120,19 @@
                                               <Component id="cmbGender" min="-2" pref="108" max="-2" attributes="0"/>
                                               <Component id="cmbStatus" alignment="0" min="-2" pref="133" max="-2" attributes="0"/>
                                               <Component id="Nationalite" alignment="0" min="-2" pref="141" max="-2" attributes="0"/>
-                                              <Group type="102" alignment="0" attributes="0">
-                                                  <Component id="acteNaissace" min="-2" pref="64" max="-2" attributes="0"/>
-                                                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                                                  <Component id="jLabel14" min="-2" max="-2" attributes="0"/>
-                                                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                                                  <Component id="jourAct" min="-2" pref="52" max="-2" attributes="0"/>
-                                                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                                                  <Component id="moisAct" min="-2" pref="72" max="-2" attributes="0"/>
-                                                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                                                  <Component id="anneAct" min="-2" pref="64" max="-2" attributes="0"/>
-                                              </Group>
                                           </Group>
                                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" attributes="0">
+                                          <Component id="acteNaissace" min="-2" pref="64" max="-2" attributes="0"/>
+                                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                                          <Component id="jLabel14" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                                          <Component id="jourAct" min="-2" pref="52" max="-2" attributes="0"/>
+                                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                                          <Component id="moisAct" max="32767" attributes="0"/>
+                                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                                          <Component id="anneAct" min="-2" pref="64" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                               </Group>
@@ -462,21 +462,24 @@
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
               <StringArray count="12">
-                <StringItem index="0" value="Janv"/>
-                <StringItem index="1" value="Fev"/>
+                <StringItem index="0" value="Janvier"/>
+                <StringItem index="1" value="Fevrier"/>
                 <StringItem index="2" value="Mars"/>
                 <StringItem index="3" value="Avril"/>
                 <StringItem index="4" value="Mai"/>
                 <StringItem index="5" value="Juin"/>
                 <StringItem index="6" value="Juillet"/>
                 <StringItem index="7" value="Aout"/>
-                <StringItem index="8" value="Sept"/>
-                <StringItem index="9" value="Oct"/>
-                <StringItem index="10" value="Nov"/>
-                <StringItem index="11" value="Dec"/>
+                <StringItem index="8" value="Septembre"/>
+                <StringItem index="9" value="Octobre"/>
+                <StringItem index="10" value="Novembre"/>
+                <StringItem index="11" value="Decembre"/>
               </StringArray>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="moisActActionPerformed"/>
+          </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
           </AuxValues>

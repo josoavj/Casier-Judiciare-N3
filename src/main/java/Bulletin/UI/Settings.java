@@ -15,7 +15,6 @@ public class Settings extends javax.swing.JPanel {
      */
     public Settings() {
         initComponents();
-        //setLocation(null);
     }
 
     /**
