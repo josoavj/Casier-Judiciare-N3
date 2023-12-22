@@ -133,7 +133,7 @@ public class Contact extends javax.swing.JFrame {
     // Bouton pour quitter la page ouverte - Contact
     private void btnQuitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuitActionPerformed
         // TODO add your handling code here:
-        
+    this.dispose();        
     }//GEN-LAST:event_btnQuitActionPerformed
 
     /**
