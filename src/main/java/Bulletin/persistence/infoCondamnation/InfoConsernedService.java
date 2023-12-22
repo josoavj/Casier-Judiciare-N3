@@ -1,5 +1,8 @@
 package Bulletin.persistence.infoCondamnation;
 
+import Bulletin.persistence.condamnation.Condamnation;
+import Bulletin.persistence.condamnation.CondamnationService;
+import Bulletin.print.PrinterEntity;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
@@ -39,17 +42,22 @@ public class InfoConsernedService {
      * @description Cette fonction persiste une nouvelle inforamtion dans la table 'infoConserned'
      */
     public void addConserned(InfoConserned conserned){
+        InfoConserned infoConserned = new InfoConserned();
+        Query query = entityManager.createQuery("SELECT MAX(id) AS id_max FROM InfoConserned", InfoConserned.class);
         entityManager.getTransaction().begin();
-        entityManager.persist(conserned);
+        entityManager.persist(infoConserned);
         entityManager.getTransaction().commit();
+        updateInfoConserned((Integer) query.getSingleResult(),conserned);
+
     }
 
     public void updateInfoConserned(int id, InfoConserned infoConsernedUpdated){
-        InfoConserned infoConserned = entityManager.find(InfoConserned.class,id);
+        InfoConserned infoConserned = getConsernedById(id);
         entityManager.getTransaction().begin();
         infoConserned.setNom(infoConsernedUpdated.getNom());
         infoConserned.setPrenoms(infoConsernedUpdated.getPrenoms());
         infoConserned.setActeNaissance(infoConsernedUpdated.getActeNaissance());
+        infoConserned.setDateActeNaissance(infoConsernedUpdated.getDateActeNaissance());
         infoConserned.setSexe(infoConsernedUpdated.getSexe());
         infoConserned.setPere(infoConsernedUpdated.getPere());
         infoConserned.setMere(infoConsernedUpdated.getMere());
@@ -59,6 +67,33 @@ public class InfoConsernedService {
         infoConserned.setDomicile(infoConsernedUpdated.getDomicile());
         infoConserned.setDateNaissance(infoConsernedUpdated.getDateNaissance());
         infoConserned.setLieuNaissance(infoConsernedUpdated.getLieuNaissance());
+        List<Condamnation> condamnationList = infoConserned.getCondamnations();
+        for(int i = 0;i<condamnationList.size();i++){
+            boolean remove = true;
+            for(Condamnation c : infoConsernedUpdated.getCondamnations()){
+                if (infoConserned.getCondamnations().get(i).getIdCondamnation() == c.getIdCondamnation()){
+                    infoConserned.getCondamnations().get(i).setDateCondamnation(c.getDateCondamnation());
+                    infoConserned.getCondamnations().get(i).setNaturePeine(c.getNaturePeine());
+                    infoConserned.getCondamnations().get(i).setNatureCrime(c.getNatureCrime());
+                    infoConserned.getCondamnations().get(i).setObservation(c.getObservation());
+                    infoConserned.getCondamnations().get(i).setInfoConserned(infoConserned);
+                    remove = false;
+                }
+            }
+            System.out.println(remove);
+            System.out.println("blang" + infoConserned.getCondamnations());
+            if(remove){
+                infoConserned.getCondamnations().get(i).setInfoConserned(null);
+                condamnationList.remove(infoConserned.getCondamnations().get(i));
+            }
+        }
+        for(Condamnation c : infoConsernedUpdated.getCondamnations()){
+            if(c.getIdCondamnation() == 0){
+                c.setInfoConserned(infoConserned);
+                condamnationList.add(c);
+                CondamnationService.getInstance().createCondamnation(c);
+            }
+        }
         entityManager.getTransaction().commit();
     }
 

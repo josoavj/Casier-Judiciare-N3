@@ -65,6 +65,11 @@ public class BarreMenu extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Main Menu");
         setResizable(false);
+        addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                formMouseClicked(evt);
+            }
+        });
 
         txtBienvenue.setFont(new java.awt.Font("Cantarell", 1, 24)); // NOI18N
         txtBienvenue.setText("Bienvenue");
@@ -293,7 +298,7 @@ public class BarreMenu extends javax.swing.JFrame {
 
     private void ListePersonneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ListePersonneActionPerformed
     // Voir la liste des personnes dans la liste
-    ListePersonne frm= new ListePersonne();
+    ListePersonne frm = Bulletin.UI.ListePersonne.getInstance();
     frm.setVisible(true);
     }//GEN-LAST:event_ListePersonneActionPerformed
 
@@ -303,6 +308,16 @@ public class BarreMenu extends javax.swing.JFrame {
      Contact frm = new Contact();
      frm.setVisible(true);
     }//GEN-LAST:event_MContactActionPerformed
+
+    private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
+        if(evt.getClickCount()==1){
+            System.out.println("clicked");
+        }
+        if(evt.getClickCount()==2){
+            System.out.println("double click");
+        }
+            // TODO add your handling code here:
+    }//GEN-LAST:event_formMouseClicked
 
     /**
      * @param args the command line arguments

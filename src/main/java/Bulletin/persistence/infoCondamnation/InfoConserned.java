@@ -3,6 +3,7 @@ package Bulletin.persistence.infoCondamnation;
 import Bulletin.persistence.condamnation.Condamnation;
 import jakarta.persistence.*;
 
+import java.time.LocalDate;
 import java.util.*;
 
 @Entity @Table(name = "infoConserned")
@@ -12,21 +13,47 @@ public class InfoConserned {
     @Column(name = "idConserned", nullable = false)
     private int idConserned;
 
-    @OneToMany(mappedBy = "infoConserned", orphanRemoval = true)
+    @OneToMany(mappedBy = "infoConserned",orphanRemoval = true)
     private List<Condamnation> condamnations = new ArrayList<>();
 
     public InfoConserned() {
-        this(0, "uknown", "uknown", "uknown", "uknown",
-                null, "uknown", "uknown", "uknown",
+        this(0, java.sql.Date.valueOf(LocalDate.now()), "uknown", "uknown", "uknown", "uknown",
+                java.sql.Date.valueOf(LocalDate.now()), "uknown", "uknown", "uknown",
                 "uknown", "uknown", "uknown");
     }
 
-    public InfoConserned(int acteNaissance, String nom, String prenoms, String pere, String mere, Date dateNaissance, String lieuNaissance, String situationFamiliale, String profession, String domicile, String sexe, String nationalite) {
+    public InfoConserned(int acteNaissance, Date dateActeNaissance, String nom, String prenoms, String pere, String mere, Date dateNaissance, String lieuNaissance, String situationFamiliale, String profession, String domicile, String sexe, String nationalite) {
         this.acteNaissance = acteNaissance;
-        this.nom = nom;
-        this.prenoms = prenoms;
-        this.pere = pere;
-        this.mere = mere;
+        this.dateActeNaissance = dateActeNaissance;
+        this.nom = nom.toUpperCase();
+        String[] prenomSplited = prenoms.split(" ");
+        String prenom = null;
+        for (String pn : prenomSplited){
+            String firstLetter = String.valueOf(pn.charAt(0));
+            firstLetter = firstLetter.toUpperCase();
+            prenom = prenom +" "+firstLetter+pn.substring(1) ;
+        }
+        this.prenoms = prenom;
+        //pere
+        String[] pereSplited = pere.split(" ");
+        String newpere = pereSplited[0].toUpperCase();
+        for (int i = 1; i < pereSplited.length; i++) {
+            String pn = pereSplited[i];
+            String firstLetter = String.valueOf(pn.charAt(0));
+            firstLetter = firstLetter.toUpperCase();
+            newpere  = newpere + " "+firstLetter + pn.substring(1) ;
+        }
+        this.pere =  newpere;
+        //mere
+        String[] mereSplited = mere.split(" ");
+        String newmere = mereSplited[0].toUpperCase();
+        for (int i = 1; i < mereSplited.length; i++) {
+            String pn = mereSplited[i];
+            String firstLetter = String.valueOf(pn.charAt(0));
+            firstLetter = firstLetter.toUpperCase();
+            newmere  = newmere + " "+firstLetter + pn.substring(1) ;
+        }
+        this.mere = newmere;
         this.dateNaissance = dateNaissance;
         this.lieuNaissance = lieuNaissance;
         this.situationFamiliale = situationFamiliale;
@@ -35,12 +62,38 @@ public class InfoConserned {
         this.sexe = sexe;
         this.nationalite = nationalite;
     }
-    public InfoConserned(int acteNaissance, String nom, String prenoms, String pere, String mere, Date dateNaissance, String lieuNaissance, String situationFamiliale, String profession, String domicile, String sexe) {
+    public InfoConserned(int acteNaissance, Date dateActeNaissance, String nom, String prenoms, String pere, String mere, Date dateNaissance, String lieuNaissance, String situationFamiliale, String profession, String domicile, String sexe) {
         this.acteNaissance = acteNaissance;
-        this.nom = nom;
-        this.prenoms = prenoms;
-        this.pere = pere;
-        this.mere = mere;
+        this.dateActeNaissance = dateActeNaissance;
+        this.nom = nom.toUpperCase();
+        String prenom = null;
+        String[] prenomSplited = prenoms.split(" ");
+        for (String pn : prenomSplited){
+            String firstLetter = String.valueOf(pn.charAt(0));
+            firstLetter = firstLetter.toUpperCase();
+            prenom = prenom +" "+firstLetter+pn.substring(1) ;
+        }
+        this.prenoms = prenom;
+        //pere
+        String[] pereSplited = pere.split(" ");
+        String newpere = pereSplited[0].toUpperCase();
+        for (int i = 1; i < pereSplited.length; i++) {
+            String pn = pereSplited[i];
+            String firstLetter = String.valueOf(pn.charAt(0));
+            firstLetter = firstLetter.toUpperCase();
+            newpere  = newpere + " "+firstLetter + pn.substring(1) ;
+        }
+        this.pere =  newpere;
+        //mere
+        String[] mereSplited = mere.split(" ");
+        String newmere = mereSplited[0].toUpperCase();
+        for (int i = 1; i < mereSplited.length; i++) {
+            String pn = mereSplited[i];
+            String firstLetter = String.valueOf(pn.charAt(0));
+            firstLetter = firstLetter.toUpperCase();
+            newmere  = newmere + " "+firstLetter + pn.substring(1) ;
+        }
+        this.mere = newmere;
         this.dateNaissance = dateNaissance;
         this.lieuNaissance = lieuNaissance;
         this.situationFamiliale = situationFamiliale;
@@ -54,6 +107,7 @@ public class InfoConserned {
         return idConserned;
     }
     private int acteNaissance;
+    private Date dateActeNaissance;
     private String nom;
     private String prenoms;
     private String pere;
@@ -65,8 +119,6 @@ public class InfoConserned {
     private String domicile;
     private String sexe;
     private String nationalite;
-    @OneToMany(targetEntity = Condamnation.class,mappedBy = "infoConserned")
-    private List<Condamnation> condamnationList = new ArrayList<Condamnation>();
 
     public List<Condamnation> getCondamnations() {
         return condamnations;
@@ -75,19 +127,22 @@ public class InfoConserned {
     public void setCondamnations(List<Condamnation> condamnations) {
         this.condamnations = condamnations;
     }
-
-    public List<Condamnation> getCondamnationList() {
-        return condamnationList;
-    }
     public void addCondamnation(Condamnation condamnation){
-        this.condamnationList.add(condamnation);
+        condamnation.setInfoConserned(this);
+        this.condamnations.add(condamnation);
+    }
+    public void removeCondamnation(Condamnation condamnation){
+        this.condamnations.remove(condamnation);
+    }
+    public void clearCondamnation(){
+        this.condamnations.clear();
     }
     public String getNom() {
         return nom;
     }
 
     public void setNom(String nom) {
-        this.nom = nom;
+        this.nom = nom.toUpperCase();
     }
 
     public String getPrenoms() {
@@ -95,7 +150,14 @@ public class InfoConserned {
     }
 
     public void setPrenoms(String prenoms) {
-        this.prenoms = prenoms;
+        String[] prenomSplited = prenoms.split(" ");
+        String prenom = "";
+        for (String pn : prenomSplited){
+            String firstLetter = String.valueOf(pn.charAt(0));
+            firstLetter = firstLetter.toUpperCase();
+            prenom = prenom +" "+firstLetter+pn.substring(1) ;
+        }
+        this.prenoms = prenom;
     }
 
     public String getPere() {
@@ -103,7 +165,15 @@ public class InfoConserned {
     }
 
     public void setPere(String pere) {
-        this.pere = pere;
+        String[] pereSplited = pere.split(" ");
+        String newpere = pereSplited[0].toUpperCase();
+        for (int i = 1; i < pereSplited.length; i++) {
+            String pn = pereSplited[i];
+            String firstLetter = String.valueOf(pn.charAt(0));
+            firstLetter = firstLetter.toUpperCase();
+            newpere  = newpere +" "+firstLetter+pn.substring(1) ;
+        }
+        this.pere = newpere;
     }
 
     public String getMere() {
@@ -111,7 +181,15 @@ public class InfoConserned {
     }
 
     public void setMere(String mere) {
-        this.mere = mere;
+        String[] mereSplited = mere.split(" ");
+        String newmere = mereSplited[0].toUpperCase();
+        for (int i = 1; i < mereSplited.length; i++) {
+            String pn = mereSplited[i];
+            String firstLetter = String.valueOf(pn.charAt(0));
+            firstLetter = firstLetter.toUpperCase();
+            newmere  = newmere + " "+firstLetter + pn.substring(1) ;
+        }
+        this.mere = newmere;
     }
 
     public Date getDateNaissance() {
@@ -177,10 +255,15 @@ public class InfoConserned {
                 ", profession='" + profession + '\'' +
                 ", domicile='" + domicile + '\'' +
                 ", nationalite='" + nationalite + '\'' +
-                ", condamnationList=" + condamnationList +
                 '}';
     }
-
+    public List getCondamnationList(){
+        List list = new ArrayList();
+        for(Condamnation c : condamnations){
+            list.add(c);
+        }
+        return list;
+    }
     public int getActeNaissance() {
         return acteNaissance;
     }
@@ -195,5 +278,13 @@ public class InfoConserned {
 
     public void setSexe(String sexe) {
         this.sexe = sexe;
+    }
+
+    public Date getDateActeNaissance() {
+        return dateActeNaissance;
+    }
+
+    public void setDateActeNaissance(Date dateActeNaissance) {
+        this.dateActeNaissance = dateActeNaissance;
     }
 }

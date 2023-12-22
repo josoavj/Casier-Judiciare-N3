@@ -3,6 +3,7 @@ package Bulletin.UI;
 
 import Bulletin.persistence.infoCondamnation.InfoConserned;
 import Bulletin.persistence.infoCondamnation.InfoConsernedService;
+import Bulletin.print.PrinterService;
 import jakarta.persistence.Query;
 
 import java.sql.Connection;
@@ -10,7 +11,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.JOptionPane;
+import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 // import net.proteanit.sql.DbUtils;
 
@@ -18,8 +19,14 @@ public class ListePersonne extends javax.swing.JFrame {
 Connection con=null;
 ResultSet rs=null;
 PreparedStatement pst=null;
-InfoConsernedService infoConsernedService = null;
-List<InfoConserned> infoConsernedList = new ArrayList<>();
+ InfoConsernedService infoConsernedService = null;
+ List<InfoConserned> infoConsernedList = new ArrayList<>();
+ private static ListePersonne instance = null;
+
+    public static ListePersonne getInstance() {
+        return instance == null ? new ListePersonne() : instance;
+    }
+
     /**
      * Creates new form PatientRegistrationRecord
      */
@@ -28,11 +35,14 @@ List<InfoConserned> infoConsernedList = new ArrayList<>();
         Get_Data();
         setLocationRelativeTo(null);
     }
- private void Get_Data(){
+ public void Get_Data(){
             infoConsernedService = InfoConsernedService.getInstance();
             infoConsernedList = infoConsernedService.getConsernedList();
            Object[][] data = new Object[infoConsernedList.size()][8];
            int i=0;
+           AjoutPersonne.listCondamnationAdded.clear();
+           AjoutPersonne.listeDeCondamnations.clear();
+           AjoutPersonne.listCondamnationWillRemoved.clear();
            for (InfoConserned infoConserned : infoConsernedList){
                data[i][0] = infoConserned.getActeNaissance();
                data[i][1] = infoConserned.getNom();
@@ -59,6 +69,10 @@ List<InfoConserned> infoConsernedList = new ArrayList<>();
          }catch(Exception e){
             JOptionPane.showMessageDialog(null, e);
         }
+           btnImprimer.setEnabled(false);
+           btnDel.setEnabled(false);
+           btnMod.setEnabled(false);
+           getInformation.setEnabled(false);
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -98,7 +112,17 @@ List<InfoConserned> infoConsernedList = new ArrayList<>();
             new String [] {
                 "Acte de Naissance", "Nom", "Prénom", "Père", "Mère", "Date de Naissance", "Sexe", "Nationalité"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tablePerson.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        tablePerson.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         tablePerson.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tablePersonMouseClicked(evt);
@@ -123,11 +147,20 @@ List<InfoConserned> infoConsernedList = new ArrayList<>();
         });
 
         btnMod.setText("Modifier");
+        btnMod.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnModActionPerformed(evt);
+            }
+        });
 
         btnImprimer.setText("Imprimer");
         btnImprimer.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnImprimerActionPerformed(evt);
+                try {
+                    btnImprimerActionPerformed(evt);
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
             }
         });
 
@@ -204,6 +237,12 @@ List<InfoConserned> infoConsernedList = new ArrayList<>();
     }// </editor-fold>//GEN-END:initComponents
 
     private void tablePersonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablePersonMouseClicked
+            btnImprimer.setEnabled(true);
+            btnDel.setEnabled(true);
+            btnMod.setEnabled(true);
+            getInformation.setEnabled(true);
+
+        if(evt.getClickCount()==2){
       try{
             infoConsernedService = InfoConsernedService.getInstance();
             int row= tablePerson.getSelectedRow();
@@ -213,34 +252,72 @@ List<InfoConserned> infoConsernedList = new ArrayList<>();
             this.setVisible(false);
             AjoutPersonne frm = new AjoutPersonne(ic);
             frm.setVisible(true);
-            this.dispose();
         }catch(Exception ex){
             JOptionPane.showMessageDialog(this,ex);
+        }
         }
     }//GEN-LAST:event_tablePersonMouseClicked
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
     this.setVisible(false);
-    AjoutPersonne frm = new AjoutPersonne();
-    frm.setVisible(true);
-    this.dispose();
     }//GEN-LAST:event_formWindowClosing
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
-        // TODO add your handling code here:
+    AjoutPersonne frm = new AjoutPersonne();
+    frm.setVisible(true);
+ // TODO add your handling code here:
     }//GEN-LAST:event_btnAddActionPerformed
 
     private void btnDelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDelActionPerformed
-        // TODO add your handling code here:
+        int row= tablePerson.getSelectedRow();
+        String table_click= tablePerson.getModel().getValueAt(row, 0).toString();
+        int acteNaissanceNum = Integer.parseInt(table_click);
+        InfoConserned ic = infoConsernedService.getInfoConsernedByAN(acteNaissanceNum);
+        String message = "voulez vous supprimer "+ic.getNom();
+        if(JOptionPane.showConfirmDialog(null,message)==0) {
+            InfoConsernedService.getInstance().removeInfoConserned(ic);
+            Get_Data();
+        }
     }//GEN-LAST:event_btnDelActionPerformed
 
     private void getInformationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_getInformationActionPerformed
+        int row= tablePerson.getSelectedRow();
+        String table_click= tablePerson.getModel().getValueAt(row, 0).toString();
+        int acteNaissanceNum = Integer.parseInt(table_click);
+        InfoConserned ic = infoConsernedService.getInfoConsernedByAN(acteNaissanceNum);
+        InfoPersonne frm = new InfoPersonne(ic);
+        frm.setVisible(true);
         // TODO add your handling code here: Voir les informations complètes sur la personne
     }//GEN-LAST:event_getInformationActionPerformed
 
-    private void btnImprimerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImprimerActionPerformed
-        // TODO add your handling code here: Imprimer la personne selectionné
+    private void btnImprimerActionPerformed(java.awt.event.ActionEvent evt) throws Exception {//GEN-FIRST:event_btnImprimerActionPerformed
+        int row= tablePerson.getSelectedRow();
+        String table_click= tablePerson.getModel().getValueAt(row, 0).toString();
+        int acteNaissanceNum = Integer.parseInt(table_click);
+        InfoConserned ic = infoConsernedService.getInfoConsernedByAN(acteNaissanceNum);
+        boolean printed = PrinterService.Print(ic);
+        if(printed){
+            JOptionPane.showMessageDialog(null,"impression terminée avec succès");
+        }else{
+            JOptionPane.showMessageDialog(null,"Impression annulée");
+        }
     }//GEN-LAST:event_btnImprimerActionPerformed
+
+    private void btnModActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModActionPerformed
+        try{
+            infoConsernedService = InfoConsernedService.getInstance();
+            int row= tablePerson.getSelectedRow();
+            String table_click= tablePerson.getModel().getValueAt(row, 0).toString();
+            int acteNaissanceNum = Integer.parseInt(table_click);
+            InfoConserned ic = infoConsernedService.getInfoConsernedByAN(acteNaissanceNum);
+            this.setVisible(false);
+            AjoutPersonne frm = new AjoutPersonne(ic);
+            frm.setVisible(true);
+        }catch(Exception ex){
+            JOptionPane.showMessageDialog(this,ex);
+        }
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnModActionPerformed
 
     /**
      * @param args the command line arguments

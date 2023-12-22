@@ -5,25 +5,19 @@ import Bulletin.persistence.condamnation.Condamnation;
 import Bulletin.persistence.condamnation.CondamnationService;
 import Bulletin.persistence.infoCondamnation.InfoConserned;
 import Bulletin.persistence.infoCondamnation.InfoConsernedService;
-import org.hibernate.service.spi.InjectService;
+import Bulletin.print.PrinterService;
 
-import java.awt.HeadlessException;
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.awt.event.KeyEvent;
-import java.sql.*;
+import java.sql.Date;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
-import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
 
 
 public class AjoutPersonne extends javax.swing.JFrame {
-Connection con=null;
-ResultSet rs=null;
-PreparedStatement pst=null;
-
-
 InfoConsernedService infoConsernedService = null;
 CondamnationService condamnationService = null;
     /**
@@ -47,7 +41,6 @@ CondamnationService condamnationService = null;
     public AjoutPersonne() {
         initComponents();
         setLocationRelativeTo(null);
-        listeDeCondamnations.clear();
         lister_Condamnation();
     }
     public AjoutPersonne(InfoConserned infoConserned){
@@ -55,6 +48,9 @@ CondamnationService condamnationService = null;
         setLocationRelativeTo(null);
         this.setInfoConserned(infoConserned);
         acteNaissace.setText(String.valueOf(infoConserned.getActeNaissance()));
+        jourAct.setText(infoConserned.getDateActeNaissance().toString().split("-")[2].split(" ")[0]);
+        anneAct.setText(infoConserned.getDateActeNaissance().toString().split("-")[0]);
+        moisAct.setSelectedIndex(Integer.parseInt(infoConserned.getDateActeNaissance().toString().split("-")[1])-1);
         NomPers.setText(infoConserned.getNom());
         PrenomPers.setText(infoConserned.getPrenoms());
         mere.setText(infoConserned.getMere());
@@ -76,10 +72,12 @@ CondamnationService condamnationService = null;
             break;
             case "Marié" : case "Mariée" :cmbStatus.setSelectedIndex(1);
             break;
-            case "Veuf" : case "Veuve" : cmbStatus.setSelectedIndex(3);
+            case "Veuf" : case "Veuve" : cmbStatus.setSelectedIndex(2);
             break;
         }
-        listeDeCondamnations = infoConserned.getCondamnations();
+        for(Object c : infoConserned.getCondamnationList()){
+            listeDeCondamnations.add((Condamnation) c);
+        }
         lister_Condamnation();
         AjoutForm.setBorder(javax.swing.BorderFactory.createTitledBorder("Informations Consernant " + infoConserned.getNom()));
         btnEffacer.setEnabled(true);
@@ -120,6 +118,10 @@ private void Reset()
     Profession.setText("");
     Domicile.setText("");
     Nationalite.setText("");
+    annenaiss.setText("");
+    anneAct.setText("");
+    jourAct.setText("");
+    moisAct.setSelectedIndex(0);
     cmbStatus.setSelectedIndex(0);
     cmbGender.setSelectedIndex(0);
     listeDeCondamnations.clear();
@@ -128,7 +130,7 @@ private void Reset()
     btnEnregistrer.setEnabled(true);
     btnMaj.setEnabled(false);
     btnEffacer.setEnabled(false);
-    acteNaissace.requestDefaultFocus();
+    acteNaissace.requestFocus(true);
     AjoutForm.setBorder(javax.swing.BorderFactory.createTitledBorder("Ajout d'une nouvelle personne "));
     infoConserned = null;
     lister_Condamnation();
@@ -174,6 +176,10 @@ private void Reset()
         tableCondamnation = new javax.swing.JTable();
         moisnaiss = new javax.swing.JComboBox<>();
         annenaiss = new javax.swing.JTextField();
+        jLabel14 = new javax.swing.JLabel();
+        jourAct = new javax.swing.JTextField();
+        moisAct = new javax.swing.JComboBox<>();
+        anneAct = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         btnNouveau = new javax.swing.JButton();
         btnEnregistrer = new javax.swing.JButton();
@@ -181,6 +187,7 @@ private void Reset()
         btnMaj = new javax.swing.JButton();
         btnGetInfo = new javax.swing.JButton();
         btnImprimer = new javax.swing.JButton();
+        jLabel13 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Patient Registration");
@@ -188,7 +195,7 @@ private void Reset()
 
         AjoutForm.setBorder(javax.swing.BorderFactory.createTitledBorder("Ajout d'une nouvelle personne"));
 
-        jLabel1.setText("Acte De naissance");
+        jLabel1.setText("Acte De naissance N°");
 
         jLabel2.setText("Nom ");
 
@@ -278,6 +285,27 @@ private void Reset()
             }
         });
 
+        jLabel14.setText("delivré le");
+
+        jourAct.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jourActKeyTyped(evt);
+            }
+        });
+
+        moisAct.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Janv", "Fev", "Mars", "Avril", "Mai", "Juin", "Juillet", "Aout", "Sept", "Oct", "Nov", "Dec" }));
+
+        anneAct.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                anneActActionPerformed(evt);
+            }
+        });
+        anneAct.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                anneActKeyTyped(evt);
+            }
+        });
+
         javax.swing.GroupLayout AjoutFormLayout = new javax.swing.GroupLayout(AjoutForm);
         AjoutForm.setLayout(AjoutFormLayout);
         AjoutFormLayout.setHorizontalGroup(
@@ -305,27 +333,39 @@ private void Reset()
                                     .addComponent(jLabel8)
                                     .addComponent(jLabel9))
                                 .addGap(54, 54, 54)
-                                .addGroup(AjoutFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(cmbGender, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(acteNaissace, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(NomPers, javax.swing.GroupLayout.DEFAULT_SIZE, 344, Short.MAX_VALUE)
-                                    .addComponent(PrenomPers)
+                                .addGroup(AjoutFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(pere)
                                     .addComponent(mere)
                                     .addComponent(lieunais)
-                                    .addComponent(cmbStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(Profession)
                                     .addComponent(Domicile)
-                                    .addComponent(Nationalite, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(AjoutFormLayout.createSequentialGroup()
                                         .addComponent(datenaiss, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(moisnaiss, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(62, 62, 62)
-                                        .addComponent(annenaiss, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                        .addGap(0, 38, Short.MAX_VALUE))
+                                        .addComponent(annenaiss, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(NomPers)
+                                    .addComponent(PrenomPers)
+                                    .addGroup(AjoutFormLayout.createSequentialGroup()
+                                        .addGroup(AjoutFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(cmbGender, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(cmbStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(Nationalite, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGroup(AjoutFormLayout.createSequentialGroup()
+                                                .addComponent(acteNaissace, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(18, 18, 18)
+                                                .addComponent(jLabel14)
+                                                .addGap(18, 18, 18)
+                                                .addComponent(jourAct, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(18, 18, 18)
+                                                .addComponent(moisAct, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(18, 18, 18)
+                                                .addComponent(anneAct, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addGap(0, 0, Short.MAX_VALUE)))))
+                        .addGap(15, 15, 15))
                     .addComponent(btnAjoutCondamnation, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 568, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addContainerGap())
         );
         AjoutFormLayout.setVerticalGroup(
@@ -334,7 +374,11 @@ private void Reset()
                 .addGap(19, 19, 19)
                 .addGroup(AjoutFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(acteNaissace, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(acteNaissace, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel14)
+                    .addComponent(jourAct, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(moisAct, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(anneAct, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(AjoutFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
@@ -389,8 +433,8 @@ private void Reset()
                 .addGap(18, 18, 18)
                 .addComponent(btnAjoutCondamnation)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(39, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 106, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
@@ -435,7 +479,11 @@ private void Reset()
         btnImprimer.setText("Imprimer");
         btnImprimer.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnImprimerActionPerformed(evt);
+                try {
+                    btnImprimerActionPerformed(evt);
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
             }
         });
 
@@ -472,16 +520,23 @@ private void Reset()
                 .addContainerGap(13, Short.MAX_VALUE))
         );
 
+        jLabel13.setFont(new java.awt.Font("DialogInput", 1, 13)); // NOI18N
+        jLabel13.setText("Ajout ou modification des informations d'une personne - Casier Judiciaire N°3");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(39, 39, 39)
                 .addComponent(AjoutForm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(246, Short.MAX_VALUE))
+                .addContainerGap(33, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel13)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -493,7 +548,9 @@ private void Reset()
                     .addGroup(layout.createSequentialGroup()
                         .addGap(34, 34, 34)
                         .addComponent(AjoutForm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel13)
+                .addContainerGap())
         );
 
         AjoutForm.getAccessibleContext().setAccessibleName("Information sur le concerné");
@@ -507,6 +564,53 @@ private void Reset()
     Reset();
     }//GEN-LAST:event_btnNouveauActionPerformed
 
+    private void fieldsVerification(){
+        if (acteNaissace.getText().equals("")) {
+            JOptionPane.showMessageDialog(this, "Acte de naissance non initialisé", "Erreur", JOptionPane.ERROR_MESSAGE);
+            return;
+
+        }
+        if (jourAct.getText().equals("")) {
+            JOptionPane.showMessageDialog(this, "veuillez ajouter le jour de creation  de l'acte de naissance", "Erreur", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        if (anneAct.getText().equals("")) {
+            JOptionPane.showMessageDialog(this, "veuillez ajouter le année de creation  de l'acte de naissance", "Erreur", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        if (NomPers.getText().equals("")) {
+            JOptionPane.showMessageDialog(this, "Veuillez remplir le nom", "Erreur", JOptionPane.ERROR_MESSAGE);
+            return;
+
+        }
+        if (pere.getText().equals("")) {
+            JOptionPane.showMessageDialog(this, "Veuillez remplir le nom du père", "Erreur", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        if (mere.getText().equals("")) {
+            JOptionPane.showMessageDialog(this, "Veuillez remplir le nom de la mère", "Erreur", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // Lieu de Naissance
+        if (lieunais.getText().equals("")) {
+            JOptionPane.showMessageDialog(this, "Veuillez ajouter un date de naissance", "Erreur", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        if (cmbStatus.getSelectedItem().equals("")) {
+            JOptionPane.showMessageDialog(this, "Veuillez selectionner la situation familiale", "Erreur", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        if (Domicile.getText().equals("")) {
+            JOptionPane.showMessageDialog(this, "Veuillez ajouter la domicile", "Erreur", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        if (Profession.getText().equals("")) {
+            JOptionPane.showMessageDialog(this, "Veuillez ajouter une profession", "Erreur", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+    }
+
     /**
      * ajout d'un nouvelle Personne
      * @param evt
@@ -514,42 +618,7 @@ private void Reset()
 
     // Enregistrer les données
     private void btnEnregistrerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnregistrerActionPerformed
-            if (acteNaissace.getText().equals("")) {
-                JOptionPane.showMessageDialog(this, "Please enter patient id", "Error", JOptionPane.ERROR_MESSAGE);
-                return;
-
-            }
-            if (NomPers.getText().equals("")) {
-                JOptionPane.showMessageDialog(this, "Veuillez remplir le nom", "Error", JOptionPane.ERROR_MESSAGE);
-                return;
-
-            }
-            if (pere.getText().equals("")) {
-                JOptionPane.showMessageDialog(this, "Veuillez remplir le nom du père", "Error", JOptionPane.ERROR_MESSAGE);
-                return;
-            }
-            if (mere.getText().equals("")) {
-                JOptionPane.showMessageDialog(this, "Veuillez remplir le nom de la mère", "Error", JOptionPane.ERROR_MESSAGE);
-                return;
-            }
-
-            // Lieu de Naissance
-            if (lieunais.getText().equals("")) {
-                JOptionPane.showMessageDialog(this, "Veuillez ajouter un date de naissance", "Error", JOptionPane.ERROR_MESSAGE);
-                return;
-            }
-            if (cmbStatus.getSelectedItem().equals("")) {
-                JOptionPane.showMessageDialog(this, "Veuillez selectionner la situation familiale", "Error", JOptionPane.ERROR_MESSAGE);
-                return;
-            }
-            if (Domicile.getText().equals("")) {
-                JOptionPane.showMessageDialog(this, "Veuillez ajouter la domicile", "Error", JOptionPane.ERROR_MESSAGE);
-                return;
-            }
-            if (Profession.getText().equals("")) {
-                JOptionPane.showMessageDialog(this, "Veuillez ajouter une profession", "Error", JOptionPane.ERROR_MESSAGE);
-                return;
-            }
+            fieldsVerification();
             try {
                 Integer.parseInt(datenaiss.getText().strip());
                 Integer.parseInt(annenaiss.getText().strip());
@@ -567,10 +636,15 @@ private void Reset()
             }
             this.infoConsernedService = InfoConsernedService.getInstance();
             this.condamnationService = CondamnationService.getInstance();
+            //formatage de la date de naissance
             LocalDate localDate = LocalDate.of(Integer.parseInt(annenaiss.getText()), moisnaiss.getSelectedIndex() + 1, Integer.parseInt(datenaiss.getText()));
             Date date = Date.valueOf(localDate);
+            //formatage de la date pour l'acte de naissance
+            LocalDate localActDate = LocalDate.of(Integer.parseInt(anneAct.getText()), moisAct.getSelectedIndex() + 1, Integer.parseInt(jourAct.getText()));
+            Date dateAct = Date.valueOf(localActDate);
             InfoConserned infoConserned1 = new InfoConserned();
             infoConserned1.setActeNaissance(Integer.parseInt(acteNaissace.getText().strip()));
+            infoConserned1.setDateActeNaissance(dateAct);
             infoConserned1.setNom(NomPers.getText().strip());
             infoConserned1.setPrenoms(PrenomPers.getText().strip());
             infoConserned1.setPere(pere.getText().strip());
@@ -582,20 +656,16 @@ private void Reset()
             infoConserned1.setNationalite(Nationalite.getText().strip().toUpperCase());
             infoConserned1.setSexe(cmbGender.getSelectedItem().toString());
             infoConserned1.setSituationFamiliale(status);
+        System.out.println(listCondamnationAdded);
+            for (Condamnation c :listCondamnationAdded ){
+                infoConserned1.addCondamnation(c);
+            }
+        System.out.println(infoConserned1.getCondamnations());
             infoConsernedService.addConserned(infoConserned1);
-        for (Condamnation c:listCondamnationAdded) {
-            c.setInfoConserned(infoConsernedService.getInfoConsernedByAN(infoConserned1.getActeNaissance()));
-            condamnationService.createCondamnation(c);
-        }
-
         JOptionPane.showMessageDialog(null,"enregistrement réuissite");
-        listCondamnationWillRemoved.clear();
-        listeDeCondamnations.clear();
-        listCondamnationAdded.clear();
-        infoConserned = null;
         this.setVisible(false);
-        ListePersonne frm= new ListePersonne();
-        frm.setVisible(true);
+        ListePersonne.getInstance().Get_Data();
+        ListePersonne.getInstance().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnEnregistrerActionPerformed
 
@@ -607,21 +677,56 @@ private void Reset()
             infoConsernedService = InfoConsernedService.getInstance();
             infoConsernedService.removeInfoConserned(infoConserned);
             JOptionPane.showMessageDialog(null,"Supression réuissite");
-            listCondamnationWillRemoved.clear();
-            listeDeCondamnations.clear();
-            listCondamnationAdded.clear();
-            infoConserned = null;
             this.setVisible(false);
-            ListePersonne frm= new ListePersonne();
-            frm.setVisible(true);
+            ListePersonne.getInstance().Get_Data();
+            ListePersonne.getInstance().setVisible(true);
             this.dispose();
         }
     }//GEN-LAST:event_btnEffacerActionPerformed
 
     private void btnGetInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGetInfoActionPerformed
-this.hide();
-ListePersonne frm=new ListePersonne();
-frm.setVisible(true);
+        fieldsVerification();
+        try {
+            Integer.parseInt(datenaiss.getText().strip());
+            Integer.parseInt(annenaiss.getText().strip());
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, e);
+            return;
+        }
+        String status = "Célibataire";
+        if (cmbStatus.getSelectedIndex() == 0) {
+            status = "Célibataire";
+        } else if (cmbStatus.getSelectedIndex() == 1) {
+            status = cmbGender.getSelectedIndex() == 0 ? "Marié" : "Mariée";
+        } else if (cmbStatus.getSelectedIndex() == 2) {
+            status = cmbGender.getSelectedIndex() == 0 ? "Veuf" : "Veuve";
+        }
+        this.infoConsernedService = InfoConsernedService.getInstance();
+        //formatage de la date de naissance
+        LocalDate localDate = LocalDate.of(Integer.parseInt(annenaiss.getText()), moisnaiss.getSelectedIndex() + 1, Integer.parseInt(datenaiss.getText()));
+        Date date = Date.valueOf(localDate);
+        //formatage de la date pour l'acte de naissance
+        LocalDate localActDate = LocalDate.of(Integer.parseInt(anneAct.getText()), moisAct.getSelectedIndex() + 1, Integer.parseInt(jourAct.getText()));
+        Date dateAct = Date.valueOf(localActDate);
+        InfoConserned infoConserned1 = new InfoConserned();
+        infoConserned1.setActeNaissance(Integer.parseInt(acteNaissace.getText().strip()));
+        infoConserned1.setDateActeNaissance(dateAct);
+        infoConserned1.setNom(NomPers.getText().strip());
+        infoConserned1.setPrenoms(PrenomPers.getText().strip());
+        infoConserned1.setPere(pere.getText().strip());
+        infoConserned1.setMere(mere.getText().strip());
+        infoConserned1.setDateNaissance(date);
+        infoConserned1.setLieuNaissance(lieunais.getText().strip());
+        infoConserned1.setProfession(Profession.getText().strip());
+        infoConserned1.setDomicile(Domicile.getText().strip());
+        infoConserned1.setNationalite(Nationalite.getText().strip().toUpperCase());
+        infoConserned1.setSexe(cmbGender.getSelectedItem().toString());
+        infoConserned1.setSituationFamiliale(status);
+        for (Condamnation c : listeDeCondamnations){
+            infoConserned1.addCondamnation(c);
+        }
+            InfoPersonne frm=new InfoPersonne(infoConserned1);
+            frm.setVisible(true);
     }//GEN-LAST:event_btnGetInfoActionPerformed
 
     /**
@@ -630,42 +735,63 @@ frm.setVisible(true);
      */
 
     private void btnMajActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMajActionPerformed
-        if (acteNaissace.getText().equals("")) {
-            JOptionPane.showMessageDialog(this, "Please enter patient id", "Error", JOptionPane.ERROR_MESSAGE);
+        fieldsVerification();
+        try {
+            Integer.parseInt(datenaiss.getText().strip());
+            Integer.parseInt(annenaiss.getText().strip());
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, e);
             return;
+        }
+        String status = "Célibataire";
+        if (cmbStatus.getSelectedIndex() == 0) {
+            status = "Célibataire";
+        } else if (cmbStatus.getSelectedIndex() == 1) {
+            status = cmbGender.getSelectedIndex() == 0 ? "Marié" : "Mariée";
+        } else if (cmbStatus.getSelectedIndex() == 2) {
+            status = cmbGender.getSelectedIndex() == 0 ? "Veuf" : "Veuve";
+        }
+        this.infoConsernedService = InfoConsernedService.getInstance();
+        LocalDate localDate = LocalDate.of(Integer.parseInt(annenaiss.getText()), moisnaiss.getSelectedIndex() + 1, Integer.parseInt(datenaiss.getText()));
+        Date date = Date.valueOf(localDate);
+        LocalDate localActDate = LocalDate.of(Integer.parseInt(anneAct.getText()), moisAct.getSelectedIndex() + 1, Integer.parseInt(jourAct.getText()));
+        Date dateAct = Date.valueOf(localActDate);
+        InfoConserned infoConserned1 = new InfoConserned();
+        infoConserned1.setActeNaissance(Integer.parseInt(acteNaissace.getText().strip()));
+        infoConserned1.setDateActeNaissance(dateAct);
+        infoConserned1.setNom(NomPers.getText().strip());
+        infoConserned1.setPrenoms(PrenomPers.getText().strip());
+        infoConserned1.setPere(pere.getText().strip());
+        infoConserned1.setMere(mere.getText().strip());
+        infoConserned1.setDateNaissance(date);
+        infoConserned1.setLieuNaissance(lieunais.getText().strip());
+        infoConserned1.setProfession(Profession.getText().strip());
+        infoConserned1.setDomicile(Domicile.getText().strip());
+        infoConserned1.setNationalite(Nationalite.getText().strip().toUpperCase());
+        infoConserned1.setSexe(cmbGender.getSelectedItem().toString());
+        infoConserned1.setSituationFamiliale(status);
+        //ajout d'une nouvelle condamnation
+        for(Condamnation c : listeDeCondamnations){
+            c.setInfoConserned(null);
+            infoConserned1.addCondamnation(c);
+        }
+        int majConfirmation = JOptionPane.showConfirmDialog(null,"Voulez vous mettre à jour les informations sur "+infoConserned.getNom()
+        + " ?");
+        if(majConfirmation == 0){
+        infoConsernedService.updateInfoConserned(infoConserned.getIdConserned(),infoConserned1);
+            this.setVisible(false);
+            ListePersonne.getInstance().Get_Data();
+            ListePersonne.getInstance().setVisible(true);
+            this.dispose();
+        }else{
+            JOptionPane.showMessageDialog(null,"La mise à jour n'as pas été enregisté");
+        }
 
-        }
-        if (NomPers.getText().equals("")) {
-            JOptionPane.showMessageDialog(this, "Veuillez remplir le nom", "Error", JOptionPane.ERROR_MESSAGE);
-            return;
+    }//GEN-LAST:event_btnMajActionPerformed
 
-        }
-        if (pere.getText().equals("")) {
-            JOptionPane.showMessageDialog(this, "Veuillez remplir le nom du père", "Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-        if (mere.getText().equals("")) {
-            JOptionPane.showMessageDialog(this, "Veuillez remplir le nom de la mère", "Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
 
-        // Lieu de Naissance
-        if (lieunais.getText().equals("")) {
-            JOptionPane.showMessageDialog(this, "Veuillez ajouter un date de naissance", "Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-        if (cmbStatus.getSelectedItem().equals("")) {
-            JOptionPane.showMessageDialog(this, "Veuillez selectionner la situation familiale", "Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-        if (Domicile.getText().equals("")) {
-            JOptionPane.showMessageDialog(this, "Veuillez ajouter la domicile", "Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-        if (Profession.getText().equals("")) {
-            JOptionPane.showMessageDialog(this, "Veuillez ajouter une profession", "Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
+    private void btnImprimerActionPerformed(java.awt.event.ActionEvent evt) throws Exception {//GEN-FIRST:event_btnImprimerActionPerformed
+        fieldsVerification();
         try {
             Integer.parseInt(datenaiss.getText().strip());
             Integer.parseInt(annenaiss.getText().strip());
@@ -683,10 +809,15 @@ frm.setVisible(true);
         }
         this.infoConsernedService = InfoConsernedService.getInstance();
         this.condamnationService = CondamnationService.getInstance();
+        //formatage de la date de naissance
         LocalDate localDate = LocalDate.of(Integer.parseInt(annenaiss.getText()), moisnaiss.getSelectedIndex() + 1, Integer.parseInt(datenaiss.getText()));
         Date date = Date.valueOf(localDate);
+        //formatage de la date pour l'acte de naissance
+        LocalDate localActDate = LocalDate.of(Integer.parseInt(anneAct.getText()), moisAct.getSelectedIndex() + 1, Integer.parseInt(jourAct.getText()));
+        Date dateAct = Date.valueOf(localActDate);
         InfoConserned infoConserned1 = new InfoConserned();
         infoConserned1.setActeNaissance(Integer.parseInt(acteNaissace.getText().strip()));
+        infoConserned1.setDateActeNaissance(dateAct);
         infoConserned1.setNom(NomPers.getText().strip());
         infoConserned1.setPrenoms(PrenomPers.getText().strip());
         infoConserned1.setPere(pere.getText().strip());
@@ -698,45 +829,15 @@ frm.setVisible(true);
         infoConserned1.setNationalite(Nationalite.getText().strip().toUpperCase());
         infoConserned1.setSexe(cmbGender.getSelectedItem().toString());
         infoConserned1.setSituationFamiliale(status);
-        int majConfirmation = JOptionPane.showConfirmDialog(null,"voullez vous mettre à jour les informations sur "+infoConserned.getNom()
-        + " ?");
-        if(majConfirmation == 0){
-        infoConsernedService.updateInfoConserned(infoConserned.getIdConserned(),infoConserned1);
-        //mise à jour des condamnations
         for (Condamnation c : listeDeCondamnations){
-            if(c.getIdCondamnation()!=0){
-            Condamnation originalC = condamnationService.getCondamnationById(c.getIdCondamnation());
-            if(originalC != c){
-                condamnationService.updateCondamnation(originalC.getIdCondamnation(), c);
-            }
-            }
+            infoConserned1.addCondamnation(c);
         }
-        //ajout des nouveaux condamnations
-        for (Condamnation c:listCondamnationAdded) {
-            c.setInfoConserned(infoConsernedService.getInfoConsernedByAN(infoConserned1.getActeNaissance()));
-            condamnationService.createCondamnation(c);
-        }
-        //suppression des condamnations
-        for (Condamnation c:listCondamnationWillRemoved) {
-            condamnationService.removeCondamnation(condamnationService.getCondamnationById(c.getIdCondamnation()));
-        }
-            listCondamnationWillRemoved.clear();
-            listeDeCondamnations.clear();
-            listCondamnationAdded.clear();
-            infoConserned = null;
-            this.setVisible(false);
-            ListePersonne frm= new ListePersonne();
-            frm.setVisible(true);
-            this.dispose();
+        boolean printed = PrinterService.Print(infoConserned1);
+        if(printed){
+            JOptionPane.showMessageDialog(null,"impression terminée avec succès");
         }else{
-            JOptionPane.showMessageDialog(null,"La mise à jour n'as pas été enregisté");
+            JOptionPane.showMessageDialog(null,"Impression annulée");
         }
-
-    }//GEN-LAST:event_btnMajActionPerformed
-
-
-    private void btnImprimerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImprimerActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_btnImprimerActionPerformed
 
     private void cmbStatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbStatusActionPerformed
@@ -793,6 +894,26 @@ frm.setVisible(true);
     } 
     }//GEN-LAST:event_annenaissKeyTyped
 
+    private void anneActActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_anneActActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_anneActActionPerformed
+
+    private void jourActKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jourActKeyTyped
+        char c=evt.getKeyChar();
+        if (!(Character.isDigit(c)|| (c== KeyEvent.VK_BACK_SPACE)||(c==KeyEvent.VK_DELETE))) {
+            getToolkit().beep();
+            evt.consume();
+        }
+    }//GEN-LAST:event_jourActKeyTyped
+
+    private void anneActKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_anneActKeyTyped
+            char c=evt.getKeyChar();
+            if (!(Character.isDigit(c)|| (c== KeyEvent.VK_BACK_SPACE)||(c==KeyEvent.VK_DELETE))) {
+                getToolkit().beep();
+                evt.consume();
+            }
+    }//GEN-LAST:event_anneActKeyTyped
+
     /**
      * @param args the command line arguments
      */
@@ -837,6 +958,7 @@ frm.setVisible(true);
     public javax.swing.JTextField Profession;
     private javax.swing.JLabel Sexe;
     public javax.swing.JTextField acteNaissace;
+    private javax.swing.JTextField anneAct;
     private javax.swing.JTextField annenaiss;
     private javax.swing.JButton btnAjoutCondamnation;
     public javax.swing.JButton btnEffacer;
@@ -852,6 +974,8 @@ frm.setVisible(true);
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -862,8 +986,10 @@ frm.setVisible(true);
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextField jourAct;
     public javax.swing.JTextField lieunais;
     public javax.swing.JTextField mere;
+    private javax.swing.JComboBox<String> moisAct;
     private javax.swing.JComboBox<String> moisnaiss;
     public javax.swing.JTextField pere;
     private static javax.swing.JTable tableCondamnation;
