@@ -230,10 +230,10 @@ PreparedStatement pst=null;
     }// </editor-fold>//GEN-END:initComponents
 
     private void tableListPersonMouseClicked(java.awt.event.MouseEvent evt) {                                             
-    private void tablePersonMouseClicked(java.awt.event.MouseEvent evt) {                                         
+    //private void tableListPersonMouseClicked(java.awt.event.MouseEvent evt) {                                         
             printPerson.setEnabled(true);
             deletePerson.setEnabled(true);
-            modifyPerson.setEnabled(true);
+            modifPerson.setEnabled(true);
             getPersonInfo.setEnabled(true);
 
         if(evt.getClickCount()==2){
@@ -271,8 +271,8 @@ PreparedStatement pst=null;
     }                                      
 
     private void btnDelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDelActionPerformed
-        int row= tablePerson.getSelectedRow();
-        String table_click= tablePerson.getModel().getValueAt(row, 0).toString();
+        int row= tableListPerson.getSelectedRow();
+        String table_click= tableListPerson.getModel().getValueAt(row, 0).toString();
         int acteNaissanceNum = Integer.parseInt(table_click);
         InfoConserned ic = infoConsernedService.getInfoConsernedByAN(acteNaissanceNum);
         String message = "Voulez vous supprimer "+ic.getNom();
@@ -283,21 +283,19 @@ PreparedStatement pst=null;
     }//GEN-LAST:event_btnDelActionPerformed
 
     private void getInformationActionPerformed(java.awt.event.ActionEvent evt) {                                               
-        int row= tablePerson.getSelectedRow();
-        String table_click= tablePerson.getModel().getValueAt(row, 0).toString();
+        int row= tableListPerson.getSelectedRow();
+        String table_click= tableListPerson.getModel().getValueAt(row, 0).toString();
         int acteNaissanceNum = Integer.parseInt(table_click);
         InfoConserned ic = infoConsernedService.getInfoConsernedByAN(acteNaissanceNum);
         InfoPersonne frm = new InfoPersonne(ic);
         frm.setVisible(true);
-        // TODO add your handling code here: Voir les informations complètes sur la personne
     }                                             
 
     private void printPersonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_printPersonActionPerformed
-        // TODO add your handling code here: Imprimer la personne selectionné
     }//GEN-LAST:event_printPersonActionPerformed
     private void btnImprimerActionPerformed(java.awt.event.ActionEvent evt) throws Exception {//GEN-FIRST:event_btnImprimerActionPerformed
-        int row= tablePerson.getSelectedRow();
-        String table_click= tablePerson.getModel().getValueAt(row, 0).toString();
+        int row= tableListPerson.getSelectedRow();
+        String table_click= tableListPerson.getModel().getValueAt(row, 0).toString();
         int acteNaissanceNum = Integer.parseInt(table_click);
         InfoConserned ic = infoConsernedService.getInfoConsernedByAN(acteNaissanceNum);
         boolean printed = PrinterService.Print(ic);
@@ -321,7 +319,6 @@ PreparedStatement pst=null;
         }catch(Exception ex){
             JOptionPane.showMessageDialog(this,ex);
         }
-        // TODO add your handling code here:
     }//GEN-LAST:event_btnModActionPerformed
 
     /**
