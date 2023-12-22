@@ -196,11 +196,7 @@ public class BarreMenu extends javax.swing.JFrame {
         MenuBar.add(menuAdmin);
 
         menuAide.setText("Aide");
-        menuAide.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menuAideActionPerformed(evt);
-            }
-        });
+        
 
         MAbout.setText("A propos");
         MAbout.addActionListener(new java.awt.event.ActionListener() {
@@ -279,10 +275,6 @@ public class BarreMenu extends javax.swing.JFrame {
      Settings frm= new Settings();
      frm.setVisible(true);
     }//GEN-LAST:event_SettingsActionPerformed
-
-    private void menuAideActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuAideActionPerformed
-
-    }//GEN-LAST:event_menuAideActionPerformed
 
     // Pour ouvrir AboutUs
     private void MAboutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MAboutActionPerformed
