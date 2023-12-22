@@ -194,11 +194,6 @@ public class BarreMenu extends javax.swing.JFrame {
         menuAdmin.add(Info_Connex);
 
         MenuBar.add(menuAdmin);
-        Info_Connex.addActionListener( new java.awt.event.ActionListener(){
-            public void actionPerformed(java.awt.event.ActionEvent evt){
-                
-            }
-        });
 
         menuAide.setText("Aide");
         menuAide.addActionListener(new java.awt.event.ActionListener() {
@@ -286,7 +281,7 @@ public class BarreMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_SettingsActionPerformed
 
     private void menuAideActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuAideActionPerformed
-   
+
     }//GEN-LAST:event_menuAideActionPerformed
 
     // Pour ouvrir AboutUs
@@ -316,10 +311,10 @@ public class BarreMenu extends javax.swing.JFrame {
 
     private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
         if(evt.getClickCount()==1){
-            System.out.println("clicked");
+            System.out.println("Clicked");
         }
         if(evt.getClickCount()==2){
-            System.out.println("double click");
+            System.out.println("Double click");
         }
             // TODO add your handling code here:
     }//GEN-LAST:event_formMouseClicked
