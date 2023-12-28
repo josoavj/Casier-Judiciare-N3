@@ -70,19 +70,19 @@
                           <EmptySpace min="-2" pref="56" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" attributes="0">
-                                  <Component id="jLabel8" min="-2" pref="43" max="-2" attributes="0"/>
-                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  <Component id="infoMere" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
                                   <Component id="labelMere" max="32767" attributes="0"/>
                               </Group>
                               <Group type="102" attributes="0">
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Group type="102" attributes="0">
-                                          <Component id="jLabel10" min="-2" max="-2" attributes="0"/>
+                                          <Component id="situationFamiliale" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace type="separate" max="-2" attributes="0"/>
                                           <Component id="labelSituatioFamiliale" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <Group type="102" alignment="0" attributes="0">
-                                          <Component id="jLabel12" min="-2" max="-2" attributes="0"/>
+                                          <Component id="domicile" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                           <Component id="labelDomicile" min="-2" pref="211" max="-2" attributes="0"/>
                                       </Group>
@@ -96,9 +96,9 @@
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace min="-2" pref="58" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="jLabel1" min="-2" pref="338" max="-2" attributes="0"/>
+                                      <Component id="identificationPersonne" min="-2" pref="338" max="-2" attributes="0"/>
                                       <Group type="102" alignment="0" attributes="0">
-                                          <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+                                          <Component id="infoDateNaissance" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace type="separate" max="-2" attributes="0"/>
                                           <Component id="labelDateNaissance" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -107,7 +107,7 @@
                                           <Component id="labelLieuNaissance" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <Group type="102" alignment="0" attributes="0">
-                                          <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
+                                          <Component id="infoPere" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace max="-2" attributes="0"/>
                                           <Component id="labelPere" min="-2" pref="312" max="-2" attributes="0"/>
                                       </Group>
@@ -145,32 +145,32 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                  <Component id="identificationPersonne" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="infoDateNaissance" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="labelDateNaissance" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="labelLieuNaissance" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jLabel6" alignment="3" min="-2" pref="18" max="-2" attributes="0"/>
+                      <Component id="infoPere" alignment="3" min="-2" pref="18" max="-2" attributes="0"/>
                       <Component id="labelPere" alignment="3" min="-2" pref="18" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jLabel8" alignment="3" min="-2" pref="18" max="-2" attributes="0"/>
+                      <Component id="infoMere" alignment="3" min="-2" pref="18" max="-2" attributes="0"/>
                       <Component id="labelMere" alignment="3" min="-2" pref="18" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jLabel10" alignment="3" min="-2" pref="18" max="-2" attributes="0"/>
+                      <Component id="situationFamiliale" alignment="3" min="-2" pref="18" max="-2" attributes="0"/>
                       <Component id="labelSituatioFamiliale" alignment="3" min="-2" pref="18" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jLabel12" alignment="3" min="-2" pref="18" max="-2" attributes="0"/>
+                      <Component id="domicile" alignment="3" min="-2" pref="18" max="-2" attributes="0"/>
                       <Component id="labelDomicile" alignment="3" min="-2" pref="18" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
@@ -191,15 +191,15 @@
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JLabel" name="jLabel1">
+        <Component class="javax.swing.JLabel" name="identificationPersonne">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Fira Sans Light" size="14" style="1"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Nom et Prenom(s) du consern&#xe9;e"/>
+            <Property name="text" type="java.lang.String" value="Nom et Prenom(s) du concern&#xe9;(e)"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel2">
+        <Component class="javax.swing.JLabel" name="infoDateNaissance">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Fira Sans Light" size="14" style="1"/>
@@ -231,7 +231,7 @@
             <Property name="text" type="java.lang.String" value="01 Janvier 2000"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel6">
+        <Component class="javax.swing.JLabel" name="infoPere">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Fira Sans Light" size="14" style="1"/>
@@ -247,12 +247,12 @@
             <Property name="text" type="java.lang.String" value="JEAN Dupont"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel8">
+        <Component class="javax.swing.JLabel" name="infoMere">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Fira Sans Light" size="14" style="1"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="et de"/>
+            <Property name="text" type="java.lang.String" value="Et de"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="labelMere">
@@ -263,7 +263,7 @@
             <Property name="text" type="java.lang.String" value="Jeanne Marie"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel10">
+        <Component class="javax.swing.JLabel" name="situationFamiliale">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Fira Sans Light" size="14" style="1"/>
@@ -279,12 +279,12 @@
             <Property name="text" type="java.lang.String" value="C&#xe9;libataire"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel12">
+        <Component class="javax.swing.JLabel" name="domicile">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Fira Sans Light" size="14" style="1"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Habite &#xe0; :"/>
+            <Property name="text" type="java.lang.String" value="R&#xe9;sidant &#xe0;"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="labelDomicile">
@@ -310,7 +310,7 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Fira Sans Light" size="14" style="1"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Acte de naissance numero"/>
+            <Property name="text" type="java.lang.String" value="Acte de naissance Num&#xe9;ro"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="labelNumeroact">
@@ -334,7 +334,7 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Fira Sans Light" size="14" style="1"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="fait le"/>
+            <Property name="text" type="java.lang.String" value="Fait le"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="printInfos">

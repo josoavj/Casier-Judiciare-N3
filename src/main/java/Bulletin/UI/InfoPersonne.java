@@ -79,13 +79,13 @@ public class InfoPersonne extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         labelTitre.setText("Informations sur "+infoConserned.getNom()+" "+infoConserned.getPrenoms());
-        jLabel1.setText(infoConserned.getNom()+" "+infoConserned.getPrenoms());
+        identificationPersonne.setText(infoConserned.getNom()+" "+infoConserned.getPrenoms());
         if(infoConserned.getSexe().equals("Masculin")){
-            jLabel2.setText("Né le");
-            jLabel6.setText("Fils de");
+            infoDateNaissance.setText("Né le");
+            infoPere.setText("Fils de");
         }else {
-            jLabel2.setText("Née le");
-            jLabel6.setText("Fille de");
+            infoDateNaissance.setText("Née le");
+            infoPere.setText("Fille de");
         }
         labelDateNaissance.setText(formatDate(infoConserned.getDateNaissance().toString(),true));
         labelLieuNaissance.setText(infoConserned.getLieuNaissance());
@@ -96,9 +96,9 @@ public class InfoPersonne extends javax.swing.JFrame {
         labelDateact.setText(formatDate(infoConserned.getDateActeNaissance().toString(),true));
         labelNumeroact.setText(String.valueOf(infoConserned.getActeNaissance()));
         if (infoConserned.getCondamnations().isEmpty()){
-            labelCondamnations.setText("aucune condamnation");
+            labelCondamnations.setText("Aucune condamnation");
         }else {
-            labelCondamnations.setText("nombre de condamnations : " + String.valueOf(infoConserned.getCondamnations().size()));
+            labelCondamnations.setText("Nombre de condamnations : " + String.valueOf(infoConserned.getCondamnations().size()));
         }
     }
 
@@ -113,18 +113,18 @@ public class InfoPersonne extends javax.swing.JFrame {
 
         labelTitre = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        identificationPersonne = new javax.swing.JLabel();
+        infoDateNaissance = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         labelLieuNaissance = new javax.swing.JLabel();
         labelDateNaissance = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
+        infoPere = new javax.swing.JLabel();
         labelPere = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
+        infoMere = new javax.swing.JLabel();
         labelMere = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
+        situationFamiliale = new javax.swing.JLabel();
         labelSituatioFamiliale = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
+        domicile = new javax.swing.JLabel();
         labelDomicile = new javax.swing.JLabel();
         labelCondamnations = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
@@ -139,11 +139,11 @@ public class InfoPersonne extends javax.swing.JFrame {
         labelTitre.setFont(new java.awt.Font("Cantarell", 1, 18)); // NOI18N
         labelTitre.setText("Informations sur ");
 
-        jLabel1.setFont(new java.awt.Font("Fira Sans Light", 1, 14)); // NOI18N
-        jLabel1.setText("Nom et Prenom(s) du consernée");
+        identificationPersonne.setFont(new java.awt.Font("Fira Sans Light", 1, 14)); // NOI18N
+        identificationPersonne.setText("Nom et Prenom(s) du concerné(e)");
 
-        jLabel2.setFont(new java.awt.Font("Fira Sans Light", 1, 14)); // NOI18N
-        jLabel2.setText("Né(e) le");
+        infoDateNaissance.setFont(new java.awt.Font("Fira Sans Light", 1, 14)); // NOI18N
+        infoDateNaissance.setText("Né(e) le");
 
         jLabel3.setFont(new java.awt.Font("Fira Sans Light", 1, 14)); // NOI18N
         jLabel3.setText("à");
@@ -154,26 +154,26 @@ public class InfoPersonne extends javax.swing.JFrame {
         labelDateNaissance.setFont(new java.awt.Font("Fira Sans Light", 1, 14)); // NOI18N
         labelDateNaissance.setText("01 Janvier 2000");
 
-        jLabel6.setFont(new java.awt.Font("Fira Sans Light", 1, 14)); // NOI18N
-        jLabel6.setText("Fils/fille de");
+        infoPere.setFont(new java.awt.Font("Fira Sans Light", 1, 14)); // NOI18N
+        infoPere.setText("Fils/fille de");
 
         labelPere.setFont(new java.awt.Font("Fira Sans Light", 1, 14)); // NOI18N
         labelPere.setText("JEAN Dupont");
 
-        jLabel8.setFont(new java.awt.Font("Fira Sans Light", 1, 14)); // NOI18N
-        jLabel8.setText("et de");
+        infoMere.setFont(new java.awt.Font("Fira Sans Light", 1, 14)); // NOI18N
+        infoMere.setText("Et de");
 
         labelMere.setFont(new java.awt.Font("Fira Sans Light", 1, 14)); // NOI18N
         labelMere.setText("Jeanne Marie");
 
-        jLabel10.setFont(new java.awt.Font("Fira Sans Light", 1, 14)); // NOI18N
-        jLabel10.setText("Situation familiale : ");
+        situationFamiliale.setFont(new java.awt.Font("Fira Sans Light", 1, 14)); // NOI18N
+        situationFamiliale.setText("Situation familiale : ");
 
         labelSituatioFamiliale.setFont(new java.awt.Font("Fira Sans Light", 1, 14)); // NOI18N
         labelSituatioFamiliale.setText("Célibataire");
 
-        jLabel12.setFont(new java.awt.Font("Fira Sans Light", 1, 14)); // NOI18N
-        jLabel12.setText("Habite à :");
+        domicile.setFont(new java.awt.Font("Fira Sans Light", 1, 14)); // NOI18N
+        domicile.setText("Résidant à");
 
         labelDomicile.setFont(new java.awt.Font("Fira Sans Light", 1, 14)); // NOI18N
         labelDomicile.setText("Antananarivo");
@@ -182,7 +182,7 @@ public class InfoPersonne extends javax.swing.JFrame {
         labelCondamnations.setText("Condamnations : ");
 
         jLabel16.setFont(new java.awt.Font("Fira Sans Light", 1, 14)); // NOI18N
-        jLabel16.setText("Acte de naissance numero");
+        jLabel16.setText("Acte de naissance Numéro");
 
         labelNumeroact.setFont(new java.awt.Font("Fira Sans Light", 1, 14)); // NOI18N
         labelNumeroact.setText("0004");
@@ -191,17 +191,13 @@ public class InfoPersonne extends javax.swing.JFrame {
         labelDateact.setText("O1 janvier 2003");
 
         jLabel19.setFont(new java.awt.Font("Fira Sans Light", 1, 14)); // NOI18N
-        jLabel19.setText("fait le");
+        jLabel19.setText("Fait le");
 
         printInfos.setFont(new java.awt.Font("Fira Sans Light", 2, 14)); // NOI18N
         printInfos.setText("Imprimer les informations");
         printInfos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                try {
-                    printInfosActionPerformed(evt);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+                printInfosActionPerformed(evt);
             }
         });
 
@@ -215,17 +211,17 @@ public class InfoPersonne extends javax.swing.JFrame {
                         .addGap(56, 56, 56)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(infoMere)
+                                .addGap(22, 22, 22)
                                 .addComponent(labelMere, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jLabel10)
+                                        .addComponent(situationFamiliale)
                                         .addGap(18, 18, 18)
                                         .addComponent(labelSituatioFamiliale))
                                     .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jLabel12)
+                                        .addComponent(domicile)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(labelDomicile, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addGap(0, 0, Short.MAX_VALUE))))
@@ -234,9 +230,9 @@ public class InfoPersonne extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(58, 58, 58)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 338, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(identificationPersonne, javax.swing.GroupLayout.PREFERRED_SIZE, 338, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jLabel2)
+                                        .addComponent(infoDateNaissance)
                                         .addGap(18, 18, 18)
                                         .addComponent(labelDateNaissance)
                                         .addGap(18, 18, 18)
@@ -244,7 +240,7 @@ public class InfoPersonne extends javax.swing.JFrame {
                                         .addGap(12, 12, 12)
                                         .addComponent(labelLieuNaissance))
                                     .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jLabel6)
+                                        .addComponent(infoPere)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(labelPere, javax.swing.GroupLayout.PREFERRED_SIZE, 312, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -271,28 +267,28 @@ public class InfoPersonne extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
+                .addComponent(identificationPersonne)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
+                    .addComponent(infoDateNaissance)
                     .addComponent(labelDateNaissance)
                     .addComponent(labelLieuNaissance)
                     .addComponent(jLabel3))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(infoPere, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(labelPere, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(infoMere, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(labelMere, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(situationFamiliale, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(labelSituatioFamiliale, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(domicile, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(labelDomicile, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(27, 27, 27)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -338,7 +334,7 @@ public class InfoPersonne extends javax.swing.JFrame {
     private void printInfosActionPerformed(java.awt.event.ActionEvent evt) throws Exception {//GEN-FIRST:event_printInfosActionPerformed
         boolean printed = PrinterService.Print(ic);
         if(printed){
-            JOptionPane.showMessageDialog(null,"impression terminée avec succès");
+            JOptionPane.showMessageDialog(null,"Impression terminée avec succès");
         }else{
           JOptionPane.showMessageDialog(null,"Impression annulée");
         }
@@ -381,16 +377,15 @@ public class InfoPersonne extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel domicile;
+    private javax.swing.JLabel identificationPersonne;
+    private javax.swing.JLabel infoDateNaissance;
+    private javax.swing.JLabel infoMere;
+    private javax.swing.JLabel infoPere;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel19;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel labelCondamnations;
     private javax.swing.JLabel labelDateNaissance;
@@ -403,5 +398,6 @@ public class InfoPersonne extends javax.swing.JFrame {
     private javax.swing.JLabel labelSituatioFamiliale;
     private javax.swing.JLabel labelTitre;
     private javax.swing.JButton printInfos;
+    private javax.swing.JLabel situationFamiliale;
     // End of variables declaration//GEN-END:variables
 }
