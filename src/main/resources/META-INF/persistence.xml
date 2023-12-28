@@ -6,8 +6,8 @@
     <properties>
       <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL8Dialect"/>
       <property name="jakarta.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
-      <property name="jakarta.persistence.jdbc.user" value="dazai"/>
-      <property name="jakarta.persistence.jdbc.password" value="dazai"/>
+      <property name="jakarta.persistence.jdbc.user" value="josoa"/>
+      <property name="jakarta.persistence.jdbc.password" value="100805Josh"/>
       <property name="jakarta.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/Bulletin"/>
     </properties>
   </persistence-unit>

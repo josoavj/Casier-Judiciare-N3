@@ -106,33 +106,34 @@
                                       <Component id="lieunais" alignment="0" max="32767" attributes="0"/>
                                       <Component id="Profession" max="32767" attributes="0"/>
                                       <Component id="Domicile" alignment="0" max="32767" attributes="0"/>
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <Component id="datenaiss" min="-2" pref="85" max="-2" attributes="0"/>
-                                          <EmptySpace max="32767" attributes="0"/>
-                                          <Component id="moisnaiss" min="-2" pref="96" max="-2" attributes="0"/>
-                                          <EmptySpace min="-2" pref="62" max="-2" attributes="0"/>
-                                          <Component id="annenaiss" min="-2" pref="85" max="-2" attributes="0"/>
-                                      </Group>
                                       <Component id="NomPers" alignment="0" max="32767" attributes="0"/>
                                       <Component id="PrenomPers" alignment="0" max="32767" attributes="0"/>
-                                      <Group type="102" attributes="0">
-                                          <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="cmbGender" min="-2" pref="108" max="-2" attributes="0"/>
-                                              <Component id="cmbStatus" alignment="0" min="-2" pref="133" max="-2" attributes="0"/>
-                                              <Component id="Nationalite" alignment="0" min="-2" pref="141" max="-2" attributes="0"/>
-                                          </Group>
-                                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                                      </Group>
                                       <Group type="102" attributes="0">
                                           <Component id="acteNaissace" min="-2" pref="64" max="-2" attributes="0"/>
                                           <EmptySpace type="separate" max="-2" attributes="0"/>
                                           <Component id="jLabel14" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                                          <Component id="jourAct" min="-2" pref="52" max="-2" attributes="0"/>
+                                          <Component id="jourAct" min="-2" pref="30" max="-2" attributes="0"/>
                                           <EmptySpace type="separate" max="-2" attributes="0"/>
                                           <Component id="moisAct" max="32767" attributes="0"/>
                                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                                          <Component id="anneAct" min="-2" pref="64" max="-2" attributes="0"/>
+                                          <Component id="anneAct" min="-2" pref="50" max="-2" attributes="0"/>
+                                          <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" attributes="0">
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="cmbGender" min="-2" pref="108" max="-2" attributes="0"/>
+                                              <Component id="cmbStatus" alignment="0" min="-2" pref="133" max="-2" attributes="0"/>
+                                              <Component id="Nationalite" alignment="0" min="-2" pref="141" max="-2" attributes="0"/>
+                                              <Group type="102" alignment="0" attributes="0">
+                                                  <Component id="datenaiss" min="-2" pref="32" max="-2" attributes="0"/>
+                                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                                  <Component id="moisnaiss" min="-2" pref="96" max="-2" attributes="0"/>
+                                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                                  <Component id="annenaiss" min="-2" pref="50" max="-2" attributes="0"/>
+                                              </Group>
+                                          </Group>
+                                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                       </Group>
                                   </Group>
                               </Group>
@@ -183,13 +184,11 @@
                       <Group type="103" alignment="0" groupAlignment="3" attributes="0">
                           <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="datenaiss" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="moisnaiss" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="annenaiss" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="moisnaiss" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="annenaiss" alignment="3" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="lieunais" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="jLabel12" alignment="3" min="-2" max="-2" attributes="0"/>
