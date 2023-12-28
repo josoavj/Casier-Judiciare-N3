@@ -997,6 +997,6 @@ private void Reset()
     private javax.swing.JComboBox<String> moisAct;
     private javax.swing.JComboBox<String> moisnaiss;
     public javax.swing.JTextField pere;
-    private javax.swing.JTable tableCondamnation;
+    private static javax.swing.JTable tableCondamnation;
     // End of variables declaration//GEN-END:variables
 }
