@@ -840,7 +840,7 @@ private void Reset()
         }
         boolean printed = PrinterService.Print(infoConserned1);
         if(printed){
-            JOptionPane.showMessageDialog(null,"impression terminée avec succès");
+            JOptionPane.showMessageDialog(null,"Impression terminée avec succès");
         }else{
             JOptionPane.showMessageDialog(null,"Impression annulée");
         }
