@@ -484,7 +484,15 @@ private void Reset()
         btnImprimer.setText("Imprimer");
         btnImprimer.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnImprimerActionPerformed(evt);
+                try {
+                    btnImprimerActionPerformed(evt);
+                } catch (Exception e) {
+                    try {
+                        throw new RuntimeException(e);
+                    } catch (RuntimeException ex) {
+                        throw new RuntimeException(ex);
+                    }
+                }
             }
         });
 
