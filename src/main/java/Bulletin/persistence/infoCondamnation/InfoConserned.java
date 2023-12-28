@@ -25,17 +25,22 @@ public class InfoConserned {
     public InfoConserned(int acteNaissance, Date dateActeNaissance, String nom, String prenoms, String pere, String mere, Date dateNaissance, String lieuNaissance, String situationFamiliale, String profession, String domicile, String sexe, String nationalite) {
         this.acteNaissance = acteNaissance;
         this.dateActeNaissance = dateActeNaissance;
-        this.nom = nom.toUpperCase();
-        String[] prenomSplited = prenoms.split(" ");
+        this.nom = nom.toUpperCase().strip();
+        if(prenoms.split(" ").length!=0){
+        String[] prenomSplited = prenoms.replaceAll("  "," ").split(" ");
         String prenom = null;
         for (String pn : prenomSplited){
             String firstLetter = String.valueOf(pn.charAt(0));
             firstLetter = firstLetter.toUpperCase();
-            prenom = prenom +" "+firstLetter+pn.substring(1) ;
+            prenom = prenom +" "+firstLetter+pn.substring(1);
         }
-        this.prenoms = prenom;
+        this.prenoms = prenom.strip();
+        }else{
+            this.prenoms = String.valueOf(prenoms.charAt(0)) + prenoms.substring(1);
+        }
         //pere
-        String[] pereSplited = pere.split(" ");
+        if(pere.split(" ").length!=0){
+        String[] pereSplited = pere.replaceAll("  "," ").split(" ");
         String newpere = pereSplited[0].toUpperCase();
         for (int i = 1; i < pereSplited.length; i++) {
             String pn = pereSplited[i];
@@ -43,9 +48,14 @@ public class InfoConserned {
             firstLetter = firstLetter.toUpperCase();
             newpere  = newpere + " "+firstLetter + pn.substring(1) ;
         }
-        this.pere =  newpere;
+        this.pere =  newpere.strip();
+        }else{
+            this.pere = pere.toUpperCase();
+        }
         //mere
-        String[] mereSplited = mere.split(" ");
+        if(mere.split(" ").length!=0){
+
+        String[] mereSplited = mere.replaceAll("  "," ").split(" ");
         String newmere = mereSplited[0].toUpperCase();
         for (int i = 1; i < mereSplited.length; i++) {
             String pn = mereSplited[i];
@@ -53,7 +63,10 @@ public class InfoConserned {
             firstLetter = firstLetter.toUpperCase();
             newmere  = newmere + " "+firstLetter + pn.substring(1) ;
         }
-        this.mere = newmere;
+        this.mere = newmere.strip();
+        }else{
+            this.mere = mere.toUpperCase();
+        }
         this.dateNaissance = dateNaissance;
         this.lieuNaissance = lieuNaissance;
         this.situationFamiliale = situationFamiliale;
@@ -61,46 +74,7 @@ public class InfoConserned {
         this.domicile = domicile;
         this.sexe = sexe;
         this.nationalite = nationalite;
-    }
-    public InfoConserned(int acteNaissance, Date dateActeNaissance, String nom, String prenoms, String pere, String mere, Date dateNaissance, String lieuNaissance, String situationFamiliale, String profession, String domicile, String sexe) {
-        this.acteNaissance = acteNaissance;
-        this.dateActeNaissance = dateActeNaissance;
-        this.nom = nom.toUpperCase();
-        String prenom = null;
-        String[] prenomSplited = prenoms.split(" ");
-        for (String pn : prenomSplited){
-            String firstLetter = String.valueOf(pn.charAt(0));
-            firstLetter = firstLetter.toUpperCase();
-            prenom = prenom +" "+firstLetter+pn.substring(1) ;
-        }
-        this.prenoms = prenom;
-        //pere
-        String[] pereSplited = pere.split(" ");
-        String newpere = pereSplited[0].toUpperCase();
-        for (int i = 1; i < pereSplited.length; i++) {
-            String pn = pereSplited[i];
-            String firstLetter = String.valueOf(pn.charAt(0));
-            firstLetter = firstLetter.toUpperCase();
-            newpere  = newpere + " "+firstLetter + pn.substring(1) ;
-        }
-        this.pere =  newpere;
-        //mere
-        String[] mereSplited = mere.split(" ");
-        String newmere = mereSplited[0].toUpperCase();
-        for (int i = 1; i < mereSplited.length; i++) {
-            String pn = mereSplited[i];
-            String firstLetter = String.valueOf(pn.charAt(0));
-            firstLetter = firstLetter.toUpperCase();
-            newmere  = newmere + " "+firstLetter + pn.substring(1) ;
-        }
-        this.mere = newmere;
-        this.dateNaissance = dateNaissance;
-        this.lieuNaissance = lieuNaissance;
-        this.situationFamiliale = situationFamiliale;
-        this.profession = profession;
-        this.domicile = domicile;
-        this.sexe = sexe;
-        this.nationalite = "MALAGASY";
+        this.setCondamnations(new ArrayList<>());
     }
 
     public int getIdConserned() {
@@ -142,7 +116,7 @@ public class InfoConserned {
     }
 
     public void setNom(String nom) {
-        this.nom = nom.toUpperCase();
+        this.nom = nom.toUpperCase().strip();
     }
 
     public String getPrenoms() {
@@ -150,14 +124,14 @@ public class InfoConserned {
     }
 
     public void setPrenoms(String prenoms) {
-        String[] prenomSplited = prenoms.split(" ");
+        String[] prenomSplited = prenoms.replaceAll("  "," ").split(" ");
         String prenom = "";
         for (String pn : prenomSplited){
             String firstLetter = String.valueOf(pn.charAt(0));
             firstLetter = firstLetter.toUpperCase();
             prenom = prenom +" "+firstLetter+pn.substring(1) ;
         }
-        this.prenoms = prenom;
+        this.prenoms = prenom.strip();
     }
 
     public String getPere() {
@@ -165,7 +139,7 @@ public class InfoConserned {
     }
 
     public void setPere(String pere) {
-        String[] pereSplited = pere.split(" ");
+        String[] pereSplited = pere.replaceAll("  "," ").split(" ");
         String newpere = pereSplited[0].toUpperCase();
         for (int i = 1; i < pereSplited.length; i++) {
             String pn = pereSplited[i];
@@ -173,7 +147,7 @@ public class InfoConserned {
             firstLetter = firstLetter.toUpperCase();
             newpere  = newpere +" "+firstLetter+pn.substring(1) ;
         }
-        this.pere = newpere;
+        this.pere = newpere.strip();
     }
 
     public String getMere() {
@@ -181,7 +155,7 @@ public class InfoConserned {
     }
 
     public void setMere(String mere) {
-        String[] mereSplited = mere.split(" ");
+        String[] mereSplited = mere.replaceAll("  "," ").split(" ");
         String newmere = mereSplited[0].toUpperCase();
         for (int i = 1; i < mereSplited.length; i++) {
             String pn = mereSplited[i];
@@ -189,7 +163,7 @@ public class InfoConserned {
             firstLetter = firstLetter.toUpperCase();
             newmere  = newmere + " "+firstLetter + pn.substring(1) ;
         }
-        this.mere = newmere;
+        this.mere = newmere.strip();
     }
 
     public Date getDateNaissance() {

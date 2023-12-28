@@ -662,17 +662,23 @@ private void Reset()
             infoConserned1.setNationalite(Nationalite.getText().strip().toUpperCase());
             infoConserned1.setSexe(cmbGender.getSelectedItem().toString());
             infoConserned1.setSituationFamiliale(status);
-        System.out.println(listCondamnationAdded);
             for (Condamnation c :listCondamnationAdded ){
                 infoConserned1.addCondamnation(c);
             }
-        System.out.println(infoConserned1.getCondamnations());
-            infoConsernedService.addConserned(infoConserned1);
-        JOptionPane.showMessageDialog(null,"enregistrement réuissite");
-        this.setVisible(false);
-        ListePersonne.getInstance().Get_Data();
-        ListePersonne.getInstance().setVisible(true);
-        this.dispose();
+            if(infoConsernedService.getInfoConsernedByAN(infoConserned1.getActeNaissance())!=null){
+                JOptionPane.showMessageDialog(null, "Une personne avec la m�me numero d'acte de naissance" +
+                        "existe déjà dans la base de données");
+                return;
+            }
+            if(infoConsernedService.addConserned(infoConserned1)) {
+                JOptionPane.showMessageDialog(null, "Enregistrement réuissite");
+                this.setVisible(false);
+                ListePersonne.getInstance().Get_Data();
+                ListePersonne.getInstance().setVisible(true);
+                this.dispose();
+            }else{
+                JOptionPane.showMessageDialog(null, "Echec d'enregistement");
+            }
     }//GEN-LAST:event_btnEnregistrerActionPerformed
 
     private void btnEffacerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEffacerActionPerformed
@@ -784,11 +790,15 @@ private void Reset()
         int majConfirmation = JOptionPane.showConfirmDialog(null,"Voulez vous mettre à jour les informations sur "+infoConserned.getNom()
         + " ?");
         if(majConfirmation == 0){
-        infoConsernedService.updateInfoConserned(infoConserned.getIdConserned(),infoConserned1);
+        if(infoConsernedService.updateInfoConserned(infoConserned.getIdConserned(),infoConserned1)) {
+            JOptionPane.showMessageDialog(null,"La mise à jour terminée avec succès");
             this.setVisible(false);
             ListePersonne.getInstance().Get_Data();
             ListePersonne.getInstance().setVisible(true);
             this.dispose();
+        }else{
+            JOptionPane.showMessageDialog(null,"La mise à jour a été une echec");
+        }
         }else{
             JOptionPane.showMessageDialog(null,"La mise à jour n'as pas été enregisté");
         }
