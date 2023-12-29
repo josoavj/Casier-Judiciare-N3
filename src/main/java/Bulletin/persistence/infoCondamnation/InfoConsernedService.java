@@ -1,5 +1,6 @@
 package Bulletin.persistence.infoCondamnation;
 
+import Bulletin.persistence.EntityManagerHandler;
 import Bulletin.persistence.condamnation.Condamnation;
 import Bulletin.persistence.condamnation.CondamnationService;
 import jakarta.persistence.*;
@@ -10,9 +11,7 @@ import java.util.HashSet;
 import java.util.List;
 
 public class InfoConsernedService {
-    private EntityManagerFactory emf = null;
-
-    private EntityManager entityManager = null;
+    private final EntityManager entityManager = EntityManagerHandler.getEntityManager();
     private static InfoConsernedService instance = null;
 
     /**
@@ -29,10 +28,12 @@ public class InfoConsernedService {
      * @TableDeSelection 'infoConserned'
      */
     public List<InfoConserned> getConsernedList(){
-        emf = Persistence.createEntityManagerFactory("Bulletin");
-        entityManager = emf.createEntityManager();
-        Query query = entityManager.createQuery("SELECT ic FROM InfoConserned ic", InfoConserned.class);
-        return query.getResultList();
+        try {
+            Query query = entityManager.createQuery("SELECT ic FROM InfoConserned ic", InfoConserned.class);
+            return query.getResultList();
+        }catch (NoResultException e){
+            return null;
+        }
     }
 
     /**
@@ -43,8 +44,6 @@ public class InfoConsernedService {
      */
     public boolean addConserned(InfoConserned conserned){
         try {
-        emf = Persistence.createEntityManagerFactory("Bulletin");
-        entityManager = emf.createEntityManager();
         EntityTransaction trans = entityManager.getTransaction();
         trans.begin();
 
@@ -79,8 +78,6 @@ public class InfoConsernedService {
 
     public boolean updateInfoConserned(int id, InfoConserned infoConsernedUpdated){
         try {
-            emf = Persistence.createEntityManagerFactory("Bulletin");
-            entityManager = emf.createEntityManager();
             InfoConserned infoConserned = getConsernedById(id);
             EntityTransaction trans  = entityManager.getTransaction();
             trans.begin();
@@ -141,9 +138,9 @@ public class InfoConsernedService {
      * @TableDeSelection 'infoConserned'
      */
     public InfoConserned getConsernedById(int id){
-        emf = Persistence.createEntityManagerFactory("Bulletin");
-        entityManager = emf.createEntityManager();
-        return entityManager.find(InfoConserned.class,id);
+        InfoConserned infoConserned = entityManager.find(InfoConserned.class,id);
+        entityManager.refresh(infoConserned);
+        return infoConserned;
     }
 
     /**
@@ -155,8 +152,6 @@ public class InfoConsernedService {
      * @TableDeSelection 'infoConserned'
      */
     public HashSet<InfoConserned> getConsernedByName(String searchQuery) {
-        emf = Persistence.createEntityManagerFactory("Bulletin");
-        entityManager = emf.createEntityManager();
         HashSet<InfoConserned> queryResults = new HashSet<InfoConserned>();
         HashSet<InfoConserned> finalResult = new HashSet<InfoConserned>();
         boolean specFound = false;
@@ -187,8 +182,7 @@ public class InfoConsernedService {
      * @description Cette fonction efface l'element qui est passée en paramètre de la table 'infoConserned'
      */
     public void removeInfoConserned(InfoConserned infoConserned){
-        emf = Persistence.createEntityManagerFactory("Bulletin");
-        entityManager = emf.createEntityManager();
+        entityManager.refresh(infoConserned);
         entityManager.getTransaction().begin();
         entityManager.remove(infoConserned);
         entityManager.getTransaction().commit();
@@ -196,12 +190,12 @@ public class InfoConsernedService {
 
     public InfoConserned getInfoConsernedByAN(int acteNaissace){
         try {
-            emf = Persistence.createEntityManagerFactory("Bulletin");
-            entityManager = emf.createEntityManager();
             Query query = entityManager.createQuery("SELECT ic FROM InfoConserned ic WHERE ic.acteNaissance = :acteNaissance",
                     InfoConserned.class);
             query.setParameter("acteNaissance",acteNaissace);
-            return (InfoConserned) query.getSingleResult();
+            InfoConserned infoConserned =  (InfoConserned) query.getSingleResult();
+            entityManager.refresh(infoConserned);
+            return infoConserned;
         }catch (NoResultException e){
             return null;
         }

@@ -1,4 +1,6 @@
 package Bulletin.persistence.condamnation;
+import Bulletin.persistence.EntityManagerHandler;
+import jakarta.annotation.PreDestroy;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
@@ -6,8 +8,7 @@ import jakarta.persistence.Query;
 import java.util.List;
 
 public class CondamnationService {
-    private final EntityManagerFactory emf = Persistence.createEntityManagerFactory("Bulletin");
-    private final EntityManager entityManager = emf.createEntityManager();
+    private final EntityManager entityManager = EntityManagerHandler.getEntityManager();
     private static CondamnationService instance = null;
 
     /**
@@ -57,6 +58,7 @@ public class CondamnationService {
      * @description cette methode efface une condamantion dans la table 'condamnation'
      */
     public void removeCondamnation(Condamnation condamnation){
+        entityManager.refresh(condamnation);
         entityManager.getTransaction().begin();
         entityManager.remove(condamnation);
         entityManager.getTransaction().commit();
@@ -71,4 +73,5 @@ public class CondamnationService {
     public Condamnation getCondamnationById(int id){
         return entityManager.find(Condamnation.class,id);
     }
+
 }

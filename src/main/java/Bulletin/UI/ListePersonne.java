@@ -35,6 +35,10 @@ PreparedStatement pst=null;
  public void Get_Data(){
             infoConsernedService = InfoConsernedService.getInstance();
             infoConsernedList = infoConsernedService.getConsernedList();
+            if (infoConsernedList == null){
+                JOptionPane.showMessageDialog(null,"La base de donnée est vide");
+                return;
+            }
            Object[][] data = new Object[infoConsernedList.size()][8];
            int i=0;
            AjoutPersonne.listCondamnationAdded.clear();

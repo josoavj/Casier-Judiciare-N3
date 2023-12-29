@@ -1,13 +1,13 @@
 package Bulletin.print;
 
+import Bulletin.persistence.EntityManagerHandler;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 import jakarta.persistence.Query;
 
 public class PrinterEntityService {
-    private final EntityManagerFactory emf = Persistence.createEntityManagerFactory("Bulletin");
-    private final EntityManager entityManager = emf.createEntityManager();
+    private final EntityManager entityManager = EntityManagerHandler.getEntityManager();
     private  static PrinterEntityService instance = null;
     public static PrinterEntityService getInstance(){
         return instance == null ? new PrinterEntityService() : instance;
