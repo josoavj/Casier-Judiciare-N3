@@ -484,7 +484,11 @@ private void Reset()
         btnImprimer.setText("Imprimer");
         btnImprimer.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnImprimerActionPerformed(evt);
+                try {
+                    btnImprimerActionPerformed(evt);
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
             }
         });
 
@@ -1007,6 +1011,6 @@ private void Reset()
     private javax.swing.JComboBox<String> moisAct;
     private javax.swing.JComboBox<String> moisnaiss;
     public javax.swing.JTextField pere;
-    private javax.swing.JTable tableCondamnation;
+    private static javax.swing.JTable tableCondamnation;
     // End of variables declaration//GEN-END:variables
 }
