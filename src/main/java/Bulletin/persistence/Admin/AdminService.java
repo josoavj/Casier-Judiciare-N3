@@ -1,5 +1,6 @@
 package Bulletin.persistence.Admin;
 
+import Bulletin.persistence.EntityManagerHandler;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
@@ -10,8 +11,7 @@ import jakarta.persistence.NoResultException;
 import java.util.List;
 
 public class AdminService {
-    private EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("Bulletin");
-    private EntityManager entityManager = entityManagerFactory.createEntityManager();
+    private final EntityManager entityManager = EntityManagerHandler.getEntityManager();
 
     private static AdminService instance = null;
 
