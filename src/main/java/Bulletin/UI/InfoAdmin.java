@@ -23,7 +23,6 @@ PreparedStatement pst=null;
         try{
          pst=con.prepareStatement(sql);
           rs= pst.executeQuery();
-         //jTable1.setModel(DbUtils.resultSetToTableModel(rs));
          }catch(Exception e){
             JOptionPane.showMessageDialog(null, e);
           

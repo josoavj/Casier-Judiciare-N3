@@ -14,6 +14,8 @@ import java.sql.Date;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.regex.Pattern;
 
 
@@ -272,7 +274,7 @@ private void Reset()
         });
         jScrollPane1.setViewportView(tableCondamnation);
 
-        moisnaiss.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Janvier", "Fevrier", "Mars", "Avril", "Mai", "Juin", "Juillet", "Aout", "Septembre", "Octobre", "Novembre", "Decembre" }));
+        moisnaiss.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Aout", "Septembre", "Octobre", "Novembre", "Décembre" }));
 
         annenaiss.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -293,7 +295,7 @@ private void Reset()
             }
         });
 
-        moisAct.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Janvier", "Fevrier", "Mars", "Avril", "Mai", "Juin", "Juillet", "Aout", "Septembre", "Octobre", "Novembre", "Decembre" }));
+        moisAct.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Aout", "Septembre", "Octobre", "Novembre", "Décembre" }));
         moisAct.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 moisActActionPerformed(evt);
@@ -483,15 +485,7 @@ private void Reset()
         btnImprimer.setText("Imprimer");
         btnImprimer.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                try {
-                    btnImprimerActionPerformed(evt);
-                } catch (Exception e) {
-                    try {
-                        throw new RuntimeException(e);
-                    } catch (RuntimeException ex) {
-                        throw new RuntimeException(ex);
-                    }
-                }
+                btnImprimerActionPerformed(evt);
             }
         });
 
@@ -668,29 +662,29 @@ private void Reset()
                 infoConserned1.addCondamnation(c);
             }
             if(infoConsernedService.getInfoConsernedByAN(infoConserned1.getActeNaissance())!=null){
-                JOptionPane.showMessageDialog(null, "Une personne avec la m�me numero d'acte de naissance" +
+                JOptionPane.showMessageDialog(null, "Une personne avec la même numéro d'acte de naissance" +
                         "existe déjà dans la base de données");
                 return;
             }
             if(infoConsernedService.addConserned(infoConserned1)) {
-                JOptionPane.showMessageDialog(null, "Enregistrement réuissite");
+                JOptionPane.showMessageDialog(null, "Enregistrement réussit");
                 this.setVisible(false);
                 ListePersonne.getInstance().Get_Data();
                 ListePersonne.getInstance().setVisible(true);
                 this.dispose();
             }else{
-                JOptionPane.showMessageDialog(null, "Echec d'enregistement");
+                JOptionPane.showMessageDialog(null, "Echec de l'enregistement");
             }
     }//GEN-LAST:event_btnEnregistrerActionPerformed
 
     private void btnEffacerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEffacerActionPerformed
 
-        int jOptionPane = JOptionPane.showConfirmDialog(null,"voulez vous supprimer "+infoConserned.getNom()
+        int jOptionPane = JOptionPane.showConfirmDialog(null,"Voulez vous supprimer "+infoConserned.getNom()
         +" de la base de donnés?");
         if(jOptionPane == 0){
             infoConsernedService = InfoConsernedService.getInstance();
             infoConsernedService.removeInfoConserned(infoConserned);
-            JOptionPane.showMessageDialog(null,"Supression réuissite");
+            JOptionPane.showMessageDialog(null,"Supression réussit");
             this.setVisible(false);
             ListePersonne.getInstance().Get_Data();
             ListePersonne.getInstance().setVisible(true);
@@ -799,10 +793,10 @@ private void Reset()
             ListePersonne.getInstance().setVisible(true);
             this.dispose();
         }else{
-            JOptionPane.showMessageDialog(null,"La mise à jour a été une echec");
+            JOptionPane.showMessageDialog(null,"Echec de la mise à jour");
         }
         }else{
-            JOptionPane.showMessageDialog(null,"La mise à jour n'as pas été enregisté");
+            JOptionPane.showMessageDialog(null,"Mise à jour non enregisté");
         }
 
     }//GEN-LAST:event_btnMajActionPerformed
@@ -1014,6 +1008,6 @@ private void Reset()
     private javax.swing.JComboBox<String> moisAct;
     private javax.swing.JComboBox<String> moisnaiss;
     public javax.swing.JTextField pere;
-    private static javax.swing.JTable tableCondamnation;
+    private javax.swing.JTable tableCondamnation;
     // End of variables declaration//GEN-END:variables
 }
