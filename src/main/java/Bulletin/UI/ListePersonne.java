@@ -110,7 +110,7 @@ public class ListePersonne extends javax.swing.JFrame {
         cmbFilter = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Patient Registration Record");
+        setTitle("Personnes enregistrées");
         setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
@@ -339,8 +339,8 @@ public class ListePersonne extends javax.swing.JFrame {
         String table_click= tableListPerson.getModel().getValueAt(row, 0).toString();
         int acteNaissanceNum = Integer.parseInt(table_click);
         InfoConserned ic = infoConsernedService.getInfoConsernedByAN(acteNaissanceNum);
-        String message = "voulez vous supprimer "+ic.getNom();
-        if(JOptionPane.showConfirmDialog(null,message,"Confirmation",JOptionPane.YES_NO_OPTION)==0) {
+        String message = "Voulez vous supprimer "+ic.getNom();
+        if(JOptionPane.showConfirmDialog(null,message,"Confirmer",JOptionPane.YES_NO_OPTION)==0) {
             InfoConsernedService.getInstance().removeInfoConserned(ic);
             txtSearch.setText("");
             Get_Data();
@@ -363,7 +363,7 @@ public class ListePersonne extends javax.swing.JFrame {
         InfoConserned ic = infoConsernedService.getInfoConsernedByAN(acteNaissanceNum);
         boolean printed = PrinterService.Print(ic);
         if(printed){
-            JOptionPane.showMessageDialog(null,"impression terminée avec succès");
+            JOptionPane.showMessageDialog(null,"Impression terminée");
         }else{
             JOptionPane.showMessageDialog(null,"Impression annulée");
         }

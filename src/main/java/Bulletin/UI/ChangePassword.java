@@ -46,7 +46,7 @@ private AdminService adminService = AdminService.getInstance();
         txtTitleSection = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Change Password");
+        setTitle("Changer le mot de passe ou mettre à jour vos informations");
         setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowOpened(java.awt.event.WindowEvent evt) {

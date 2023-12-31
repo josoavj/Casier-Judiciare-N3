@@ -31,7 +31,7 @@ public class Contact extends javax.swing.JFrame {
         jSeparator1 = new javax.swing.JSeparator();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Contact");
+        setTitle("Contacter les développeurs");
         setResizable(false);
 
         btnQuit.setFont(new java.awt.Font("Cantarell", 1, 14)); // NOI18N

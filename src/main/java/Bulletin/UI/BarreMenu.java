@@ -89,7 +89,7 @@ public class BarreMenu extends javax.swing.JFrame {
         jMenuItem16.setText("jMenuItem16");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Main Menu");
+        setTitle("Menu - Acceuil");
         setResizable(false);
         addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {

@@ -30,7 +30,7 @@ public class About extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("About");
+        setTitle("A propos des développeurs");
         setResizable(false);
 
         jButton1.setText("OK");

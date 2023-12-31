@@ -28,7 +28,7 @@ private AdminService adminService = AdminService.getInstance();
     }
 
     /**
-     * Creates new form Doctor
+     * Creates new form
      */
     public Administrateur() {
         initComponents();
@@ -101,7 +101,7 @@ private AdminService adminService = AdminService.getInstance();
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Administrteur");
+        setTitle("Administrateur");
         setResizable(false);
 
         formPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Administrateur"));

@@ -193,7 +193,7 @@ private void Reset()
         jLabel13 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Patient Registration");
+        setTitle("Ajout ou mise à jour des informations d'une personne");
         setResizable(false);
 
         AjoutForm.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Ajout d'une nouvelle personne", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Poppins", 1, 11))); // NOI18N
