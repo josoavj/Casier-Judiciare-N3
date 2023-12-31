@@ -30,7 +30,7 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jScrollPane1" pref="1665" max="32767" attributes="0"/>
+              <Component id="jScrollPane1" pref="1638" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
           </Group>
@@ -147,7 +147,7 @@
                   <Component id="filterPanel" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
                   <Component id="modifPanel" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="665" max="32767" attributes="0"/>
+                  <EmptySpace pref="624" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
