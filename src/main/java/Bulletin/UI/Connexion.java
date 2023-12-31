@@ -12,9 +12,6 @@ import java.sql.ResultSet;
 import javax.swing.*;
 
 public class Connexion extends javax.swing.JFrame {
-Connection con=null;
-ResultSet rs=null;
-PreparedStatement pst=null;
 
 AdminService adminService = AdminService.getInstance();
 
@@ -198,9 +195,10 @@ AdminService adminService = AdminService.getInstance();
       {
           Admin admin = adminService.getAdmin(username,password);
           if (admin != null){
-             this.hide();
-             BarreMenu frm=new BarreMenu();
-             frm.setVisible(true);
+              System.out.println(admin);
+             ConnexionBeanHandler.setLogin(admin);
+             BarreMenu.getInstance().setVisible(true);
+             this.dispose();
           }
           else{
             JOptionPane.showMessageDialog(null, "Erreur de connection !","Access refusée",JOptionPane.ERROR_MESSAGE);
@@ -232,13 +230,12 @@ AdminService adminService = AdminService.getInstance();
       {
           Admin admin = adminService.getAdmin(txtUserName.getText(),txtPassword.getText());
           if (admin != null){
-             this.hide();
-            BarreMenu frm=new BarreMenu();
-            System.out.println("connected");
-            frm.setVisible(true);
+              System.out.println(admin);
+              ConnexionBeanHandler.setLogin(admin);
+              BarreMenu.getInstance().setVisible(true);
+              this.dispose();
           }
           else{
-
             JOptionPane.showMessageDialog(null, "Erreur de Connection","Access denied",JOptionPane.ERROR_MESSAGE);
             txtUserName.setText("");
             txtPassword.setText("");

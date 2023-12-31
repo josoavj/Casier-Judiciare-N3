@@ -108,6 +108,7 @@ CondamnationService condamnationService = null;
     }
 private void Reset()
 {
+    ListePersonne.getInstance().dispose();
     acteNaissace.setText("");
     NomPers.setText("");
     PrenomPers.setText("");
@@ -573,51 +574,64 @@ private void Reset()
     Reset();
     }//GEN-LAST:event_btnNouveauActionPerformed
 
-    private void fieldsVerification(){
+    private boolean fieldsValidate(){
         if (acteNaissace.getText().equals("")) {
             JOptionPane.showMessageDialog(this, "Acte de naissance non initialisé", "Erreur", JOptionPane.ERROR_MESSAGE);
-            return;
+            return false;
 
         }
         if (jourAct.getText().equals("")) {
             JOptionPane.showMessageDialog(this, "veuillez ajouter le jour de creation  de l'acte de naissance", "Erreur", JOptionPane.ERROR_MESSAGE);
-            return;
+            return false;
         }
         if (anneAct.getText().equals("")) {
             JOptionPane.showMessageDialog(this, "veuillez ajouter le année de creation  de l'acte de naissance", "Erreur", JOptionPane.ERROR_MESSAGE);
-            return;
+            return false;
         }
         if (NomPers.getText().equals("")) {
             JOptionPane.showMessageDialog(this, "Veuillez remplir le nom", "Erreur", JOptionPane.ERROR_MESSAGE);
-            return;
+            return false;
 
         }
         if (pere.getText().equals("")) {
             JOptionPane.showMessageDialog(this, "Veuillez remplir le nom du père", "Erreur", JOptionPane.ERROR_MESSAGE);
-            return;
+            return false;
         }
         if (mere.getText().equals("")) {
             JOptionPane.showMessageDialog(this, "Veuillez remplir le nom de la mère", "Erreur", JOptionPane.ERROR_MESSAGE);
-            return;
+            return false;
         }
 
         // Lieu de Naissance
         if (lieunais.getText().equals("")) {
             JOptionPane.showMessageDialog(this, "Veuillez ajouter un date de naissance", "Erreur", JOptionPane.ERROR_MESSAGE);
-            return;
+            return false;
         }
         if (cmbStatus.getSelectedItem().equals("")) {
             JOptionPane.showMessageDialog(this, "Veuillez selectionner la situation familiale", "Erreur", JOptionPane.ERROR_MESSAGE);
-            return;
+            return false;
         }
         if (Domicile.getText().equals("")) {
             JOptionPane.showMessageDialog(this, "Veuillez ajouter la domicile", "Erreur", JOptionPane.ERROR_MESSAGE);
-            return;
+            return false;
         }
         if (Profession.getText().equals("")) {
             JOptionPane.showMessageDialog(this, "Veuillez ajouter une profession", "Erreur", JOptionPane.ERROR_MESSAGE);
-            return;
+            return false;
         }
+        try {
+            LocalDate.of(Integer.parseInt(anneAct.getText()), moisAct.getSelectedIndex() + 1, Integer.parseInt(jourAct.getText()));
+        }catch (Exception e){
+            JOptionPane.showMessageDialog(null, "Veuillez rectifier la date de délivrance de l'acte de naissance","Erreur",JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        try {
+            LocalDate.of(Integer.parseInt(annenaiss.getText()), moisnaiss.getSelectedIndex() + 1, Integer.parseInt(datenaiss.getText()));
+        }catch (Exception e){
+            JOptionPane.showMessageDialog(null, "Veuillez rectifier la date de naissance","Erreur",JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        return true;
     }
 
     /**
@@ -627,7 +641,9 @@ private void Reset()
 
     // Enregistrer les données
     private void btnEnregistrerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnregistrerActionPerformed
-            fieldsVerification();
+            if(!fieldsValidate()) {
+                return;
+            }
             try {
                 Integer.parseInt(datenaiss.getText().strip());
                 Integer.parseInt(annenaiss.getText().strip());
@@ -670,28 +686,27 @@ private void Reset()
             }
             if(infoConsernedService.getInfoConsernedByAN(infoConserned1.getActeNaissance())!=null){
                 JOptionPane.showMessageDialog(null, "Une personne avec la m�me numero d'acte de naissance" +
-                        "existe déjà dans la base de données");
+                        "existe déjà dans la base de données","Erreur",JOptionPane.ERROR_MESSAGE);
                 return;
             }
             if(infoConsernedService.addConserned(infoConserned1)) {
-                JOptionPane.showMessageDialog(null, "Enregistrement réuissite");
+                JOptionPane.showMessageDialog(null, "Enregistrement réuissite","Succès",JOptionPane.ERROR_MESSAGE);
                 this.setVisible(false);
                 ListePersonne.getInstance().Get_Data();
                 ListePersonne.getInstance().setVisible(true);
                 this.dispose();
             }else{
-                JOptionPane.showMessageDialog(null, "Echec d'enregistement");
+                JOptionPane.showMessageDialog(null, "Echec d'enregistement","Erreur",JOptionPane.ERROR_MESSAGE);
             }
     }//GEN-LAST:event_btnEnregistrerActionPerformed
 
     private void btnEffacerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEffacerActionPerformed
-
         int jOptionPane = JOptionPane.showConfirmDialog(null,"voulez vous supprimer "+infoConserned.getNom()
-        +" de la base de donnés?");
+        +" de la base de donnés?","Confirmation",JOptionPane.YES_NO_OPTION);
         if(jOptionPane == 0){
             infoConsernedService = InfoConsernedService.getInstance();
             infoConsernedService.removeInfoConserned(infoConserned);
-            JOptionPane.showMessageDialog(null,"Supression réuissite");
+            JOptionPane.showMessageDialog(null,"Supression réuissite","Succès",JOptionPane.INFORMATION_MESSAGE);
             this.setVisible(false);
             ListePersonne.getInstance().Get_Data();
             ListePersonne.getInstance().setVisible(true);
@@ -700,7 +715,7 @@ private void Reset()
     }//GEN-LAST:event_btnEffacerActionPerformed
 
     private void btnGetInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGetInfoActionPerformed
-        fieldsVerification();
+        if(!fieldsValidate()){ return;}
         try {
             Integer.parseInt(datenaiss.getText().strip());
             Integer.parseInt(annenaiss.getText().strip());
@@ -750,7 +765,7 @@ private void Reset()
      */
 
     private void btnMajActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMajActionPerformed
-        fieldsVerification();
+        if(!fieldsValidate()){ return;}
         try {
             Integer.parseInt(datenaiss.getText().strip());
             Integer.parseInt(annenaiss.getText().strip());
@@ -790,8 +805,14 @@ private void Reset()
             c.setInfoConserned(null);
             infoConserned1.addCondamnation(c);
         }
+        InfoConserned verif = infoConsernedService.getInfoConsernedByAN(infoConserned1.getActeNaissance());
+        if(verif != null && verif != this.infoConserned ){
+            JOptionPane.showMessageDialog(null, "Une personne avec la m�me numero d'acte de naissance" +
+                    "existe déjà dans la base de données");
+            return;
+        }
         int majConfirmation = JOptionPane.showConfirmDialog(null,"Voulez vous mettre à jour les informations sur "+infoConserned.getNom()
-        + " ?");
+        + " ?","Confirmation",JOptionPane.YES_NO_OPTION);
         if(majConfirmation == 0){
         if(infoConsernedService.updateInfoConserned(infoConserned.getIdConserned(),infoConserned1)) {
             JOptionPane.showMessageDialog(null,"La mise à jour terminée avec succès");
@@ -810,7 +831,7 @@ private void Reset()
 
 
     private void btnImprimerActionPerformed(java.awt.event.ActionEvent evt) throws Exception {//GEN-FIRST:event_btnImprimerActionPerformed
-        fieldsVerification();
+        if(!fieldsValidate()){ return;}
         try {
             Integer.parseInt(datenaiss.getText().strip());
             Integer.parseInt(annenaiss.getText().strip());

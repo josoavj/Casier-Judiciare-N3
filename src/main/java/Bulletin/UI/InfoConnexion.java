@@ -26,14 +26,12 @@ public class InfoConnexion extends javax.swing.JFrame {
     // Pour avoir les données de l'utilisateur et l'afficher dans le tableau
     private void Get_Data(){
           try{
-              List<Admin> admins = adminService.getAllAdmin();
-              Object[][] data = new Object[admins.size()][2];
-              int i = 0;
-              for (Admin admin : admins){
-                  data[i][0] = admin.getUsername();
-                  data[i][1] = admin.getPassword();
-                  i++;
-              }
+              Object[][] data = new Object[1][2];
+              Admin admin = ConnexionBeanHandler.getLogin();
+                  data[0][0] = admin.getUsername();
+                  data[0][1] = admin.getPassword();
+
+
               String[] columnNames = new String[2];
               columnNames[0] = "Nom d'utilisateur";
               columnNames[1] = "Mot de passe";

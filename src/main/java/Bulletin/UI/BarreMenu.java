@@ -1,16 +1,41 @@
 package Bulletin.UI;
 
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 public class BarreMenu extends javax.swing.JFrame {
 
     /**
      * Creates new form MainMenu
      */
+    private static BarreMenu instance = null;
+    public static BarreMenu getInstance(){
+        if(instance == null){
+            instance = new BarreMenu();
+        }
+        return instance;
+    }
     public BarreMenu() {
         initComponents();
         setLocationRelativeTo(this);
+        testConnection();
     }
-
+    private void timerTask(){
+      this.setEnabled(ConnexionBeanHandler.getLogin() != null);
+    }
+    private void testConnection(){
+        // Crée un timer pour exécuter la fonction
+        Timer timer = new Timer();
+        TimerTask task = new TimerTask() {
+            @Override
+            public void run() {
+                timerTask();
+            }
+        };
+        // Définit la fonction à exécuter
+        timer.scheduleAtFixedRate(task, 0, 1000);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -164,7 +189,7 @@ public class BarreMenu extends javax.swing.JFrame {
 
         MenuBar.add(menuOptions);
 
-        menuAdmin.setText("Admin");
+        menuAdmin.setText("Comptes");
 
         AdmIden.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_R, java.awt.event.InputEvent.ALT_DOWN_MASK));
         AdmIden.setText("Identification");
@@ -196,7 +221,11 @@ public class BarreMenu extends javax.swing.JFrame {
         MenuBar.add(menuAdmin);
 
         menuAide.setText("Aide");
-        
+        menuAide.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MAideActionPerformed(evt);
+            }
+        });
 
         MAbout.setText("A propos");
         MAbout.addActionListener(new java.awt.event.ActionListener() {
@@ -257,8 +286,9 @@ public class BarreMenu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void AdmIdenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AdmIdenActionPerformed
-    AdIdentification frm = new AdIdentification();
-    frm.setVisible(true); 
+    AdIdentification.getInstance().setVisible(true);
+    AdIdentification.getInstance().setAdmin(ConnexionBeanHandler.getLogin());
+    AdIdentification.getInstance().fillFields();
     }//GEN-LAST:event_AdmIdenActionPerformed
 
     private void MdpChangeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MdpChangeActionPerformed
@@ -272,13 +302,16 @@ public class BarreMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_Info_ConnexActionPerformed
 
     private void SettingsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SettingsActionPerformed
-     Settings frm= new Settings();
-     frm.setVisible(true);
+        Bulletin.UI.Settings.getInstance().setVisible(true);
     }//GEN-LAST:event_SettingsActionPerformed
 
-    // Pour ouvrir AboutUs
+    private void MAideActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MAideActionPerformed
+   
+    }//GEN-LAST:event_MAideActionPerformed
+
+    // Pour ouvrir About
     private void MAboutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MAboutActionPerformed
-     AboutUs frm= new AboutUs();
+     About frm= new About();
      frm.setVisible(true);
     }//GEN-LAST:event_MAboutActionPerformed
 
@@ -290,11 +323,16 @@ public class BarreMenu extends javax.swing.JFrame {
 
     private void ListePersonneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ListePersonneActionPerformed
     // Voir la liste des personnes dans la liste
-    ListePersonne frm = new ListePersonne();
+    ListePersonne frm = Bulletin.UI.ListePersonne.getInstance();
     frm.setVisible(true);
     }//GEN-LAST:event_ListePersonneActionPerformed
 
-    
+    @Override
+    public void dispose() {
+        super.dispose();
+        instance = null;
+    }
+
     // Pour ouvrir la page Contact
     private void MContactActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MContactActionPerformed
      Contact frm = new Contact();
@@ -303,11 +341,12 @@ public class BarreMenu extends javax.swing.JFrame {
 
     private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
         if(evt.getClickCount()==1){
-            System.out.println("Clicked");
+            System.out.println("clicked");
         }
         if(evt.getClickCount()==2){
-            System.out.println("Double click");
+            System.out.println("double click");
         }
+            // TODO add your handling code here:
     }//GEN-LAST:event_formMouseClicked
 
     /**
@@ -341,7 +380,7 @@ public class BarreMenu extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new BarreMenu().setVisible(true);
+                BarreMenu.getInstance().setVisible(true);
             }
         });
     }

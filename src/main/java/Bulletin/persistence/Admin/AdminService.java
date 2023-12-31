@@ -41,6 +41,15 @@ public class AdminService {
         }
 
     }
+    public Admin getAdminByUsername(String username){
+        try {
+            Query query = entityManager.createQuery("SELECT a FROM Admin a where a.username = :username", Admin.class);
+            query.setParameter("username", username);
+            return (Admin) query.getSingleResult();
+        }catch (NoResultException e){
+            return null;
+        }
+    }
     public void changeMdp(int id,String mdp){
         Admin admin = entityManager.find(Admin.class,id);
         entityManager.getTransaction().begin();
@@ -54,13 +63,22 @@ public class AdminService {
         admin1.setUsername(admin.getUsername());
         admin1.setName(admin.getName());
         admin1.setPassword(admin.getPassword());
+        admin1.setRule(admin.getRule());
+        admin1.setPoste(admin.getPoste());
         entityManager.getTransaction().commit();
     }
 
     public List<Admin> getAllAdmin(){
-        Query query = entityManager.createQuery("SELECT ad FROM Admin ad", Admin.class);
+        Query query = entityManager.createQuery("SELECT ad FROM Admin ad where ad.rule = :rule", Admin.class);
+        query.setParameter("rule",Rules.ADMIN);
         return query.getResultList();
     }
+    public List<Admin> getAllUtilisateur(){
+        Query query = entityManager.createQuery("SELECT ad FROM Admin ad where ad.rule = :rule", Admin.class);
+        query.setParameter("rule",Rules.USER);
+        return query.getResultList();
+    }
+
     public void removeAdmin(Admin admin){
         entityManager.getTransaction().begin();
         entityManager.remove(admin);

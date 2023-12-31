@@ -39,9 +39,6 @@ domicile varchar(255) NOT NULL,
 sexe varchar(30) NOT NULL,
 nationalite varchar(255)  DEFAULT "MALAGASY");
 
-INSERT INTO infoConserned (acteNaissance,dateActenaissance,nom,prenoms,pere,mere,dateNaissance,lieuNaissance,situationFamiliale,profession,sexe,domicile) values
-(1112,CURRENT_DATE,"dazai","osamu","nanika","nakahara", CURRENT_DATE ,"shinjuku","celibataire", "portomafia","Masculin","shinjuku");
-
 -- ---------------------------------condamnation---------------------------------------
 
 CREATE TABLE condamnation (idCondamnation int(8) UNSIGNED ZEROFILL PRIMARY KEY NOT NULL AUTO_INCREMENT,
@@ -55,25 +52,20 @@ CREATE TABLE condamnation (idCondamnation int(8) UNSIGNED ZEROFILL PRIMARY KEY N
 
 -- -------------------------valeur par defaut (condamnation)----------------------------
 
-INSERT INTO condamnation (dateCondamnation,
-                            coursOuTrubinaux,
-                            natureCrime,
-                            naturePeine,
-                            Observation,
-                            idConserned)
-                            values (CURRENT_DATE, 'kille', 'die', 'dmfq', 'fqm',1);
-
 -- --------------------------------table Admin--------------------------------------------
 
 CREATE TABLE Admin (
                      id int(4) UNSIGNED ZEROFILL AUTO_INCREMENT PRIMARY KEY NOT NULL,
                      username VARCHAR(256) NOT NULL,
                      name varchar(256) NOT NULL,
-                     password VARCHAR(256) NOT NULL );
+                     password VARCHAR(256) NOT NULL,
+                     poste VARCHAR(256) NOT NULL,
+                     rule VARCHAR(20) NOT NULL
+                      );
 
 -- --------------------------------Administrateur par defaut------------------------------
 
-INSERT INTO Admin (username,name, password) VALUES ("Admin", "Admin","Admin");
+INSERT INTO Admin (username,name, password, poste, rule) VALUES ("Admin", "Admin","Admin","Uknown","ADMIN");
 
 -- --------------------------------------Printer-------------------------------------------
 CREATE TABLE PRINTER (id int(4) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT PRIMARY KEY,

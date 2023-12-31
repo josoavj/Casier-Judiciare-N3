@@ -107,8 +107,6 @@ public class InfoConsernedService {
                         remove = false;
                     }
                 }
-                System.out.println(remove);
-                System.out.println("blang" + infoConserned.getCondamnations());
                 if (remove) {
                     infoConserned.getCondamnations().get(i).setInfoConserned(null);
                     condamnationList.remove(infoConserned.getCondamnations().get(i));
@@ -151,29 +149,6 @@ public class InfoConsernedService {
      * @description Cette fait une recherche d'information dans la ase de donnée par le nom ou prenoms de du consernée
      * @TableDeSelection 'infoConserned'
      */
-    public HashSet<InfoConserned> getConsernedByName(String searchQuery) {
-        HashSet<InfoConserned> queryResults = new HashSet<InfoConserned>();
-        HashSet<InfoConserned> finalResult = new HashSet<InfoConserned>();
-        boolean specFound = false;
-
-        Query query = entityManager.createQuery("SELECT ic FROM InfoConserned ic WHERE ic.nom LIKE :search " +
-                "OR ic.prenoms LIKE :search", InfoConserned.class);
-        for (String search : searchQuery.split(" ")
-        ) {
-            query.setParameter("search", "%" + search + "%");
-            queryResults.addAll(query.getResultList());
-        }
-        for (InfoConserned result:queryResults) {
-            if ((result.getNom() + " " + result.getPrenoms()).contains(searchQuery) ||
-                    (result.getPrenoms() + " " + result.getNom()).contains(searchQuery)){
-               specFound = true;
-               finalResult.add(result);
-            }
-        }
-        if(specFound){return finalResult;}
-        finalResult = queryResults;
-        return finalResult;
-    }
 
     /**
      *

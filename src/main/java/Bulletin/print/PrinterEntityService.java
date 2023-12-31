@@ -20,7 +20,6 @@ public class PrinterEntityService {
     }
     public int getLastId(){
         Query query = entityManager.createQuery("SELECT MAX(id) AS id_max FROM PrinterEntity", PrinterEntity.class);
-
         return  (int) query.getSingleResult();
 
     }

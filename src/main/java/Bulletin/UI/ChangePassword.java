@@ -221,7 +221,13 @@ private AdminService adminService = AdminService.getInstance();
             if(admin!=null)
             {
                 adminService.changeMdp(admin.getId(),Newpass);
-                 JOptionPane.showMessageDialog(this,"Mot de passe changée");
+                 JOptionPane.showMessageDialog(this,"Mot de passe modifié avec succès");
+                 if(JOptionPane.showConfirmDialog(this,"Voulez vous vous deconnecter ?","Deconnection",
+                         JOptionPane.YES_NO_OPTION)==0){
+                     ConnexionBeanHandler.disconnect();
+                     return;
+                 }
+                 ConnexionBeanHandler.setLogin(adminService.getAdminByUsername(admin.getUsername()));
                  this.dispose();
                  return;
               }

@@ -1,6 +1,10 @@
 package Bulletin.UI;
 
 
+import Bulletin.persistence.Admin.Admin;
+import Bulletin.persistence.Admin.AdminService;
+import Bulletin.persistence.Admin.Rules;
+
 import java.awt.HeadlessException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -11,16 +15,61 @@ import javax.swing.JOptionPane;
 
 
 public class Administrateur extends javax.swing.JFrame {
-Connection con=null;
-ResultSet rs=null;
-PreparedStatement pst=null;
+private Admin user = null;
+private AdminService adminService = AdminService.getInstance();
+
+    public Admin getUser() {
+        return user;
+    }
+
+    public void setUser(Admin user) {
+        this.user = user;
+    }
+
     /**
      * Creates new form Doctor
      */
     public Administrateur() {
         initComponents();
+        btnSave.setEnabled(true);
+        btnDelete.setEnabled(false);
+        btnUpdate.setEnabled(false);
+        cmbAccountType.setSelectedIndex(0);
+        if(ConnexionBeanHandler.getLogin().getRule() == Rules.USER){
+            cmbAccountType.setEnabled(false);
+        }
         setLocationRelativeTo(null);
- 
+    }
+    public Administrateur(Admin admin){
+        initComponents();
+        setLocationRelativeTo(null);
+        this.requestFocus();
+        setUser(admin);
+        NomAd.setText(admin.getName());
+        AdUsername.setText(admin.getUsername());
+        AdPoste.setText(admin.getPoste());
+        AdPassword.setText(admin.getPassword());
+        btnSave.setEnabled(false);
+        btnUpdate.setEnabled(true);
+         btnDelete.setEnabled(true);
+        if(admin.getRule() == Rules.ADMIN){
+            cmbAccountType.setSelectedIndex(1);
+        }else {
+            cmbAccountType.setSelectedIndex(0);
+            cmbAccountType.setEnabled(false);
+        }
+        if(admin != ConnexionBeanHandler.getLogin()){
+            NomAd.setEnabled(false);
+            AdPoste.setEnabled(false);
+            AdUsername.setEnabled(false);
+            AdPassword.setEnabled(false);
+            btnDelete.setEnabled(false);
+            btnUpdate.setEnabled(false);
+            if(ConnexionBeanHandler.getLogin().getRule() == Rules.ADMIN){
+                cmbAccountType.setEnabled(true);
+                btnUpdate.setEnabled(true);
+            }
+        }
     }
 
     /**
@@ -32,19 +81,17 @@ PreparedStatement pst=null;
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
-        IDAdmin = new javax.swing.JLabel();
+        formPanel = new javax.swing.JPanel();
         AdNom = new javax.swing.JLabel();
-        AdPrenom = new javax.swing.JLabel();
         Username = new javax.swing.JLabel();
         Poste = new javax.swing.JLabel();
-        ID = new javax.swing.JTextField();
         NomAd = new javax.swing.JTextField();
-        PrenomAd = new javax.swing.JTextField();
         AdUsername = new javax.swing.JTextField();
         AdPoste = new javax.swing.JTextField();
         Sexe = new javax.swing.JLabel();
-        cmbGender = new javax.swing.JComboBox();
+        cmbAccountType = new javax.swing.JComboBox();
+        jLabel1 = new javax.swing.JLabel();
+        AdPassword = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         btnNew = new javax.swing.JButton();
         btnSave = new javax.swing.JButton();
@@ -53,77 +100,74 @@ PreparedStatement pst=null;
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Doctor");
+        setTitle("Administrteur");
         setResizable(false);
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Administrateur"));
-
-        IDAdmin.setText("ID");
+        formPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Administrateur"));
 
         AdNom.setText("Nom");
-
-        AdPrenom.setText("Prenom");
 
         Username.setText("Nom d'utilisateur");
 
         Poste.setText("Poste");
 
-        Sexe.setText("Sexe");
+        Sexe.setText("Type de compte");
 
-        cmbGender.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Masculin", "Feminin" }));
+        cmbAccountType.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Utilisateur", "Administrateur" }));
+        cmbAccountType.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbAccountTypeActionPerformed(evt);
+            }
+        });
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        jLabel1.setText("Mot de passe");
+
+        javax.swing.GroupLayout formPanelLayout = new javax.swing.GroupLayout(formPanel);
+        formPanel.setLayout(formPanelLayout);
+        formPanelLayout.setHorizontalGroup(
+            formPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(formPanelLayout.createSequentialGroup()
                 .addGap(33, 33, 33)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(IDAdmin)
+                .addGroup(formPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(AdNom)
-                    .addComponent(AdPrenom)
                     .addComponent(Username)
                     .addComponent(Poste)
-                    .addComponent(Sexe))
+                    .addComponent(Sexe)
+                    .addComponent(jLabel1))
                 .addGap(50, 50, 50)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(ID, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(NomAd)
-                        .addComponent(PrenomAd, javax.swing.GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE))
+                .addGroup(formPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(NomAd, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(AdUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(AdPoste, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cmbGender, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cmbAccountType, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(formPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(AdPassword, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(AdPoste, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 194, Short.MAX_VALUE)))
                 .addContainerGap(87, Short.MAX_VALUE))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(27, 27, 27)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(IDAdmin)
-                    .addComponent(ID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        formPanelLayout.setVerticalGroup(
+            formPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(formPanelLayout.createSequentialGroup()
+                .addGap(34, 34, 34)
+                .addGroup(formPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(NomAd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(AdNom))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(AdNom)
-                    .addComponent(NomAd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(formPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(AdUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Username))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(AdPrenom)
-                    .addComponent(PrenomAd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Username)
-                    .addComponent(AdUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(formPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(Poste)
                     .addComponent(AdPoste, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Sexe)
-                    .addComponent(cmbGender, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(240, Short.MAX_VALUE))
+                .addGroup(formPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addComponent(AdPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(formPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(cmbAccountType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Sexe))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
@@ -201,154 +245,166 @@ PreparedStatement pst=null;
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(formPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(47, Short.MAX_VALUE))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(25, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(21, 21, 21))
             .addGroup(layout.createSequentialGroup()
                 .addGap(34, 34, 34)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(363, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(formPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(275, 275, 275))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 private void Reset()
 {
-    ID.setText("");
+    setUser(null);
     NomAd.setText("");
-    PrenomAd.setText("");
     AdUsername.setText("");
     AdPoste.setText("");
-    cmbGender.setSelectedIndex(-1);
+    AdPassword.setText("");
+    cmbAccountType.setSelectedIndex(0);
+    if(ConnexionBeanHandler.getLogin().getRule() != Rules.ADMIN){
+        cmbAccountType.setEnabled(false);
+    }
     btnSave.setEnabled(true);
     btnUpdate.setEnabled(false);
     btnDelete.setEnabled(false);
-    ID.requestDefaultFocus();
 
 }
     private void btnNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewActionPerformed
         Reset();
     }//GEN-LAST:event_btnNewActionPerformed
+    private boolean fieldValidate(){
+        if(NomAd.getText().strip().equals("")){
+            JOptionPane.showMessageDialog(null,"Veuillez ajouter un nom", "Erreur",JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        if(AdUsername.getText().strip().equals("")){
+            JOptionPane.showMessageDialog(null,"Veuillez ajouter un nom", "Erreur",JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        if(AdPoste.getText().strip().equals("")){
+            JOptionPane.showMessageDialog(null,"Veuillez ajouter un nom", "Erreur",JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        if(AdPassword.getText().strip().equals("")){
+            JOptionPane.showMessageDialog(null,"Veuillez ajouter un nom", "Erreur",JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        return true;
+    }
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
+        if(!fieldValidate()){
+            return;
+        }
+        Admin admin = new Admin();
+        String nom = NomAd.getText().strip();
+        String username = AdUsername.getText().strip();
+        String poste = AdPoste.getText().strip();
+        String password = AdPassword.getText().strip();
+        int ruleSelection = cmbAccountType.getSelectedIndex();
+        Rules rule = Rules.UKNOWN;
+        if(ruleSelection == 0){
+            rule = Rules.USER;
+        }else{
+            rule = Rules.ADMIN;
+        }
+        admin.setName(nom);
+        admin.setUsername(username);
+        admin.setPoste(poste);
+        admin.setPassword(password);
+        admin.setRule(rule);
         try{
-            con=Connect.ConnectDB();
-            if (ID.getText().equals("")) {
-                JOptionPane.showMessageDialog( this, "Please enter doctor id","Error", JOptionPane.ERROR_MESSAGE);
-                return;
-
-            }
-            if (NomAd.getText().equals("")) {
-                JOptionPane.showMessageDialog( this, "Please enter doctor name","Error", JOptionPane.ERROR_MESSAGE);
-                return;
-
-            }
-            if (PrenomAd.getText().equals("")) {
-                JOptionPane.showMessageDialog( this, "Please enter Father's name","Error", JOptionPane.ERROR_MESSAGE);
+            if(adminService.getAdminByUsername(username) != null){
+                JOptionPane.showMessageDialog(this,"Un utilisateur avec la m�me nom d'utilisateur existe déjà dans la base de données","Erreur",JOptionPane.ERROR_MESSAGE);
                 return;
             }
-            if (AdUsername.getText().equals("")) {
-                JOptionPane.showMessageDialog( this, "Please enter address","Error", JOptionPane.ERROR_MESSAGE);
-                return;
-            }
-            /*
-            if (txtContactNo.getText().equals("")) {
-                JOptionPane.showMessageDialog( this, "Please enter contact no.","Error", JOptionPane.ERROR_MESSAGE);
-                return;
-            }
-         
-            if (txtQualifications.getText().equals("")) {
-                JOptionPane.showMessageDialog( this, "Please enter qualifications","Error", JOptionPane.ERROR_MESSAGE);
-                return;
-            }
-            */
-            if (AdPoste.getText().equals("")) {
-                JOptionPane.showMessageDialog( this, "Please enter specialization","Error", JOptionPane.ERROR_MESSAGE);
-                return;
-            }
-             if (cmbGender.getSelectedItem().equals("")) {
-                JOptionPane.showMessageDialog( this, "Please select gender","Error", JOptionPane.ERROR_MESSAGE);
-                return;
-            }
-            /*
-             if (cmbBloodGroup.getSelectedItem().equals("")) {
-                JOptionPane.showMessageDialog( this, "Please select blood group","Error", JOptionPane.ERROR_MESSAGE);
-                return;
-            }
-           
-            if (txtDateOfJoining.getText().equals("")) {
-                JOptionPane.showMessageDialog( this, "Please enter joining date","Error", JOptionPane.ERROR_MESSAGE);
-                return;
-            }
-             */
-   Statement stmt;
-       stmt= con.createStatement();
-       String sql1="Select DoctorID from Doctor where DoctorID= '" + ID.getText() + "'";
-      rs=stmt.executeQuery(sql1);
-      if(rs.next()){
-        JOptionPane.showMessageDialog( this, "Doctor ID already exists","Error", JOptionPane.ERROR_MESSAGE);
-        ID.setText("");
-        ID.requestDefaultFocus();
-       return;
-      }
-            String sql= "insert into Doctor(DoctorID,Doctorname,FatherName,Email,ContactNo,Qualifications,Specialization,Gender,BloodGroup,DateOfJoining,Address)values('"+ ID.getText() + "','"+ NomAd.getText() + "','"+ PrenomAd.getText() + "','"+  "','"+ AdPoste.getText() + "','" + cmbGender.getSelectedItem() + "','" + AdUsername.getText() + "')";
-
-            pst=con.prepareStatement(sql);
-            pst.execute();
-            JOptionPane.showMessageDialog(this,"Successfully saved","Doctor Record",JOptionPane.INFORMATION_MESSAGE);
-            btnSave.setEnabled(false);
-
-        }catch(HeadlessException | SQLException ex){
+            adminService.createAdmin(admin);
+            JOptionPane.showMessageDialog(this,"Un utilisateur à été ajouté dans la base de donnée","Succèss",JOptionPane.INFORMATION_MESSAGE);
+            this.dispose();
+        }catch(Exception ex){
             JOptionPane.showMessageDialog(this,ex);
         }
     }//GEN-LAST:event_btnSaveActionPerformed
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
         try{
-            int P = JOptionPane.showConfirmDialog(null," Are you sure want to delete ?","Confirmation",JOptionPane.YES_NO_OPTION);
+            int P = JOptionPane.showConfirmDialog(null," Voulez vous supprimer " +
+                     getUser().getUsername() +"de la base de donées ?","Confirmation",JOptionPane.YES_NO_OPTION);
             if (P==0)
             {
-                con=Connect.ConnectDB();
-                String sql= "delete from Doctor where DoctorID = '" + ID.getText() + "'";
-                pst=con.prepareStatement(sql);
-                pst.execute();
-                JOptionPane.showMessageDialog(this,"Successfully deleted","Record",JOptionPane.INFORMATION_MESSAGE);
-
-                Reset();
+                boolean dconnect = getUser() == ConnexionBeanHandler.getLogin();
+                adminService.removeAdmin(getUser());
+                JOptionPane.showMessageDialog(this,"Un utilisateur à été supprimé de la base de donées");
+                this.dispose();
+                if(dconnect){
+                    ConnexionBeanHandler.disconnect();
+                }
             }
-        }catch(HeadlessException | SQLException ex){
+        }catch(Exception ex){
             JOptionPane.showMessageDialog(this,ex);
         }
     }//GEN-LAST:event_btnDeleteActionPerformed
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
-        try{
-            con=Connect.ConnectDB();
-            String sql= "update Doctor set Doctorname='"+ NomAd.getText() + "',FatherName='"+ PrenomAd.getText() + "',Email='"+  "',Specialization='"+ AdPoste.getText() + "',Gender='" + cmbGender.getSelectedItem() + "',BloodGroup='"+  "',Address='" + AdUsername.getText() + "' where DoctorID='" + ID.getText() + "'";
-
-           pst=con.prepareStatement(sql);
-            pst.execute();
-            JOptionPane.showMessageDialog(this,"Successfully updated","Doctor Record",JOptionPane.INFORMATION_MESSAGE);
-            btnUpdate.setEnabled(false);
-
-        }catch(HeadlessException | SQLException ex){
+        if(!fieldValidate()){
+            return;
+        }
+        Admin admin = new Admin();
+        String nom = NomAd.getText().strip();
+        String username = AdUsername.getText().strip();
+        String poste = AdPoste.getText().strip();
+        String password = AdPassword.getText().strip();
+        int ruleSelection = cmbAccountType.getSelectedIndex();
+        Rules rule = Rules.UKNOWN;
+        if(ruleSelection == 0){
+            rule = Rules.USER;
+        }else{
+            rule = Rules.ADMIN;
+        }
+        admin.setName(nom);
+        admin.setUsername(username);
+        admin.setPoste(poste);
+        admin.setPassword(password);
+        admin.setRule(rule);
+        try {
+            if (adminService.getAdminByUsername(username) != null && adminService.getAdminByUsername(username) != getUser()) {
+                JOptionPane.showMessageDialog(this, "Un utilisateur avec la m�me nom d'utilisateur existe déjà dans la base de données", "Erreur", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            if(JOptionPane.showConfirmDialog(null,"Voulez vous confirmer la mise à jour des informations sur " +
+                    getUser().getUsername() + " ?", "Confirmation", JOptionPane.YES_NO_OPTION) == 0) {
+                adminService.updateAdmin(getUser().getId(), admin);
+                if(getUser()==ConnexionBeanHandler.getLogin()){
+                ConnexionBeanHandler.setLogin(adminService.getAdminByUsername(admin.getUsername()));
+                }
+                JOptionPane.showMessageDialog(null,"Mise à jour terminée avec succès");
+                this.dispose();
+            }
+        }catch (Exception ex){
             JOptionPane.showMessageDialog(this,ex);
         }
     }//GEN-LAST:event_btnUpdateActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-     this.hide();
-     InfoAdmin frm=new InfoAdmin();
-     frm.setVisible(true);
+     this.setVisible(false);
+     InfoAdmin.getInstance().setVisible(true);
+     this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void cmbAccountTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbAccountTypeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbAccountTypeActionPerformed
 
     /**
      * @param args the command line arguments
@@ -387,23 +443,21 @@ private void Reset()
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel AdNom;
+    private javax.swing.JTextField AdPassword;
     public javax.swing.JTextField AdPoste;
-    private javax.swing.JLabel AdPrenom;
     public javax.swing.JTextField AdUsername;
-    public javax.swing.JTextField ID;
-    private javax.swing.JLabel IDAdmin;
     public javax.swing.JTextField NomAd;
     private javax.swing.JLabel Poste;
-    public javax.swing.JTextField PrenomAd;
     private javax.swing.JLabel Sexe;
     private javax.swing.JLabel Username;
     public javax.swing.JButton btnDelete;
     private javax.swing.JButton btnNew;
     public javax.swing.JButton btnSave;
     public javax.swing.JButton btnUpdate;
-    public javax.swing.JComboBox cmbGender;
+    public javax.swing.JComboBox cmbAccountType;
+    private javax.swing.JPanel formPanel;
     private javax.swing.JButton jButton1;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel2;
     // End of variables declaration//GEN-END:variables
 }

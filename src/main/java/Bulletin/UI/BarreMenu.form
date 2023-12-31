@@ -86,7 +86,7 @@
         </Menu>
         <Menu class="javax.swing.JMenu" name="menuAdmin">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Admin"/>
+            <Property name="text" type="java.lang.String" value="Comptes"/>
           </Properties>
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="AdmIden">

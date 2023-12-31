@@ -1,33 +1,89 @@
 package Bulletin.UI;
 
 
+import Bulletin.persistence.Admin.Admin;
+import Bulletin.persistence.Admin.AdminService;
+import Bulletin.persistence.Admin.Rules;
+
 import java.sql.*;
+import java.util.List;
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 //import net.proteanit.sql.DbUtils;
 
 public class InfoAdmin extends javax.swing.JFrame {
-Connection con=null;
-ResultSet rs=null;
-PreparedStatement pst=null;
+AdminService adminService = AdminService.getInstance();
+private static InfoAdmin instance = null;
+
+    public static InfoAdmin getInstance() {
+        if(instance == null){
+            instance = new InfoAdmin();
+        }
+        return instance;
+    }
+
+    @Override
+    public void dispose() {
+        super.dispose();
+        instance = null;
+    }
+
     /**
      * Creates new form UsersRegistrationRecord
      */
     public InfoAdmin() {
         initComponents();
-        con= Connect.ConnectDB();
         Get_Data();
         setLocationRelativeTo(null);
     }
   private void Get_Data(){
-        String sql="select NameOfUser as 'Name', UserName as 'User Name',Password,ContactNo as 'Contact No',Email as 'Email ID' from Registration";
-        try{
-         pst=con.prepareStatement(sql);
-          rs= pst.executeQuery();
-         //jTable1.setModel(DbUtils.resultSetToTableModel(rs));
-         }catch(Exception e){
-            JOptionPane.showMessageDialog(null, e);
-          
-}
+        try {
+        if(ConnexionBeanHandler.getLogin().getRule() == Rules.ADMIN){
+            List<Admin> admins = adminService.getAllUtilisateur();
+            admins.add(0,ConnexionBeanHandler.getLogin());
+            Object[][] data = new Object[admins.size()][6];
+            int i = 0;
+            for(Admin admin : admins){
+                data[i][0] = admin.getId();
+                data[i][1] = admin.getName();
+                data[i][2] = admin.getUsername();
+                data[i][3] = admin.getPassword();
+                data[i][4] = admin.getRule();
+                data[i][5] = admin == ConnexionBeanHandler.getLogin() ? "Connecté" : "Deconnecté";
+                i++;
+            }
+            String[] columnNames = new String[6];
+            columnNames[0] = "Id";
+            columnNames[1] = "Nom";
+            columnNames[2] = "Nom d'Utilisateur";
+            columnNames[3] = "Mot de Passe";
+            columnNames[4] = "Type";
+            columnNames[5] = "Status";
+            DefaultTableModel tableModel = new DefaultTableModel(data,columnNames);
+            usersList.setModel(tableModel);
+        }else {
+            Admin admin = ConnexionBeanHandler.getLogin();
+            Object[][] data = new Object[1][5];
+            int i=0;
+                data[i][0] = admin.getId();
+                data[i][1] = admin.getName();
+                data[i][2] = admin.getUsername();
+                data[i][3] = admin.getPassword();
+                data[i][4] = admin.getRule();
+
+            String[] columnNames = new String[5];
+            columnNames[0] = "Id";
+            columnNames[1] = "Nom";
+            columnNames[2] = "Username";
+            columnNames[3] = "Mot de Passe";
+            columnNames[4] = "Type";
+            DefaultTableModel tableModel = new DefaultTableModel(data,columnNames);
+            usersList.setModel(tableModel);
+        }
+        }catch (Exception e){
+            JOptionPane.showMessageDialog(null,"Erreur");
+        }
+
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -201,36 +257,19 @@ PreparedStatement pst=null;
 
     private void usersListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_usersListMouseClicked
              try{
-            con=Connect.ConnectDB();
             int row= usersList.getSelectedRow();
-            String table_click= usersList.getModel().getValueAt(row, 1).toString();
-            String sql= "select * from registration where username= '" + table_click + "'";
-            pst=con.prepareStatement(sql);
-            rs=  pst.executeQuery();
-            if(rs.next()){
-                this.hide();
-                AdIdentification frm = new AdIdentification();
-                frm.setVisible(true);
-                String add1=rs.getString("Username");
-                frm.txtUserName.setText(add1);
-                String add2=rs.getString("Password");
-                frm.txtPassword.setText(add2);
-                String add3=rs.getString("NameOfUser");
-                frm.txtName.setText(add3);
-                frm.saveUser.setEnabled(false);
-                frm.deleteUser.setEnabled(true);
-                frm.updateUser.setEnabled(true);
-            }
-          
+            String table_click= usersList.getModel().getValueAt(row, 2).toString();
+            Administrateur administrateur = new Administrateur(AdminService.getInstance().getAdminByUsername(table_click));
+            administrateur.setVisible(true);
+            this.dispose();
         }catch(Exception ex){
             JOptionPane.showMessageDialog(this,ex);
         }
     }//GEN-LAST:event_usersListMouseClicked
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-  this.hide();
+  this.dispose();
   AdIdentification frm = new AdIdentification();
-  frm.setVisible(true);
     }//GEN-LAST:event_formWindowClosing
 
     /**
@@ -264,7 +303,7 @@ PreparedStatement pst=null;
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new InfoAdmin().setVisible(true);
+                InfoAdmin.getInstance().setVisible(true);
             }
         });
     }

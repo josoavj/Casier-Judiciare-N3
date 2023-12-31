@@ -287,7 +287,11 @@ public class AjoutCondamnation extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, e);
             return;
         }
-
+        try {
+            LocalDate.of(Integer.parseInt(dateAnnee.getText()),dateMois.getSelectedIndex()+1,Integer.parseInt(dateJour.getText()));
+        }catch (Exception e){
+            JOptionPane.showMessageDialog(null, "Veuillez rectifier la date de condamnation","Erreur",JOptionPane.ERROR_MESSAGE);
+        }
         LocalDate localDate = LocalDate.of(Integer.parseInt(dateAnnee.getText()),dateMois.getSelectedIndex()+1,Integer.parseInt(dateJour.getText()));
         Date date = Date.valueOf(localDate);
 
@@ -324,7 +328,11 @@ public class AjoutCondamnation extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, e);
                 return;
             }
-
+            try {
+                LocalDate.of(Integer.parseInt(dateAnnee.getText()),dateMois.getSelectedIndex()+1,Integer.parseInt(dateJour.getText()));
+            }catch (Exception e){
+                JOptionPane.showMessageDialog(null, "Veuillez rectifier la date de condamnation","Erreur",JOptionPane.ERROR_MESSAGE);
+            }
             LocalDate localDate = LocalDate.of(Integer.parseInt(dateAnnee.getText()),dateMois.getSelectedIndex()+1,Integer.parseInt(dateJour.getText()));
             Date date = Date.valueOf(localDate);
             if (condamnation == this.condamnationSelected){

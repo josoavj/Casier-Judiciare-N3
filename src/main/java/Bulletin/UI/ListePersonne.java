@@ -6,35 +6,40 @@ import Bulletin.persistence.infoCondamnation.InfoConsernedService;
 import Bulletin.print.PrinterService;
 import jakarta.persistence.Query;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
+import java.util.regex.Pattern;
+import javax.print.DocFlavor;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 // import net.proteanit.sql.DbUtils;
 
 public class ListePersonne extends javax.swing.JFrame {
-Connection con=null;
-ResultSet rs=null;
-PreparedStatement pst=null;
- InfoConsernedService infoConsernedService = null;
+ InfoConsernedService infoConsernedService = InfoConsernedService.getInstance();
  List<InfoConserned> infoConsernedList = new ArrayList<>();
  private static ListePersonne instance = null;
 
     public static ListePersonne getInstance() {
-        return instance == null ? new ListePersonne() : instance;
+        if(instance == null){
+            instance = new ListePersonne();
+        }
+        return instance;
     }
 
     public ListePersonne() {
         initComponents();
+        infoConsernedList=infoConsernedService.getConsernedList();
         Get_Data();
         setLocationRelativeTo(null);
     }
  public void Get_Data(){
-            infoConsernedService = InfoConsernedService.getInstance();
-            infoConsernedList = infoConsernedService.getConsernedList();
             if (infoConsernedList == null){
                 JOptionPane.showMessageDialog(null,"La base de donnée est vide");
                 return;
@@ -50,7 +55,12 @@ PreparedStatement pst=null;
                data[i][2] = infoConserned.getPrenoms();
                data[i][3] = infoConserned.getPere();
                data[i][4] = infoConserned.getMere();
-               data[i][5] = infoConserned.getDateNaissance();
+               Pattern pattern = Pattern.compile("[ -]");
+               String[] format = pattern.split(infoConserned.getDateNaissance().toString());
+               String jour = format[2];
+               String mois = format[1];
+               String annee = format[0];
+               data[i][5] = jour+"-"+mois+"-"+annee;
                data[i][6] = infoConserned.getSexe();
                data[i][7] = infoConserned.getNationalite();
                i++;
@@ -93,6 +103,9 @@ PreparedStatement pst=null;
         modifPerson = new javax.swing.JButton();
         printPerson = new javax.swing.JButton();
         getPersonInfo = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
+        txtSearch = new javax.swing.JTextField();
+        cmbFilter = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Patient Registration Record");
@@ -202,6 +215,42 @@ PreparedStatement pst=null;
                 .addContainerGap(17, Short.MAX_VALUE))
         );
 
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Filtres"));
+
+        txtSearch.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtSearchKeyTyped(evt);
+            }
+        });
+
+        cmbFilter.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tout", "Avec condamnations", "Sans condamnation" }));
+        cmbFilter.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbFilterActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtSearch)
+                    .addComponent(cmbFilter, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(14, 14, 14)
+                .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(cmbFilter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(20, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -210,11 +259,14 @@ PreparedStatement pst=null;
                 .addGap(39, 39, 39)
                 .addComponent(modifPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(36, Short.MAX_VALUE))
+            .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(39, 39, 39)
+                .addGap(13, 13, 13)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(28, 28, 28)
                 .addComponent(modifPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -230,8 +282,8 @@ PreparedStatement pst=null;
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 911, Short.MAX_VALUE)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 584, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -269,14 +321,21 @@ PreparedStatement pst=null;
     this.dispose();
     }//GEN-LAST:event_addPersonActionPerformed
 
+    @Override
+    public void dispose() {
+        super.dispose();
+        instance = null;
+    }
+
     private void deletePersonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deletePersonActionPerformed
         int row= tableListPerson.getSelectedRow();
         String table_click= tableListPerson.getModel().getValueAt(row, 0).toString();
         int acteNaissanceNum = Integer.parseInt(table_click);
         InfoConserned ic = infoConsernedService.getInfoConsernedByAN(acteNaissanceNum);
         String message = "voulez vous supprimer "+ic.getNom();
-        if(JOptionPane.showConfirmDialog(null,message)==0) {
+        if(JOptionPane.showConfirmDialog(null,message,"Confirmation",JOptionPane.YES_NO_OPTION)==0) {
             InfoConsernedService.getInstance().removeInfoConserned(ic);
+            txtSearch.setText("");
             Get_Data();
         }
     }//GEN-LAST:event_deletePersonActionPerformed
@@ -290,7 +349,7 @@ PreparedStatement pst=null;
         frm.setVisible(true);
     }
 
-    private void printPersonActionPerformed(java.awt.event.ActionEvent evt) throws Exception {//GEN-FIRST:event_printPersonActionPerformed
+    private void printPersonActionPerformed(java.awt.event.ActionEvent evt) throws Exception {                                            
         int row= tableListPerson.getSelectedRow();
         String table_click= tableListPerson.getModel().getValueAt(row, 0).toString();
         int acteNaissanceNum = Integer.parseInt(table_click);
@@ -302,6 +361,7 @@ PreparedStatement pst=null;
             JOptionPane.showMessageDialog(null,"Impression annulée");
         }
     }
+
     private void btnModActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModActionPerformed
         try{
             infoConsernedService = InfoConsernedService.getInstance();
@@ -309,14 +369,68 @@ PreparedStatement pst=null;
             String table_click= tableListPerson.getModel().getValueAt(row, 0).toString();
             int acteNaissanceNum = Integer.parseInt(table_click);
             InfoConserned ic = infoConsernedService.getInfoConsernedByAN(acteNaissanceNum);
-            this.setVisible(false);
             AjoutPersonne frm = new AjoutPersonne(ic);
             frm.setVisible(true);
+            this.dispose();
         }catch(Exception ex){
             JOptionPane.showMessageDialog(this,ex);
         }
 
     }//GEN-LAST:event_btnModActionPerformed
+
+    private void txtSearchKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchKeyTyped
+        if (evt.getKeyChar() == KeyEvent.VK_ENTER || evt.getKeyChar()==KeyEvent.VK_BACK_SPACE) {
+            List<InfoConserned> searchValues = new ArrayList<>();
+
+            for(InfoConserned ic : infoConsernedList){
+                String fullname = ic.getNom() + " " + ic.getPrenoms();
+                if(ic.getNom().toLowerCase().contains(txtSearch.getText().toLowerCase()) ||
+                        ic.getPrenoms().toLowerCase().contains(txtSearch.getText().toLowerCase())
+                || fullname.toLowerCase().contains(txtSearch.getText().toLowerCase())){
+                    searchValues.add(ic);
+                }
+            }
+            if(txtSearch.getText().isEmpty()){
+                List<InfoConserned> filteredList = new ArrayList();
+                if(cmbFilter.getSelectedIndex() == 0){
+                    infoConsernedList = infoConsernedService.getConsernedList();
+                }else {
+                    for (InfoConserned ic : infoConsernedService.getConsernedList()) {
+                        if (cmbFilter.getSelectedIndex() == 1 && !ic.getCondamnationList().isEmpty()) {
+                            filteredList.add(ic);
+                        }
+                        if (cmbFilter.getSelectedIndex() == 2 && ic.getCondamnationList().isEmpty()) {
+                            filteredList.add(ic);
+                        }
+                    }
+                    infoConsernedList = filteredList;
+                }
+                Get_Data();
+                return;
+            }
+            infoConsernedList =  searchValues;
+            Get_Data();
+        }
+    }//GEN-LAST:event_txtSearchKeyTyped
+
+    private void cmbFilterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbFilterActionPerformed
+        // TODO add your handling code here:
+        List<InfoConserned> filteredList = new ArrayList();
+        if(cmbFilter.getSelectedIndex() == 0){
+            infoConsernedList = infoConsernedService.getConsernedList();
+        }else {
+            for (InfoConserned ic : infoConsernedService.getConsernedList()) {
+                if (cmbFilter.getSelectedIndex() == 1 && !ic.getCondamnationList().isEmpty()) {
+                    filteredList.add(ic);
+                }
+                if (cmbFilter.getSelectedIndex() == 2 && ic.getCondamnationList().isEmpty()) {
+                    filteredList.add(ic);
+                }
+            }
+            infoConsernedList = filteredList;
+        }
+        Get_Data();
+    }//GEN-LAST:event_cmbFilterActionPerformed
 
     /**
      * @param args the command line arguments
@@ -357,13 +471,16 @@ PreparedStatement pst=null;
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addPerson;
+    private javax.swing.JComboBox<String> cmbFilter;
     private javax.swing.JButton deletePerson;
     private javax.swing.JButton getPersonInfo;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel modifPanel;
     private javax.swing.JButton modifPerson;
     private javax.swing.JButton printPerson;
     private javax.swing.JTable tableListPerson;
+    private javax.swing.JTextField txtSearch;
     // End of variables declaration//GEN-END:variables
 }

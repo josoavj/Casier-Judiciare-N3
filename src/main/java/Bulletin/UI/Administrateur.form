@@ -3,7 +3,7 @@
 <Form version="1.5" maxVersion="1.8" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="2"/>
-    <Property name="title" type="java.lang.String" value="Doctor"/>
+    <Property name="title" type="java.lang.String" value="Administrteur"/>
     <Property name="resizable" type="boolean" value="false"/>
   </Properties>
   <SyntheticProperties>
@@ -27,30 +27,30 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
-              <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
+              <Component id="formPanel" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="47" max="32767" attributes="0"/>
+              <EmptySpace pref="20" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="1" attributes="0">
-              <EmptySpace pref="25" max="32767" attributes="0"/>
-              <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
-          </Group>
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
               <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
+              <EmptySpace pref="363" max="32767" attributes="0"/>
+          </Group>
+          <Group type="102" alignment="1" attributes="0">
               <EmptySpace max="32767" attributes="0"/>
+              <Component id="formPanel" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="275" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Container class="javax.swing.JPanel" name="jPanel1">
+    <Container class="javax.swing.JPanel" name="formPanel">
       <Properties>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
@@ -65,23 +65,21 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="IDAdmin" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="AdNom" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="AdPrenom" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="Username" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="Poste" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="Sexe" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="ID" alignment="0" min="-2" pref="89" max="-2" attributes="0"/>
-                          <Component id="NomAd" alignment="0" max="32767" attributes="0"/>
-                          <Component id="PrenomAd" alignment="0" pref="193" max="32767" attributes="0"/>
-                      </Group>
+                      <Component id="NomAd" alignment="0" min="-2" pref="193" max="-2" attributes="0"/>
                       <Component id="AdUsername" min="-2" pref="207" max="-2" attributes="0"/>
-                      <Component id="AdPoste" alignment="0" min="-2" pref="194" max="-2" attributes="0"/>
-                      <Component id="cmbGender" alignment="0" min="-2" pref="102" max="-2" attributes="0"/>
+                      <Component id="cmbAccountType" alignment="0" min="-2" pref="102" max="-2" attributes="0"/>
+                      <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                          <Component id="AdPassword" alignment="0" max="32767" attributes="0"/>
+                          <Component id="AdPoste" alignment="0" pref="194" max="32767" attributes="0"/>
+                      </Group>
                   </Group>
                   <EmptySpace pref="87" max="32767" attributes="0"/>
               </Group>
@@ -90,55 +88,40 @@
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="IDAdmin" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="ID" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="AdNom" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="NomAd" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="AdNom" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="AdPrenom" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="PrenomAd" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="1" attributes="0">
+                      <Component id="AdUsername" min="-2" max="-2" attributes="0"/>
+                      <Component id="Username" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="Username" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="AdUsername" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="Poste" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="AdPoste" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="Poste" min="-2" max="-2" attributes="0"/>
+                      <Component id="AdPoste" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="Sexe" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="cmbGender" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                      <Component id="AdPassword" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="240" max="32767" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="1" attributes="0">
+                      <Component id="cmbAccountType" min="-2" max="-2" attributes="0"/>
+                      <Component id="Sexe" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace pref="22" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JLabel" name="IDAdmin">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="ID"/>
-          </Properties>
-        </Component>
         <Component class="javax.swing.JLabel" name="AdNom">
           <Properties>
             <Property name="text" type="java.lang.String" value="Nom"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JLabel" name="AdPrenom">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Prenom"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="Username">
@@ -151,17 +134,7 @@
             <Property name="text" type="java.lang.String" value="Poste"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="ID">
-          <AuxValues>
-            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
-          </AuxValues>
-        </Component>
         <Component class="javax.swing.JTextField" name="NomAd">
-          <AuxValues>
-            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
-          </AuxValues>
-        </Component>
-        <Component class="javax.swing.JTextField" name="PrenomAd">
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
           </AuxValues>
@@ -178,21 +151,31 @@
         </Component>
         <Component class="javax.swing.JLabel" name="Sexe">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Sexe"/>
+            <Property name="text" type="java.lang.String" value="Type de compte"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JComboBox" name="cmbGender">
+        <Component class="javax.swing.JComboBox" name="cmbAccountType">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
               <StringArray count="2">
-                <StringItem index="0" value="Masculin"/>
-                <StringItem index="1" value="Feminin"/>
+                <StringItem index="0" value="Utilisateur"/>
+                <StringItem index="1" value="Administrateur"/>
               </StringArray>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cmbAccountTypeActionPerformed"/>
+          </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
           </AuxValues>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabel1">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Mot de passe"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="AdPassword">
         </Component>
       </SubComponents>
     </Container>
