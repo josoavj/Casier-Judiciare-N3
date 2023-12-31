@@ -222,6 +222,7 @@ private AdminService adminService = AdminService.getInstance();
             {
                 adminService.changeMdp(admin.getId(),Newpass);
                  JOptionPane.showMessageDialog(this,"Mot de passe modifié avec succès");
+                 if(ConnexionBeanHandler.getLogin() == admin){
                  if(JOptionPane.showConfirmDialog(this,"Voulez vous vous deconnecter ?","Deconnection",
                          JOptionPane.YES_NO_OPTION)==0){
                      ConnexionBeanHandler.disconnect();
@@ -230,6 +231,7 @@ private AdminService adminService = AdminService.getInstance();
                  ConnexionBeanHandler.setLogin(adminService.getAdminByUsername(admin.getUsername()));
                  this.dispose();
                  return;
+                 }
               }
             else
             {
@@ -254,52 +256,59 @@ private AdminService adminService = AdminService.getInstance();
                 String uName = UserName.getText();
                 if (uName.equals("")) {
 
-                    JOptionPane.showMessageDialog(this, "Veuillez entrer votre nom d'utilisateur",
+                    JOptionPane.showMessageDialog(this, "Entrer votre nom d'utilisateur",
                             "Error", JOptionPane.ERROR_MESSAGE);
                     return;
 
                 } else if (OldPass.equals("")) {
 
                     JOptionPane.showMessageDialog(this, "Veuillez entrer votre ancien mot de passe",
-                            "Error", JOptionPane.ERROR_MESSAGE);
+                            "Erreur", JOptionPane.ERROR_MESSAGE);
                     return;
 
                 } else if (Newpass.equals("")) {
 
                     JOptionPane.showMessageDialog(this, "Veuillez entrer votre nouveau mot de passe",
-                            "Error", JOptionPane.ERROR_MESSAGE);
+                            "Erreur", JOptionPane.ERROR_MESSAGE);
                     return;
 
                 } else if (ConfPass.equals("")) {
 
                     JOptionPane.showMessageDialog(this, "Veuillez confirmer votre mot de passe",
-                            "Error", JOptionPane.ERROR_MESSAGE);
+                            "Erreur", JOptionPane.ERROR_MESSAGE);
                     return;
                 } else if (Newpass.length() < 5) {
 
                     JOptionPane.showMessageDialog(this,
-                            "The New Password Should be of Atleast 5 Characters",
-                            "Error", JOptionPane.ERROR_MESSAGE);
+                            "Le mot de passe doit contenir au moins 5 caractères",
+                            "Erreur", JOptionPane.ERROR_MESSAGE);
                     return;
                 } else if ((Newpass).equals(OldPass)) {
 
                     JOptionPane.showMessageDialog(this,
-                            "Password is same..Re-enter new password", "Error", JOptionPane.ERROR_MESSAGE);
+                            "Mot de passe identique..Veuillez reecrire votre mot de passe", "Erreur", JOptionPane.ERROR_MESSAGE);
                     return;
                 } else if (!(Newpass).equals(ConfPass)) {
 
                     JOptionPane.showMessageDialog(this,
-                            "New Password doesn't match with Confirmed Password",
+                            "Le nouveau mot de passe ne se corresponde pas, réessayez",
                             "Error", JOptionPane.ERROR_MESSAGE);
                     return;
                 }
-
                 Admin admin = adminService.getAdmin(uName, OldPass);
                 if (admin != null) {
                     adminService.changeMdp(admin.getId(), Newpass);
-                    JOptionPane.showMessageDialog(this, "Mot de passe changée");
-                    this.dispose();
-                    return;
+                    JOptionPane.showMessageDialog(this, "Mot de passe modifié avec succès");
+                    if (ConnexionBeanHandler.getLogin() == admin) {
+                        if (JOptionPane.showConfirmDialog(this, "Voulez vous vous deconnecter ?", "Deconnection",
+                                JOptionPane.YES_NO_OPTION) == 0) {
+                            ConnexionBeanHandler.disconnect();
+                            return;
+                        }
+                        ConnexionBeanHandler.setLogin(adminService.getAdminByUsername(admin.getUsername()));
+                        this.dispose();
+                        return;
+                    }
                 } else {
                     JOptionPane.showMessageDialog(this, "Utilisateur ou mot de passe erroné", "Erreur", JOptionPane.ERROR_MESSAGE);
                     UserName.setText("");
