@@ -176,25 +176,29 @@ private AdminService adminService = AdminService.getInstance();
                                           "Error", JOptionPane.ERROR_MESSAGE);
                 return;
                
-            } else if (OldPass.equals("")) {
+            }
+        if (OldPass.equals("")) {
             
                 JOptionPane.showMessageDialog( this, "Veuillez entrer votre ancien mot de passe",
                                           "Erreur", JOptionPane.ERROR_MESSAGE);
                 return;
                
-            } else if (Newpass.equals("")) {
+            }
+        if (Newpass.equals("")) {
               
                 JOptionPane.showMessageDialog( this, "Veuillez entrer votre nouveau mot de passe",
                                           "Erreur", JOptionPane.ERROR_MESSAGE);
                 return;
                 
-            } else if (ConfPass.equals("")) {
+            }
+        if (ConfPass.equals("")) {
                
                 JOptionPane.showMessageDialog( this, "Veuillez confirmer votre mot de passe",
                                           "Erreur", JOptionPane.ERROR_MESSAGE);
                 return;
             } 
-               else if (Newpass.length()< 8) {
+
+        if (Newpass.length()< 8) {
                
                 JOptionPane.showMessageDialog(this,
                                          "Le mot de passe doit contenir au moins 8 caractères",
@@ -260,30 +264,35 @@ private AdminService adminService = AdminService.getInstance();
                             "Error", JOptionPane.ERROR_MESSAGE);
                     return;
 
-                } else if (OldPass.equals("")) {
+                }
+                if (OldPass.equals("")) {
 
                     JOptionPane.showMessageDialog(this, "Veuillez entrer votre ancien mot de passe",
                             "Erreur", JOptionPane.ERROR_MESSAGE);
                     return;
 
-                } else if (Newpass.equals("")) {
+                }
+                if (Newpass.equals("")) {
 
                     JOptionPane.showMessageDialog(this, "Veuillez entrer votre nouveau mot de passe",
                             "Erreur", JOptionPane.ERROR_MESSAGE);
                     return;
 
-                } else if (ConfPass.equals("")) {
+                }
+                if (ConfPass.equals("")) {
 
                     JOptionPane.showMessageDialog(this, "Veuillez confirmer votre mot de passe",
                             "Erreur", JOptionPane.ERROR_MESSAGE);
                     return;
-                } else if (Newpass.length() < 5) {
+                }
+                if (Newpass.length() < 8) {
 
                     JOptionPane.showMessageDialog(this,
-                            "Le mot de passe doit contenir au moins 5 caractères",
+                            "Le mot de passe doit contenir au moins 8 caractères",
                             "Erreur", JOptionPane.ERROR_MESSAGE);
                     return;
-                } else if ((Newpass).equals(OldPass)) {
+                }
+                if ((Newpass).equals(OldPass)) {
 
                     JOptionPane.showMessageDialog(this,
                             "Mot de passe identique..Veuillez reecrire votre mot de passe", "Erreur", JOptionPane.ERROR_MESSAGE);
