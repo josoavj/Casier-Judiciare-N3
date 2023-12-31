@@ -276,6 +276,10 @@ private void Reset()
     if(ConnexionBeanHandler.getLogin().getRule() != Rules.ADMIN){
         cmbAccountType.setEnabled(false);
     }
+    NomAd.setEnabled(true);
+    AdUsername.setEnabled(true);
+    AdPassword.setEnabled(true);
+    AdPoste.setEnabled(true);
     btnSave.setEnabled(true);
     btnUpdate.setEnabled(false);
     btnDelete.setEnabled(false);
