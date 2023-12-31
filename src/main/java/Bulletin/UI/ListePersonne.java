@@ -172,7 +172,12 @@ public class ListePersonne extends javax.swing.JFrame {
         printPerson.setText("Imprimer");
         printPerson.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                printPersonActionPerformed(evt);
+                try {
+                    printPersonActionPerformed(evt);
+                } catch (Exception e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
             }
         });
 
