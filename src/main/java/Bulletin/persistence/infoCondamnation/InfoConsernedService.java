@@ -120,6 +120,7 @@ public class InfoConsernedService {
                 }
             }
             trans.commit();
+            CondamnationService.getInstance().cleanTable();
             return true;
         }catch (Exception e){
             System.out.println(e);

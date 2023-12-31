@@ -686,12 +686,6 @@ private void Reset()
                 return;
             }
             if(infoConsernedService.addConserned(infoConserned1)) {
-                JOptionPane.showMessageDialog(null, "Enregistrement réuissite","Succès",JOptionPane.ERROR_MESSAGE);
-                JOptionPane.showMessageDialog(null, "Une personne avec la même numéro d'acte de naissance" +
-                        "existe déjà dans la base de données");
-                return;
-            }
-            if(infoConsernedService.addConserned(infoConserned1)) {
                 JOptionPane.showMessageDialog(null, "Enregistrement réussit");
                 this.setVisible(false);
                 ListePersonne.getInstance().Get_Data();
@@ -713,6 +707,7 @@ private void Reset()
             this.setVisible(false);
             ListePersonne.getInstance().Get_Data();
             ListePersonne.getInstance().setVisible(true);
+            ListePersonne.getInstance().requestFocus();
             this.dispose();
         }
     }//GEN-LAST:event_btnEffacerActionPerformed
@@ -822,6 +817,7 @@ private void Reset()
             this.setVisible(false);
             ListePersonne.getInstance().Get_Data();
             ListePersonne.getInstance().setVisible(true);
+            ListePersonne.getInstance().requestFocus();
             this.dispose();
         }else{
             JOptionPane.showMessageDialog(null,"Echec de la mise à jour");

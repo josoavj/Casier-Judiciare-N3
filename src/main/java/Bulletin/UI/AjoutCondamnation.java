@@ -332,6 +332,7 @@ public class AjoutCondamnation extends javax.swing.JFrame {
                 LocalDate.of(Integer.parseInt(dateAnnee.getText()),dateMois.getSelectedIndex()+1,Integer.parseInt(dateJour.getText()));
             }catch (Exception e){
                 JOptionPane.showMessageDialog(null, "Veuillez rectifier la date de condamnation","Erreur",JOptionPane.ERROR_MESSAGE);
+                return;
             }
             LocalDate localDate = LocalDate.of(Integer.parseInt(dateAnnee.getText()),dateMois.getSelectedIndex()+1,Integer.parseInt(dateJour.getText()));
             Date date = Date.valueOf(localDate);

@@ -73,5 +73,14 @@ public class CondamnationService {
     public Condamnation getCondamnationById(int id){
         return entityManager.find(Condamnation.class,id);
     }
+    public void cleanTable(){
+        for(Condamnation condamnation : getCondamnationList()){
+            if(condamnation.getInfoConserned() == null){
+                entityManager.getTransaction().begin();
+                entityManager.remove(condamnation);
+                entityManager.getTransaction().commit();
+            }
+        }
+    }
 
 }
