@@ -1,6 +1,7 @@
 package Bulletin.UI;
 
 
+import java.awt.event.ActionEvent;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -222,8 +223,8 @@ public class BarreMenu extends javax.swing.JFrame {
 
         menuAide.setText("Aide");
         menuAide.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menuAideActionPerformed(evt);
+            public void actionPerformed(ActionEvent evt) {
+                MAideActionPerformed(evt);
             }
         });
 
