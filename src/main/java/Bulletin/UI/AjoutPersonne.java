@@ -730,26 +730,42 @@ private void Reset()
             status = cmbGender.getSelectedIndex() == 0 ? "Veuf" : "Veuve";
         }
         this.infoConsernedService = InfoConsernedService.getInstance();
-        //formatage de la date de naissance
-        LocalDate localDate = LocalDate.of(Integer.parseInt(annenaiss.getText()), moisnaiss.getSelectedIndex() + 1, Integer.parseInt(datenaiss.getText()));
-        Date date = Date.valueOf(localDate);
-        //formatage de la date pour l'acte de naissance
-        LocalDate localActDate = LocalDate.of(Integer.parseInt(anneAct.getText()), moisAct.getSelectedIndex() + 1, Integer.parseInt(jourAct.getText()));
-        Date dateAct = Date.valueOf(localActDate);
         InfoConserned infoConserned1 = new InfoConserned();
+        //formatage de la date pour l'acte de naissance
+        try {
+            LocalDate localActDate = LocalDate.of(Integer.parseInt(anneAct.getText()), moisAct.getSelectedIndex() + 1, Integer.parseInt(jourAct.getText()));
+            Date dateAct = Date.valueOf(localActDate);
+            infoConserned1.setDateActeNaissance(dateAct);
+        }catch (Exception e){
+            JOptionPane.showMessageDialog(this,"Veuillez rectifier la date de delivrence de l'acte de naissance","Erreur",JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        //formatage de la date de naissance
+        try {
+            LocalDate localDate = LocalDate.of(Integer.parseInt(annenaiss.getText()), moisnaiss.getSelectedIndex() + 1, Integer.parseInt(datenaiss.getText()));
+            Date date = Date.valueOf(localDate);
+            infoConserned1.setDateNaissance(date);
+        }catch (Exception e){
+            JOptionPane.showMessageDialog(this,"Veuillez rectifier la date de naissance","Erreur",JOptionPane.ERROR_MESSAGE);
+            return;
+        }
         infoConserned1.setActeNaissance(Integer.parseInt(acteNaissace.getText().strip()));
-        infoConserned1.setDateActeNaissance(dateAct);
         infoConserned1.setNom(NomPers.getText().strip());
         infoConserned1.setPrenoms(PrenomPers.getText().strip());
         infoConserned1.setPere(pere.getText().strip());
         infoConserned1.setMere(mere.getText().strip());
-        infoConserned1.setDateNaissance(date);
         infoConserned1.setLieuNaissance(lieunais.getText().strip());
         infoConserned1.setProfession(Profession.getText().strip());
         infoConserned1.setDomicile(Domicile.getText().strip());
         infoConserned1.setNationalite(Nationalite.getText().strip().toUpperCase());
         infoConserned1.setSexe(cmbGender.getSelectedItem().toString());
         infoConserned1.setSituationFamiliale(status);
+        InfoConserned verif = infoConsernedService.getInfoConsernedByAN(infoConserned1.getActeNaissance());
+        if(verif != null && verif != this.infoConserned ){
+            JOptionPane.showMessageDialog(null, "Une personne avec la m�me numero d'acte de naissance" +
+                    "existe déjà dans la base de données");
+            return;
+        }
         for (Condamnation c : listeDeCondamnations){
             infoConserned1.addCondamnation(c);
         }
@@ -848,26 +864,45 @@ private void Reset()
         }
         this.infoConsernedService = InfoConsernedService.getInstance();
         this.condamnationService = CondamnationService.getInstance();
-        //formatage de la date de naissance
-        LocalDate localDate = LocalDate.of(Integer.parseInt(annenaiss.getText()), moisnaiss.getSelectedIndex() + 1, Integer.parseInt(datenaiss.getText()));
-        Date date = Date.valueOf(localDate);
-        //formatage de la date pour l'acte de naissance
-        LocalDate localActDate = LocalDate.of(Integer.parseInt(anneAct.getText()), moisAct.getSelectedIndex() + 1, Integer.parseInt(jourAct.getText()));
-        Date dateAct = Date.valueOf(localActDate);
         InfoConserned infoConserned1 = new InfoConserned();
+        //formatage de la date pour l'acte de naissance
+        try {
+            LocalDate localActDate = LocalDate.of(Integer.parseInt(anneAct.getText()), moisAct.getSelectedIndex() + 1, Integer.parseInt(jourAct.getText()));
+            Date dateAct = Date.valueOf(localActDate);
+            infoConserned1.setDateActeNaissance(dateAct);
+        }catch (Exception e){
+            JOptionPane.showMessageDialog(this,"Veuillez rectifier la date de delivrence de l'acte de naissance","Erreur",JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        //formatage de la date de naissance
+        try {
+            LocalDate localDate = LocalDate.of(Integer.parseInt(annenaiss.getText()), moisnaiss.getSelectedIndex() + 1, Integer.parseInt(datenaiss.getText()));
+            Date date = Date.valueOf(localDate);
+            infoConserned1.setDateNaissance(date);
+        }catch (Exception e){
+            JOptionPane.showMessageDialog(this,"Veuillez rectifier la date de naissance","Erreur",JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+
         infoConserned1.setActeNaissance(Integer.parseInt(acteNaissace.getText().strip()));
-        infoConserned1.setDateActeNaissance(dateAct);
         infoConserned1.setNom(NomPers.getText().strip());
         infoConserned1.setPrenoms(PrenomPers.getText().strip());
         infoConserned1.setPere(pere.getText().strip());
         infoConserned1.setMere(mere.getText().strip());
-        infoConserned1.setDateNaissance(date);
         infoConserned1.setLieuNaissance(lieunais.getText().strip());
         infoConserned1.setProfession(Profession.getText().strip());
         infoConserned1.setDomicile(Domicile.getText().strip());
         infoConserned1.setNationalite(Nationalite.getText().strip().toUpperCase());
         infoConserned1.setSexe(cmbGender.getSelectedItem().toString());
         infoConserned1.setSituationFamiliale(status);
+
+        InfoConserned verif = infoConsernedService.getInfoConsernedByAN(infoConserned1.getActeNaissance());
+        if(verif != null && verif != this.infoConserned ){
+            JOptionPane.showMessageDialog(null, "Une personne avec la m�me numero d'acte de naissance" +
+                    "existe déjà dans la base de données");
+            return;
+        }
         for (Condamnation c : listeDeCondamnations){
             infoConserned1.addCondamnation(c);
         }
