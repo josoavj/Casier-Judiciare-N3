@@ -3,6 +3,7 @@ package Bulletin.UI;
 
 import Bulletin.persistence.Admin.Admin;
 import Bulletin.persistence.Admin.AdminService;
+import Bulletin.persistence.Admin.Rules;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -207,14 +208,15 @@ public class AdIdentification extends javax.swing.JFrame {
     private void deleteUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteUserActionPerformed
           try
           {
-              if(adminService.getAllAdmin().size() == 1){
+              if(ConnexionBeanHandler.getLogin().getRule() == Rules.ADMIN && adminService.getAllAdmin().size() == 1){
                   JOptionPane.showMessageDialog(null,"C'est le seul administrateur de l'application, vous ne pouvez pas le supprimer","Erreur"
                   , JOptionPane.ERROR_MESSAGE);
+                  return;
               }
-        int P = JOptionPane.showConfirmDialog(null," Are you sure want to delete ?","Confirmation",JOptionPane.YES_NO_OPTION);
+        int P = JOptionPane.showConfirmDialog(null," Voulez vous continuer la suppression ?","Confirmation",JOptionPane.YES_NO_OPTION);
      if (P==0)
      {
-         adminService.removeAdmin(adminService.getAdmin(txtUserName.getText(), Arrays.toString(txtPassword.getPassword())));
+         adminService.removeAdmin(adminService.getAdmin(txtUserName.getText(), txtPassword.getPassword().toString()));
          JOptionPane.showMessageDialog(null,"Un utilisateur à été supprimé");
          ConnexionBeanHandler.disconnect();
      }
@@ -226,8 +228,8 @@ public class AdIdentification extends javax.swing.JFrame {
 
     private void getUserDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_getUserDataActionPerformed
       this.hide();
-      InfoAdmin frm = new InfoAdmin();
-      frm.setVisible(true); 
+      InfoAdmin.getInstance().setVisible(true);
+      InfoAdmin.getInstance().requestFocus();
     }//GEN-LAST:event_getUserDataActionPerformed
 
     /**
