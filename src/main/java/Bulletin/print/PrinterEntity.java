@@ -9,25 +9,25 @@ import java.time.LocalDate;
 public class PrinterEntity {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private String nameConserned;
+    private String nameConcerned;
     private Date date;
     public PrinterEntity(){
         this("null");
     }
-    public PrinterEntity(String nameConserned){
-        this.nameConserned = nameConserned;
+    public PrinterEntity(String nameConcerned){
+        this.nameConcerned = nameConcerned;
     }
 
     public int getId() {
         return id;
     }
 
-    public String getNameConserned() {
-        return nameConserned;
+    public String getNameConcerned() {
+        return nameConcerned;
     }
 
-    public void setNameConserned(String nameConserned) {
-        this.nameConserned = nameConserned;
+    public void setNameConcerned(String nameConcerned) {
+        this.nameConcerned = nameConcerned;
         this.date = Date.valueOf(LocalDate.now());
     }
 

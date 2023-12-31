@@ -65,14 +65,14 @@ CREATE TABLE Admin (
 
 -- --------------------------------Administrateur par defaut------------------------------
 
-INSERT INTO Admin (username,name, password, poste, rule) VALUES ("Admin", "Admin","Admin","Uknown","ADMIN");
+INSERT INTO Admin (username,name, password, poste, rule) VALUES ("Admin", "Admin","Admin","Unknown","ADMIN");
 
 -- --------------------------------------Printer-------------------------------------------
 CREATE TABLE PRINTER (id int(4) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT PRIMARY KEY,
-                            nameConerned VARCHAR(256) NOT NULL,
+                            nameConcerned VARCHAR(256) NOT NULL,
                             date date default CURRENT_DATE);
 -- --------------------------------------Default printer-----------------------------------
-INSERT INTO PRINTER (nameConerned) values ("null");
+INSERT INTO PRINTER (nameConcerned) values ("null");
 
 
 
