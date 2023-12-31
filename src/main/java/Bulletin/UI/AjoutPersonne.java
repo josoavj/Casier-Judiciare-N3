@@ -14,6 +14,8 @@ import java.sql.Date;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.regex.Pattern;
 
 
@@ -194,7 +196,7 @@ private void Reset()
         setTitle("Patient Registration");
         setResizable(false);
 
-        AjoutForm.setBorder(javax.swing.BorderFactory.createTitledBorder("Ajout d'une nouvelle personne"));
+        AjoutForm.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Ajout d'une nouvelle personne", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Poppins", 1, 11))); // NOI18N
 
         jLabel1.setText("Acte De naissance N°");
 
@@ -273,7 +275,7 @@ private void Reset()
         });
         jScrollPane1.setViewportView(tableCondamnation);
 
-        moisnaiss.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Janvier", "Fevrier", "Mars", "Avril", "Mai", "Juin", "Juillet", "Aout", "Septembre", "Octobre", "Novembre", "Decembre" }));
+        moisnaiss.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Aout", "Septembre", "Octobre", "Novembre", "Décembre" }));
 
         annenaiss.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -294,7 +296,7 @@ private void Reset()
             }
         });
 
-        moisAct.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Janvier", "Fevrier", "Mars", "Avril", "Mai", "Juin", "Juillet", "Aout", "Septembre", "Octobre", "Novembre", "Decembre" }));
+        moisAct.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Aout", "Septembre", "Octobre", "Novembre", "Décembre" }));
         moisAct.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 moisActActionPerformed(evt);
@@ -317,14 +319,15 @@ private void Reset()
         AjoutFormLayout.setHorizontalGroup(
             AjoutFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(AjoutFormLayout.createSequentialGroup()
+                .addGap(33, 33, 33)
                 .addGroup(AjoutFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(AjoutFormLayout.createSequentialGroup()
+                        .addComponent(jLabel10)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AjoutFormLayout.createSequentialGroup()
-                        .addGroup(AjoutFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(AjoutFormLayout.createSequentialGroup()
-                                .addGap(54, 54, 54)
-                                .addComponent(jLabel10))
-                            .addGroup(AjoutFormLayout.createSequentialGroup()
-                                .addGap(33, 33, 33)
+                        .addGroup(AjoutFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, AjoutFormLayout.createSequentialGroup()
                                 .addGroup(AjoutFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel1)
                                     .addComponent(jLabel2)
@@ -347,33 +350,30 @@ private void Reset()
                                     .addComponent(Domicile)
                                     .addComponent(NomPers)
                                     .addComponent(PrenomPers)
-                                    .addGroup(AjoutFormLayout.createSequentialGroup()
-                                        .addComponent(acteNaissace, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jLabel14)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jourAct, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(moisAct, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(anneAct, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(36, 36, 36))
+                                    .addComponent(btnAjoutCondamnation, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addGroup(AjoutFormLayout.createSequentialGroup()
                                         .addGroup(AjoutFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(cmbGender, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(cmbStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(Nationalite, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(cmbGender, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(cmbStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addGroup(AjoutFormLayout.createSequentialGroup()
                                                 .addComponent(datenaiss, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addGap(18, 18, 18)
                                                 .addComponent(moisnaiss, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addGap(18, 18, 18)
-                                                .addComponent(annenaiss, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                        .addGap(0, 0, Short.MAX_VALUE)))))
-                        .addGap(15, 15, 15))
-                    .addComponent(btnAjoutCondamnation, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addContainerGap())
+                                                .addComponent(annenaiss, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addGroup(AjoutFormLayout.createSequentialGroup()
+                                                .addComponent(acteNaissace, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(18, 18, 18)
+                                                .addComponent(jLabel14)
+                                                .addGap(18, 18, 18)
+                                                .addComponent(jourAct, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(18, 18, 18)
+                                                .addComponent(moisAct, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(18, 18, 18)
+                                                .addComponent(anneAct, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addGap(0, 138, Short.MAX_VALUE)))))
+                        .addGap(21, 21, 21))))
         );
         AjoutFormLayout.setVerticalGroup(
             AjoutFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -434,13 +434,13 @@ private void Reset()
                 .addGroup(AjoutFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Nationalite, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel9))
-                .addGap(48, 48, 48)
-                .addComponent(jLabel10)
+                .addGap(45, 45, 45)
+                .addGroup(AjoutFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel10)
+                    .addComponent(btnAjoutCondamnation))
                 .addGap(18, 18, 18)
-                .addComponent(btnAjoutCondamnation)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 106, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(14, Short.MAX_VALUE))
         );
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
@@ -488,11 +488,7 @@ private void Reset()
                 try {
                     btnImprimerActionPerformed(evt);
                 } catch (Exception e) {
-                    try {
-                        throw new RuntimeException(e);
-                    } catch (RuntimeException ex) {
-                        throw new RuntimeException(ex);
-                    }
+                    throw new RuntimeException(e);
                 }
             }
         });
@@ -553,12 +549,12 @@ private void Reset()
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(34, 34, 34)
-                        .addComponent(AjoutForm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(42, 42, 42)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(34, 34, 34)
+                        .addComponent(AjoutForm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 66, Short.MAX_VALUE)
                 .addComponent(jLabel13)
                 .addContainerGap())
         );
@@ -691,22 +687,29 @@ private void Reset()
             }
             if(infoConsernedService.addConserned(infoConserned1)) {
                 JOptionPane.showMessageDialog(null, "Enregistrement réuissite","Succès",JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Une personne avec la même numéro d'acte de naissance" +
+                        "existe déjà dans la base de données");
+                return;
+            }
+            if(infoConsernedService.addConserned(infoConserned1)) {
+                JOptionPane.showMessageDialog(null, "Enregistrement réussit");
                 this.setVisible(false);
                 ListePersonne.getInstance().Get_Data();
                 ListePersonne.getInstance().setVisible(true);
                 this.dispose();
             }else{
-                JOptionPane.showMessageDialog(null, "Echec d'enregistement","Erreur",JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Echec de l'enregistement");
             }
     }//GEN-LAST:event_btnEnregistrerActionPerformed
 
     private void btnEffacerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEffacerActionPerformed
-        int jOptionPane = JOptionPane.showConfirmDialog(null,"voulez vous supprimer "+infoConserned.getNom()
+        int jOptionPane = JOptionPane.showConfirmDialog(null,"Voulez vous supprimer "+infoConserned.getNom()
         +" de la base de donnés?","Confirmation",JOptionPane.YES_NO_OPTION);
         if(jOptionPane == 0){
             infoConsernedService = InfoConsernedService.getInstance();
             infoConsernedService.removeInfoConserned(infoConserned);
-            JOptionPane.showMessageDialog(null,"Supression réuissite","Succès",JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null,"Supression réuissit","Succès",JOptionPane.INFORMATION_MESSAGE);
+
             this.setVisible(false);
             ListePersonne.getInstance().Get_Data();
             ListePersonne.getInstance().setVisible(true);
@@ -821,10 +824,10 @@ private void Reset()
             ListePersonne.getInstance().setVisible(true);
             this.dispose();
         }else{
-            JOptionPane.showMessageDialog(null,"La mise à jour a été une echec");
+            JOptionPane.showMessageDialog(null,"Echec de la mise à jour");
         }
         }else{
-            JOptionPane.showMessageDialog(null,"La mise à jour n'as pas été enregisté");
+            JOptionPane.showMessageDialog(null,"Mise à jour non enregisté");
         }
 
     }//GEN-LAST:event_btnMajActionPerformed
