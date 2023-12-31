@@ -216,12 +216,12 @@ public class AdIdentification extends javax.swing.JFrame {
         int P = JOptionPane.showConfirmDialog(null," Voulez vous continuer la suppression ?","Confirmation",JOptionPane.YES_NO_OPTION);
      if (P==0)
      {
-         adminService.removeAdmin(adminService.getAdmin(txtUserName.getText(), txtPassword.getPassword().toString()));
+         adminService.removeAdmin(adminService.getAdminByUsername(txtUserName.getText()));
          JOptionPane.showMessageDialog(null,"Un utilisateur à été supprimé");
          ConnexionBeanHandler.disconnect();
      }
        }catch(Exception e){
-           JOptionPane.showMessageDialog(this,"Erreur de suppression");
+           JOptionPane.showMessageDialog(this,e);
           }
          
     }//GEN-LAST:event_deleteUserActionPerformed
