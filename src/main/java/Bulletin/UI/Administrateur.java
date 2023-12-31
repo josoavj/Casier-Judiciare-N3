@@ -11,6 +11,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.List;
 import javax.swing.JOptionPane;
 
 
@@ -289,15 +290,15 @@ private void Reset()
             return false;
         }
         if(AdUsername.getText().strip().equals("")){
-            JOptionPane.showMessageDialog(null,"Veuillez ajouter un nom", "Erreur",JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null,"Veuillez ajouter un nom d'utilisateur", "Erreur",JOptionPane.ERROR_MESSAGE);
             return false;
         }
         if(AdPoste.getText().strip().equals("")){
-            JOptionPane.showMessageDialog(null,"Veuillez ajouter un nom", "Erreur",JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null,"Veuillez ajouter votre Poste", "Erreur",JOptionPane.ERROR_MESSAGE);
             return false;
         }
-        if(AdPassword.getText().strip().equals("")){
-            JOptionPane.showMessageDialog(null,"Veuillez ajouter un nom", "Erreur",JOptionPane.ERROR_MESSAGE);
+        if(AdPassword.getText().strip().length() < 8 && user != adminService.getAdminById(1)){
+            JOptionPane.showMessageDialog(null,"Le mot de passe doit contenir au moins 8 caractères", "Erreur",JOptionPane.ERROR_MESSAGE);
             return false;
         }
         return true;

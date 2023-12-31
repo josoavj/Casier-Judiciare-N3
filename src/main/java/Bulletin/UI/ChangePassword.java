@@ -194,10 +194,10 @@ private AdminService adminService = AdminService.getInstance();
                                           "Erreur", JOptionPane.ERROR_MESSAGE);
                 return;
             } 
-               else if (Newpass.length()< 5) {
+               else if (Newpass.length()< 8) {
                
                 JOptionPane.showMessageDialog(this,
-                                         "Le mot de passe doit contenir au moins 5 caractères",
+                                         "Le mot de passe doit contenir au moins 8 caractères",
                                          "Erreur", JOptionPane.ERROR_MESSAGE);
                 return;
                }

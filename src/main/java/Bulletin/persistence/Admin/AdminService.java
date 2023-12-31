@@ -56,7 +56,13 @@ public class AdminService {
         admin.setPassword(mdp);
         entityManager.getTransaction().commit();
     }
-
+    public Admin getAdminById(int id){
+        try {
+            return entityManager.find(Admin.class,id);
+        }catch (NoResultException e){
+            return null;
+        }
+    }
     public void updateAdmin(int id,Admin admin){
         Admin admin1 = entityManager.find(Admin.class,id);
         entityManager.getTransaction().begin();
