@@ -41,42 +41,46 @@ private static InfoAdmin instance = null;
         if(ConnexionBeanHandler.getLogin().getRule() == Rules.ADMIN){
             List<Admin> admins = adminService.getAllUtilisateur();
             admins.add(0,ConnexionBeanHandler.getLogin());
-            Object[][] data = new Object[admins.size()][6];
+            Object[][] data = new Object[admins.size()][7];
             int i = 0;
             for(Admin admin : admins){
                 data[i][0] = admin.getId();
                 data[i][1] = admin.getName();
                 data[i][2] = admin.getUsername();
-                data[i][3] = admin.getPassword();
+                data[i][3] = admin.getPoste();
                 data[i][4] = admin.getRule();
                 data[i][5] = admin == ConnexionBeanHandler.getLogin() ? "Connecté" : "Deconnecté";
+                data[i][6] = admin.getPassword();
                 i++;
             }
-            String[] columnNames = new String[6];
+            String[] columnNames = new String[7];
             columnNames[0] = "Id";
             columnNames[1] = "Nom";
             columnNames[2] = "Nom d'Utilisateur";
-            columnNames[3] = "Mot de Passe";
-            columnNames[4] = "Type";
+            columnNames[3] = "Poste";
+            columnNames[4] = "Type de Compte";
             columnNames[5] = "Status";
+            columnNames[6] = "Mot de Passe";
             DefaultTableModel tableModel = new DefaultTableModel(data,columnNames);
             usersList.setModel(tableModel);
         }else {
             Admin admin = ConnexionBeanHandler.getLogin();
-            Object[][] data = new Object[1][5];
+            Object[][] data = new Object[1][6];
             int i=0;
                 data[i][0] = admin.getId();
                 data[i][1] = admin.getName();
                 data[i][2] = admin.getUsername();
-                data[i][3] = admin.getPassword();
+                data[i][3] = admin.getPoste();
                 data[i][4] = admin.getRule();
+                data[i][5] = admin.getPassword();
 
-            String[] columnNames = new String[5];
+            String[] columnNames = new String[6];
             columnNames[0] = "Id";
             columnNames[1] = "Nom";
             columnNames[2] = "Username";
-            columnNames[3] = "Mot de Passe";
-            columnNames[4] = "Type";
+            columnNames[3] = "Poste";
+            columnNames[4] = "Type de compte";
+            columnNames[5] = "Mot de passe";
             DefaultTableModel tableModel = new DefaultTableModel(data,columnNames);
             usersList.setModel(tableModel);
         }
