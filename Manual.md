@@ -8,3 +8,6 @@
 
 # Bug reports
 - In the event of a bug or problem, please contact the developers directly listed in the Contact and About page of the Help menu.
+
+#Forking
+- For this, if you want to use the database or have access to the content. You must first source the database present MySqlTemplate.sql in your local database
