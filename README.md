@@ -1,7 +1,10 @@
 # Casier-Judiciare-N3
-Logiciel de saisie Casier Judiciaire N3
+- fr: Logiciel de saisie Casier Judiciaire N3, utilisé pour faciliter la saisie des informations sur les personnes lors d'une demande du bulletin.
+- en: Criminal Record N3 entry software,used to facilitate the entry of information about people when requesting the bulletin.
 
-# Contributeurs:
-- Josoa886 (@Josoa886)
-- haritsimba (@haritsimba)
+# Contributeurs (Contributor):
+- Josoa886 (@Josoa886)[https://github.com/Josoa886](https://github.com/Josoa886)
+- haritsimba (@haritsimba)[https://github.com/haritsimba](https://github.com/haritsimba)
 
+# Forking
+You can fork this project, it's an opensource project. We used JavaSwing but you can switch to JavaFX or other framework.
