@@ -10,4 +10,6 @@
 - En cas de bug ou de problème, veuillez contacter directement les développeurs cités dans la page Contact et About du menu Aide.
 
 # Forking
-- Pour cela, si vous voulez utiliser la base de données ou y avoir accès au contenu. Vous devez d'abord sourcer la base de données présent MySqlTemplate.sql dans votre base de données locale. 
+- Pour cela, si vous voulez utiliser la base de données ou y avoir accès au contenu. Vous devez d'abord sourcer la base de données présent MySqlTemplate.sql dans votre base de données locale. Chemin du fichier: src/main/resources/database
+
+- Veuillez changer les paramètres de dépendance selon vos besoins.
