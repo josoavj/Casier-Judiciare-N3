@@ -27,7 +27,6 @@ public class Settings extends javax.swing.JFrame {
     public Settings() {
         initComponents();
         setLocationRelativeTo(null);
-        setBackground(Color.orange);
     }
 
     @Override
@@ -52,7 +51,7 @@ public class Settings extends javax.swing.JFrame {
         themePanel = new javax.swing.JPanel();
         themeSwitch = new javax.swing.JComboBox<>();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         productName.setFont(new java.awt.Font("sansserif", 1, 24)); // NOI18N
         productName.setText("S-CASIER");
@@ -167,11 +166,6 @@ public class Settings extends javax.swing.JFrame {
 
     private void themeSwitchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_themeSwitchActionPerformed
         // TODO add your handling code here:
-        if(themeSwitch.getSelectedIndex()==0){
-
-            }else{
-
-        }
 
     }//GEN-LAST:event_themeSwitchActionPerformed
 
@@ -206,7 +200,7 @@ public class Settings extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Settings().setVisible(true);
+                Settings.getInstance().setVisible(true);
             }
         });
     }
