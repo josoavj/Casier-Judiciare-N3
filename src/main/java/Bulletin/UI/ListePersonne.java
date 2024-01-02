@@ -116,7 +116,7 @@ public class ListePersonne extends javax.swing.JFrame {
         cmbFilter = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Personnes enregistrées");
+        setTitle("Patient Registration Record");
         setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
@@ -136,7 +136,7 @@ public class ListePersonne extends javax.swing.JFrame {
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -181,8 +181,7 @@ public class ListePersonne extends javax.swing.JFrame {
                 try {
                     printPersonActionPerformed(evt);
                 } catch (Exception e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
+                    throw new RuntimeException(e);
                 }
             }
         });
