@@ -110,8 +110,8 @@ public class ListePersonne extends javax.swing.JFrame {
         cmbFilter = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Patient Registration Record");
-        setResizable(false);
+        setTitle("Liste des personnes enregistrées");
+        setResizable(true);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 formWindowClosing(evt);

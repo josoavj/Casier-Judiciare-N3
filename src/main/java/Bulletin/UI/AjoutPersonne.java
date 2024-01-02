@@ -194,7 +194,7 @@ private void Reset()
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Ajout ou mise à jour des informations d'une personne");
-        setResizable(false);
+        setResizable(true);
 
         AjoutForm.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Ajout d'une nouvelle personne", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Poppins", 1, 11))); // NOI18N
 
@@ -819,7 +819,7 @@ private void Reset()
         }
         InfoConserned verif = infoConsernedService.getInfoConsernedByAN(infoConserned1.getActeNaissance());
         if(verif != null && verif != this.infoConserned ){
-            JOptionPane.showMessageDialog(null, "Une personne avec la m�me numero d'acte de naissance" +
+            JOptionPane.showMessageDialog(null, "Une personne avec la même numéro d'acte de naissance" +
                     "existe déjà dans la base de données");
             return;
         }
