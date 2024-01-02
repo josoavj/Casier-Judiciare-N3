@@ -197,7 +197,11 @@ public class InfoPersonne extends javax.swing.JFrame {
         printInfos.setText("Imprimer les informations");
         printInfos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                printInfosActionPerformed(evt);
+                try {
+                    printInfosActionPerformed(evt);
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
             }
         });
 
