@@ -56,7 +56,7 @@ public class InfoPersonne extends javax.swing.JFrame {
                     mois = "Juillet";
                     break;
                 case "08":
-                    mois = "A�ut";
+                    mois = "Aôut";
                     break;
                 case "09":
                     mois = "Septembre";
@@ -135,7 +135,8 @@ public class InfoPersonne extends javax.swing.JFrame {
         printInfos = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-
+        setTitle("Informations");
+        setResizable(false);
         labelTitre.setFont(new java.awt.Font("Cantarell", 1, 18)); // NOI18N
         labelTitre.setText("Informations sur ");
 
