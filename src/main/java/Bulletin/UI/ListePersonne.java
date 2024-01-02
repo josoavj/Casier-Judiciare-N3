@@ -76,7 +76,13 @@ public class ListePersonne extends javax.swing.JFrame {
            columnNames[5] = "Date de Naissance";
            columnNames[6] = "Sexe";
            columnNames[7] = "Nationalité";
-     DefaultTableModel tableModel = new DefaultTableModel(data,columnNames);
+     DefaultTableModel tableModel = new DefaultTableModel(data,columnNames){
+         @Override
+         public boolean isCellEditable(int row, int column) {
+             //all cells false
+             return false;
+         }
+     };
            try{
          tableListPerson.setModel(tableModel);
          }catch(Exception e){
@@ -304,14 +310,14 @@ public class ListePersonne extends javax.swing.JFrame {
 
         if(evt.getClickCount()==2){
       try{
-            infoConsernedService = InfoConsernedService.getInstance();
-            int row= tableListPerson.getSelectedRow();
-            String table_click= tableListPerson.getModel().getValueAt(row, 0).toString();
-            int acteNaissanceNum = Integer.parseInt(table_click);
-            InfoConserned ic = infoConsernedService.getInfoConsernedByAN(acteNaissanceNum);
-            this.setVisible(false);
-            AjoutPersonne frm = new AjoutPersonne(ic);
-            frm.setVisible(true);
+          infoConsernedService = InfoConsernedService.getInstance();
+          int row= tableListPerson.getSelectedRow();
+          String table_click= tableListPerson.getModel().getValueAt(row, 0).toString();
+          int acteNaissanceNum = Integer.parseInt(table_click);
+          InfoConserned ic = infoConsernedService.getInfoConsernedByAN(acteNaissanceNum);
+          AjoutPersonne frm = new AjoutPersonne(ic);
+          frm.setVisible(true);
+          this.dispose();
         }catch(Exception ex){
             JOptionPane.showMessageDialog(this,ex);
         }
