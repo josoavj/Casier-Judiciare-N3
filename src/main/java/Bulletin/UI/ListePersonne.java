@@ -4,24 +4,13 @@ package Bulletin.UI;
 import Bulletin.persistence.infoCondamnation.InfoConserned;
 import Bulletin.persistence.infoCondamnation.InfoConsernedService;
 import Bulletin.print.PrinterService;
-import jakarta.persistence.Query;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.KeyEvent;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import java.util.regex.Pattern;
-import javax.print.DocFlavor;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-// import net.proteanit.sql.DbUtils;
+import java.awt.event.KeyEvent;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.regex.Pattern;
 
 public class ListePersonne extends javax.swing.JFrame {
  InfoConsernedService infoConsernedService = InfoConsernedService.getInstance();

@@ -4,9 +4,6 @@
  */
 package Bulletin.UI;
 
-import javax.swing.*;
-import java.awt.*;
-
 /**
  *
  * @author dazai

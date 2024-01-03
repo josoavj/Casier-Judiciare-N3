@@ -5,15 +5,7 @@ import Bulletin.persistence.Admin.Admin;
 import Bulletin.persistence.Admin.AdminService;
 import Bulletin.persistence.Admin.Rules;
 
-import java.awt.*;
-import java.awt.event.KeyEvent;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.Arrays;
-import javax.swing.JOptionPane;
+import javax.swing.*;
 
 
 public class AdIdentification extends javax.swing.JFrame {

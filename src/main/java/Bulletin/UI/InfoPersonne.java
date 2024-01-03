@@ -8,8 +8,6 @@ import Bulletin.persistence.infoCondamnation.InfoConserned;
 import Bulletin.print.PrinterService;
 
 import javax.swing.*;
-import java.awt.*;
-import java.util.Objects;
 import java.util.regex.Pattern;
 
 /**

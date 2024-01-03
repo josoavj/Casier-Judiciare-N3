@@ -4,14 +4,9 @@ package Bulletin.UI;
 import Bulletin.persistence.Admin.Admin;
 import Bulletin.persistence.Admin.AdminService;
 
-import java.awt.HeadlessException;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.KeyEvent;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import javax.swing.JOptionPane;
 
 // Pour changer le mot de passe Administrateur
 public class ChangePassword extends javax.swing.JFrame {

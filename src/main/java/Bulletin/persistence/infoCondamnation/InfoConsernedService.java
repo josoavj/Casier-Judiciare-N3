@@ -3,11 +3,12 @@ package Bulletin.persistence.infoCondamnation;
 import Bulletin.persistence.EntityManagerHandler;
 import Bulletin.persistence.condamnation.Condamnation;
 import Bulletin.persistence.condamnation.CondamnationService;
-import jakarta.persistence.*;
-
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.NoResultException;
+import jakarta.persistence.Query;
+
 import javax.swing.*;
-import java.util.HashSet;
 import java.util.List;
 
 public class InfoConsernedService {

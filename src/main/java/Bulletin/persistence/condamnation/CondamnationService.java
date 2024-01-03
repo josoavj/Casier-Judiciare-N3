@@ -1,10 +1,9 @@
 package Bulletin.persistence.condamnation;
+
 import Bulletin.persistence.EntityManagerHandler;
-import jakarta.annotation.PreDestroy;
 import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityManagerFactory;
-import jakarta.persistence.Persistence;
 import jakarta.persistence.Query;
+
 import java.util.List;
 
 public class CondamnationService {

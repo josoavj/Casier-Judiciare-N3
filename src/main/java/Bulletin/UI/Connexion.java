@@ -4,12 +4,9 @@ package Bulletin.UI;
 import Bulletin.persistence.Admin.Admin;
 import Bulletin.persistence.Admin.AdminService;
 
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import javax.swing.*;
 
 public class Connexion extends javax.swing.JFrame {
 

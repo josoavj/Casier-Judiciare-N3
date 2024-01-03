@@ -2,11 +2,8 @@ package Bulletin.persistence.Admin;
 
 import Bulletin.persistence.EntityManagerHandler;
 import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityManagerFactory;
-import jakarta.persistence.Persistence;
-import jakarta.persistence.Query;
-
 import jakarta.persistence.NoResultException;
+import jakarta.persistence.Query;
 
 import java.util.List;
 

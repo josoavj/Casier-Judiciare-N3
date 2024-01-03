@@ -5,11 +5,9 @@ import Bulletin.persistence.Admin.Admin;
 import Bulletin.persistence.Admin.AdminService;
 import Bulletin.persistence.Admin.Rules;
 
-import java.sql.*;
-import java.util.List;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-//import net.proteanit.sql.DbUtils;
+import java.util.List;
 
 public class InfoAdmin extends javax.swing.JFrame {
 AdminService adminService = AdminService.getInstance();
