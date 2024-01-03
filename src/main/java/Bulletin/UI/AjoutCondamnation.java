@@ -47,6 +47,9 @@ public class AjoutCondamnation extends javax.swing.JFrame {
         btnAjouter.setEnabled(false);
         btnSupprimer.setEnabled(true);
         btnUpdate.setEnabled(true);
+        if (!btnAnnuler.isEnabled()) {
+            btnAnnuler.setEnabled(true);
+        }
     }
 
     /**
@@ -79,6 +82,7 @@ public class AjoutCondamnation extends javax.swing.JFrame {
         btnAjouter = new javax.swing.JButton();
         btnUpdate = new javax.swing.JButton();
         btnSupprimer = new javax.swing.JButton();
+        btnAnnuler = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
@@ -218,6 +222,14 @@ public class AjoutCondamnation extends javax.swing.JFrame {
             }
         });
 
+        btnAnnuler.setText("Annuler");
+        btnAnnuler.setEnabled(false);
+        btnAnnuler.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAnnulerActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout optionPanelLayout = new javax.swing.GroupLayout(optionPanel);
         optionPanel.setLayout(optionPanelLayout);
         optionPanelLayout.setHorizontalGroup(
@@ -227,7 +239,8 @@ public class AjoutCondamnation extends javax.swing.JFrame {
                 .addGroup(optionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnAjouter, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnUpdate, javax.swing.GroupLayout.DEFAULT_SIZE, 189, Short.MAX_VALUE)
-                    .addComponent(btnSupprimer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnSupprimer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnAnnuler, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(17, Short.MAX_VALUE))
         );
         optionPanelLayout.setVerticalGroup(
@@ -239,6 +252,8 @@ public class AjoutCondamnation extends javax.swing.JFrame {
                 .addComponent(btnUpdate)
                 .addGap(18, 18, 18)
                 .addComponent(btnSupprimer)
+                .addGap(18, 18, 18)
+                .addComponent(btnAnnuler)
                 .addGap(21, 21, 21))
         );
 
@@ -276,11 +291,11 @@ public class AjoutCondamnation extends javax.swing.JFrame {
 
     private void btnAjouterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAjouterActionPerformed
         if(txtNaturePeine.getText().strip().equals("")){
-            JOptionPane.showMessageDialog(null, "Veuillez specifier la nature de ou durée de la peine");
+            JOptionPane.showMessageDialog(null, "Veuillez spécifier la nature de ou durée de la peine");
             return;
         }
         if(txtNatureCrimes.getText().strip().equals("")){
-            JOptionPane.showMessageDialog(null, "Veuillez specifier la nature de la condamnation");
+            JOptionPane.showMessageDialog(null, "Veuillez spécifier la nature de la condamnation");
             return;
         }
         try {
@@ -385,6 +400,14 @@ public class AjoutCondamnation extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_dateAnneeKeyTyped
 
+    private void btnAnnulerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnnulerActionPerformed
+        // TODO add your handling code here:
+        AjoutPersonne.lister_Condamnation();
+        isAnnulerClicked = true;
+        this.dispose();
+    }//GEN-LAST:event_btnAnnulerActionPerformed
+    private boolean isAnnulerClicked = false;
+
     /**
      * @param args the command line arguments
      */
@@ -424,6 +447,7 @@ public class AjoutCondamnation extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel ajoutCondamnationPanel;
     private javax.swing.JButton btnAjouter;
+    private javax.swing.JButton btnAnnuler;
     private javax.swing.JButton btnSupprimer;
     private javax.swing.JButton btnUpdate;
     private javax.swing.JTextField dateAnnee;

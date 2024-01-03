@@ -82,7 +82,7 @@ CondamnationService condamnationService = null;
         }
         lister_Condamnation();
         AjoutForm.setBorder(javax.swing.BorderFactory.createTitledBorder("Informations Consernant " + infoConserned.getNom()));
-        this.setTitle("Modifications des informations Consernant " + infoConserned.getNom());
+        this.setTitle("Modifications des informations Concernant " + infoConserned.getNom());
         btnEffacer.setEnabled(true);
         btnMaj.setEnabled(true);
         btnEnregistrer.setEnabled(false);

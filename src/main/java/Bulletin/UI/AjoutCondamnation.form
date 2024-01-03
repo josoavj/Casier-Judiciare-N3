@@ -262,6 +262,7 @@
                       <Component id="btnAjouter" max="32767" attributes="0"/>
                       <Component id="btnUpdate" pref="189" max="32767" attributes="0"/>
                       <Component id="btnSupprimer" max="32767" attributes="0"/>
+                      <Component id="btnAnnuler" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace pref="17" max="32767" attributes="0"/>
               </Group>
@@ -276,6 +277,8 @@
                   <Component id="btnUpdate" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="btnSupprimer" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Component id="btnAnnuler" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -306,6 +309,15 @@
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSupprimerActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="btnAnnuler">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Annuler"/>
+            <Property name="enabled" type="boolean" value="false"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAnnulerActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>
