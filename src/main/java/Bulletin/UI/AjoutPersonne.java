@@ -6,6 +6,7 @@ import Bulletin.persistence.condamnation.CondamnationService;
 import Bulletin.persistence.infoCondamnation.InfoConserned;
 import Bulletin.persistence.infoCondamnation.InfoConsernedService;
 import Bulletin.print.PrinterService;
+import org.jdesktop.swingx.prompt.PromptSupport;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -178,6 +179,7 @@ private void Reset()
         jLabel9 = new javax.swing.JLabel();
         Domicile = new javax.swing.JTextField();
         Nationalite = new javax.swing.JTextField();
+        PromptSupport.setPrompt("MALAGASY",Nationalite);
         jLabel10 = new javax.swing.JLabel();
         btnAjoutCondamnation = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -677,7 +679,7 @@ private void Reset()
             infoConserned1.setLieuNaissance(Capitalize(lieunais.getText()).strip());
             infoConserned1.setProfession(Capitalize(Profession.getText()).strip());
             infoConserned1.setDomicile(Capitalize(Domicile.getText()).strip());
-            infoConserned1.setNationalite(Nationalite.getText().strip().toUpperCase());
+            infoConserned1.setNationalite(Nationalite.getText().strip().equals("") ? "MALAGASY" : Nationalite.getText().strip().toUpperCase());
             infoConserned1.setSexe(cmbGender.getSelectedItem().toString());
             infoConserned1.setSituationFamiliale(status);
             for (Condamnation c :listCondamnationAdded ){
@@ -762,7 +764,7 @@ private void Reset()
         infoConserned1.setLieuNaissance(Capitalize(lieunais.getText()).strip());
         infoConserned1.setProfession(Capitalize(Profession.getText()).strip());
         infoConserned1.setDomicile(Capitalize(Domicile.getText()).strip());
-        infoConserned1.setNationalite(Nationalite.getText().strip().toUpperCase());
+        infoConserned1.setNationalite(Nationalite.getText().strip().equals("") ? "MALAGASY" : Nationalite.getText().strip().toUpperCase());
         infoConserned1.setSexe(cmbGender.getSelectedItem().toString());
         infoConserned1.setSituationFamiliale(status);
         InfoConserned verif = infoConsernedService.getInfoConsernedByAN(infoConserned1.getActeNaissance());
@@ -816,7 +818,7 @@ private void Reset()
         infoConserned1.setLieuNaissance(Capitalize(lieunais.getText()).strip());
         infoConserned1.setProfession(Capitalize(Profession.getText()).strip());
         infoConserned1.setDomicile(Capitalize(Domicile.getText()).strip());
-        infoConserned1.setNationalite(Nationalite.getText().strip().toUpperCase());
+        infoConserned1.setNationalite(Nationalite.getText().strip().equals("") ? "MALAGASY" : Nationalite.getText().strip().toUpperCase());
         infoConserned1.setSexe(cmbGender.getSelectedItem().toString());
         infoConserned1.setSituationFamiliale(status);
         //ajout d'une nouvelle condamnation
@@ -899,7 +901,7 @@ private void Reset()
         infoConserned1.setLieuNaissance(Capitalize(lieunais.getText()).strip());
         infoConserned1.setProfession(Capitalize(Profession.getText()).strip());
         infoConserned1.setDomicile(Capitalize(Domicile.getText()).strip());
-        infoConserned1.setNationalite(Nationalite.getText().strip().toUpperCase());
+        infoConserned1.setNationalite(Nationalite.getText().strip().equals("") ? "MALAGASY" : Nationalite.getText().strip().toUpperCase());
         infoConserned1.setSexe(cmbGender.getSelectedItem().toString());
         infoConserned1.setSituationFamiliale(status);
 

@@ -5,6 +5,7 @@
 package Bulletin.UI;
 
 import Bulletin.persistence.condamnation.Condamnation;
+import org.jdesktop.swingx.prompt.PromptSupport;
 
 import javax.swing.*;
 import java.awt.event.KeyEvent;
@@ -30,6 +31,7 @@ public class AjoutCondamnation extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         dateJour.requestFocus();
+        btnAnnuler.setEnabled(true);
     }
     public AjoutCondamnation(Condamnation condamnation){
         initComponents();
@@ -110,6 +112,7 @@ public class AjoutCondamnation extends javax.swing.JFrame {
                 txtCoursOuTrubinauxActionPerformed(evt);
             }
         });
+        PromptSupport.setPrompt("TPI MIARINARIVO",txtCoursOuTrubinaux);
 
         txtObservation.setColumns(20);
         txtObservation.setRows(5);
@@ -313,7 +316,7 @@ public class AjoutCondamnation extends javax.swing.JFrame {
         LocalDate localDate = LocalDate.of(Integer.parseInt(dateAnnee.getText()),dateMois.getSelectedIndex()+1,Integer.parseInt(dateJour.getText()));
         Date date = Date.valueOf(localDate);
 
-        Condamnation condamnation = new Condamnation(date, Objects.equals(txtCoursOuTrubinaux.getText().strip(), "") ?"TPI MIARINARIVO" :txtCoursOuTrubinaux.getText().strip()
+        Condamnation condamnation = new Condamnation(date, Objects.equals(txtCoursOuTrubinaux.getText().strip(), "") ?"TPI MIARINARIVO" :txtCoursOuTrubinaux.getText().toUpperCase().strip()
                 ,Capitalize(txtNatureCrimes.getText()),Capitalize(txtNaturePeine.getText()),Capitalize(txtObservation.getText()));
         AjoutPersonne.listeDeCondamnations.add(condamnation);
         AjoutPersonne.listCondamnationAdded.add(condamnation);
@@ -356,7 +359,7 @@ public class AjoutCondamnation extends javax.swing.JFrame {
             Date date = Date.valueOf(localDate);
             if (condamnation == this.condamnationSelected){
                 condamnation.setDateCondamnation(date);
-                condamnation.setCoursOutrubinaux(txtCoursOuTrubinaux.getText().strip().equals("")?"TPI MIARINARIVO" :txtCoursOuTrubinaux.getText().strip());
+                condamnation.setCoursOutrubinaux(txtCoursOuTrubinaux.getText().strip().equals("")?"TPI MIARINARIVO" :txtCoursOuTrubinaux.getText().toUpperCase().strip());
                 condamnation.setNatureCrime(Capitalize(txtNatureCrimes.getText()));
                 condamnation.setNaturePeine(Capitalize(txtNaturePeine.getText()));
                 condamnation.setObservation(Capitalize(txtObservation.getText()));
