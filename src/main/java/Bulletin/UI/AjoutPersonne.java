@@ -575,47 +575,47 @@ private void Reset()
 
     private boolean fieldsValidate(){
         if (acteNaissace.getText().equals("")) {
-            JOptionPane.showMessageDialog(this, "Acte de naissance non initialisé", "Erreur", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Acte de naissance non initialisé", "Erreur d'initialisation", JOptionPane.ERROR_MESSAGE);
             return false;
 
         }
         if (jourAct.getText().equals("")) {
-            JOptionPane.showMessageDialog(this, "Veuillez ajouter le jour de création  de l'acte de naissance", "Erreur", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Veuillez ajouter le jour de création  de l'acte de naissance", "Erreur - Champs vide", JOptionPane.ERROR_MESSAGE);
             return false;
         }
         if (anneAct.getText().equals("")) {
-            JOptionPane.showMessageDialog(this, "Veuillez ajouter l'année de création  de l'acte de naissance", "Erreur", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Veuillez ajouter l'année de création  de l'acte de naissance", "Erreur - Champs vide", JOptionPane.ERROR_MESSAGE);
             return false;
         }
         if (NomPers.getText().equals("")) {
-            JOptionPane.showMessageDialog(this, "Veuillez remplir le nom", "Erreur", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Veuillez remplir le nom", "Erreur - Champs vide", JOptionPane.ERROR_MESSAGE);
             return false;
 
         }
         if (pere.getText().equals("")) {
-            JOptionPane.showMessageDialog(this, "Veuillez remplir le nom du père", "Erreur", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Veuillez remplir le nom du père", "Erreur - Champs vide", JOptionPane.ERROR_MESSAGE);
             return false;
         }
         if (mere.getText().equals("")) {
-            JOptionPane.showMessageDialog(this, "Veuillez remplir le nom de la mère", "Erreur", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Veuillez remplir le nom de la mère", "Erreur - Champs vide", JOptionPane.ERROR_MESSAGE);
             return false;
         }
 
         // Lieu de Naissance
         if (lieunais.getText().equals("")) {
-            JOptionPane.showMessageDialog(this, "Veuillez ajouter un date de naissance", "Erreur", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Veuillez ajouter un date de naissance", "Erreur - Champs vide", JOptionPane.ERROR_MESSAGE);
             return false;
         }
         if (cmbStatus.getSelectedItem().equals("")) {
-            JOptionPane.showMessageDialog(this, "Veuillez selectionner la situation familiale", "Erreur", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Veuillez selectionner la situation familiale", "Erreur - Champs vide", JOptionPane.ERROR_MESSAGE);
             return false;
         }
         if (Domicile.getText().equals("")) {
-            JOptionPane.showMessageDialog(this, "Veuillez ajouter la domicile", "Erreur", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Veuillez ajouter la domicile", "Erreur - Champs vide ", JOptionPane.ERROR_MESSAGE);
             return false;
         }
         if (Profession.getText().equals("")) {
-            JOptionPane.showMessageDialog(this, "Veuillez ajouter une profession", "Erreur", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Veuillez ajouter une profession", "Erreur - Champ vide", JOptionPane.ERROR_MESSAGE);
             return false;
         }
         try {

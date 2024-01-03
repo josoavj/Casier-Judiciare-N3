@@ -351,7 +351,7 @@ public class ListePersonne extends javax.swing.JFrame {
         int acteNaissanceNum = Integer.parseInt(table_click);
         InfoConserned ic = infoConsernedService.getInfoConsernedByAN(acteNaissanceNum);
         String message = "Voulez vous supprimer "+ic.getNom();
-        if(JOptionPane.showConfirmDialog(null,message,"Confirmer",JOptionPane.YES_NO_OPTION)==0) {
+        if(JOptionPane.showConfirmDialog(null,message,"Confirmation de suppression",JOptionPane.YES_NO_OPTION)==0) {
             InfoConsernedService.getInstance().removeInfoConserned(ic);
             txtSearch.setText("");
             infoConsernedList = InfoConsernedService.getInstance().getConsernedList();
