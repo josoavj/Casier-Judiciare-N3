@@ -2,7 +2,6 @@ package Bulletin.print;
 
 import Bulletin.persistence.condamnation.Condamnation;
 import Bulletin.persistence.infoCondamnation.InfoConserned;
-import com.itextpdf.commons.utils.FileUtil;
 import com.itextpdf.io.font.FontProgram;
 import com.itextpdf.io.font.FontProgramFactory;
 import com.itextpdf.kernel.font.PdfFont;
@@ -12,21 +11,17 @@ import com.itextpdf.kernel.pdf.PdfPage;
 import com.itextpdf.kernel.pdf.PdfReader;
 import com.itextpdf.kernel.pdf.PdfWriter;
 import com.itextpdf.kernel.pdf.canvas.PdfCanvas;
-import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 
 import javax.swing.*;
-import java.awt.*;
 import java.io.File;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 import java.util.Objects;
 import java.util.regex.Pattern;
 
 public class PrinterService {
     public static final String MASTERPATH = String.valueOf(PrinterService.class.getClassLoader().getResource("PdfTemplates"));
+    public static final String JOSEFIN = "src/main/resources/Fonts/josefin/JosefinSans-Regular.ttf";
 
     private static String formatDate(String date, String formatDate) {
         Pattern pattern = Pattern.compile("[ -]");
@@ -74,7 +69,7 @@ public class PrinterService {
                     break;
             }
         }
-            return jour + " " + mois + " " + annee;
+            return jour + "-" + mois + "-" + annee;
     }
 
     public static boolean Print(InfoConserned infoConserned) throws Exception{
@@ -85,17 +80,19 @@ public class PrinterService {
         chooser.setSelectedFile(new File(chooser.getCurrentDirectory().toString()+"/Casier-B3-"+infoConserned.getNom()+".pdf"));
         // Choisir le dossier d'exportation
         int returnVal = chooser.showSaveDialog(null);
+        boolean b = true;
         if (returnVal == JFileChooser.APPROVE_OPTION) {
             PdfWriter pdfWriter = new PdfWriter(chooser.getSelectedFile());
+            //PdfWriter pdfWriter = new PdfWriter("src/main/resources/PdfTemplates/Casier-B3name.pdf");
             PdfDocument pdfDocument = new PdfDocument(pdfReader, pdfWriter);
             String name = infoConserned.getNom().strip() + " " + infoConserned.getPrenoms().strip();
             String pere = infoConserned.getPere();
             String mere = infoConserned.getMere();
             String dateNaiss = formatDate(infoConserned.getDateNaissance().toString(), "long");
-            String lieuNaiss = infoConserned.getLieuNaissance();
+            String lieuNaiss = String.valueOf(infoConserned.getLieuNaissance().charAt(0)).toUpperCase()+infoConserned.getLieuNaissance().substring(1);
             String sitFam = infoConserned.getSituationFamiliale();
-            String profession = infoConserned.getProfession();
-            String domicile = infoConserned.getDomicile();
+            String profession = infoConserned.getProfession().toUpperCase().charAt(0)+infoConserned.getProfession().substring(1);
+            String domicile = infoConserned.getDomicile().toUpperCase().charAt(0)+infoConserned.getDomicile().substring(1);
             String nationalite = infoConserned.getNationalite();
             String dateCond = null;
             String dateCond2 = null;
@@ -108,6 +105,9 @@ public class PrinterService {
             String observation = null;
             String observation2 = null;
             String acteNaiss = String.valueOf(infoConserned.getActeNaissance());
+            while (acteNaiss.length() < 4) {
+                acteNaiss = "0" + acteNaiss;
+            }
             String localDate = LocalDate.now().toString();
             String dateAct = formatDate(infoConserned.getDateActeNaissance().toString(), "long");
             StringBuilder numeroPdf = new StringBuilder(String.valueOf(PrinterEntityService.getInstance().getLastId() + 1));
@@ -117,17 +117,17 @@ public class PrinterService {
             if (!infoConserned.getCondamnations().isEmpty()) {
                 Condamnation c1 = infoConserned.getCondamnations().get(0);
                 dateCond = formatDate(c1.getDateCondamnation().toString(), "court");
-                courOuTrubunal = c1.getCoursOutrubinaux();
-                natureCrime = c1.getNatureCrime();
-                naturePeine = c1.getNaturePeine();
-                observation = c1.getObservation();
+                courOuTrubunal = c1.getCoursOutrubinaux().toUpperCase();
+                natureCrime = c1.getNatureCrime().toUpperCase().charAt(0)+c1.getNatureCrime().substring(1);
+                naturePeine = c1.getNaturePeine().toUpperCase().charAt(0)+c1.getNaturePeine().substring(1);
+                observation = c1.getObservation().toUpperCase().charAt(0)+c1.getObservation().substring(1);
                 if (infoConserned.getCondamnations().size() > 1) {
                     Condamnation c2 = infoConserned.getCondamnations().get(1);
                     dateCond2 = formatDate(c2.getDateCondamnation().toString(), "court");
                     courOuTrubunal2 = c2.getCoursOutrubinaux();
-                    natureCrime2 = c2.getNatureCrime();
-                    naturePeine2 = c2.getNaturePeine();
-                    observation2 = c2.getObservation();
+                    natureCrime2 = c2.getNatureCrime().toUpperCase().charAt(0)+c2.getNatureCrime().substring(1);
+                    naturePeine2 = c2.getNaturePeine().toUpperCase().charAt(0)+c2.getNaturePeine().substring(1);
+                    observation2 = c2.getObservation().toUpperCase().charAt(0)+c2.getObservation().substring(1);
                 }
             }
 
@@ -135,21 +135,20 @@ public class PrinterService {
             PdfPage page = pdfDocument.getPage(1);
             PdfCanvas canvas = new PdfCanvas(page);
 
-            FontProgram fontProgram = FontProgramFactory.createFont();
+            FontProgram fontProgram = FontProgramFactory.createFont(JOSEFIN);
             PdfFont font = PdfFontFactory.createFont(fontProgram);
-            canvas.setFontAndSize(font, 11);
+            canvas.setFontAndSize(font, 10);
 
             canvas.beginText();
             canvas.setTextMatrix(343, 333);
             canvas.showText("");
 
             //Nom et Prenoms
-            canvas.setTextMatrix(435, 642);
-            if (name.length() > 22) {
+            if (name.length() > 30) {
                 String[] splitedName = new String[2];
                 int j = 0;
                 for (int i = 0; i < name.length(); i++) {
-                    if (name.toCharArray()[i] == ' ' && i < 23) {
+                    if (name.toCharArray()[i] == ' ' && i < 31) {
                         splitedName[0] = name.substring(0, i).strip();
                         j = i;
                     } else {
@@ -157,96 +156,171 @@ public class PrinterService {
                     }
 
                 }
-                canvas.setTextMatrix(435, 642);
+                canvas.setTextMatrix(386, 688);
                 canvas.showText(splitedName[0]);
-                canvas.setTextMatrix(282, 626);
+                canvas.setTextMatrix(246, 675);
                 canvas.showText(splitedName[1]);
             } else {
-                canvas.setTextMatrix(435, 642);
+                canvas.setTextMatrix(386, 688);
                 canvas.showText(name.strip());
             }
             //Pere
-            canvas.setTextMatrix(359, 609);
+            canvas.setTextMatrix(316, 658);
             canvas.showText(pere.strip());
             //Mere
-            canvas.setTextMatrix(318, 592);
+            canvas.setTextMatrix(278, 642);
             canvas.showText(mere.strip());
             //Date de Naissance
-            canvas.setTextMatrix(332, 576);
+            canvas.setTextMatrix(291, 627);
             canvas.showText(dateNaiss.strip());
             //Lieu de Naissance
-            canvas.setTextMatrix(300, 560);
+            canvas.setTextMatrix(260, 611);
             canvas.showText(lieuNaiss.strip());
             //Situation Familiale
-            canvas.setTextMatrix(387, 543);
+            canvas.setTextMatrix(342, 595);
             canvas.showText(sitFam.strip());
             //Profession
-            canvas.setTextMatrix(340, 526);
+            canvas.setTextMatrix(298, 580);
             canvas.showText(profession.strip());
             //Domicile
-            canvas.setTextMatrix(332, 510);
+            canvas.setTextMatrix(292, 565);
             canvas.showText(domicile.strip());
             //Nationalité
-            canvas.setTextMatrix(346, 494);
+            canvas.setTextMatrix(305, 549);
             canvas.showText(nationalite.strip().toUpperCase());
             //Date de Condamnation
             if (!infoConserned.getCondamnations().isEmpty()) {
 
-                canvas.setTextMatrix(75, 378);
+                canvas.setTextMatrix(42, 495);
                 canvas.showText(dateCond.strip());
                 //date de Condamnation 2
                 if (dateCond2 != null) {
-                    canvas.setTextMatrix(75, 356);
+                    canvas.setTextMatrix(42, 470);
                     canvas.showText(dateCond2.strip());
                 }
                 //Cours ou Trubinaux
-                canvas.setTextMatrix(155, 378);
+                canvas.setTextMatrix(115, 495);
                 canvas.showText(courOuTrubunal.strip());
                 //Cours ou Trubinaux 2
                 if (courOuTrubunal2 != null) {
-                    canvas.setTextMatrix(155, 356);
+                    canvas.setTextMatrix(115, 470);
                     canvas.showText(courOuTrubunal2.strip());
                 }
                 //Nature de Crimes ou Delits
-                canvas.setTextMatrix(254, 378);
-                canvas.showText(natureCrime.strip());
+                if (natureCrime.strip().length() > 20) {
+                    String[] splitedNatureCrime = new String[2];
+                    int j = 0;
+                    for (int i = 0; i < natureCrime.strip().length(); i++) {
+                        if (natureCrime.strip().toCharArray()[i] == ' ' && i < 21) {
+                            splitedNatureCrime[0] = natureCrime.substring(0, i).strip();
+                            j = i;
+                        } else {
+                            splitedNatureCrime[1] = natureCrime.substring(j, i + 1).strip();
+                        }
+
+                    }
+                    canvas.setTextMatrix(232, 495);
+                    canvas.showText(splitedNatureCrime[0]);
+
+                    canvas.setTextMatrix(232, 484);
+                    if(splitedNatureCrime[1].length()>20){
+                        splitedNatureCrime[1] = splitedNatureCrime[1].substring(0,19)+"...";
+                    }
+                    canvas.showText(splitedNatureCrime[1]);
+                } else {
+                    canvas.setTextMatrix(232, 495);
+                    canvas.showText(natureCrime.strip());
+                }
                 if (natureCrime2 != null) {
-                    canvas.setTextMatrix(254, 356);
+                    canvas.setTextMatrix(232, 470);
+                    if(natureCrime2.length()>20){
+                        natureCrime2 = natureCrime2.substring(0,19)+"...";
+                    }
                     canvas.showText(natureCrime2.strip());
                 }
                 //Nature ou durée de peine
-                canvas.setTextMatrix(351, 378);
-                canvas.showText(naturePeine.strip());
+                if (naturePeine.strip().length() > 18) {
+                    String[] splitedNaturePeine = new String[2];
+                    int j = 0;
+                    for (int i = 0; i < naturePeine.strip().length(); i++) {
+                        if (naturePeine.strip().toCharArray()[i] == ' ' && i < 19) {
+                            splitedNaturePeine[0] = naturePeine.substring(0, i).strip();
+                            j = i;
+                        } else {
+                            splitedNaturePeine[1] = naturePeine.substring(j, i + 1).strip();
+                        }
+
+                    }
+                    canvas.setTextMatrix(345, 495);
+                    canvas.showText(splitedNaturePeine[0]);
+
+                    canvas.setTextMatrix(345, 484);
+                    if(splitedNaturePeine[1].length()>18){
+                        splitedNaturePeine[1] = splitedNaturePeine[1].substring(0,17)+"...";
+                    }
+                    canvas.showText(splitedNaturePeine[1]);
+                } else {
+                    canvas.setTextMatrix(345, 495);
+                    canvas.showText(naturePeine.strip());
+                }
                 if (naturePeine2 != null) {
-                    canvas.setTextMatrix(351, 356);
+                    canvas.setTextMatrix(345, 470);
+                    if(naturePeine2.length()>18){
+                        naturePeine2 = naturePeine2.substring(0,17)+"...";
+                    }
                     canvas.showText(naturePeine2.strip());
                 }
                 //Observation
-                canvas.setTextMatrix(447, 378);
-                canvas.showText(observation.strip());
+                if (observation.strip().length() > 17) {
+                    String[] splitedObservation = new String[2];
+                    int j = 0;
+                    for (int i = 0; i < observation.strip().length(); i++) {
+                        if (observation.strip().toCharArray()[i] == ' ' && i < 18) {
+                            splitedObservation[0] = observation.substring(0, i).strip();
+                            j = i;
+                        } else {
+                            splitedObservation[1] = observation.substring(j, i + 1).strip();
+                        }
+
+                    }
+                    canvas.setTextMatrix(447, 495);
+                    canvas.showText(splitedObservation[0]);
+
+                    canvas.setTextMatrix(447, 484);
+                    if(splitedObservation[1].length()>17){
+                        splitedObservation[1] = splitedObservation[1].substring(0,16)+"...";
+                    }
+                    canvas.showText(splitedObservation[1]);
+                } else {
+                    canvas.setTextMatrix(447, 495);
+                    canvas.showText(observation.strip());
+                }
                 if (observation2 != null) {
-                    canvas.setTextMatrix(447, 356);
+                    canvas.setTextMatrix(447, 470);
+                    if(observation2.length()>18){
+                        observation2 = observation2.substring(0,16)+"...";
+                    }
                     canvas.showText(observation2.strip());
                 }
             }
             //Acte de Naissance
-            canvas.setTextMatrix(310, 334);
+            canvas.setTextMatrix(252, 452);
             canvas.showText(acteNaiss.strip());
             //Date acte de naissance
-            canvas.setTextMatrix(390, 334);
+            canvas.setTextMatrix(320, 452);
             canvas.showText(dateAct);
             //Date de delivrance du casier judiciaire
-            canvas.setTextMatrix(395, 262);
+            canvas.setTextMatrix(387, 408);
             canvas.showText(formatDate(localDate.strip(), "long"));
             //Numero pdf
-            canvas.setTextMatrix(52, 642);
+            canvas.setTextMatrix(49, 689);
             canvas.showText(numeroPdf.toString().strip());
 
 
             canvas.endText();
             pdfDocument.close();
-            PrinterEntity printerEntity = new PrinterEntity(infoConserned.getNom());
-            PrinterEntityService.getInstance().persistePrintedInfo(printerEntity);
+           PrinterEntity printerEntity = new PrinterEntity(infoConserned.getNom());
+           PrinterEntityService.getInstance().persistePrintedInfo(printerEntity);
             return true;
         }
         return false;

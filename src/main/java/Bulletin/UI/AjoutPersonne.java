@@ -92,6 +92,7 @@ CondamnationService condamnationService = null;
      * @description cette methode liste les condamnation lié au concerné
      */
     public static void lister_Condamnation(){
+        tableCondamnation.setEnabled(true);
         Object[][] datas = new Object[listeDeCondamnations.size()][4];
         int i=0;
         for (Condamnation condamnation : listeDeCondamnations){
@@ -139,8 +140,10 @@ private void Reset()
     this.setTitle("Ajout d'une nouvelle personne ");
     infoConserned = null;
     lister_Condamnation();
-
 }
+    private String Capitalize(String str){
+        return str.toUpperCase().charAt(0)+str.substring(1);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -671,9 +674,9 @@ private void Reset()
             infoConserned1.setPere(pere.getText().strip());
             infoConserned1.setMere(mere.getText().strip());
             infoConserned1.setDateNaissance(date);
-            infoConserned1.setLieuNaissance(lieunais.getText().strip());
-            infoConserned1.setProfession(Profession.getText().strip());
-            infoConserned1.setDomicile(Domicile.getText().strip());
+            infoConserned1.setLieuNaissance(Capitalize(lieunais.getText()).strip());
+            infoConserned1.setProfession(Capitalize(Profession.getText()).strip());
+            infoConserned1.setDomicile(Capitalize(Domicile.getText()).strip());
             infoConserned1.setNationalite(Nationalite.getText().strip().toUpperCase());
             infoConserned1.setSexe(cmbGender.getSelectedItem().toString());
             infoConserned1.setSituationFamiliale(status);
@@ -754,9 +757,9 @@ private void Reset()
         infoConserned1.setPrenoms(PrenomPers.getText().strip());
         infoConserned1.setPere(pere.getText().strip());
         infoConserned1.setMere(mere.getText().strip());
-        infoConserned1.setLieuNaissance(lieunais.getText().strip());
-        infoConserned1.setProfession(Profession.getText().strip());
-        infoConserned1.setDomicile(Domicile.getText().strip());
+        infoConserned1.setLieuNaissance(Capitalize(lieunais.getText()).strip());
+        infoConserned1.setProfession(Capitalize(Profession.getText()).strip());
+        infoConserned1.setDomicile(Capitalize(Domicile.getText()).strip());
         infoConserned1.setNationalite(Nationalite.getText().strip().toUpperCase());
         infoConserned1.setSexe(cmbGender.getSelectedItem().toString());
         infoConserned1.setSituationFamiliale(status);
@@ -808,9 +811,9 @@ private void Reset()
         infoConserned1.setPere(pere.getText().strip());
         infoConserned1.setMere(mere.getText().strip());
         infoConserned1.setDateNaissance(date);
-        infoConserned1.setLieuNaissance(lieunais.getText().strip());
-        infoConserned1.setProfession(Profession.getText().strip());
-        infoConserned1.setDomicile(Domicile.getText().strip());
+        infoConserned1.setLieuNaissance(Capitalize(lieunais.getText()).strip());
+        infoConserned1.setProfession(Capitalize(Profession.getText()).strip());
+        infoConserned1.setDomicile(Capitalize(Domicile.getText()).strip());
         infoConserned1.setNationalite(Nationalite.getText().strip().toUpperCase());
         infoConserned1.setSexe(cmbGender.getSelectedItem().toString());
         infoConserned1.setSituationFamiliale(status);
@@ -890,9 +893,9 @@ private void Reset()
         infoConserned1.setPrenoms(PrenomPers.getText().strip());
         infoConserned1.setPere(pere.getText().strip());
         infoConserned1.setMere(mere.getText().strip());
-        infoConserned1.setLieuNaissance(lieunais.getText().strip());
-        infoConserned1.setProfession(Profession.getText().strip());
-        infoConserned1.setDomicile(Domicile.getText().strip());
+        infoConserned1.setLieuNaissance(Capitalize(lieunais.getText()).strip());
+        infoConserned1.setProfession(Capitalize(Profession.getText()).strip());
+        infoConserned1.setDomicile(Capitalize(Domicile.getText()).strip());
         infoConserned1.setNationalite(Nationalite.getText().strip().toUpperCase());
         infoConserned1.setSexe(cmbGender.getSelectedItem().toString());
         infoConserned1.setSituationFamiliale(status);
@@ -906,8 +909,7 @@ private void Reset()
         for (Condamnation c : listeDeCondamnations){
             infoConserned1.addCondamnation(c);
         }
-        boolean printed = PrinterService.Print(infoConserned1);
-        if(printed){
+        if(PrinterService.Print(infoConserned1)){
             JOptionPane.showMessageDialog(null,"Impression terminée avec succès");
         }else{
             JOptionPane.showMessageDialog(null,"Impression annulée");
@@ -923,6 +925,7 @@ private void Reset()
     }//GEN-LAST:event_cmbGenderActionPerformed
 
     private void btnAjoutCondamnationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAjoutCondamnationActionPerformed
+        tableCondamnation.setEnabled(false);
         AjoutCondamnation frm = new AjoutCondamnation();
         frm.setVisible(true);
         frm.setLocationRelativeTo(null);
@@ -932,6 +935,7 @@ private void Reset()
             try{
                 int row= tableCondamnation.getSelectedRow();
                 Condamnation condamnationClicked = listeDeCondamnations.get(row);
+                tableCondamnation.setEnabled(false);
                 AjoutCondamnation frm = new AjoutCondamnation(condamnationClicked);
                 frm.setVisible(true);
             }catch(Exception ex){

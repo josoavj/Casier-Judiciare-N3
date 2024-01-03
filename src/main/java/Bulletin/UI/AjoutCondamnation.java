@@ -22,6 +22,9 @@ public class AjoutCondamnation extends javax.swing.JFrame {
     /**
      * Creates new form ajoutCondamnation
      */
+    private String Capitalize(String str){
+        return str.toUpperCase().charAt(0)+str.substring(1);
+    }
     private Condamnation condamnationSelected;
     public AjoutCondamnation() {
         initComponents();
@@ -296,7 +299,7 @@ public class AjoutCondamnation extends javax.swing.JFrame {
         Date date = Date.valueOf(localDate);
 
         Condamnation condamnation = new Condamnation(date, Objects.equals(txtCoursOuTrubinaux.getText().strip(), "") ?"TPI MIARINARIVO" :txtCoursOuTrubinaux.getText().strip()
-                ,txtNatureCrimes.getText(),txtNaturePeine.getText(),txtObservation.getText());
+                ,Capitalize(txtNatureCrimes.getText()),Capitalize(txtNaturePeine.getText()),Capitalize(txtObservation.getText()));
         AjoutPersonne.listeDeCondamnations.add(condamnation);
         AjoutPersonne.listCondamnationAdded.add(condamnation);
         AjoutPersonne.lister_Condamnation();
@@ -339,9 +342,9 @@ public class AjoutCondamnation extends javax.swing.JFrame {
             if (condamnation == this.condamnationSelected){
                 condamnation.setDateCondamnation(date);
                 condamnation.setCoursOutrubinaux(txtCoursOuTrubinaux.getText().strip().equals("")?"TPI MIARINARIVO" :txtCoursOuTrubinaux.getText().strip());
-                condamnation.setNatureCrime(txtNatureCrimes.getText());
-                condamnation.setNaturePeine(txtNaturePeine.getText());
-                condamnation.setObservation(txtObservation.getText());
+                condamnation.setNatureCrime(Capitalize(txtNatureCrimes.getText()));
+                condamnation.setNaturePeine(Capitalize(txtNaturePeine.getText()));
+                condamnation.setObservation(Capitalize(txtObservation.getText()));
             }
             AjoutPersonne.lister_Condamnation();
             this.dispose();
@@ -359,6 +362,12 @@ public class AjoutCondamnation extends javax.swing.JFrame {
         AjoutPersonne.lister_Condamnation();
         this.dispose();
     }//GEN-LAST:event_btnSupprimerActionPerformed
+
+    @Override
+    public void dispose() {
+        super.dispose();
+        AjoutPersonne.lister_Condamnation();
+    }
 
     private void dateJourKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_dateJourKeyTyped
          char c=evt.getKeyChar();

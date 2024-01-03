@@ -71,8 +71,6 @@ INSERT INTO Admin (username,name, password, poste, rule) VALUES ("Admin", "Admin
 CREATE TABLE PRINTER (id int(4) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT PRIMARY KEY,
                             nameConcerned VARCHAR(256) NOT NULL,
                             date date default CURRENT_DATE);
--- --------------------------------------Default printer-----------------------------------
-INSERT INTO PRINTER (nameConcerned) values ("null");
 
 
 

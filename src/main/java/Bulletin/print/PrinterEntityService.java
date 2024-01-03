@@ -1,10 +1,7 @@
 package Bulletin.print;
 
 import Bulletin.persistence.EntityManagerHandler;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityManagerFactory;
-import jakarta.persistence.Persistence;
-import jakarta.persistence.Query;
+import jakarta.persistence.*;
 
 public class PrinterEntityService {
     private final EntityManager entityManager = EntityManagerHandler.getEntityManager();
@@ -20,7 +17,12 @@ public class PrinterEntityService {
     }
     public int getLastId(){
         Query query = entityManager.createQuery("SELECT MAX(id) AS id_max FROM PrinterEntity", PrinterEntity.class);
-        return  (int) query.getSingleResult();
+        if(query.getSingleResult() != null){
+            return  (int) query.getSingleResult();
+        }else{
+            return 0;
+        }
+
 
     }
 }

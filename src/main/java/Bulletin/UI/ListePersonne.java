@@ -366,8 +366,7 @@ public class ListePersonne extends javax.swing.JFrame {
         String table_click= tableListPerson.getModel().getValueAt(row, 0).toString();
         int acteNaissanceNum = Integer.parseInt(table_click);
         InfoConserned ic = infoConsernedService.getInfoConsernedByAN(acteNaissanceNum);
-        boolean printed = PrinterService.Print(ic);
-        if(printed){
+        if(PrinterService.Print(ic)){
             JOptionPane.showMessageDialog(null,"Impression terminée");
         }else{
             JOptionPane.showMessageDialog(null,"Impression annulée");
