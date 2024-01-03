@@ -82,6 +82,7 @@ CondamnationService condamnationService = null;
         }
         lister_Condamnation();
         AjoutForm.setBorder(javax.swing.BorderFactory.createTitledBorder("Informations Consernant " + infoConserned.getNom()));
+        this.setTitle("Modifications des informations Consernant " + infoConserned.getNom());
         btnEffacer.setEnabled(true);
         btnMaj.setEnabled(true);
         btnEnregistrer.setEnabled(false);
@@ -135,6 +136,7 @@ private void Reset()
     btnEffacer.setEnabled(false);
     acteNaissace.requestFocus(true);
     AjoutForm.setBorder(javax.swing.BorderFactory.createTitledBorder("Ajout d'une nouvelle personne "));
+    this.setTitle("Ajout d'une nouvelle personne ");
     infoConserned = null;
     lister_Condamnation();
 
@@ -193,7 +195,7 @@ private void Reset()
         jLabel13 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Ajout ou mise à jour des informations d'une personne");
+        setTitle("Ajout nouvelle d'une personne");
         setResizable(true);
 
         AjoutForm.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Ajout d'une nouvelle personne", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Poppins", 1, 11))); // NOI18N
