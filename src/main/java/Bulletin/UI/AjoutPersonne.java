@@ -691,6 +691,7 @@ private void Reset()
             if(infoConsernedService.addConserned(infoConserned1)) {
                 JOptionPane.showMessageDialog(null, "Enregistrement réussit");
                 this.setVisible(false);
+                ListePersonne.getInstance().infoConsernedList = infoConsernedService.getConsernedList();
                 ListePersonne.getInstance().Get_Data();
                 ListePersonne.getInstance().setVisible(true);
                 this.dispose();
@@ -708,6 +709,7 @@ private void Reset()
             JOptionPane.showMessageDialog(null,"Supression réuissit","Succès",JOptionPane.INFORMATION_MESSAGE);
 
             this.setVisible(false);
+            ListePersonne.getInstance().infoConsernedList = infoConsernedService.getConsernedList();
             ListePersonne.getInstance().Get_Data();
             ListePersonne.getInstance().setVisible(true);
             ListePersonne.getInstance().requestFocus();
@@ -834,6 +836,7 @@ private void Reset()
         if(infoConsernedService.updateInfoConserned(infoConserned.getIdConserned(),infoConserned1)) {
             JOptionPane.showMessageDialog(null,"La mise à jour terminée avec succès");
             this.setVisible(false);
+            ListePersonne.getInstance().infoConsernedList = infoConsernedService.getConsernedList();
             ListePersonne.getInstance().Get_Data();
             ListePersonne.getInstance().setVisible(true);
             ListePersonne.getInstance().requestFocus();
