@@ -223,7 +223,7 @@ public class AjoutCondamnation extends javax.swing.JFrame {
         });
 
         btnAnnuler.setText("Annuler");
-        btnAnnuler.setEnabled(false);
+        btnAnnuler.setEnabled(true);
         btnAnnuler.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAnnulerActionPerformed(evt);
