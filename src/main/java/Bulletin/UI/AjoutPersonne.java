@@ -580,11 +580,11 @@ private void Reset()
 
         }
         if (jourAct.getText().equals("")) {
-            JOptionPane.showMessageDialog(this, "veuillez ajouter le jour de creation  de l'acte de naissance", "Erreur", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Veuillez ajouter le jour de création  de l'acte de naissance", "Erreur", JOptionPane.ERROR_MESSAGE);
             return false;
         }
         if (anneAct.getText().equals("")) {
-            JOptionPane.showMessageDialog(this, "veuillez ajouter le année de creation  de l'acte de naissance", "Erreur", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Veuillez ajouter l'année de création  de l'acte de naissance", "Erreur", JOptionPane.ERROR_MESSAGE);
             return false;
         }
         if (NomPers.getText().equals("")) {
@@ -621,13 +621,13 @@ private void Reset()
         try {
             LocalDate.of(Integer.parseInt(anneAct.getText()), moisAct.getSelectedIndex() + 1, Integer.parseInt(jourAct.getText()));
         }catch (Exception e){
-            JOptionPane.showMessageDialog(null, "Veuillez rectifier la date de délivrance de l'acte de naissance","Erreur",JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Veuillez rectifier la date de délivrance de l'acte de naissance","Delivrance d'acte de naissance - Erreur de saisie",JOptionPane.ERROR_MESSAGE);
             return false;
         }
         try {
             LocalDate.of(Integer.parseInt(annenaiss.getText()), moisnaiss.getSelectedIndex() + 1, Integer.parseInt(datenaiss.getText()));
         }catch (Exception e){
-            JOptionPane.showMessageDialog(null, "Veuillez rectifier la date de naissance","Erreur",JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Veuillez rectifier la date de naissance","Date de naissance - Erreur de saisie",JOptionPane.ERROR_MESSAGE);
             return false;
         }
         return true;
