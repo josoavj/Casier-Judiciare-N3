@@ -21,7 +21,7 @@ import java.util.regex.Pattern;
 
 public class PrinterService {
     public static final String MASTERPATH = String.valueOf(PrinterService.class.getClassLoader().getResource("PdfTemplates"));
-    public static final String JOSEFIN = "src/main/resources/Fonts/josefin/JosefinSans-Regular.ttf";
+    public static final String JOSEFIN = String.valueOf(PrinterService.class.getClassLoader().getResource("Fonts"))+"/josefin/JosefinSans-Regular.ttf";
 
     private static String formatDate(String date, String formatDate) {
         Pattern pattern = Pattern.compile("[ -]");
