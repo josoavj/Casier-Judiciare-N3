@@ -36,7 +36,7 @@ public class ListePersonne extends javax.swing.JFrame {
                 return;
             }
            Object[][] data = new Object[infoConsernedList.size()][8];
-           int i=0;
+           int i=infoConsernedList.size()-1;
            AjoutPersonne.listCondamnationAdded.clear();
            AjoutPersonne.listeDeCondamnations.clear();
            AjoutPersonne.listCondamnationWillRemoved.clear();
@@ -54,7 +54,7 @@ public class ListePersonne extends javax.swing.JFrame {
                data[i][5] = jour+"-"+mois+"-"+annee;
                data[i][6] = infoConserned.getSexe();
                data[i][7] = infoConserned.getNationalite();
-               i++;
+               i--;
            }
            String[] columnNames = new String[8];
            columnNames[0] = "Acte de Naissance";

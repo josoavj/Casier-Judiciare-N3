@@ -3,6 +3,9 @@ package Bulletin.UI;
 
 import Bulletin.persistence.Admin.Admin;
 import Bulletin.persistence.Admin.AdminService;
+import org.hibernate.HibernateException;
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
 
 import javax.swing.*;
 import java.awt.*;
@@ -10,7 +13,7 @@ import java.awt.event.KeyEvent;
 
 public class Connexion extends javax.swing.JFrame {
 
-AdminService adminService = AdminService.getInstance();
+static AdminService adminService = null;
 
     /**
      * Creates new form Login
@@ -267,7 +270,13 @@ AdminService adminService = AdminService.getInstance();
         }
         //</editor-fold>
         //</editor-fold>
-
+        try {
+          adminService = AdminService.getInstance();
+            // ...
+        } catch (ExceptionInInitializerError e) {
+            JOptionPane.showMessageDialog(null, "Erreur de connexion à la base de données", "Erreur", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
