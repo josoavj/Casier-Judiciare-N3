@@ -362,7 +362,7 @@ public class AjoutCondamnation extends javax.swing.JFrame {
                 condamnation.setCoursOutrubinaux(txtCoursOuTrubinaux.getText().strip().equals("")?"TPI MIARINARIVO" :txtCoursOuTrubinaux.getText().toUpperCase().strip());
                 condamnation.setNatureCrime(Capitalize(txtNatureCrimes.getText()));
                 condamnation.setNaturePeine(Capitalize(txtNaturePeine.getText()));
-                condamnation.setObservation(Capitalize(txtObservation.getText()));
+                condamnation.setObservation(Capitalize(txtObservation.getText().strip().equals("") ? " " :txtObservation.getText().strip()));
             }
             AjoutPersonne.lister_Condamnation();
             this.dispose();
