@@ -317,7 +317,7 @@ public class AjoutCondamnation extends javax.swing.JFrame {
         Date date = Date.valueOf(localDate);
 
         Condamnation condamnation = new Condamnation(date, Objects.equals(txtCoursOuTrubinaux.getText().strip(), "") ?"TPI MIARINARIVO" :txtCoursOuTrubinaux.getText().toUpperCase().strip()
-                ,Capitalize(txtNatureCrimes.getText()),Capitalize(txtNaturePeine.getText()),Capitalize(txtObservation.getText()));
+                ,Capitalize(txtNatureCrimes.getText()),Capitalize(txtNaturePeine.getText()),Capitalize(txtObservation.getText().strip().equals("") ? " " : txtObservation.getText().strip()));
         AjoutPersonne.listeDeCondamnations.add(condamnation);
         AjoutPersonne.listCondamnationAdded.add(condamnation);
         AjoutPersonne.lister_Condamnation();
