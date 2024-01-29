@@ -3,8 +3,8 @@
 - en: Criminal Record N3 entry software,used to facilitate the entry of information about people when requesting the bulletin.
 
 # Contributeurs (Contributor):
-- Josoa886 [Josoa886](https://github.com/Josoa886)
-- haritsimba [haritsimba](https://github.com/haritsimba)
+- [Josoa886](https://github.com/Josoa886)
+- [haritsimba](https://github.com/haritsimba)
 
 # Forking
 You can fork this project, it's an opensource project. We used JavaSwing but you can switch to JavaFX or other framework.
