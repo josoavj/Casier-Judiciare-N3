@@ -3,7 +3,7 @@
 - **en:** Criminal Record entry software,used to facilitate the entry of information about people when requesting the bulletin.
 
 # Contributeurs (Contributor):
-- [Josoa886](https://github.com/Josoa886)
+- [josoavj](https://github.com/josoavj)
 - [haritsimba](https://github.com/haritsimba)
 
 # Forking
