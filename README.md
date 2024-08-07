@@ -14,4 +14,4 @@ You can fork this project, it's an opensource project. We used JavaSwing but you
 
 #### Other
 
-- **Suggestions:** For any suggestions, please send a mail to [josoavj](josoavonjinaina13@gmail.com)
+- **Suggestions:** For any suggestions, please send a mail to **josoavonjinaina13@gmail.com**
