@@ -5,7 +5,7 @@
 
 ## Contributeurs (Contributor):
 
-- **Organisation:** [Dev-Corps](https://github.com/Dev-Corps)
+- **Organisation:** [APEXNova Labs](https://github.com/APEXNovaLabs)
 - **[josoavj](https://github.com/josoavj)**
 - **[haritsimba](https://github.com/haritsimba)**
 
